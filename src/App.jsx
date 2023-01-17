@@ -9,6 +9,7 @@ import Parkings from './Components/Parkings/Parkings';
 import Parking from './Components/Parking/Parking';
 import About from './Components/About/About';
 
+
 export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
