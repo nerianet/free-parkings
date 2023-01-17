@@ -20,7 +20,7 @@ export default function App() {
     setData
   }
 
-jjjjjjjjjjjj
+jjjjjjjjjjjjj
 
   return (
     <div className='bg-warning'>
