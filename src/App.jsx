@@ -21,6 +21,8 @@ export default function App() {
     setData
   }
 
+jjjjjjjjjjjjjj
+
   return (
     <div className='bg-warning'>
     <MyContext.Provider value={AllData}>
