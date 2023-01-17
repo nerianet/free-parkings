@@ -21,7 +21,6 @@ export default function App() {
   }
 
 
-  jjjjjjjjjjjjj
 
   return (
     <div className='bg-warning'>
