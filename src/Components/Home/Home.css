@@ -1,0 +1,19 @@
+.bg {
+    /* background-image: url(""); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 100%; */
+    background-color: rgba(247, 198, 49, 0.974);
+}
+
+.bgCircle1 {
+    background-image: url("https://images.pexels.com/photos/1000633/pexels-photo-1000633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.bgCircle2 {
+    background-image: url("https://images.pexels.com/photos/103601/pexels-photo-103601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
