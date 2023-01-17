@@ -8,7 +8,7 @@ export default function Parkings() {
 
   return (
     <>
-    <div className="bg">
+    <div className="bg">bre
       <div className="container" style={{height:'920px'}}>
         <h1 className="d-flex justify-content-center">search parkings</h1>
         <p className="d-flex justify-content-center">Here you can easily find parking</p>
