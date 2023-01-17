@@ -20,7 +20,7 @@ export default function App() {
     setData
   }
 
-neria hre
+neria hres
 
   return (
     <div className='bg-warning'>
