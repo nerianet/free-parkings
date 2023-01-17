@@ -30,7 +30,7 @@ export default function App() {
       <Route path="/" element={<Home />}></Route>
       <Route path="/User" element={<User />}></Route>
       <Route path="/Parkings" element={<Parkings />}></Route>
-      <Route path="/Parking/:id" element={<Parking />}></Route>
+      <Route path="/Parkings/:id" element={<Parking />}></Route>
       <Route path="/About" element={<About />}></Route>
     </Routes>
     </MyContext.Provider>
