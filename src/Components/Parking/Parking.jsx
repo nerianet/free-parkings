@@ -22,7 +22,6 @@ console.log(current);
           <Link><button class="btn btn-primary btn-lg">הוסף לסל</button></Link>
         </div>
       </div>
-      
       <div class="row mt-5">
         <div class="col-md-12">
           <h3>{current.category}</h3>
