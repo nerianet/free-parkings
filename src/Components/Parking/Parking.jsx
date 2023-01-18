@@ -21,8 +21,7 @@ console.log(current);
           <h3 class="text-primary">₪{current.price}</h3>
           <Link><button class="btn btn-primary btn-lg">הוסף לסל</button></Link>
         </div>
-      </div>
-      
+      </div> 
       <div class="row mt-5">
         <div class="col-md-12">
           <h3>{current.category}</h3>
