@@ -38,6 +38,7 @@ export default function App() {
   
   
   return (
+
     <>
       <div className='bg-warning'>
         <MyContext.Provider value={AllData}>
@@ -54,6 +55,6 @@ export default function App() {
         </Routes>
         </MyContext.Provider>
       </div>
-    </>
+      </>
   )
 }
