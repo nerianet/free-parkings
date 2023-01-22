@@ -44,7 +44,7 @@ export default function App() {
         <MyContext.Provider value={AllData}>
         <Header />
         <Footer/>
-        hahahah
+        
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/User" element={<User />}></Route>
