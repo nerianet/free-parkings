@@ -43,7 +43,6 @@ export default function App() {
       <div className='bg-warning'>
         <MyContext.Provider value={AllData}>
         <Header />
-        <Footer/>
         
         <Routes>
           <Route path="/" element={<Home />}></Route>
