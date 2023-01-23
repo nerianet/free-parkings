@@ -30,8 +30,3 @@ const handleSubmit = async (testdata) => {
     }
 }
 export default handleSubmit;
-
-
-
-  
-  
