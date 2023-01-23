@@ -14,11 +14,6 @@ export default function User() {
 
   const submithandler = (a) => {
     a.preventDefault();
-    if(users[0] == undefined)
-    {
-      console.log("You Dont Have a acount");
-    }
-    else{
      const found = users.find((user) => user.userName === userName.current.value);
      if(found){
       console.log("Haii`m");
@@ -32,7 +27,6 @@ export default function User() {
      }       
     userName.current.value = "";
     password.current.value = "";
-  }
   }
 
   return ( 
