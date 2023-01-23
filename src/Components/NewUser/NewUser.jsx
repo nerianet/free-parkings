@@ -21,7 +21,7 @@ export default function NewUser() {
       password: pass.current.value
     }
     if(pass.current.value!=pass2.current.value){
-      console.log("ERROR");
+      console.log("the password not correct");
     } else {
       setUsers([...users, user]);
       setEmail(userName.current.value);
@@ -33,10 +33,8 @@ export default function NewUser() {
       Phone.current.value = "";
       YourName.current.value = "";
       pass2.current.value = "";
-    }
-    
-    }
-
+    }  
+  }
 
   return (
   <>

@@ -4,7 +4,6 @@ import { MyContext } from "../../App";
 import "./Home.css"
 
 export default function Home() {
-    const { data } = useContext(MyContext);
 
   return (
   <>
