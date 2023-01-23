@@ -1,6 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {  getFirestore, addDoc, collection, getDocs } from "@firebase/firestore"
+import {   addDoc,
+  collection,
+  getDocs,
+  getFirestore,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where, } from "@firebase/firestore"
+import { useState } from "react";
+import { useContext } from "react";
+import { MyContext } from "../App";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,18 +32,48 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
-const handleSubmit = async (testdata) => {
-  const ref = collection(firestore, "test_data") // Firebase creates this automaticall// 
-    try {
-    addDoc(ref, testdata);
-    // getDocs()
-    } catch(err) {
-    console.log(err);
-    }
-}
-export default handleSubmit;
+
+
+//export default handleSubmit;
 
 
 
+
+// // init firebase app
+// initializeApp(firebaseConfig);
+
+// // init services
+// const db = getFirestore();
+
+// // collection spacific ref
+// const colRef = collection(db, "books");
+
+// //queries
+// let q = query(colRef, where("author", "==", "nadav amar"));
+
+
+
+// export function FirsrFirebs() {
+//   const [authorInp, setAuthorInp] = useState();
+//   const [titleInp, settitleInp] = useState("ddd");
+//   const docRef = doc(db, "books", titleInp);
+
+//   console.log(titleInp);
+
+//   const addNewBook = (e) => {
+//     e.preventDefault();
+//     addDoc(colRef, {
+//       title: titleInp,
+//       author: authorInp,
+//     });
+//   };
+
+//   const onDeleteBook = (e) => {
+//     e.preventDefault();
+//     deleteDoc(docRef);
+//   };
+
+  
+// }
   
   

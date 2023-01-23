@@ -1,10 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import "./Home.css"
 
 export default function Home() {
+  const {currentUser} = useContext(MyContext);
+  const navigate = useNavigate();
 
+  function changeNavigate(){
+    navigate("/NewUser")
+  }
   return (
   <>
   <div className="bg">

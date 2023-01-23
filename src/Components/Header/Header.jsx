@@ -7,6 +7,7 @@ import { MyContext } from '../../App';
 
 export default function Header() {
   const {currentUser,setCurrentUser} = useContext(MyContext);
+
   function Disconnect(){
     setCurrentUser(undefined);
   } 

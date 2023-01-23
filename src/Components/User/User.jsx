@@ -16,12 +16,16 @@ export default function User() {
     a.preventDefault();
      const found = users.find((user) => user.userName === userName.current.value);
      if(found){
-      console.log("Haii`m");
-      setCurrentUser(found.YourName);
-      userName.current.value = "";
-      password.current.value = "";
-      navigate('/');
-     } else{
+      if(password.current.value === found.password){
+        console.log(found);
+        setCurrentUser(found.YourName);
+        userName.current.value = "";
+        password.current.value = "";
+        navigate('/');
+      } else {
+        password.current.value = "";
+      }
+     } else {
      // prompt("Please Sign In");
       window.alert("Please Sign In");
      }       
