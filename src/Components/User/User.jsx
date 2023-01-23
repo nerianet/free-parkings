@@ -16,20 +16,21 @@ export default function User() {
 
   const submithandler = (a) => {
     a.preventDefault();
-    // console.log(users);
-    for(let i = 0; i < users.length; i++){
-      if(users[i].userName == ''){
-         console.log("Moshe");
-        prompt("Please Log In");
-      }
-      else if( users[i].userName == userName.current.value){
-          setCurrentUser(users[i].userName);
-          console.log("Haii`m");
-
-      }
-      else{
-        prompt("Please Sign In");
-      }
+     console.log(users[0]);
+    if(users[0] == undefined)
+    {
+      console.log("You Dont Have a acount");
+    }
+    else{
+      users.map((e)=>{
+        if( e.userName == userName.current.value){
+        setCurrentUser(e.YourName);
+        console.log("Haii`m");
+        }
+        else{
+          prompt("Please Sign In");
+        }
+      })
     }
     userName.current.value = "";
     password.current.value = "";

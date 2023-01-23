@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import "./Home.css"
 
-export default function Parkings() {
+export default function Home() {
     const { data } = useContext(MyContext);
 
   return (
@@ -15,7 +15,7 @@ export default function Parkings() {
         
         <div className="d-flex row h-50 ">
           <div id="d" className="row justify-content-between w-100 h-100 ">
-            <Link to={"/blabla"} style={{width:'450px'}} className="col-4 bgCircle1 h-100 d-flex justify-content-center align-items-center border rounded-circle display-4"><strong>Post a Park</strong></Link>
+            <Link to={"/PostPark"} style={{width:'450px'}} className="col-4 bgCircle1 h-100 d-flex justify-content-center align-items-center border rounded-circle display-4"><strong>Post a Park</strong></Link>
             <Link to={"/Parkings"} style={{width:'450px'}} className="col-4 bgCircle2 h-100 d-flex justify-content-center align-items-center border rounded-circle display-4"><strong>parking search</strong></Link>
           </div>
         </div>

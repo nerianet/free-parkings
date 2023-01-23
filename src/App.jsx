@@ -12,13 +12,17 @@ import Footer from './Components/Footer/Footer';
 import handleSubmit from './firebasee/firebase';
 import { useRef } from 'react';
 import SignIn from './Components/SignIn/SignIn';
+import { useEffect } from 'react';
 
 export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
-  const [users, setUsers] = useState([{userName: '', password: '' }]);
+  const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
+  useEffect(()=>{
+   // console.log();
 
+  }, [])
 
 
   const [data, setData] = useState(Data)
@@ -39,11 +43,11 @@ export default function App() {
   
   return (
 
-    <>
-      <div className='bg-warning'>
-        <MyContext.Provider value={AllData}>
+    <div className='bg-warning '>
+      <MyContext.Provider value={AllData}>
+
         <Header />
-        <Footer/>
+      <div className='container'>
         
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -52,9 +56,11 @@ export default function App() {
           <Route path="/Parkings/:id" element={<Parking />}></Route>
           <Route path="/About" element={<About />}></Route>
           <Route path="/:SignIn" element={<SignIn />}></Route>
+          <Route path="/:PostPark" element={< Home/>}></Route>
         </Routes>
+        <Footer/>
+        </div>
         </MyContext.Provider>
       </div>
-      </>
   )
 }

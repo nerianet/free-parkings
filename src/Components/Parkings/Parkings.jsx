@@ -29,7 +29,7 @@ export default function Parkings() {
               style={{ height: "65%" }}
             >
               <img
-                className="img-card"
+                className="img-card border"
                 src={item.img}
                 alt={item.name}
                 style={{ height: "85%", width: "100%" }}

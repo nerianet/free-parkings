@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, addDoc, collection } from "@firebase/firestore"
+import {  getFirestore, addDoc, collection } from "@firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,16 +20,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
-const handleSubmit = (testdata) => {
-  const ref = collection(firestore, "test_data") // Firebase creates this automatically
+const handleSubmit = async (testdata) => {
+  const ref = collection(firestore, "test_data") // Firebase creates this automaticall// 
     try {
-  addDoc(ref, testdata);
-  } catch(err) {
-  console.log(err);
-  }
-
+    addDoc(ref, testdata);
+    } catch(err) {
+    console.log(err);
+    }
 }
 export default handleSubmit;
+
+
 
   
   
