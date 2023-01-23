@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 import { async } from '@firebase/util';
 import { firestore } from '../../firebasee/firebase';
@@ -7,36 +7,35 @@ import "./User.css"
 import Home from '../Home/Home'
 
 export default function User() {
-  const {handleSubmit, users, setUsers, setCurrentUser} = useContext(MyContext);
+  const {handleSubmit, users, setUsers, setCurrentUser, currentUser} = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
+  const navigate = useNavigate();
 
   const submithandler = (a) => {
     a.preventDefault();
-     console.log(users[0]);
     if(users[0] == undefined)
     {
       console.log("You Dont Have a acount");
     }
     else{
-      users.map((e)=>{
-        if( e.userName == userName.current.value){
-        console.log("Haii`m");
-        setCurrentUser(e.YourName);
-
-        }
-        else{
-          prompt("Please Sign In");
-        }
-      })
-    }
-
+     const found = users.find((user) => user.userName === userName.current.value);
+     if(found){
+      console.log("Haii`m");
+      setCurrentUser(found.YourName);
+      userName.current.value = "";
+      password.current.value = "";
+      navigate('/');
+     } else{
+     // prompt("Please Sign In");
+      window.alert("Please Sign In");
+     }       
     userName.current.value = "";
     password.current.value = "";
   }
+  }
 
-
-  return (
+  return ( 
     <div className='body'>
     <form className='form-signin' onSubmit={submithandler}>
       <div className='text-center mb-4'>
@@ -66,7 +65,3 @@ export default function User() {
     </div>
   )
 }
-
-
-
-//<Link to={'/:SignIn'} class="btn btn-lg btn-primary btn-block" style={{marginLeft:'3px'}}>Sign in</Link>

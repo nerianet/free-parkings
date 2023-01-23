@@ -21,7 +21,7 @@ export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState();
   useEffect(()=>{
    // console.log();
   });

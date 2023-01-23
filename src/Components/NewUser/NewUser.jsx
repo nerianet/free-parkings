@@ -1,16 +1,18 @@
 import React, { useContext, useRef, useState } from 'react';
 import { MyContext } from '../../App';
+import { Route, Link, useNavigate } from "react-router-dom";
 
+import Home from '../Home/Home';
 export default function NewUser() {
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
-  const {handleSubmit, users,setUsers,setCurrentUser} = useContext(MyContext);
+  const {handleSubmit, users,setUsers,setCurrentUser, currentUser} = useContext(MyContext);
   const userName = useRef();
   const pass = useRef();
   const pass2 = useRef();
   const Phone = useRef();
   const YourName = useRef();
-  
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,11 +35,13 @@ export default function NewUser() {
       Phone.current.value = "";
       YourName.current.value = "";
       pass2.current.value = "";
+      navigate('/');
     }  
   }
 
   return (
   <>
+  {currentUser != undefined ? <div></div> :
   <div class="vh-100" style={{backgroundColor: '#eee'}}>
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -116,6 +120,7 @@ export default function NewUser() {
       </div>
     </div>
   </div>
+}
   </>
   );
 }
