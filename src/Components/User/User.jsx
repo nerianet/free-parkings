@@ -21,14 +21,16 @@ export default function User() {
     else{
       users.map((e)=>{
         if( e.userName == userName.current.value){
-        setCurrentUser(e.YourName);
         console.log("Haii`m");
+        setCurrentUser(e.YourName);
+
         }
         else{
           prompt("Please Sign In");
         }
       })
     }
+
     userName.current.value = "";
     password.current.value = "";
   }
