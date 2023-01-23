@@ -14,6 +14,9 @@ import { useRef } from 'react';
 import SignIn from './Components/SignIn/SignIn';
 import { useEffect } from 'react';
 
+import NewUser from './Components/NewUser/NewUser';
+import PostParking from './Components/PostParking/PostParking';
+
 export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
@@ -21,10 +24,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState([]);
   useEffect(()=>{
    // console.log();
-
-  }, [])
-
-
+  });
   const [data, setData] = useState(Data)
   const AllData = {
     data,
@@ -35,32 +35,24 @@ export default function App() {
     currentUser,
     setCurrentUser
   }
-   
-  
-
-
-  
   
   return (
-
-    <div className='bg-warning '>
+    <>
+    <div className='bg-warning'>
       <MyContext.Provider value={AllData}>
-
-        <Header />
-      <div className='container'>
-        
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/User" element={<User />}></Route>
-          <Route path="/Parkings" element={<Parkings />}></Route>
-          <Route path="/Parkings/:id" element={<Parking />}></Route>
-          <Route path="/About" element={<About />}></Route>
-          <Route path="/:SignIn" element={<SignIn />}></Route>
-          <Route path="/:PostPark" element={< Home/>}></Route>
-        </Routes>
-        <Footer/>
-        </div>
-        </MyContext.Provider>
-      </div>
+      <Header />
+      
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/User" element={<User />}></Route>
+        <Route path="/Parkings" element={<Parkings />}></Route>
+        <Route path="/Parkings/:id" element={<Parking />}></Route>
+        <Route path="/About" element={<About />}></Route>
+        <Route path="/NewUser" element={<NewUser />}></Route>
+        <Route path="/PostParking" element={<PostParking />}></Route>
+      </Routes>
+      </MyContext.Provider>
+    </div>
+    </>
   )
 }
