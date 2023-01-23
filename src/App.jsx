@@ -11,15 +11,14 @@ import About from './Components/About/About';
 import Footer from './Components/Footer/Footer';
 import handleSubmit from './firebasee/firebase';
 import { useRef } from 'react';
-import SignIn from './Components/SignIn/SignIn';
+import NewUser from './Components/NewUser/NewUser';
+import PostParking from './Components/PostParking/PostParking';
 
 export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
   const [users, setUsers] = useState([{userName: '', password: '' }]);
   const [currentUser, setCurrentUser] = useState([]);
-
-
 
   const [data, setData] = useState(Data)
   const AllData = {
@@ -33,22 +32,22 @@ export default function App() {
   }
   
   return (
-
     <>
-      <div className='bg-warning'>
-        <MyContext.Provider value={AllData}>
-        <Header />
-        
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/User" element={<User />}></Route>
-          <Route path="/Parkings" element={<Parkings />}></Route>
-          <Route path="/Parkings/:id" element={<Parking />}></Route>
-          <Route path="/About" element={<About />}></Route>
-          <Route path="/:SignIn" element={<SignIn />}></Route>
-        </Routes>
-        </MyContext.Provider>
-      </div>
-      </>
+    <div className='bg-warning'>
+      <MyContext.Provider value={AllData}>
+      <Header />
+      
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/User" element={<User />}></Route>
+        <Route path="/Parkings" element={<Parkings />}></Route>
+        <Route path="/Parkings/:id" element={<Parking />}></Route>
+        <Route path="/About" element={<About />}></Route>
+        <Route path="/NewUser" element={<NewUser />}></Route>
+        <Route path="/PostParking" element={<PostParking />}></Route>
+      </Routes>
+      </MyContext.Provider>
+    </div>
+    </>
   )
 }
