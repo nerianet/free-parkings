@@ -31,11 +31,6 @@ export default function App() {
     currentUser,
     setCurrentUser
   }
-   
-  
-
-
-  
   
   return (
 
