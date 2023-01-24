@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { MyContext } from '../../App';
-import { Route, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Home from '../Home/Home';
 export default function NewUser() {

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Data from "./Data.json";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
@@ -12,8 +12,6 @@ import Footer from "./Components/Footer/Footer";
 import { firestore } from "./firebasee/firebase";
 import { addDoc, collection, onSnapshot, query } from "@firebase/firestore";
 
-import { useRef } from "react";
-import SignIn from "./Components/SignIn/SignIn";
 import { useEffect } from "react";
 
 import NewUser from "./Components/NewUser/NewUser";
