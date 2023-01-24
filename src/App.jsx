@@ -10,15 +10,10 @@ import About from './Components/About/About';
 import Footer from './Components/Footer/Footer';
 //import handleSubmit from './firebasee/firebase';
 import { firestore } from './firebasee/firebase';
-import {   addDoc,
-  collection,
-  getDocs,
-  getFirestore,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  where, } from "@firebase/firestore"
+import { addDoc,
+         collection,
+         onSnapshot,
+         query,} from "@firebase/firestore"
 
 import { useRef } from 'react';
 import SignIn from './Components/SignIn/SignIn';
@@ -26,6 +21,7 @@ import { useEffect } from 'react';
 
 import NewUser from './Components/NewUser/NewUser';
 import PostParking from './Components/PostParking/PostParking';
+import axios from 'axios';
 
 export const MyContext = createContext() // הצהרה רישונית
 
@@ -60,7 +56,6 @@ export default function App() {
     
 
   ////////////////////////////////////////////////
-  
   useEffect(()=>{
    // console.log();
   });
@@ -75,7 +70,6 @@ export default function App() {
     setCurrentUser
   }
   console.log(users);
-
   return (
     <div className='bg-warning'>
     <div >
