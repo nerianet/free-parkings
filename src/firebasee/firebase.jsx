@@ -1,14 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {   addDoc,
-  collection,
-  getDocs,
-  getFirestore,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  where, } from "@firebase/firestore"
+import { getFirestore } from "@firebase/firestore"
 import { useState } from "react";
 import { useContext } from "react";
 import { MyContext } from "../App";

@@ -1,6 +1,7 @@
 .bg_site {
     background-image: url("https://images.pexels.com/photos/327502/pexels-photo-327502.jpeg");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
+    
     /* background-color: rgba(247, 198, 49, 0.974); */
 }

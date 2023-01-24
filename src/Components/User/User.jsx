@@ -34,8 +34,8 @@ export default function User() {
   }
 
   return ( 
-    <div className='body'>
-    <form className='form-signin' onSubmit={submithandler}>
+    <div className='body '>
+    <form className='form-signin bg_header rounded' onSubmit={submithandler}>
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
         <h1 class="h3 mb-3 font-weight-normal">Enter User</h1>

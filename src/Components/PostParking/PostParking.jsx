@@ -15,7 +15,7 @@ export default function PostParking() {
     if(currentUser == undefined){
       changeNavigate();
     }
-  }, [])
+  }, [currentUser])
   
   return (
     <>
