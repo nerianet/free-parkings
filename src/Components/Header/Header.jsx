@@ -22,9 +22,9 @@ export default function Header() {
       <div className='d-flex '>
       <li className=''>Hello {currentUser ? currentUser : "Guest"}</li>
       {currentUser != undefined ? 
-       <li><button className='btn btn-primary' onClick={Disconnect}><FaUserCheck/></button></li>
+       <li><button style={{marginLeft:'6px'}} className='btn btn-danger' onClick={Disconnect}><FaUserCheck/></button></li>
       : 
-      <li><Link className='btn btn-primary' to={"/User"}><FaUserAltSlash/></Link></li>}
+      <li><Link style={{marginLeft:'6px'}} className='btn btn-primary' to={"/User"}><FaUserAltSlash/></Link></li>}
       </div>
     </ul>
     </>

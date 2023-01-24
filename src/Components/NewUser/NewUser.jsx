@@ -16,6 +16,10 @@ export default function NewUser() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const found = users.find((user) => user.userName === userName.current.value);
+    if(found){
+      window.alert("You Hava A Acount");
+    } else {
     const user ={
       userName: userName.current.value, 
       Phone: Phone.current.value,
@@ -38,6 +42,7 @@ export default function NewUser() {
       navigate('/');
     }  
   }
+}
 
   return (
   <>

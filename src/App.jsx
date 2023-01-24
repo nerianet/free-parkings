@@ -77,8 +77,8 @@ export default function App() {
   console.log(users);
 
   return (
-    <>
     <div className='bg-warning'>
+    <div >
       <MyContext.Provider value={AllData}>
       <Header />
       
@@ -91,8 +91,9 @@ export default function App() {
         <Route path="/NewUser" element={<NewUser />}></Route>
         <Route path="/PostParking" element={<PostParking />}></Route>
       </Routes>
+      <Footer/>
       </MyContext.Provider>
     </div>
-    </>
+    </div>
   )
 }
