@@ -70,8 +70,8 @@ export default function App() {
   }
   console.log(users);
   return (
-    <div className='bgr vh-100 '>
-    <div className='bgr'>
+    <div className='bg_site vh-100 '>
+    <div className='bg_site'>
       <MyContext.Provider value={AllData}>
       <Header />
       
