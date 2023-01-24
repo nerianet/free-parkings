@@ -39,7 +39,7 @@ export default function User() {
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
         <h1 class="h3 mb-3 font-weight-normal">Enter User</h1>
-        <Link to={'/NewUser'}>New User? Click here</Link>
+        <Link className='link-light' to={'/NewUser'}>New User? Click here</Link>
       </div>
 
       <div class="form-label-group">

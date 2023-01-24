@@ -9,6 +9,13 @@
     background-image: url("https://images.pexels.com/photos/1000633/pexels-photo-1000633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    transition: transform 1.1s;
+
+}
+
+.bgCircle1:hover {
+    box-shadow: 1px 1px 3px #0e010167;
+    transform: scale(1.05);
 }
 
 .bgCircle2 {

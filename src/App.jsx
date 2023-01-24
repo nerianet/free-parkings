@@ -21,8 +21,7 @@ import { useEffect } from 'react';
 
 import NewUser from './Components/NewUser/NewUser';
 import PostParking from './Components/PostParking/PostParking';
-import axios from 'axios';
-
+import './App.css'
 export const MyContext = createContext() // הצהרה רישונית
 
 export default function App() {
@@ -71,8 +70,8 @@ export default function App() {
   }
   console.log(users);
   return (
-    <div className='bg-warning'>
-    <div >
+    <div className='bgr vh-100 '>
+    <div className='bgr'>
       <MyContext.Provider value={AllData}>
       <Header />
       

@@ -13,12 +13,11 @@ export default function Header() {
   } 
   return (
     <>
-    <ul className='d-flex justify-content-around fs-2 gap-4 sticky-top list-unstyled bg-warning'>
-      <li></li>
+    <ul className='d-flex justify-content-around fs-2 sticky-top list-unstyled'>
       <li><Link to={"/"}><img src='https://i.ibb.co/mcCN2jp/logo-free-parking.png' width="100px" height="70px"/></Link></li>
       <li></li>
       <li></li>
-      <li><Link to={"/About"}>About</Link></li>
+      <li><Link className='link-dark' to={"/About"}>About</Link></li>
       <div className='d-flex '>
       <li className=''>Hello {currentUser ? currentUser : "Guest"}</li>
       {currentUser != undefined ? 
