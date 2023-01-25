@@ -38,7 +38,7 @@ export default function User() {
     <form className='form-signin bg_header rounded' onSubmit={submithandler}>
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
-        <h1 class="h3 mb-3 font-weight-normal">Enter User</h1>
+        <h1 class="h3 mb-3 font-weight-normal text-light">Enter User</h1>
         <Link className='link-light' to={'/NewUser'}>New User? Click here</Link>
       </div>
 
@@ -53,8 +53,8 @@ export default function User() {
       </div>
 
       <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
+        <label className='text-light'>
+          <input  type="checkbox" value="remember-me" /> Remember me
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>

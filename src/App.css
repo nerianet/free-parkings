@@ -1,25 +1,28 @@
 .bg_site {
-    background-image: url("https://images.pexels.com/photos/327502/pexels-photo-327502.jpeg");
+    background-image: url("https://images.pexels.com/photos/2402235/pexels-photo-2402235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-repeat: no-repeat;
     background-size: cover;
-    
+    font-style:italic;
     /* background-color: rgba(247, 198, 49, 0.974); */
 }
 
 .bg_header {
-    background-color: rgba(31, 30, 29, 0.4);
+    background-color: rgba(31, 30, 29, 0.6);
 }
 
 .bgCircle1 {
-    /* background-image: url("");
+    /* background-image: url("https://thumbs.dreamstime.com/z/smartphone-application-online-searching-free-parking-place-map-gps-navigation-parking-concept-smartphone-application-111457034.jpg");
     background-repeat: no-repeat;
-    background-size: 100% 100%; */
-    background-color: rgba(254, 255, 255, 0.3);
+    background-size: cover; */
+    background-color: rgba(1, 19, 19, 0.5);
+    box-shadow: 2px 2px 12px 2px rgb(12, 11, 11);
 }
 
 .bgCircle2 {
     /* background-image: url("");
     background-repeat: no-repeat;
     background-size: 100% 100%; */
-    background-color: rgba(254, 255, 255, 0.3);
+    background-color: rgba(1, 19, 19, 0.5);
+    box-shadow: 2px 2px 12px 2px rgb(12, 11, 11);
+
 }

@@ -14,10 +14,10 @@ export default function Header() {
   return (
     <>
     <ul className='d-flex justify-content-around fs-2 sticky-top list-unstyled bg_header'>
-      <li><Link to={"/"}><img src='https://i.ibb.co/mcCN2jp/logo-free-parking.png' width="100px" height="70px"/></Link></li>
+      <li><Link to={"/"}><img className='rounded-circle' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
       <li></li>
       <li></li>
-      <li><Link className='link-dark' to={"/About"}>About</Link></li>
+      <li><Link className='link-light' to={"/About"}>About</Link></li>
       <div className='d-flex '>
       <li className=''>{currentUser}</li>
       {currentUser != undefined ? 
