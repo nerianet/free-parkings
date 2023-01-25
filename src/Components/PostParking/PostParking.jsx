@@ -64,6 +64,13 @@ export default function PostParking() {
                           <label className="form-label" for="form3Example4c">Suitable for?</label>
                         </div>
                       </div>
+                      
+                      <div className="mb-1">
+                          Image <span className="font-css top">*</span>
+                          <div className="">
+                              <input type="file" id="file-input" name="ImageStyle"/>
+                          </div>
+                      </div>
   
                       {/* <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-key fa-lg me-3 fa-fw"></i>
