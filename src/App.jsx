@@ -9,31 +9,45 @@ import Parking from "./Components/Parking/Parking";
 import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 //import handleSubmit from './firebasee/firebase';
-import { firestore } from "./firebasee/firebase";
+import { firestore, storage } from "./firebasee/firebase";
 import { addDoc, collection, onSnapshot, query } from "@firebase/firestore";
+import { ref } from "firebase/storage";
+
 
 import { useEffect } from "react";
 
 import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
 import "./App.css";
+import { uploadBytes } from "firebase/storage";
 export const MyContext = createContext(); // הצהרה רישונית
 
 export default function App() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState();
+  const [post, setPost] = useState();
+
   /////////////////////////////////
-  const ref = collection(firestore, "test_data"); // Firebase creates this automaticall//
+  const fireRef = collection(firestore, "test_data"); // Firebase creates this automaticall//
+  const storageRef = ref(storage, "post" + ".jpg"); // Firebase creates this automaticall//
 
   const handleSubmit = async (testdata) => {
     try {
-      addDoc(ref, testdata);
+      addDoc(fireRef, testdata);
       // getDocs()
     } catch (err) {
       console.log(err);
     }
   };
-  let q = query(ref);
+
+  const setStorage = async (file) => {
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+    });
+  }
+
+
+  let q = query(fireRef);
   // real time collection data
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -57,10 +71,13 @@ export default function App() {
     data,
     setData,
     handleSubmit,
+    setStorage,
     users,
     setUsers,
     currentUser,
     setCurrentUser,
+    post,
+    setPost,
   };
   console.log(users);
   return (

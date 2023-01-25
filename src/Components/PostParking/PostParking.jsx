@@ -6,10 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 
   const PostParking = () => {
-  const {currentUser} = useContext(MyContext);
+  const {currentUser, post, setPost, setStorage} = useContext(MyContext);
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
-  const imageUser = useRef();
+  //const imageRef = useRef();
 
 
   function changeNavigate(){
@@ -21,15 +20,12 @@ import { MyContext } from '../../App'
         changeNavigate();
   }, []);
 
-  const submit = (e) => {
+  // console.log(post);
+
+  const handleChange = (e) => {
     e.preventDefault();
-
-    if(imageUser.current.value != undefined)
-    {
-      setImage(imageUser.current.value);
-      console.log(imageUser.current.value);
-
-    }
+    setPost( e.target.files[0]);
+    setStorage(post);
   }
 
 
@@ -48,7 +44,7 @@ import { MyContext } from '../../App'
   
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
   
-                    <form className="mx-1 mx-md-4" onSubmit={submit}>
+                    <form className="mx-1 mx-md-4">
   
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
@@ -85,11 +81,11 @@ import { MyContext } from '../../App'
                       <div className="mb-1">
                           Image <span className="font-css top">*</span>
                           <div className="">
-                              <input ref={imageUser} type="file" id="file-input" name="ImageStyle"/>
+                              <input onChange={handleChange} type="file" id="file-input" name="ImageStyle"/>
                           </div>
                       </div>
-                      {imageUser.current == undefined ? "moshe" 
-                      : <img src={image}></img>
+                      {post == undefined ? "moshe" 
+                      : <></>
                       }
   
                       {/* <div className="d-flex flex-row align-items-center mb-4">
