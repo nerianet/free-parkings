@@ -1,21 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
+import { useRef } from 'react';
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 
-export default function PostParking() {
+  const PostParking = () => {
   const {currentUser} = useContext(MyContext);
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
+  const imageUser = useRef();
+
 
   function changeNavigate(){
     navigate("/User")
   }
+
   useEffect(()=>{
     if(currentUser == undefined)
-   changeNavigate();
-  }, [])
-  
+        changeNavigate();
+  }, []);
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    if(imageUser.current.value != undefined)
+    {
+      setImage(imageUser.current.value);
+      console.log(imageUser.current.value);
+
+    }
+  }
+
+
   return (
     <>
       {currentUser == undefined ? changeNavigate()
@@ -31,7 +48,7 @@ export default function PostParking() {
   
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
   
-                    <form className="mx-1 mx-md-4" onSubmit>
+                    <form className="mx-1 mx-md-4" onSubmit={submit}>
   
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
@@ -64,13 +81,16 @@ export default function PostParking() {
                           <label className="form-label" for="form3Example4c">Suitable for?</label>
                         </div>
                       </div>
-                      
+
                       <div className="mb-1">
                           Image <span className="font-css top">*</span>
                           <div className="">
-                              <input type="file" id="file-input" name="ImageStyle"/>
+                              <input ref={imageUser} type="file" id="file-input" name="ImageStyle"/>
                           </div>
                       </div>
+                      {imageUser.current == undefined ? "moshe" 
+                      : <img src={image}></img>
+                      }
   
                       {/* <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-key fa-lg me-3 fa-fw"></i>
@@ -98,4 +118,4 @@ export default function PostParking() {
     </>
   )
 }
-
+export default PostParking;
