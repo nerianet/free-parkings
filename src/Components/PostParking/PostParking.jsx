@@ -6,27 +6,48 @@ import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 
   const PostParking = () => {
-  const {currentUser, name, setName, setStorage, setImage, } = useContext(MyContext);
+  const {currentUser, setName, setStorage, setImage, image} = useContext(MyContext);
   const navigate = useNavigate();
-  //const imageRef = useRef();
+  const imageRef = useRef();
+  const [url, setUrl] = useState([]);
 
   const changeNavigate = () => {
     navigate("/LogIn")
   }
-
+  
   useEffect(()=>{
     if(currentUser == undefined)
         changeNavigate();
   }, []);
 
   // console.log(post);
-  const img = document.getElementById('myimg');
+  let img = document.getElementById('myimg');
 
   const handleChange = async (e) => {
     e.preventDefault();
-    setName(e.target.files[0].name );
-    setImage(e.target.files[0]);
-    setStorage(e.target.files[0]);
+    setName(imageRef.current.files[0].name );
+    setImage(imageRef.current.files[0]);
+    setStorage(imageRef.current.files[0]);
+  }
+  // setImage(img);
+  useEffect(()=>{
+    if(img != undefined) {
+      img.setAttribute('src', image);
+    }
+  }, [url]);
+
+  const unsetImage = (e)=>{
+    e.preventDefault();
+    setImage(undefined);
+    img = undefined;
+  }
+
+  function set(e){
+  //  e.preventDefault();
+  setImage(imageRef.current.files[0]);
+   let _url = URL.createObjectURL(imageRef.current.files[0]);
+   console.log(img);
+   setUrl(_url)
   }
   
 
@@ -45,10 +66,10 @@ import { MyContext } from '../../App'
   
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
   
-                    <form className="mx-1 mx-md-4" >
+                    <form className="mx-1 mx-md-4" onSubmit={handleChange}>
   
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        {/* <FaAccessibleIcon/> */}
                         <div className="form-outline flex-fill mb-0">
                           <label className=" form-label" for="form3Example4c">accessibility?</label>
                           <input type="checkbox" id="form3Example4c" className="mx-2" />
@@ -56,7 +77,7 @@ import { MyContext } from '../../App'
                       </div>
   
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        
                         <div className="form-outline flex-fill mb-0">
                           <label className="form-label" for="form3Example3c">Have a Code?</label>
                           <input type="checkbox" id="form3Example3c" className="mx-2"  />
@@ -64,7 +85,7 @@ import { MyContext } from '../../App'
                       </div>
 
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                        
                         <div className="form-outline flex-fill mb-0">
                           <input placeholder='Street, Number, City' type="text" id="form3Example1c" className="form-control"  />
                           <label className="form-label" for="form3Example1c">Adress</label>
@@ -72,7 +93,7 @@ import { MyContext } from '../../App'
                       </div>
   
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        
                         <div className="form-outline flex-fill mb-0">
                           <input placeholder='Car / Trunk / Bike' type="text" id="form3Example4c" className="form-control" />
                           <label className="form-label" for="form3Example4c">Suitable for?</label>
@@ -82,12 +103,16 @@ import { MyContext } from '../../App'
                       <div className="mb-1">
                           Image <span className="font-css top">*</span>
                           <div className="">
-                              <input onChange={handleChange} type="file" id="file-input" name="ImageStyle"/>
+                              <input onChange={set} ref={imageRef} type="file" id="file-input" />
                           </div>
                       </div>
-                      {name == undefined ? "moshe" 
-                      : <></>
-                      }
+                      
+                      { image == undefined ? "" : 
+                      <div> 
+                        <img className="rounded mx-3" src={url} style={{width:'250px', height:'150px'}} id="myimg" /> 
+                        <button onClick={unsetImage}>**</button>
+                      </div> }
+
   
                       {/* <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-key fa-lg me-3 fa-fw"></i>

@@ -1,5 +1,5 @@
-import React, { createContext, useState } from "react";
-import { Routes, Route, Await } from "react-router-dom";
+import React, { createContext, useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Data from "./Data.json";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
@@ -8,14 +8,11 @@ import Parkings from "./Components/Parkings/Parkings";
 import Parking from "./Components/Parking/Parking";
 import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
-//import handleSubmit from './firebasee/firebase';
+// firestore Files
 import { firestore, storage } from "./firebasee/firebase";
-import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
-import { getDownloadURL, ref , listAll } from "firebase/storage";
-import { uploadBytes } from "firebase/storage";
-
-
-import { useEffect } from "react";
+import { addDoc, collection, onSnapshot, query } from "@firebase/firestore";
+import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
+///////////////////////////////////
 
 import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
@@ -73,7 +70,6 @@ export default function App() {
     })
   }
   }
-  
  
  
 
@@ -98,10 +94,7 @@ export default function App() {
         // xhr.send();
     
         // Or inserted into an <img> element
-        const img = document.getElementById('myimg');
-       // setImage(img);
-    
-        img.setAttribute('src', url);
+        setImage(url);
     
       })
       .catch((error) => {
@@ -134,6 +127,8 @@ export default function App() {
     setImage,
     userID,
     setUserID,
+    setImage,
+    image,
   };
   //console.log(users);
   return (
@@ -150,7 +145,6 @@ export default function App() {
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
           </Routes>
-          {image != undefined ? <img className="rounded mx-3" style={{width:'500px', height:'300px'}} id="myimg" /> : ""}
           <Footer />
         </MyContext.Provider>
       </div>

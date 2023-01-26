@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewUser() {
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
-  const {handleSubmit, users,setUsers,setCurrentUser, currentUser, setUserID, UserId} = useContext(MyContext);
+  const {handleSubmit, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
   const userName = useRef();
   const pass = useRef();
   const pass2 = useRef();

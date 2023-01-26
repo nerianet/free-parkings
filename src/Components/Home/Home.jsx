@@ -12,8 +12,8 @@ export default function Home() {
       
       <div className="h-100 ">
         <div className="row justify-content-between w-100 h-100 mx-1 ">
-          <Link to={"/PostParking"} style={{width:'450px', height:'450px'}} className="link-warning  col-4 bgCircle1 d-flex justify-content-center align-items-center border rounded-circle display-4"><strong>Post a Park</strong></Link>
-          <Link to={"/Parkings"} style={{width:'450px', height:'450px'}}    className="link-warning col-4 bgCircle2 d-flex justify-content-center align-items-center border rounded-circle display-4"><strong>parking search</strong></Link>
+          <Link to={"/PostParking"} style={{width:'450px', height:'450px'}} className=" link-warning  col-4 bgCircle1 d-flex justify-content-center align-items-center border rounded-circle"><strong>Post a Park</strong></Link>
+          <Link to={"/Parkings"} style={{width:'450px', height:'450px'}}    className="link-warning col-4 bgCircle2 d-flex justify-content-center align-items-center border rounded-circle"><strong>parking search</strong></Link>
         </div>
       </div>
     </div>

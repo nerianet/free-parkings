@@ -1,14 +1,12 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
-import { async } from '@firebase/util';
-import { firestore } from '../../firebasee/firebase';
+
 import "./LogIn.css"
-import Home from '../Home/Home'
-import { useEffect } from 'react';
+
 
 export default function User() {
-  const {handleSubmit, users, setUsers, setCurrentUser, currentUser, setUserID, UserId} = useContext(MyContext);
+  const { users,  setCurrentUser,  setUserID} = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
   const navigate = useNavigate();
