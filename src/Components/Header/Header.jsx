@@ -10,6 +10,7 @@ export default function Header() {
 
   function Disconnect(){
     setCurrentUser(undefined);
+    localStorage.clear();
   } 
   return (
     <>
@@ -19,11 +20,11 @@ export default function Header() {
       <li></li>
       <li><Link className='link-light' to={"/About"}>About</Link></li>
       <div className='d-flex '>
-      <li className=''>{currentUser}</li>
+      <li className='text-light'>{currentUser}</li>
       {currentUser != undefined ? 
        <li><button style={{marginLeft:'6px'}} className='btn btn-danger' onClick={Disconnect}><FaUserCheck/></button></li>
       : 
-      <li><Link style={{marginLeft:'6px'}} className='btn btn-primary' to={"/User"}><FaUserAltSlash/></Link></li>}
+      <li><Link style={{marginLeft:'6px'}} className='btn btn-primary' to={"/LogIn"}><FaUserAltSlash/></Link></li>}
       </div>
     </ul>
     </>

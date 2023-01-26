@@ -3,18 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 import { async } from '@firebase/util';
 import { firestore } from '../../firebasee/firebase';
-import "./User.css"
+import "./LogIn.css"
 import Home from '../Home/Home'
+import { useEffect } from 'react';
 
 export default function User() {
-  const {handleSubmit, users, setUsers, setCurrentUser, currentUser} = useContext(MyContext);
+  const {handleSubmit, users, setUsers, setCurrentUser, currentUser, setUserID, UserId} = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
   const navigate = useNavigate();
 
+  
   const submithandler = (a) => {
     a.preventDefault();
-     const found = users.find((user) => user.userName === userName.current.value);
+    const found = users.find((user) => user.userName === userName.current.value);
      if(found){
       if(password.current.value === found.password){
         console.log(found);
@@ -22,6 +24,8 @@ export default function User() {
         userName.current.value = "";
         password.current.value = "";
         navigate('/');
+        localStorage.setItem("id", `${found.id}`);
+        setUserID(found.id);
       } else {
         password.current.value = "";
       }

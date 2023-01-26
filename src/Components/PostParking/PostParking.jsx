@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 
   const PostParking = () => {
-  const {currentUser, name, setName, setStorage, setImage} = useContext(MyContext);
+  const {currentUser, name, setName, setStorage, setImage, } = useContext(MyContext);
   const navigate = useNavigate();
   //const imageRef = useRef();
 
-
-  function changeNavigate(){
-    navigate("/User")
+  const changeNavigate = () => {
+    navigate("/LogIn")
   }
 
   useEffect(()=>{
@@ -21,14 +20,15 @@ import { MyContext } from '../../App'
   }, []);
 
   // console.log(post);
+  const img = document.getElementById('myimg');
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     e.preventDefault();
     setName(e.target.files[0].name );
     setImage(e.target.files[0]);
     setStorage(e.target.files[0]);
   }
-
+  
 
   return (
     <>

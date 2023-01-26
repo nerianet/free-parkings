@@ -2,11 +2,10 @@ import React, { useContext, useRef, useState } from 'react';
 import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
-import Home from '../Home/Home';
 export default function NewUser() {
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
-  const {handleSubmit, users,setUsers,setCurrentUser, currentUser} = useContext(MyContext);
+  const {handleSubmit, users,setUsers,setCurrentUser, currentUser, setUserID, UserId} = useContext(MyContext);
   const userName = useRef();
   const pass = useRef();
   const pass2 = useRef();
@@ -16,7 +15,7 @@ export default function NewUser() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const found = users.find((user) => user.userName === userName.current.value);
+    const found = users.find((user) => user.userName == userName.current.value);
     if(found){
       window.alert("You Hava A Acount");
     } else {
@@ -34,11 +33,15 @@ export default function NewUser() {
       setPassword(pass.current.value);
       handleSubmit(user);
       setCurrentUser(YourName.current.value);
+      localStorage.setItem("id", `${user.id}`);
+      setUserID(user.id);
+
       userName.current.value = "";
       pass.current.value = "";
       Phone.current.value = "";
       YourName.current.value = "";
       pass2.current.value = "";
+
       navigate('/');
     }  
   }

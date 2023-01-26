@@ -3,7 +3,7 @@ import { Routes, Route, Await } from "react-router-dom";
 import Data from "./Data.json";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
-import User from "./Components/User/User";
+import LogIn from "./Components/logIn/LogIn";
 import Parkings from "./Components/Parkings/Parkings";
 import Parking from "./Components/Parking/Parking";
 import About from "./Components/About/About";
@@ -27,10 +27,12 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState();
   const [name, setName] = useState("");
   const [image, setImage] = useState();
+  const [userID, setUserID] = useState();
+
   /////////////////////////////////
   const fireRef = collection(firestore, "test_data"); // Firebase creates this automaticall//
-  console.log(image)
-  const handleSubmit = async (testdata) => {
+  //console.log(image)
+  const handleSubmit = (testdata) => {
     try {
       addDoc(fireRef, testdata);
       // getDocs()
@@ -39,6 +41,41 @@ export default function App() {
     }
    
   };
+   
+  
+  let q = query(fireRef);
+  // where("id", "==", userID)
+  // real time collection data
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      const books = [];
+      snapshot.docs.forEach((doc) => {
+        books.push({ ...doc.data(), id: doc.id });
+      });
+      setUsers(books);
+      console.log(books);
+      //console.log(books[0].userName);
+    });
+  }, []);
+
+  useEffect(()=>{
+    check();
+  },[users])
+
+  function check () {
+    // console.log(users)
+    if(users[0] != undefined)  {
+      users.map((e)=>{
+      if (localStorage.getItem('id') === e.id) {
+        setCurrentUser(e.YourName);
+        // console.log(e);
+      }
+    })
+  }
+  }
+  
+ 
+ 
 
   const setStorage = (file) => {
     const storageRef = ref(storage, currentUser + "/images/" + file.name); // Firebase creates this automaticall//
@@ -75,18 +112,7 @@ export default function App() {
 };
 
   //console.log(image[0]);
-  let q = query(fireRef);
-  // real time collection data
-  useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      const books = [];
-      snapshot.docs.forEach((doc) => {
-        books.push({ ...doc.data(), id: doc.id });
-        setUsers(books);
-      });
-      //console.log(books[0].userName);
-    });
-  }, []);
+  
 
   ////////////////////////////////////////////////
   useEffect(() => {
@@ -105,7 +131,9 @@ export default function App() {
     setCurrentUser,
     name,
     setName,
-    setImage
+    setImage,
+    userID,
+    setUserID,
   };
   //console.log(users);
   return (
@@ -115,14 +143,14 @@ export default function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/User" element={<User />}></Route>
+            <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
             <Route path="/Parkings/:id" element={<Parking />}></Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
           </Routes>
-          {image != undefined ? <img style={{width:'500px', height:'300px'}} id="myimg" /> : ""}
+          {image != undefined ? <img className="rounded mx-3" style={{width:'500px', height:'300px'}} id="myimg" /> : ""}
           <Footer />
         </MyContext.Provider>
       </div>
