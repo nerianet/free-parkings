@@ -25,39 +25,11 @@ export const firestore = getFirestore(app);
 export const storage = getStorage();
 
 
-//export default handleSubmit;
 
-
-
-
-// // init firebase app
-// initializeApp(firebaseConfig);
-
-// // init services
-// const db = getFirestore();
-
-// // collection spacific ref
-// const colRef = collection(db, "books");
 
 // //queries
-// let q = query(colRef, where("author", "==", "nadav amar"));
+ //let q = query(ref, where("userName", "==", "nadav amar"));
 
-
-
-// export function FirsrFirebs() {
-//   const [authorInp, setAuthorInp] = useState();
-//   const [titleInp, settitleInp] = useState("ddd");
-//   const docRef = doc(db, "books", titleInp);
-
-//   console.log(titleInp);
-
-//   const addNewBook = (e) => {
-//     e.preventDefault();
-//     addDoc(colRef, {
-//       title: titleInp,
-//       author: authorInp,
-//     });
-//   };
 
 //   const onDeleteBook = (e) => {
 //     e.preventDefault();

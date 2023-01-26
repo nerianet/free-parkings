@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 
   const PostParking = () => {
-  const {currentUser, post, setPost, setStorage} = useContext(MyContext);
+  const {currentUser, name, setName, setStorage, setImage} = useContext(MyContext);
   const navigate = useNavigate();
   //const imageRef = useRef();
 
@@ -24,8 +24,9 @@ import { MyContext } from '../../App'
 
   const handleChange = (e) => {
     e.preventDefault();
-    setPost( e.target.files[0]);
-    setStorage(post);
+    setName(e.target.files[0].name );
+    setImage(e.target.files[0]);
+    setStorage(e.target.files[0]);
   }
 
 
@@ -44,7 +45,7 @@ import { MyContext } from '../../App'
   
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
   
-                    <form className="mx-1 mx-md-4">
+                    <form className="mx-1 mx-md-4" >
   
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
@@ -84,7 +85,7 @@ import { MyContext } from '../../App'
                               <input onChange={handleChange} type="file" id="file-input" name="ImageStyle"/>
                           </div>
                       </div>
-                      {post == undefined ? "moshe" 
+                      {name == undefined ? "moshe" 
                       : <></>
                       }
   
