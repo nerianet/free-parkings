@@ -15,9 +15,9 @@ export default function Parkings() {
   return (
   <>
   <div className="d-flex justify-content-end m-3">
-    <form class="col-2 d-flex form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => countryInput(e.target.value)}/>
+    <form className="col-2 d-flex form-inline my-2 my-lg-0">
+      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => countryInput(e.target.value)}/>
     </form>
   </div>
   
@@ -31,7 +31,7 @@ export default function Parkings() {
           </div>
           <h2 className="d-flex justify-content-center">{item.price}₪</h2>
           <div className=" d-flex justify-content-center">
-            <button type="button" class="btn btn-success">
+            <button type="button" className="btn btn-success">
               Detail Parking
             </button>
           </div>

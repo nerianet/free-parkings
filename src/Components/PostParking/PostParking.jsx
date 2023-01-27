@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
+import { BiAccessibility } from "react-icons/bi";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+// import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
+
+
 
   const PostParking = () => {
   const {currentUser, setName, setStorage, setImage, image} = useContext(MyContext);
   const navigate = useNavigate();
-  const imageRef = useRef();
+  const imageRef1 = useRef();
+  const imageRef2 = useRef();
+  const imageRef3 = useRef();
   const [url, setUrl] = useState([]);
 
   const changeNavigate = () => {
@@ -25,16 +35,16 @@ import { MyContext } from '../../App'
 
   const handleChange = async (e) => {
     e.preventDefault();
-    setName(imageRef.current.files[0].name );
-    setImage(imageRef.current.files[0]);
-    setStorage(imageRef.current.files[0]);
+    setName(imageRef1.current.files[0].name );
+    setImage(imageRef1.current.files[0]);
+    setStorage(imageRef1.current.files[0]);
   }
   // setImage(img);
   useEffect(()=>{
     if(img != undefined) {
       img.setAttribute('src', image);
     }
-  }, [url]);
+  }, [set]);
 
   const unsetImage = (e)=>{
     e.preventDefault();
@@ -44,13 +54,12 @@ import { MyContext } from '../../App'
 
   function set(e){
   //  e.preventDefault();
-  setImage(imageRef.current.files[0]);
-   let _url = URL.createObjectURL(imageRef.current.files[0]);
-   console.log(img);
-   setUrl(_url)
+  setImage(imageRef1.current.files[0]);
+   let _url = URL.createObjectURL(imageRef1.current.files[0]);
+   //console.log(img);
+   setUrl(_url);
   }
-  
-
+ 
   return (
     <>
       {currentUser == undefined ? changeNavigate()
@@ -69,7 +78,7 @@ import { MyContext } from '../../App'
                     <form className="mx-1 mx-md-4" onSubmit={handleChange}>
   
                       <div className="d-flex flex-row align-items-center mb-4">
-                        {/* <FaAccessibleIcon/> */}
+                       <div> <BiAccessibility  style={{width:'90px'}} /></div> 
                         <div className="form-outline flex-fill mb-0">
                           <label className=" form-label" for="form3Example4c">accessibility?</label>
                           <input type="checkbox" id="form3Example4c" className="mx-2" />
@@ -101,16 +110,28 @@ import { MyContext } from '../../App'
                       </div>
 
                       <div className="mb-1">
-                          Image <span className="font-css top">*</span>
-                          <div className="">
-                              <input onChange={set} ref={imageRef} type="file" id="file-input" />
-                          </div>
+                          <div className="" > 
+                              <input onChange={()=>set()} ref={imageRef1} type="file" id="Moshe" />
+                          </div> 
                       </div>
-                      
+{/* //////////////////////////////////////////////////////////////////////// */}
+                      {/* <Stack direction="row" alignItems="center" spacing={2}>
+      <Button variant="contained" component="label">
+        Upload
+        <input hidden accept="image/*" multiple type="file" />
+      </Button>
+      <IconButton color="primary" aria-label="upload picture" component="label">
+        <input hidden accept="image/*" type="file" />
+        {/* <PhotoCamera /> */}
+      {/* </IconButton>
+    </Stack> } */}
+                 {/* //////////////////////////////////////////////////////////////////////// */}
+                   <span className="">The selected image</span>
+
                       { image == undefined ? "" : 
-                      <div> 
-                        <img className="rounded mx-3" src={url} style={{width:'250px', height:'150px'}} id="myimg" /> 
-                        <button onClick={unsetImage}>**</button>
+                      <div style={{marginTop:'9px'}}> 
+                        <img className="rounded mx-3" src={url} style={{ width:'250px', height:'150px'}} id="myimg" /> 
+                        <button  onClick={unsetImage}>X</button>
                       </div> }
 
   
@@ -123,7 +144,7 @@ import { MyContext } from '../../App'
                       </div> */}
   
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" className="btn btn-primary btn-lg">submit</button>
+                        <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
                       </div>
   
                     </form>

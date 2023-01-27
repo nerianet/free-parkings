@@ -6,7 +6,7 @@ export default function Home() {
   return (
   <>
   <div className="">
-    <div className="container h-100 text-light" style={{height:'920px'}}>
+    <div className="container h-100 text-primary" style={{height:'920px'}}>
       <h1 className="d-flex justify-content-center">search parkings</h1>
       <p className="d-flex justify-content-center">Here you can easily find parking</p>
       

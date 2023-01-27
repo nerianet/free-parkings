@@ -45,7 +45,7 @@ export default function User() {
       </div>
 
       <div class="form-label-group">
-        <input ref={userName} type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
+        <input ref={userName} type="email" id="inputEmail" class="form-control" placeholder="Email address" required autoFocus />
         <label for="inputEmail">Email address</label>
       </div>
 
