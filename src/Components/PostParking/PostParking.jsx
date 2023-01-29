@@ -20,18 +20,21 @@ const PostParking = () => {
   const navigate = useNavigate();
   const imageRef = useRef();
   const accessibility = useRef();
-  const keyCode = useRef();
+  const adress = useRef();
+  const suitable = useRef();
   const [url, setUrl] = useState([]);
-  const [code, setcode] = useState();
-
+  const [code, setCode] = useState();
+  const [keyCode, setKeyCode] = useState();
+  const [activityTime, setActivityTime] = useState("");
   const changeNavigate = () => {
     navigate("/LogIn");
   };
 
   useEffect(() => {
-    if (currentUser == undefined) changeNavigate();
-    console.log(code);
+    if (currentUser == undefined)
+      changeNavigate();
   }, []);
+
   let img = document.getElementById("myimg");
 
   const submitPost = async (e) => {
@@ -40,25 +43,36 @@ const PostParking = () => {
     setStorage(imageRef.current.files[0]);
     setImage(undefined);
     img = undefined;
-    const post = {
+      const post = {
       userId: userID,
-      nameFile: name,
-      checked: accessibility.current.checked,
-      code: code.current.checked,
+      nameFile: imageRef.current.files[0].name,
+      accessibility: accessibility.current.checked,
+      code: code.target != undefined ? code.target.checked : "",
+      adress: adress.current.value,
+      suitable: suitable.current.value,
+      keyCode : keyCode.target != undefined ? keyCode.target.value : "",
+      activityTime: activityTime,
     };
     setNewPost(post);
+    accessibility.current.checked = false;
+    code.target != undefined ? code.target.checked = false : code.target = undefined;
+    suitable.current.value = "";
+    imageRef.current.value = null;
+    adress.current.value = "";
+    setActivityTime("");
   };
 
-  useEffect(() => {
-    if (img != undefined) {
-      img.setAttribute("src", image);
-    }
-  }, [setLocaleImage]);
+  // useEffect(() => {
+  //   if (img != undefined) {
+  //     img.setAttribute("src", image);
+  //   }
+  // }, []);
 
   const unsetImage = (e) => {
     e.preventDefault();
     setImage(undefined);
     img = undefined;
+    imageRef.current.value = null;
   };
 
   function setLocaleImage(e) {
@@ -119,18 +133,17 @@ const PostParking = () => {
                               </label>
                               <input
                                 type="checkbox"
-                                onChange={(e) => setcode(e)}
                                 id="form3Example3c"
+                                onChange={(e) => setCode(e)}
                                 className="mx-2"
                               />
-                              {code == undefined ? (
-                                ""
-                              ) : code.target.checked == false ? (
+                              { code == undefined ? "" :
+                              code.target.checked == false ? (
                                 ""
                               ) : (
                                 <input
                                   placeholder="Please Enter A Code"
-                                  ref={keyCode}
+                                  onChange={(e) => setKeyCode(e)}
                                   type="number"
                                 />
                               )}
@@ -144,6 +157,7 @@ const PostParking = () => {
                                 type="text"
                                 id="form3Example1c"
                                 className="form-control"
+                                ref={adress}
                               />
                               <label
                                 className="form-label"
@@ -161,12 +175,31 @@ const PostParking = () => {
                                 type="text"
                                 id="form3Example4c"
                                 className="form-control"
+                                ref={suitable}
                               />
                               <label
                                 className="form-label"
                                 for="form3Example4c"
                               >
-                                Suitable for?
+                                suitable for?
+                              </label>
+                            </div>
+                          </div>
+
+                          <div className="d-flex flex-row align-items-center mb-4">
+                            <div className="form-outline flex-fill mb-0">
+                              <input
+                                placeholder="sun - thurs "
+                                type="text"
+                                id="form3Example4c"
+                                className="form-control"
+                                onChange={e => setActivityTime(e.target.value)}
+                              />
+                              <label
+                                className="form-label"
+                                for="form3Example4c"
+                              >
+                                 Activity time?
                               </label>
                             </div>
                           </div>

@@ -3,11 +3,9 @@ import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
 export default function NewUser() {
-  const [email, setEmail] = useState([]);
-  const [password, setPassword] = useState([]);
   const {setNewUser, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
   const userName = useRef();
-  const pass = useRef();
+  const pass1 = useRef();
   const pass2 = useRef();
   const Phone = useRef();
   const YourName = useRef();
@@ -23,25 +21,21 @@ export default function NewUser() {
       userName: userName.current.value, 
       Phone: Phone.current.value,
       YourName: YourName.current.value,
-      password: pass.current.value
+      password: pass1.current.value
     }
-    if(pass.current.value!=pass2.current.value){
-      console.log("the password not correct");
+    if(pass1.current.value!=pass2.current.value){
+      window.alert("the password not correct");
     } else {
       setUsers([...users, user]);
-      setEmail(userName.current.value);
-      setPassword(pass.current.value);
       setNewUser(user);
       setCurrentUser(YourName.current.value);
       localStorage.setItem("id", `${user.id}`);
       setUserID(user.id);
-
       userName.current.value = "";
-      pass.current.value = "";
+      pass1.current.value = "";
       Phone.current.value = "";
       YourName.current.value = "";
       pass2.current.value = "";
-
       navigate('/');
     }  
   }
@@ -90,7 +84,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" ref={pass}/>
+                        <input type="password" id="form3Example4c" class="form-control" ref={pass1}/>
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>

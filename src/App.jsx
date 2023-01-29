@@ -16,7 +16,7 @@ import PostParking from "./Components/PostParking/PostParking";
 import { firestore, storage } from "./firebasee/firebase";
 import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
-///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
 
@@ -28,27 +28,27 @@ export default function App() {
   const [image, setImage] = useState();
   const [userID, setUserID] = useState();
 
-  /////////////////////////////////
-  const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
-  const setNewUser = (testdata) => {
+//////////////////////////////////////////////////////////////////////////////////////////////
+const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
+  const setNewUser = (userData) => {
     try {
-      addDoc(usersRef, testdata);
+      addDoc(usersRef, userData);
     } catch (err) {
       console.log(err);
     }
   };
 
   const postsRef = collection(firestore, "posts"); // Firebase creates this automaticall//
-  const setNewPost = (testdata) => {
+  const setNewPost = (postData) => {
     try {
-      addDoc(postsRef, testdata);
+      addDoc(postsRef, postData);
     } catch (err) {
       console.log(err);
     }
   };
    
+// get users data
   let q = query(usersRef);
-  // get collection users data
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       const books = [];
@@ -64,36 +64,38 @@ export default function App() {
   },[users])
 
   function check () {
-    if(users[0] != undefined)  {
-      users.map((e)=>{
+    if(users[0] != undefined) {
+      users.map((e)=> {
       if (localStorage.getItem('id') === e.id) {
         setCurrentUser(e.YourName);
-      }
-    })
-  }
+        setUserID(e.id);
+        }
+      })
+    }
   }
 
   const setStorage = (file) => {
-    const storageRef = ref(storage, currentUser + "/images/" + file.name); // Firebase creates this automaticall//
-    uploadBytes(storageRef, file).then((snapshot) => {
+    const storageRef = ref(storage, userID + "/images/" + file.name); // Firebase creates this automaticall//
+    uploadBytes(storageRef, file)
+    .then((snapshot) => {
       console.log('Uploaded successed!');
-      getUrl();
+      // getUrl();
     });
 
-    function getUrl (){
-      getDownloadURL(storageRef)
-      .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
+    // function getUrl (){
+    //   getDownloadURL(storageRef)
+    //   .then((url) => {
+    //     // `url` is the download URL for 'images/stars.jpg'
 
-        // Or inserted into an <img> element
-        //setImage(url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
+    //     // Or inserted into an <img> element
+    //     //setImage(url);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // }
 };
-  ////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
  
   const [data, setData] = useState(Data);
   const AllData = {
