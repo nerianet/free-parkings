@@ -7,18 +7,19 @@ import { Link } from "react-router-dom";
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const {currentUser, data} = useContext(MyContext);
+  const {setCurrentUser ,currentUser, data} = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
   const [posts, setPosts]     = useState(false);
+  const [YourName, setYourName] = useState(false);
 
   const changeNavigate = () => {
     navigate("/LogIn");
   };
 
   useEffect(() => {
-    if (currentUser == undefined)
+    if (currentUser.YourName == undefined)
       changeNavigate();
   }, []);
 
@@ -32,9 +33,17 @@ export default function MyAccount() {
     setProfile(false);
   }
 
+  function setKeyCode(e){
+    if(YourName.target.checked == false){
+      setYourName(false);
+    } else {
+      setCurrentUser({...currentUser, YourName: e.target.value});
+    }
+  }
+  
   return (
     <>
-      {currentUser == undefined ? changeNavigate() :
+      {currentUser.YourName == undefined ? changeNavigate() :
         <div className='container'>
             <div className='row'>
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
@@ -78,12 +87,21 @@ export default function MyAccount() {
                                             <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">My Profile</p>
                                             <form className="mx-1 mx-md-4" >
 
-                                                <div className="flex-row mb-4">
-                                                    <label className="form-label" for="form3Example1c">NAME <p>neria levi</p></label>
+                                                {/* <div className="flex-row mb-4">
+                                                    <label className="form-label"  for="form3Example1c">NAME</label>
                                                     
                                                     <div className="form-outline flex-fill mb-0">
-                                                        <input placeholder="enter name to change" type="text" id="form3Example1c" className="form-control"/>   
+                                                        <input value={currentUser.YourName} type="text" id="form3Example1c" className="form-control"/>   
                                                     </div>
+                                                </div> */}
+
+                                                <div className="d-flex flex-row align-items-center mb-4">
+                                                  <div className="form-outline flex-fill mb-0">
+                                                      <label className="form-label" for="form3Example3c">Name: {currentUser.YourName} </label>
+                                                      <button type="button" id="form3Example3c" onClick={() => YourName == false ? setYourName(true) : setYourName(false)} className="mx-2">change</button>
+                                                      { YourName == false ? "" :
+                                                      <input placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="text" />}
+                                                  </div>
                                                 </div>
 
                                                 <div className="d-flex flex-row align-items-center mb-4">
