@@ -6,7 +6,7 @@ import "./LogIn.css"
 
 
 export default function User() {
-  const { users,  setCurrentUser,  setUserID} = useContext(MyContext);
+  const { users,  setCurrentUser} = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
   const navigate = useNavigate();
@@ -18,12 +18,11 @@ export default function User() {
      if(found){
       if(password.current.value === found.password){
         console.log(found);
-        setCurrentUser(found.YourName);
+        setCurrentUser(found);
         userName.current.value = "";
         password.current.value = "";
         navigate('/');
         localStorage.setItem("id", `${found.id}`);
-        setUserID(found.id);
       } else {
         password.current.value = "";
       }

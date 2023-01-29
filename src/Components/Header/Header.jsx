@@ -9,7 +9,7 @@ export default function Header() {
   const {currentUser,setCurrentUser} = useContext(MyContext);
 
   function Disconnect(){
-    setCurrentUser(undefined);
+    setCurrentUser({});
     localStorage.clear();
   } 
   return (
@@ -19,7 +19,7 @@ export default function Header() {
       <li></li>
       <li></li>
       <li></li>
-      <p>{currentUser}</p>
+      <p>{currentUser.YourName}</p>
       
      
       
@@ -31,7 +31,7 @@ export default function Header() {
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <li className=''><Link className="dropdown-item link-primary" to={'/MyAccount'}>My Account</Link></li>
         <li>
-        {currentUser != undefined ? 
+        {currentUser.YourName != undefined ? 
        <li><button style={{marginLeft:'8px'}} className='btn btn-danger' onClick={Disconnect}>Disconnect <FaUserCheck/></button></li>
       : 
        <li><Link style={{marginLeft:'8px'}} className='btn btn-primary' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>}</li>

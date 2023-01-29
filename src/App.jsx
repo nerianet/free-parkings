@@ -25,10 +25,9 @@ export const MyContext = createContext(); // הצהרה רישונית
 export default function App() {
 
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
   const [name, setName] = useState("");
   const [image, setImage] = useState();
-  const [userID, setUserID] = useState();
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
@@ -69,15 +68,14 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     if(users[0] != undefined) {
       users.map((e)=> {
       if (localStorage.getItem('id') === e.id) {
-        setCurrentUser(e.YourName);
-        setUserID(e.id);
+        setCurrentUser(e);
         }
       })
     }
   }
 
   const setStorage = (file) => {
-    const storageRef = ref(storage, userID + "/images/" + file.name); // Firebase creates this automaticall//
+    const storageRef = ref(storage, currentUser.id + "/images/" + file.name); // Firebase creates this automaticall//
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
@@ -113,8 +111,6 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     name,
     setName,
     setImage,
-    userID,
-    setUserID,
     setImage,
     image,
   };

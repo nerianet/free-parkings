@@ -3,7 +3,7 @@ import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
 export default function NewUser() {
-  const {setNewUser, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
+  const {setNewUser, users,setUsers,setCurrentUser, currentUser} = useContext(MyContext);
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
@@ -28,9 +28,8 @@ export default function NewUser() {
     } else {
       setUsers([...users, user]);
       setNewUser(user);
-      setCurrentUser(YourName.current.value);
+      setCurrentUser(user);
       localStorage.setItem("id", `${user.id}`);
-      setUserID(user.id);
       userName.current.value = "";
       pass1.current.value = "";
       Phone.current.value = "";
@@ -43,7 +42,7 @@ export default function NewUser() {
 
   return (
   <>
-  {currentUser != undefined ? <div></div> :
+  {currentUser.YourName != undefined ? <div></div> :
   <div class="vh-100" >
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">

@@ -10,12 +10,10 @@ const PostParking = () => {
   const {
     currentUser,
     setName,
-    name,
     setStorage,
     setImage,
     image,
     setNewPost,
-    userID,
   } = useContext(MyContext);
   const navigate = useNavigate();
   const imageRef = useRef();
@@ -32,7 +30,7 @@ const PostParking = () => {
   };
 
   useEffect(() => {
-    if (currentUser == undefined)
+    if (currentUser.YourName == undefined)
       changeNavigate();
   }, []);
 
@@ -45,7 +43,7 @@ const PostParking = () => {
     setImage(undefined);
     img = undefined;
       const post = {
-      userId: userID,
+      userId: currentUser.id,
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code.target != undefined ? code.target.checked : "",
@@ -84,7 +82,7 @@ const PostParking = () => {
 
   return (
     <>
-      {currentUser == undefined ? (
+      {currentUser.YourName == undefined ? (
         changeNavigate()
       ) : (
       <div className="vh-100 ">
