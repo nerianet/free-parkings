@@ -18,13 +18,14 @@ export default function Header() {
       <li><Link to={"/"}><img className='rounded-circle' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
       <li></li>
       <li></li>
+      <li></li>
       <p>{currentUser}</p>
       
      
       
 
     <div class="btn-group rounded" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
         Menu
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
