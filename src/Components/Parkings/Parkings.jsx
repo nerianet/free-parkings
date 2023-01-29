@@ -2,13 +2,14 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import './parkings.css';
+
 export default function Parkings() {
+  
   const { data } = useContext(MyContext);
   const [inputData, setInput] = useState("");
 
   const countryInput = function (input) {
     setInput(input.charAt(0).toUpperCase() + input.slice(1));
-    console.log(inputData);
   };
 
 
