@@ -20,12 +20,23 @@ export default function Header() {
       <li></li>
       <li><Link className='link-light' to={"/About"}>About</Link></li>
       <div className='d-flex '>
-      <li className='text-light'>{currentUser}</li>
       {currentUser != undefined ? 
-       <li><button style={{marginLeft:'6px'}} className='btn btn-danger' onClick={Disconnect}><FaUserCheck/></button></li>
+       <li><button style={{marginLeft:'6px'}} className='btn btn-danger' onClick={Disconnect}>{currentUser} <FaUserCheck/></button></li>
       : 
-      <li><Link style={{marginLeft:'6px'}} className='btn btn-primary' to={"/LogIn"}><FaUserAltSlash/></Link></li>}
+      <li><Link style={{marginLeft:'6px'}} className='btn btn-primary' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>}
       </div>
+      
+
+    {/* <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div> */}
+
     </ul>
     </>
   )

@@ -116,7 +116,7 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     setImage,
     image,
   };
-  
+
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
