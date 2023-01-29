@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewUser() {
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
-  const {setNewUser, users,setUsers,setCurrentUser, currentUser, setCurrentUserID} = useContext(MyContext);
+  const {setNewUser, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
   const userName = useRef();
   const pass = useRef();
   const pass2 = useRef();
@@ -34,7 +34,7 @@ export default function NewUser() {
       setNewUser(user);
       setCurrentUser(YourName.current.value);
       localStorage.setItem("id", `${user.id}`);
-      setCurrentUserID(user.id);
+      setUserID(user.id);
 
       userName.current.value = "";
       pass.current.value = "";
