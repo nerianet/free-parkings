@@ -56,8 +56,8 @@ export default function MyAccount() {
             </div>
             {posts == true 
             ?
-            <div className="row justify-content-center ">
-                <div className="row justify-content-around container rounded ">
+            <div className="row justify-content-center pt-3">
+                <div className="row justify-content-around container rounded">
                     {data.map((item, i) => (
                     <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
                         <h4 className="d-flex justify-content-center">{item.cityAdress}</h4>
@@ -75,7 +75,7 @@ export default function MyAccount() {
                 </div>
             </div>
             :
-            <div className="vh-100 ">
+            <div className="vh-100 pt-3">
                 <div className="container h-100 ">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
