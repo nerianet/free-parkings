@@ -29,11 +29,11 @@ export default function Header() {
 
     <div class="btn-group" role="group">
       <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown
+        Menu
       </button>
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+        <li><a class="dropdown-item" href="#">My Account</a></li>
+        <li><a class="dropdown-item" href="#">Disconected</a></li>
       </ul>
     </div>
 
