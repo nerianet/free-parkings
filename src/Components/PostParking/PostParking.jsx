@@ -35,6 +35,8 @@ import Stack from '@mui/material/Stack';
   // console.log(post);
   let img = document.getElementById('myimg');
 
+
+
   const submitPost = async (e) => {
     e.preventDefault();
     setName(imageRef.current.files[0].name );
@@ -48,8 +50,11 @@ import Stack from '@mui/material/Stack';
       checked: accessibility.current.checked,
      // code: code.current.checked,
     }
+    for (const key in post) {
+      console.log(post[key]);
+      }
+    
     setNewPost(post);
-   
   }
   // setImage(img);
   useEffect(()=>{

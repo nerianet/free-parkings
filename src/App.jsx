@@ -10,7 +10,7 @@ import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 // firestore Files
 import { firestore, storage } from "./firebasee/firebase";
-import { addDoc, collection, onSnapshot, query } from "@firebase/firestore";
+import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
 ///////////////////////////////////
 
@@ -148,6 +148,9 @@ export default function App() {
       <div className="bg_site">
         <MyContext.Provider value={AllData}>
           <Header />
+          {users.map((e)=>(
+            <div>{e.YourName}</div>
+          ))}
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>
