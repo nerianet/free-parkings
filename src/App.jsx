@@ -12,6 +12,7 @@ import Footer from "./Components/Footer/Footer";
 import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
+import PageError from "./Components/PageError/PageError";
 
 
 // firestore Files
@@ -122,6 +123,7 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
           <Header />
           <Routes>
             <Route path="/" element={<Home />}></Route>
+            <Route path="/*" element={<PageError />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
