@@ -26,7 +26,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState();
   const [name, setName] = useState("");
   const [image, setImage] = useState();
-  const [userID, setUserID] = useState();
+  const [userID, setCurrentUserID] = useState();
 
   /////////////////////////////////
   const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
@@ -110,11 +110,11 @@ export default function App() {
     setName,
     setImage,
     userID,
-    setUserID,
+    setCurrentUserID,
     setImage,
     image,
   };
-  
+
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
