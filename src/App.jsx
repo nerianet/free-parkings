@@ -14,7 +14,7 @@ import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 
 // firestore Files
-import { firestore, storage } from "./firebasee/firebase";
+import { firestore, storage } from "./firebasee/Firebase";
 import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
 //////////////////////////////////////////////////////////////////////////////////////////////
