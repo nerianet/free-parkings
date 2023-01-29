@@ -27,11 +27,22 @@ export default function App() {
   const [userID, setUserID] = useState();
 
   /////////////////////////////////
-  const fireRef = collection(firestore, "test_data"); // Firebase creates this automaticall//
+  const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
   //console.log(image)
-  const handleSubmit = (testdata) => {
+  const setNewUser = (testdata) => {
     try {
-      addDoc(fireRef, testdata);
+      addDoc(usersRef, testdata);
+      // getDocs()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const postsRef = collection(firestore, "posts"); // Firebase creates this automaticall//
+  //console.log(image)
+  const setNewPost = (testdata) => {
+    try {
+      addDoc(postsRef, testdata);
       // getDocs()
     } catch (err) {
       console.log(err);
@@ -40,7 +51,7 @@ export default function App() {
   };
    
   
-  let q = query(fireRef);
+  let q = query(usersRef);
   // where("id", "==", userID)
   // real time collection data
   useEffect(() => {
@@ -94,8 +105,8 @@ export default function App() {
         // xhr.send();
     
         // Or inserted into an <img> element
-        setImage(url);
-    
+        //setImage(url);
+        console.log(url);
       })
       .catch((error) => {
         // Handle any errors
@@ -116,7 +127,8 @@ export default function App() {
   const AllData = {
     data,
     setData,
-    handleSubmit,
+    setNewUser,
+    setNewPost,
     setStorage,
     users,
     setUsers,

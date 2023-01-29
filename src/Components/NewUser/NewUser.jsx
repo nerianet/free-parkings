@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewUser() {
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
-  const {handleSubmit, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
+  const {setNewUser, users,setUsers,setCurrentUser, currentUser, setUserID} = useContext(MyContext);
   const userName = useRef();
   const pass = useRef();
   const pass2 = useRef();
@@ -19,7 +19,7 @@ export default function NewUser() {
     if(found){
       window.alert("You Hava A Acount");
     } else {
-    const user ={
+    const user = {
       userName: userName.current.value, 
       Phone: Phone.current.value,
       YourName: YourName.current.value,
@@ -31,7 +31,7 @@ export default function NewUser() {
       setUsers([...users, user]);
       setEmail(userName.current.value);
       setPassword(pass.current.value);
-      handleSubmit(user);
+      setNewUser(user);
       setCurrentUser(YourName.current.value);
       localStorage.setItem("id", `${user.id}`);
       setUserID(user.id);

@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
-import { BiAccessibility } from "react-icons/bi";
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -14,12 +13,14 @@ import Stack from '@mui/material/Stack';
 
 
   const PostParking = () => {
-  const {currentUser, setName, setStorage, setImage, image} = useContext(MyContext);
+  const {currentUser, setName, name, setStorage, setImage, image, setNewPost, userID} = useContext(MyContext);
   const navigate = useNavigate();
-  const imageRef1 = useRef();
-  const imageRef2 = useRef();
-  const imageRef3 = useRef();
+  const imageRef = useRef();
+  const accessibility = useRef();
+  const keyCode = useRef();
   const [url, setUrl] = useState([]);
+  const [code, setcode] = useState();
+
 
   const changeNavigate = () => {
     navigate("/LogIn")
@@ -28,23 +29,34 @@ import Stack from '@mui/material/Stack';
   useEffect(()=>{
     if(currentUser == undefined)
         changeNavigate();
+    console.log(code);
   }, []);
 
   // console.log(post);
   let img = document.getElementById('myimg');
 
-  const handleChange = async (e) => {
+  const submitPost = async (e) => {
     e.preventDefault();
-    setName(imageRef1.current.files[0].name );
-    setImage(imageRef1.current.files[0]);
-    setStorage(imageRef1.current.files[0]);
+    setName(imageRef.current.files[0].name );
+    setStorage(imageRef.current.files[0]);
+    setImage(undefined);
+    img = undefined;
+    console.log(name);
+    const post = {
+      userId: userID,
+      nameFile: name,
+      checked: accessibility.current.checked,
+     // code: code.current.checked,
+    }
+    setNewPost(post);
+   
   }
   // setImage(img);
   useEffect(()=>{
     if(img != undefined) {
       img.setAttribute('src', image);
     }
-  }, [set]);
+  }, [setLocaleImage]);
 
   const unsetImage = (e)=>{
     e.preventDefault();
@@ -52,11 +64,11 @@ import Stack from '@mui/material/Stack';
     img = undefined;
   }
 
-  function set(e){
+  function setLocaleImage(e){
   //  e.preventDefault();
-  setImage(imageRef1.current.files[0]);
-   let _url = URL.createObjectURL(imageRef1.current.files[0]);
-   //console.log(img);
+  setImage(imageRef.current.files[0]);
+   let _url = URL.createObjectURL(imageRef.current.files[0]);
+  //  console.log();
    setUrl(_url);
   }
  
@@ -75,13 +87,13 @@ import Stack from '@mui/material/Stack';
   
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
   
-                    <form className="mx-1 mx-md-4" onSubmit={handleChange}>
+                    <form className="mx-1 mx-md-4" onSubmit={submitPost}>
   
                       <div className="d-flex flex-row align-items-center mb-4">
-                       <div> <BiAccessibility  style={{width:'90px'}} /></div> 
+                       {/* <div> <BiAccessibility  style={{width:'90px'}} /></div>  */}
                         <div className="form-outline flex-fill mb-0">
                           <label className=" form-label" for="form3Example4c">accessibility?</label>
-                          <input type="checkbox" id="form3Example4c" className="mx-2" />
+                          <input type="checkbox"  ref={accessibility} id="form3Example4c" className="mx-2" />
                         </div>
                       </div>
   
@@ -89,7 +101,13 @@ import Stack from '@mui/material/Stack';
                         
                         <div className="form-outline flex-fill mb-0">
                           <label className="form-label" for="form3Example3c">Have a Code?</label>
-                          <input type="checkbox" id="form3Example3c" className="mx-2"  />
+                          <input type="checkbox" onChange={e=> setcode(e)} id="form3Example3c" className="mx-2"  />
+                          {code == undefined ?
+                            ""
+                            :
+                            code.target.checked == false ?  ""
+                            : <input placeholder='Please Enter A Code' ref={keyCode} type='number'/>
+                          }
                         </div>
                       </div>
 
@@ -111,7 +129,7 @@ import Stack from '@mui/material/Stack';
 
                       <div className="mb-1">
                           <div className="" > 
-                              <input onChange={()=>set()} ref={imageRef1} type="file" id="Moshe" />
+                              <input onChange={()=>setLocaleImage()} ref={imageRef} type="file" id="Moshe" />
                           </div> 
                       </div>
 {/* //////////////////////////////////////////////////////////////////////// */}
