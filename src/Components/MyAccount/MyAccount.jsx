@@ -20,9 +20,9 @@ export default function MyAccount() {
     <div className='container'>
       {currentUser == undefined ? changeNavigate() :
       <div className='border'>
-        <div className='row '>
-            <div className='col-6 justify-content-center '>My Profile</div>
-            <div className='col-6 justify-content-center'>My Posts</div>
+        <div className='d-flex justify-content-center '>
+            <div className='col-6 '>My Profile</div>
+            <div className='col-6'>My Posts</div>
         </div>
       
     </div>
