@@ -11,6 +11,7 @@ import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
+import MyAccount from "./Components/MyAccount/MyAccount";
 
 // firestore Files
 import { firestore, storage } from "./firebasee/firebase";
@@ -125,6 +126,7 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>
+            <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
             <Route path="/Parkings/:id" element={<Parking />}></Route>
             <Route path="/About" element={<About />}></Route>

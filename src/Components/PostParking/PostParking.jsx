@@ -26,6 +26,7 @@ const PostParking = () => {
   const [code, setCode] = useState();
   const [keyCode, setKeyCode] = useState();
   const [activityTime, setActivityTime] = useState("");
+  
   const changeNavigate = () => {
     navigate("/LogIn");
   };
