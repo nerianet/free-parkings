@@ -54,7 +54,7 @@ export default function App() {
       addDoc(postsRef, postData);
     } catch (err) {
       console.log(err);
-    }
+    }  
   };
    
 
