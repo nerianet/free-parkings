@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
@@ -18,6 +18,14 @@ export default function MyAccount() {
   const [chageMail, setChageMail] = useState(false);
   const [chageAddress, setChageAddress] = useState(false);
   const [chagePassword, setChagePassword] = useState(false);
+
+  const changeName = useRef();
+  const changePhone = useRef();
+  const changeEmail = useRef();
+  const changePassword1 = useRef();
+  const changePassword2 = useRef();
+  const changePassword3 = useRef();
+
 
   const changeNavigate = () => {
     navigate("/LogIn");
@@ -45,6 +53,26 @@ export default function MyAccount() {
 //     setCurrentUser({...currentUser, YourName: e.target.value});
 // }
 //   }
+
+function changeSeePassword(e) {
+    console.log(changePassword1.current);
+
+    if(changePassword1.current != undefined) {
+        if( changePassword1.current.type == 'password'){
+            changePassword1.current.type = 'text';
+            // di.innerHTML=<AiFillEye/>;
+            console.log(changePassword1.current.type);
+    
+        } else {
+            changePassword1.current.type = 'password';
+            // di.innerHTML=<AiFillEyeInvisible/>;
+            console.log(changePassword1.current.type);
+    
+        }
+        console.log(changePassword1.current);
+    }
+   
+  }
   
   return (
     <>
