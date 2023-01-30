@@ -41,7 +41,8 @@ export default function MyAccount() {
       changeNavigate();
     
       const items = posts.filter(item => item.userID == currentUser.id);
-      console.log(items);
+      setPosts(items);
+    //   console.log(items);
   }, []);
 
   const funcProfile = () => {
@@ -104,11 +105,11 @@ function changeSeePassword3(e) {
                 <div className="row justify-content-around container rounded">
                     {posts.map((item, i) => (
                     <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
-                        <h4 className="d-flex justify-content-center">{item.cityAdress}</h4>
+                        <h4 className="d-flex justify-content-center">{item.address}</h4>
                         <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
-                            <img className="img-card border rounded" src={item.img} alt={item.name} style={{ height: "85%", width: "100%" }}/>
+                            {/* <img className="img-card border rounded" src={item.img} alt={item.name} style={{ height: "85%", width: "100%" }}/> */}
                         </div>
-                        <h2 className="d-flex justify-content-center">{item.price}₪</h2>
+                        <h2 className="d-flex justify-content-center">{}</h2>
                         <div className=" d-flex justify-content-center">
                             <button type="button" className="btn btn-success">
                                 Detail Parking

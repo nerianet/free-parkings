@@ -18,7 +18,7 @@ const PostParking = () => {
   const navigate = useNavigate();
   const imageRef = useRef();
   const accessibility = useRef();
-  const adress = useRef();
+  const address = useRef();
   const suitable = useRef();
   const [url, setUrl] = useState([]);
   const [code, setCode] = useState();
@@ -47,7 +47,7 @@ const PostParking = () => {
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code.target != undefined ? code.target.checked : "",
-      adress: adress.current.value,
+      address: address.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode.target != undefined ? keyCode.target.value : "",
       activityTime: activityTime,
@@ -57,7 +57,7 @@ const PostParking = () => {
     code.target != undefined ? code.target.checked = false : code.target = undefined;
     suitable.current.value = "";
     imageRef.current.value = null;
-    adress.current.value = "";
+    address.current.value = "";
     setActivityTime("");
   };
 
@@ -117,7 +117,7 @@ const PostParking = () => {
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                                  <input placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={adress}/>
+                                  <input placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
                                   <label className="form-label" for="form3Example1c">Adress</label>
                               </div>
                           </div>
