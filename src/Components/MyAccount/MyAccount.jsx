@@ -8,7 +8,9 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const { currentUser, posts, setPosts } = useContext(MyContext);
+
+  
+  const {setCurrentUser ,currentUser, data, posts, myPosts, setMyPosts } = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
@@ -42,7 +44,7 @@ export default function MyAccount() {
     else{
      //   console.log(currentUser);
       const items = posts.filter(item => item.userId == currentUser.id);
-      setPosts(items);
+      setMyPosts(items);
     }
      //console.log(posts);
   }, [currentUser]);
@@ -105,9 +107,12 @@ function changeSeePassword3(e) {
             ?
             <div className="row justify-content-center pt-3">
                 <div className="row justify-content-around container rounded">
-                    {posts.map((item, i) => (
+                    {myPosts.map((item, i) => (
                     <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
                         <h4 className="d-flex justify-content-center">{item.address}</h4>
+                        <h4 className="d-flex justify-content-center">{item.price}</h4>
+                        <h4 className="d-flex justify-content-center">{item.activityTime}</h4>
+                        <h4 className="d-flex justify-content-center">accessibility: {item.accessibility == true ? "Yes" : "No"}</h4>
                         <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
                             {/* <img className="img-card border rounded" src={item.img} alt={item.name} style={{ height: "85%", width: "100%" }}/> */}
                         </div>

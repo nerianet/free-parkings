@@ -20,11 +20,12 @@ const PostParking = () => {
   const accessibility = useRef();
   const address = useRef();
   const suitable = useRef();
+  const price = useRef();
+
   const [url, setUrl] = useState([]);
   const [code, setCode] = useState();
   const [keyCode, setKeyCode] = useState();
-  const [activityTime, setActivityTime] = useState("");
-  
+  const [activityTime, setActivityTime] = useState(); 
   const changeNavigate = () => {
     navigate("/LogIn");
   };
@@ -48,17 +49,19 @@ const PostParking = () => {
       accessibility: accessibility.current.checked,
       code: code.target != undefined ? code.target.checked : "",
       address: address.current.value,
+      price: price.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode.target != undefined ? keyCode.target.value : "",
-      activityTime: activityTime,
+      activityTime: activityTime.target.value,
     };
     setNewPost(post);
     accessibility.current.checked = false;
     code.target != undefined ? code.target.checked = false : code.target = undefined;
     suitable.current.value = "";
+    price.current.value = "";
     imageRef.current.value = null;
     address.current.value = "";
-    setActivityTime("");
+    activityTime.target.value = "";
   };
 
   // useEffect(() => {
@@ -131,8 +134,15 @@ const PostParking = () => {
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                                  <input placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e.target.value)}/>
+                                  <input placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e)}/>
                                   <label className="form-label" for="form3Example4c">Activity time?</label>
+                              </div>
+                          </div>
+
+                          <div className="d-flex flex-row align-items-center mb-4">
+                              <div className="form-outline flex-fill mb-0">
+                                  <input placeholder="Price For Hour " type="text" id="form3Example4c" className="form-control" ref={price}/>
+                                  <label className="form-label" for="form3Example4c">Please Enter Price: </label>
                               </div>
                           </div>
 

@@ -13,6 +13,7 @@ import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
+import Location from "./location/Location";
 
 
 // firestore Files
@@ -31,6 +32,9 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const userNameInput = useRef();
+
+  const [myPosts, setMyPosts] = useState([]);
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUserName = localStorage.getItem('userName');
@@ -148,13 +152,14 @@ export default function App() {
     setImage,
     image,
     posts,
-    setPosts,
-    userNameInput,
+    myPosts,
+    setMyPosts,
   };
 
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
+        <Location/>
         <MyContext.Provider value={AllData}>
           <Header />
           <Routes>
