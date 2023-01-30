@@ -5,7 +5,7 @@ import './parkings.css';
 
 export default function Parkings() {
   
-  const { data } = useContext(MyContext);
+  const { posts } = useContext(MyContext);
   const [inputData, setInput] = useState("");
 
   const countryInput = function (input) {
@@ -24,7 +24,7 @@ export default function Parkings() {
   
   <div className="row justify-content-center ">
     <div className="row justify-content-around container rounded ">
-      {data.filter((country) => country.cityAdress.startsWith(inputData)).map((item, i) => (
+      {posts.filter((country) => country.cityAdress.startsWith(inputData)).map((item, i) => (
         <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
           <h4 className="d-flex justify-content-center">{item.cityAdress}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>

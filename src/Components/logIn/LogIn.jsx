@@ -22,7 +22,7 @@ export default function User() {
         userName.current.value = "";
         password.current.value = "";
         navigate('/');
-        localStorage.setItem("id", `${found.id}`);
+        localStorage.setItem("userName", `${found.userName}`);
       } else {
         password.current.value = "";
       }

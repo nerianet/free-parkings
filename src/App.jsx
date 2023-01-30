@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Data from "./Data.json";
@@ -30,9 +30,12 @@ export default function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
-
+  const userNameInput = useRef();
 //////////////////////////////////////////////////////////////////////////////////////////////
-const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
+
+ const localeUserName = localStorage.getItem('userName');
+
+  const usersRef = collection(firestore, "users");
   const setNewUser = (userData) => {
     try {
       addDoc(usersRef, userData);
@@ -50,14 +53,26 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     }
   };
    
-// get users data
-  let queryUser = query(usersRef);
+
+  
   useEffect(() => {
+    let userRef = collection(firestore, "users");  // Firebase creates this automaticall//
+   
+  // get users data
+    let queryUser;
+  if(localeUserName != null) {
+    queryUser = query(userRef, where('userName', '==', `${localeUserName}`));
+  } else {
+    queryUser = query(userRef);
+  }
     onSnapshot(queryUser, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
       });
+      if(localeUserName != null) {
+        setCurrentUser(books[0]);
+      }
       setUsers(books);
     });
   }, []);
@@ -74,19 +89,25 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
   }, []);
 
   useEffect(()=>{
-    check();
-  },[users])
-
-  function check () {
-    if(users[0] != undefined) {
-      users.map((e)=> {
-      if (localStorage.getItem('id') === e.id) {
+    users.map((e)=>{
+      if (localStorage.getItem('userName') === e.userName) {
         setCurrentUser(e);
-        }
-      })
-    }
-  }
+      }
+    })
+    setUsers([]);
+  },[])
 
+  // function check () {
+  //   if(users[0] != undefined) {
+  //     users.map((e)=> {
+  //     if (localStorage.getItem('userName') === e.userName) {
+  //       setCurrentUser(e);
+  //       }
+  //     })
+  //   }
+  // }
+
+  
   const setStorage = (file) => {
     const storageRef = ref(storage, currentUser.id + "/images/" + file.name); // Firebase creates this automaticall//
     uploadBytes(storageRef, file)
@@ -128,6 +149,7 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     image,
     posts,
     setPosts,
+    userNameInput,
   };
 
   return (

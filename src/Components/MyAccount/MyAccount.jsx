@@ -8,7 +8,7 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const {setCurrentUser ,currentUser, data, posts, setPosts } = useContext(MyContext);
+  const { currentUser, posts, setPosts } = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
@@ -133,9 +133,9 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>NAME : </b>{currentUser.yourName} </label>
+                                                <label className="form-label display-6 text-info" ><b>NAME : </b>{currentUser.yourName} </label>
                                                 <br/>
-                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
+                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
                                                 { chageName == false ? "" 
                                                 :
                                                 <input ref={changeName} placeholder="enter name to change" type="text" />}
@@ -144,9 +144,9 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PHONE : </b>{currentUser.phone} </label>
+                                                <label className="form-label display-6 text-info" ><b>PHONE : </b>{currentUser.phone} </label>
                                                 <br/>
-                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
+                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
                                                 { chagePhone == false ? "" 
                                                 :
                                                 <input ref={changePhone} placeholder="enter phone to change" type="text" />}
@@ -155,9 +155,9 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>ADDRESS : </b>{currentUser.address} </label>
+                                                <label className="form-label display-6 text-info" ><b>ADDRESS : </b>{currentUser.address} </label>
                                                 <br/>
-                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
+                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
                                                 { chageAddress == false ? "" 
                                                 :
                                                 <input ref={changeAddress} placeholder="enter address to change" type="text" />}
@@ -166,9 +166,9 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>MAIL : </b>{currentUser.userName} </label>
+                                                <label className="form-label display-6 text-info" ><b>MAIL : </b>{currentUser.userName} </label>
                                                 <br/>
-                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
+                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
                                                 { chageMail == false ? "" 
                                                 :
                                                 <input ref={changeEmail} placeholder="enter mail to change" type="text" />}
@@ -177,10 +177,10 @@ function changeSeePassword3(e) {
  
                                         <div className=" flex-row align-items-center mb-4"> 
                                             <div className=" form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PASSWORD : </b>*****</label>
+                                                <label className="form-label display-6 text-info" ><b>PASSWORD : </b>*****</label>
                                                 <br/>
                                                 <div className='d-flex'>
-                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
+                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
                                                 { chagePassword == false ? "" 
                                                 :
                                                 <div className=''>

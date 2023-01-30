@@ -17,6 +17,7 @@ export default function NewUser() {
     const found = users.find((user) => user.userName == userName.current.value);
     if(found){
       window.alert("You Hava A Acount");
+      navigate('/LogIn');
     } else {
     const user = {
       userName: userName.current.value, 
@@ -31,7 +32,7 @@ export default function NewUser() {
       setUsers([...users, user]);
       setNewUser(user);
       setCurrentUser(user);
-      localStorage.setItem("id", `${user.id}`);
+      localStorage.setItem("userName", `${user.userName}`);
       userName.current.value = "";
       pass1.current.value = "";
       phone.current.value = "";
