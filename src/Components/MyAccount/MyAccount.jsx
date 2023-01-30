@@ -36,6 +36,7 @@ export default function MyAccount() {
   useEffect(() => {
     if (currentUser.YourName == undefined)
       changeNavigate();
+   // console.log(changePassword1);
   }, []);
 
   const funcProfile = () => {
@@ -164,16 +165,15 @@ function changeSeePassword(e) {
                                                 <br/>
                                                 <div className='d-flex'>
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
-                                                { chagePassword == false ? "" 
-                                                :
+                                               
                                                 <div className=''>
                                                     <input ref={changePassword1} placeholder="Enter old password" type="password" />
-                                                    <div onClick={()=>changeSeePassword()}> {changePassword1.current == undefined ? "m" : changePassword1.current.type == "password" ? <AiFillEyeInvisible/> : <AiFillEye/>} </div>
+                                                    <div onClick={()=>changeSeePassword()}> {changePassword1.current != undefined ? changePassword1.current.type == "password" ? <AiFillEyeInvisible/> : <AiFillEye/> : " m"} </div>
                                                     <br/>
                                                     <input ref={changePassword2} placeholder="Enter a new password" type="password" />
                                                     <br/>
                                                     <input ref={changePassword3} placeholder="Verify new password" type="password" />
-                                                    </div>}
+                                                    </div>
                                                 </div>
                                                 
                                             </div>
