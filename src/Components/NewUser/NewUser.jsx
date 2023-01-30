@@ -63,7 +63,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" ref={yourName} />
+                        <input required type="text" id="form3Example1c" class="form-control" ref={yourName} />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -71,7 +71,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="number" id="form3Example4c" class="form-control" ref={phone}/>
+                        <input required type="number" id="form3Example4c" class="form-control" ref={phone}/>
                         <label class="form-label" for="form3Example4c">Your phone</label>
                       </div>
                     </div>
@@ -79,7 +79,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example4c" class="form-control" ref={address}/>
+                        <input required type="text" id="form3Example4c" class="form-control" ref={address}/>
                         <label class="form-label" for="form3Example4c">Your Address</label>
                       </div>
                     </div>
@@ -87,7 +87,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" ref={userName} />
+                        <input required type="email" id="form3Example3c" class="form-control" ref={userName} />
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
@@ -95,7 +95,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" ref={pass1}/>
+                        <input required type="password" id="form3Example4c" class="form-control" ref={pass1}/>
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
@@ -103,13 +103,13 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4cd" class="form-control" ref={pass2}/>
+                        <input required type="password" id="form3Example4cd" class="form-control" ref={pass2}/>
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
 
                     <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                      <input required class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>

@@ -1,7 +1,8 @@
 import React, { useContext, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {app} from '../../firebasee/Firebase'
 import "./LogIn.css"
 
 
@@ -34,6 +35,43 @@ export default function User() {
     password.current.value = "";
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  const handleSignWithGoogle = () =>{
+    const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+    const auth = getAuth(app);
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const userr = result.user;
+          //console.log(user);
+          //setCurrentUser(user);
+          // setUserID(user.id);
+          const found = users.find((user) => user.userName === userr.email);
+        //  console.log(found);
+          if(found != undefined) {
+            setCurrentUser(found);
+            navigate('/');
+            localStorage.setItem("userName", `${found.userName}`);
+          }
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          // ...
+        });
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+
   return ( 
     <div className='body '>
     <form className='form-signin bg_header rounded' onSubmit={submithandler}>
@@ -59,6 +97,7 @@ export default function User() {
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>
+      <button class="btn btn-lg btn-primary btn-block mx-5" onClick={handleSignWithGoogle} >Login With Google</button>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2022-2023</p>
     </form>
     </div>

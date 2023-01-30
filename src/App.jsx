@@ -31,6 +31,7 @@ export default function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
+  
   const userNameInput = useRef();
 
   const [myPosts, setMyPosts] = useState([]);
@@ -81,16 +82,18 @@ export default function App() {
     });
   }, []);
 
-  let queryPosts = query(postsRef);
+  let queryPosts = query(postsRef, where('userId', '==', `${currentUser.id}`));
   useEffect(() => {
     onSnapshot(queryPosts, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data() });
       });
+      console.log(books);
       setPosts(books);
     });
-  }, []);
+  }, [currentUser]);
+
 
   useEffect(()=>{
     users.map((e)=>{
