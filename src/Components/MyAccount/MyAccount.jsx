@@ -127,7 +127,7 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>NAME : </b>{currentUser.YourName} </label>
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>NAME : </b>{currentUser.yourName} </label>
                                                 <br/>
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
                                                 { chageName == false ? "" 
@@ -138,7 +138,7 @@ function changeSeePassword3(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PHONE : </b>{currentUser.Phone} </label>
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PHONE : </b>{currentUser.phone} </label>
                                                 <br/>
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
                                                 { chagePhone == false ? "" 
