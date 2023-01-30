@@ -19,6 +19,9 @@ export default function MyAccount() {
   const [chageMail, setChageMail] = useState(false);
   const [chageAddress, setChageAddress] = useState(false);
   const [chagePassword, setChagePassword] = useState(false);
+  const [eye1, setEye1] = useState(false);
+  const [eye2, setEye2] = useState(false);
+  const [eye3, setEye3] = useState(false);
 
   const changeName = useRef();
   const changePhone = useRef();
@@ -36,7 +39,6 @@ export default function MyAccount() {
   useEffect(() => {
     if (currentUser.YourName == undefined)
       changeNavigate();
-   // console.log(changePassword1);
   }, []);
 
   const funcProfile = () => {
@@ -57,24 +59,32 @@ export default function MyAccount() {
 // }
 //   }
 
-function changeSeePassword(e) {
-    console.log(changePassword1.current);
-
-    if(changePassword1.current != undefined) {
+function changeSeePassword1(e) {
         if( changePassword1.current.type == 'password'){
             changePassword1.current.type = 'text';
-            // di.innerHTML=<AiFillEye/>;
-            console.log(changePassword1.current.type);
-    
+            setEye1(true);
         } else {
             changePassword1.current.type = 'password';
-            // di.innerHTML=<AiFillEyeInvisible/>;
-            console.log(changePassword1.current.type);
-    
+            setEye1(false);
         }
-        console.log(changePassword1.current);
-    }
-   
+  }
+function changeSeePassword2(e) {
+        if( changePassword2.current.type == 'password'){
+            changePassword2.current.type = 'text';
+            setEye2(true);
+        } else {
+            changePassword2.current.type = 'password';
+            setEye2(false);
+        }
+  }
+function changeSeePassword3(e) {
+        if( changePassword3.current.type == 'password'){
+            changePassword3.current.type = 'text';
+            setEye3(true);
+        } else {
+            changePassword3.current.type = 'password';
+            setEye3(false);
+        }
   }
   
   return (
@@ -139,7 +149,7 @@ function changeSeePassword(e) {
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>ADDRESS : </b>רחובות </label>
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>ADDRESS : </b>{currentUser.address} </label>
                                                 <br/>
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
                                                 { chageAddress == false ? "" 
@@ -158,27 +168,28 @@ function changeSeePassword(e) {
                                                 <input ref={changeEmail} placeholder="enter mail to change" type="text" />}
                                             </div>
                                         </div>
-
-                                        <div className=" flex-row align-items-center mb-4">
+ 
+                                        <div className=" flex-row align-items-center mb-4"> 
                                             <div className=" form-outline flex-fill mb-0">
                                                 <label className="form-label display-6 text-info" for="form3Example3c"><b>PASSWORD : </b>*****</label>
                                                 <br/>
                                                 <div className='d-flex'>
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
-                                               
+                                                { chagePassword == false ? "" 
+                                                :
                                                 <div className=''>
                                                     <input ref={changePassword1} placeholder="Enter old password" type="password" />
-                                                    <div onClick={()=>changeSeePassword()}> {changePassword1.current != undefined ? changePassword1.current.type == "password" ? <AiFillEyeInvisible/> : <AiFillEye/> : " m"} </div>
-                                                    <br/>
+                                                    <div  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
                                                     <input ref={changePassword2} placeholder="Enter a new password" type="password" />
-                                                    <br/>
+                                                    <div  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
                                                     <input ref={changePassword3} placeholder="Verify new password" type="password" />
-                                                    </div>
+                                                    <div  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+                                                    </div>}
                                                 </div>
                                                 
                                             </div>
                                         </div>
-
+ 
                                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                             <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
                                         </div>
