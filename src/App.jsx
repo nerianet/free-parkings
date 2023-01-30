@@ -75,7 +75,6 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
 
   useEffect(()=>{
     check();
-    console.log(posts);
   },[users])
 
   function check () {
