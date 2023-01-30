@@ -13,6 +13,7 @@ import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
+import Location from "./location/Location";
 
 
 // firestore Files
@@ -30,6 +31,7 @@ export default function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState([]);
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
@@ -127,12 +129,14 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     setImage,
     image,
     posts,
-    setPosts,
+    myPosts,
+    setMyPosts,
   };
 
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
+        <Location/>
         <MyContext.Provider value={AllData}>
           <Header />
           <Routes>
