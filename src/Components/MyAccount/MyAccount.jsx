@@ -79,80 +79,79 @@ export default function MyAccount() {
                 <div className="container h-100 ">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
-                            <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(31, 30, 29, 0.6)",}}>
+                            <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(245, 240, 249, 0.3)",}}>
                                 <div className="card-body p-md-5">
-                                    {/* <div className="row justify-content-center"> */}
-                                        {/* <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"> */}
-                                            <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 display-3">My Profile</p>
-                                            <form className="mx-1 mx-md-4" >
+                                    <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 display-3">My Profile</p>
+                                    <form className="mx-1 mx-md-4" >
 
-                                                <div className="d-flex flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>NAME : </b>{currentUser.YourName} </label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)} className="mx-2">change</button>
-                                                        { chageName == false ? "" 
-                                                        :
-                                                        <input placeholder="enter name to change" type="text" />}
-                                                    </div>
-                                                </div>
+                                        <div className="d-flex flex-row align-items-center mb-4">
+                                            <div className="form-outline flex-fill mb-0">
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>NAME : </b>{currentUser.YourName} </label>
+                                                <br/>
+                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
+                                                { chageName == false ? "" 
+                                                :
+                                                <input placeholder="enter name to change" type="text" />}
+                                            </div>
+                                        </div>
 
-                                                <div className="d-flex flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>PHONE : </b>{currentUser.Phone} </label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)} className="mx-2">change</button>
-                                                        { chagePhone == false ? "" 
-                                                        :
-                                                        <input placeholder="enter phone to change" type="text" />}
-                                                    </div>
-                                                </div>
+                                        <div className="d-flex flex-row align-items-center mb-4">
+                                            <div className="form-outline flex-fill mb-0">
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PHONE : </b>{currentUser.Phone} </label>
+                                                <br/>
+                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
+                                                { chagePhone == false ? "" 
+                                                :
+                                                <input placeholder="enter phone to change" type="text" />}
+                                            </div>
+                                        </div>
 
-                                                <div className="d-flex flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>ADDRESS : </b>רחובות </label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} className="mx-2">change</button>
-                                                        { chageAddress == false ? "" 
-                                                        :
-                                                        <input placeholder="enter address to change" type="text" />}
-                                                    </div>
-                                                </div>
+                                        <div className="d-flex flex-row align-items-center mb-4">
+                                            <div className="form-outline flex-fill mb-0">
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>ADDRESS : </b>רחובות </label>
+                                                <br/>
+                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
+                                                { chageAddress == false ? "" 
+                                                :
+                                                <input placeholder="enter address to change" type="text" />}
+                                            </div>
+                                        </div>
 
-                                                <div className="d-flex flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>MAIL : </b>{currentUser.userName} </label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} className="mx-2">change</button>
-                                                        { chageMail == false ? "" 
-                                                        :
-                                                        <input placeholder="enter mail to change" type="text" />}
-                                                    </div>
-                                                </div>
+                                        <div className="d-flex flex-row align-items-center mb-4">
+                                            <div className="form-outline flex-fill mb-0">
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>MAIL : </b>{currentUser.userName} </label>
+                                                <br/>
+                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
+                                                { chageMail == false ? "" 
+                                                :
+                                                <input placeholder="enter mail to change" type="text" />}
+                                            </div>
+                                        </div>
 
-                                                <div className=" flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>PASSWORD : </b>*****</label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} className="mx-2">change</button>
-                                                        { chagePassword == false ? "" 
-                                                        :
-                                                        <div className=''>
-                                                            <input placeholder="Enter old password" type="text" />
-                                                            <br/>
-                                                            <input placeholder="Enter a new password" type="text" />
-                                                            <br/>
-                                                            <input placeholder="Verify new password" type="text" />
-                                                        </div>}
-                                                    </div>
+                                        <div className=" flex-row align-items-center mb-4">
+                                            <div className=" form-outline flex-fill mb-0">
+                                                <label className="form-label display-6 text-info" for="form3Example3c"><b>PASSWORD : </b>*****</label>
+                                                <br/>
+                                                <div className='d-flex'>
+                                                <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
+                                                { chagePassword == false ? "" 
+                                                :
+                                                <div className=''>
+                                                    <input placeholder="Enter old password" type="text" />
+                                                    <br/>
+                                                    <input placeholder="Enter a new password" type="text" />
+                                                    <br/>
+                                                    <input placeholder="Verify new password" type="text" />
+                                                    </div>}
                                                 </div>
+                                                
+                                            </div>
+                                        </div>
 
-                                                <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
-                                                </div>
-                                            </form>
-                                        {/* </div> */}
-                                    {/* </div> */}
+                                        <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
