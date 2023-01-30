@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
+import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function MyAccount() {
   const changeName = useRef();
   const changePhone = useRef();
   const changeEmail = useRef();
+  const changeAddress = useRef();
   const changePassword1 = useRef();
   const changePassword2 = useRef();
   const changePassword3 = useRef();
@@ -119,7 +121,7 @@ function changeSeePassword(e) {
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
                                                 { chageName == false ? "" 
                                                 :
-                                                <input placeholder="enter name to change" type="text" />}
+                                                <input ref={changeName} placeholder="enter name to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -130,7 +132,7 @@ function changeSeePassword(e) {
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
                                                 { chagePhone == false ? "" 
                                                 :
-                                                <input placeholder="enter phone to change" type="text" />}
+                                                <input ref={changePhone} placeholder="enter phone to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -141,7 +143,7 @@ function changeSeePassword(e) {
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
                                                 { chageAddress == false ? "" 
                                                 :
-                                                <input placeholder="enter address to change" type="text" />}
+                                                <input ref={changeAddress} placeholder="enter address to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -152,7 +154,7 @@ function changeSeePassword(e) {
                                                 <button className="btn btn-warning mx-2" type="button" id="form3Example3c" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
                                                 { chageMail == false ? "" 
                                                 :
-                                                <input placeholder="enter mail to change" type="text" />}
+                                                <input ref={changeEmail} placeholder="enter mail to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -165,11 +167,12 @@ function changeSeePassword(e) {
                                                 { chagePassword == false ? "" 
                                                 :
                                                 <div className=''>
-                                                    <input placeholder="Enter old password" type="text" />
+                                                    <input ref={changePassword1} placeholder="Enter old password" type="password" />
+                                                    <div onClick={()=>changeSeePassword()}> {changePassword1.current == undefined ? "m" : changePassword1.current.type == "password" ? <AiFillEyeInvisible/> : <AiFillEye/>} </div>
                                                     <br/>
-                                                    <input placeholder="Enter a new password" type="text" />
+                                                    <input ref={changePassword2} placeholder="Enter a new password" type="password" />
                                                     <br/>
-                                                    <input placeholder="Verify new password" type="text" />
+                                                    <input ref={changePassword3} placeholder="Verify new password" type="password" />
                                                     </div>}
                                                 </div>
                                                 
