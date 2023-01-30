@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
+import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
@@ -16,8 +17,16 @@ export default function MyAccount() {
   const [chageName, setChageName] = useState(false);
   const [chagePhone, setChagePhone] = useState(false);
   const [chageMail, setChageMail] = useState(false);
-  const [chageAddress, setChageAddress] = useState(false);
   const [chagePassword, setChagePassword] = useState(false);
+
+  
+  const changeName = useRef();
+  const changePhone = useRef();
+  const changeEmail = useRef();
+  const changePassword1 = useRef();
+  const changePassword2 = useRef();
+  const changePassword3 = useRef();
+
 
   const changeNavigate = () => {
     navigate("/LogIn");
@@ -26,6 +35,7 @@ export default function MyAccount() {
   useEffect(() => {
     if (currentUser.YourName == undefined)
       changeNavigate();
+   // console.log(currentUser);
   }, []);
 
   const funcProfile = () => {
@@ -45,7 +55,33 @@ export default function MyAccount() {
 //     setCurrentUser({...currentUser, YourName: e.target.value});
 // }
 //   }
-  
+const di = document.getElementById('pass1');
+
+  useEffect((e)=>{
+//    console.log(di);
+changeSeePassword();
+  },[changePassword1.current]);
+
+  function changeSeePassword(e) {
+    console.log(changePassword1.current);
+
+    if(changePassword1.current != undefined) {
+        if( changePassword1.current.type == 'password'){
+            changePassword1.current.type = 'text';
+            // di.innerHTML=<AiFillEye/>;
+            console.log(changePassword1.current.type);
+    
+        } else {
+            changePassword1.current.type = 'password';
+            // di.innerHTML=<AiFillEyeInvisible/>;
+            console.log(changePassword1.current.type);
+    
+        }
+        console.log(changePassword1.current);
+    }
+   
+  }
+
   return (
     <>
       {currentUser.YourName == undefined ? changeNavigate() :
@@ -93,7 +129,7 @@ export default function MyAccount() {
                                                         <button type="button" id="form3Example3c" onClick={() => chageName == false ? setChageName(true) : setChageName(false)} className="mx-2">change</button>
                                                         { chageName == false ? "" 
                                                         :
-                                                        <input placeholder="enter name to change" type="text" />}
+                                                        <input ref={changeName} placeholder="enter name to change" type="text" />}
                                                     </div>
                                                 </div>
 
@@ -104,45 +140,34 @@ export default function MyAccount() {
                                                         <button type="button" id="form3Example3c" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)} className="mx-2">change</button>
                                                         { chagePhone == false ? "" 
                                                         :
-                                                        <input placeholder="enter phone to change" type="text" />}
+                                                        <input ref={changePhone} placeholder="enter phone to change" type="text" />}
                                                     </div>
                                                 </div>
 
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>ADDRESS : </b>רחובות </label>
-                                                        <br/>
-                                                        <button type="button" id="form3Example3c" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} className="mx-2">change</button>
-                                                        { chageAddress == false ? "" 
-                                                        :
-                                                        <input placeholder="enter address to change" type="text" />}
-                                                    </div>
-                                                </div>
-
-                                                <div className="d-flex flex-row align-items-center mb-4">
-                                                    <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>MAIL : </b>{currentUser.userName} </label>
+                                                        <label className="form-label display-6" for="form3Example3c"><b>Email : </b>{currentUser.userName} </label>
                                                         <br/>
                                                         <button type="button" id="form3Example3c" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} className="mx-2">change</button>
                                                         { chageMail == false ? "" 
                                                         :
-                                                        <input placeholder="enter mail to change" type="text" />}
+                                                        <input ref={changeEmail} placeholder="enter mail to change" type="text" />}
                                                     </div>
                                                 </div>
 
                                                 <div className=" flex-row align-items-center mb-4">
                                                     <div className="form-outline flex-fill mb-0">
-                                                        <label className="form-label display-6" for="form3Example3c"><b>PASSWORD : </b>*****</label>
-                                                        <br/>
+                                                        <p className='display-6'> Password: </p><br/>
+                                                        <input type={"password"} value={currentUser.password} className="form-label display-6" for="form3Example3c"></input>                                       
                                                         <button type="button" id="form3Example3c" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} className="mx-2">change</button>
-                                                        { chagePassword == false ? "" 
+                                                        { chagePassword == false ? ""
                                                         :
                                                         <div className=''>
-                                                            <input placeholder="Enter old password" type="text" />
+                                                            <input ref={changePassword1} placeholder="Enter old password" type="password" /><br/> <div id='pass1' onClick={changeSeePassword}> {changePassword1.current == undefined ? <AiFillEyeInvisible/> : <AiFillEye/>}</div>
+                                                            
+                                                            <input ref={changePassword2} placeholder="Enter a new password" type="password" /> <div onClick>{}</div>
                                                             <br/>
-                                                            <input placeholder="Enter a new password" type="text" />
-                                                            <br/>
-                                                            <input placeholder="Verify new password" type="text" />
+                                                            <input ref={changePassword3} placeholder="Verify new password" type="password" /> <div onClick>{<AiFillEyeInvisible/>}</div>
                                                         </div>}
                                                     </div>
                                                 </div>
