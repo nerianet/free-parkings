@@ -8,11 +8,11 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const {setCurrentUser ,currentUser, data} = useContext(MyContext);
+  const {setCurrentUser ,currentUser, data, posts} = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
-  const [posts, setPosts]     = useState(false);
+  const [localePosts, setPosts]     = useState(false);
 
   const [chageName, setChageName] = useState(false);
   const [chagePhone, setChagePhone] = useState(false);
@@ -39,6 +39,9 @@ export default function MyAccount() {
   useEffect(() => {
     if (currentUser.yourName == undefined)
       changeNavigate();
+    
+      const items = posts.filter(item => item.userID == currentUser.id);
+      console.log(items);
   }, []);
 
   const funcProfile = () => {
@@ -95,11 +98,11 @@ function changeSeePassword3(e) {
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcPosts}>My Posts</div>
             </div>
-            {posts == true 
+            {localePosts == true 
             ?
             <div className="row justify-content-center pt-3">
                 <div className="row justify-content-around container rounded">
-                    {data.map((item, i) => (
+                    {posts.map((item, i) => (
                     <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
                         <h4 className="d-flex justify-content-center">{item.cityAdress}</h4>
                         <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
@@ -178,12 +181,18 @@ function changeSeePassword3(e) {
                                                 { chagePassword == false ? "" 
                                                 :
                                                 <div className=''>
-                                                    <input ref={changePassword1} placeholder="Enter old password" type="password" />
-                                                    <div  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
-                                                    <input ref={changePassword2} placeholder="Enter a new password" type="password" />
-                                                    <div  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
-                                                    <input ref={changePassword3} placeholder="Verify new password" type="password" />
-                                                    <div  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+                                                    <div className='d-flex '>
+                                                        <input ref={changePassword1} placeholder="Enter old password" type="password" />
+                                                        <div className='mx-2'  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+                                                    </div>
+                                                    <div className='d-flex pt-1'>
+                                                        <input ref={changePassword2} placeholder="Enter a new password" type="password" />
+                                                        <div className='mx-2'  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+                                                    </div>
+                                                    <div className='d-flex pt-1'>
+                                                        <input ref={changePassword3} placeholder="Verify new password" type="password" />
+                                                        <div className='mx-2'  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+                                                    </div>
                                                     </div>}
                                                 </div>
                                                 

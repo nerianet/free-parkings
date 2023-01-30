@@ -29,6 +29,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [name, setName] = useState("");
   const [image, setImage] = useState();
+  const [posts, setPosts] = useState([]);
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 const usersRef = collection(firestore, "users"); // Firebase creates this automaticall//
@@ -50,9 +51,9 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
   };
    
 // get users data
-  let q = query(usersRef);
+  let queryUser = query(usersRef);
   useEffect(() => {
-    onSnapshot(q, (snapshot) => {
+    onSnapshot(queryUser, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
@@ -61,8 +62,20 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     });
   }, []);
 
+  let queryPosts = query(postsRef);
+  useEffect(() => {
+    onSnapshot(queryPosts, (snapshot) => {
+      const books = [];
+      snapshot.docs.forEach((doc) => {
+        books.push({ ...doc.data() });
+      });
+      setPosts(books);
+    });
+  }, []);
+
   useEffect(()=>{
     check();
+    console.log(posts);
   },[users])
 
   function check () {
@@ -114,6 +127,8 @@ const usersRef = collection(firestore, "users"); // Firebase creates this automa
     setImage,
     setImage,
     image,
+    posts,
+    setPosts,
   };
 
   return (
