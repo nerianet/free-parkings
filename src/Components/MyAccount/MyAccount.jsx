@@ -8,11 +8,11 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const {setCurrentUser ,currentUser, data, posts} = useContext(MyContext);
+  const {setCurrentUser ,currentUser, data, posts, setPosts } = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
-  const [localePosts, setPosts]     = useState(false);
+  const [localePosts, setLocalePosts]     = useState(false);
 
   const [chageName, setChageName] = useState(false);
   const [chagePhone, setChagePhone] = useState(false);
@@ -39,19 +39,21 @@ export default function MyAccount() {
   useEffect(() => {
     if (currentUser.yourName == undefined)
       changeNavigate();
-    
-      const items = posts.filter(item => item.userID == currentUser.id);
+    else{
+     //   console.log(currentUser);
+      const items = posts.filter(item => item.userId == currentUser.id);
       setPosts(items);
-    //   console.log(items);
-  }, []);
+    }
+     //console.log(posts);
+  }, [currentUser]);
 
   const funcProfile = () => {
     setProfile(true);
-    setPosts(false);
+    setLocalePosts(false);
   }
 
   const funcPosts = () => {
-    setPosts(true);
+    setLocalePosts(true);
     setProfile(false);
   }
 
