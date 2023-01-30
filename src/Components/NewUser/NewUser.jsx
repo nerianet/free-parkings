@@ -7,8 +7,9 @@ export default function NewUser() {
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
-  const Phone = useRef();
-  const YourName = useRef();
+  const phone = useRef();
+  const yourName = useRef();
+  const address = useRef();
   const navigate = useNavigate();
 
   const submitHandler = (e) => {
@@ -19,9 +20,10 @@ export default function NewUser() {
     } else {
     const user = {
       userName: userName.current.value, 
-      Phone: Phone.current.value,
-      YourName: YourName.current.value,
-      password: pass1.current.value
+      phone: phone.current.value,
+      yourName: yourName.current.value,
+      password: pass1.current.value,
+      address: address.current.value,
     }
     if(pass1.current.value!=pass2.current.value){
       window.alert("the password not correct");
@@ -32,9 +34,10 @@ export default function NewUser() {
       localStorage.setItem("id", `${user.id}`);
       userName.current.value = "";
       pass1.current.value = "";
-      Phone.current.value = "";
-      YourName.current.value = "";
+      phone.current.value = "";
+      yourName.current.value = "";
       pass2.current.value = "";
+      address.current.value = "";
       navigate('/');
     }  
   }
@@ -42,7 +45,7 @@ export default function NewUser() {
 
   return (
   <>
-  {currentUser.YourName != undefined ? <div></div> :
+  {currentUser.yourName != undefined ? <div></div> :
   <div class="vh-100" >
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -59,7 +62,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" ref={YourName} />
+                        <input type="text" id="form3Example1c" class="form-control" ref={yourName} />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -67,8 +70,16 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="number" id="form3Example4c" class="form-control" ref={Phone}/>
-                        <label class="form-label" for="form3Example4c">Your Phone</label>
+                        <input type="number" id="form3Example4c" class="form-control" ref={phone}/>
+                        <label class="form-label" for="form3Example4c">Your phone</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example4c" class="form-control" ref={address}/>
+                        <label class="form-label" for="form3Example4c">Your Address</label>
                       </div>
                     </div>
 
