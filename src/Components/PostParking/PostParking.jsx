@@ -30,7 +30,7 @@ const PostParking = () => {
   };
 
   useEffect(() => {
-    if (currentUser.YourName == undefined)
+    if (currentUser.yourName == undefined)
       changeNavigate();
   }, []);
 
@@ -82,7 +82,7 @@ const PostParking = () => {
 
   return (
     <>
-      {currentUser.YourName == undefined ? (
+      {currentUser.yourName == undefined ? (
         changeNavigate()
       ) : (
       <div className="vh-100 ">

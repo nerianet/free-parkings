@@ -37,7 +37,7 @@ export default function MyAccount() {
   };
 
   useEffect(() => {
-    if (currentUser.YourName == undefined)
+    if (currentUser.yourName == undefined)
       changeNavigate();
   }, []);
 
@@ -89,7 +89,7 @@ function changeSeePassword3(e) {
   
   return (
     <>
-      {currentUser.YourName == undefined ? changeNavigate() :
+      {currentUser.yourName == undefined ? changeNavigate() :
         <div className='container'>
             <div className='row'>
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
