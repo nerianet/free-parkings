@@ -114,34 +114,34 @@ const PostParking = () => {
                                   ?
                                   ("") 
                                   : 
-                                  (<input placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
+                                  (<input required placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
                               </div>
                           </div>
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                                  <input placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
+                                  <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
                                   <label className="form-label" for="form3Example1c">Adress</label>
                               </div>
                           </div>
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                              <input placeholder="Car / Trunk / Bike" type="text" id="form3Example4c" className="form-control" ref={suitable}/>
+                              <input required placeholder="Car / Trunk / Bike" type="text" id="form3Example4c" className="form-control" ref={suitable}/>
                               <label className="form-label" for="form3Example4c">suitable for?</label>
                               </div>
                           </div>
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                                  <input placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e)}/>
+                                  <input required placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e)}/>
                                   <label className="form-label" for="form3Example4c">Activity time?</label>
                               </div>
                           </div>
 
                           <div className="d-flex flex-row align-items-center mb-4">
                               <div className="form-outline flex-fill mb-0">
-                                  <input placeholder="Price For Hour " type="text" id="form3Example4c" className="form-control" ref={price}/>
+                                  <input required placeholder="Price For Hour " type="text" id="form3Example4c" className="form-control" ref={price}/>
                                   <label className="form-label" for="form3Example4c">Please Enter Price: </label>
                               </div>
                           </div>
