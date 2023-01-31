@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function NewUser() {
   const {setNewUser, users,setUsers,setCurrentUser, currentUser} = useContext(MyContext);
@@ -12,8 +13,10 @@ export default function NewUser() {
   const address = useRef();
   const navigate = useNavigate();
 
+
   const submitHandler = (e) => {
     e.preventDefault();
+    const { v4: userId } = require('uuid');
     const found = users.find((user) => user.userName == userName.current.value);
     if(found){
       window.alert("You Hava A Acount");
@@ -25,6 +28,7 @@ export default function NewUser() {
       yourName: yourName.current.value,
       password: pass1.current.value,
       address: address.current.value,
+      userId: userId(),
     }
     if(pass1.current.value!=pass2.current.value){
       window.alert("the password not correct");
@@ -32,7 +36,7 @@ export default function NewUser() {
       setUsers([...users, user]);
       setNewUser(user);
       setCurrentUser(user);
-      localStorage.setItem("userName", `${user.userName}`);
+      localStorage.setItem("userId", `${user.userId}`);
       userName.current.value = "";
       pass1.current.value = "";
       phone.current.value = "";

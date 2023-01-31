@@ -43,7 +43,7 @@ export default function MyAccount() {
       changeNavigate();
     else{
      //   console.log(currentUser);
-      const items = posts.filter(item => item.userId == currentUser.id);
+      const items = posts.filter(item => item.userId == currentUser.userId);
       setMyPosts(items);
     }
      //console.log(posts);

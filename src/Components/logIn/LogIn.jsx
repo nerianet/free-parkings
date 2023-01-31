@@ -4,6 +4,7 @@ import { MyContext } from '../../App'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from '../../firebase/Firebase'
 import "./LogIn.css"
+import { firestore } from '../../firebase/Firebase';
 
 
 export default function User() {
@@ -18,12 +19,12 @@ export default function User() {
     const found = users.find((user) => user.userName === userName.current.value);
      if(found){
       if(password.current.value === found.password){
-        console.log(found);
+        //console.log(found);
         setCurrentUser(found);
         userName.current.value = "";
         password.current.value = "";
         navigate('/');
-        localStorage.setItem("userName", `${found.userName}`);
+        localStorage.setItem("userId", `${found.userId}`);
       } else {
         password.current.value = "";
       }
@@ -39,7 +40,7 @@ export default function User() {
   const handleSignWithGoogle = () =>{
     const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-    const auth = getAuth(app);
+    const auth = getAuth(app); 
       signInWithPopup(auth, provider)
         .then((result) => {
           // This gives you a Google Access Token. You can use it to access the Google API.
@@ -55,7 +56,7 @@ export default function User() {
           if(found != undefined) {
             setCurrentUser(found);
             navigate('/');
-            localStorage.setItem("userName", `${found.userName}`);
+            localStorage.setItem("userId", `${found.userId}`);
           }
           // ...
         }).catch((error) => {
@@ -68,6 +69,7 @@ export default function User() {
           const credential = GoogleAuthProvider.credentialFromError(error);
           // ...
         });
+
   }
   
   //////////////////////////////////////////////////////////////////////////////

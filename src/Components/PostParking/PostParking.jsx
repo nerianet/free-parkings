@@ -42,19 +42,19 @@ const PostParking = () => {
     e.preventDefault();
     setName(imageRef.current.files[0].name);
     setStorage(imageRef.current.files[0]);
-    setImage(undefined);
+    //setImage(undefined);
     img = undefined;
       const post = {
-      userId: currentUser.id,
+      userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code.target != undefined ? code.target.checked : "",
-      address: address.current.value,
+      address: (address.current.value.charAt(0).toUpperCase() + address.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode.target != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
-    };
+      };
     setNewPost(post);
     accessibility.current.checked = false;
     code.target != undefined ? code.target.checked = false : code.target = undefined;
@@ -82,6 +82,7 @@ const PostParking = () => {
     setImage(imageRef.current.files[0]);
     let _url = URL.createObjectURL(imageRef.current.files[0]);
     setUrl(_url);
+    console.log(image);
   }
 
   return (
@@ -115,7 +116,7 @@ const PostParking = () => {
                                   ?
                                   ("") 
                                   : 
-                                  (<input required placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
+                                  (<input required autoFocus placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
                               </div>
                           </div>
 
