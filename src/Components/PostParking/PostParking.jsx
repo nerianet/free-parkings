@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useContext } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 // import {BiAccessibility} from 'react-icons/bi'
@@ -158,7 +159,7 @@ const PostParking = () => {
                           : 
                           (<div style={{ marginTop: "9px" }}>
                               <img className="rounded mx-3" src={url} style={{ width: "250px", height: "150px" }} id="myimg"/>
-                              <button onClick={unsetImage}>X</button>
+                              <button onClick={unsetImage}><FaTrashAlt /></button>
                           </div>)}
 
                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
