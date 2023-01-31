@@ -149,7 +149,7 @@ const PostParking = () => {
 
                           <div className="mb-1">
                               <div className="">
-                                  <input onChange={() => setLocaleImage()} ref={imageRef} type="file" id="Moshe"/>
+                                  <input onChange={() => setLocaleImage()} ref={imageRef} type="file" />
                               </div>
                           </div>
                           <span className="">The selected image</span>
