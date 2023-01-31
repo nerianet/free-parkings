@@ -3,13 +3,7 @@ import { useEffect } from 'react';
 import './Footer.css';
 
 const API_KEY = "0d1d8fa39ae14774b80d34e9c2fe719e";
-var requestOptions = {
-  method: 'GET',
-};
-
-
-
-
+var requestOptions = { method: 'GET' };
 
 export default function Footer() {
   const [data, setData] = useState([]);
@@ -20,7 +14,6 @@ export default function Footer() {
     .then(result => setData(result.features != undefined ? result.features : []))
     .catch(error => console.log('error', error));
   },[input])
-  
   
   return (
     <div className='container align-text-bottom a w-50'>
