@@ -82,14 +82,14 @@ export default function App() {
     });
   }, []);
 
-  let queryPosts = query(postsRef, where('userId', '==', `${currentUser.id}`));
+  let queryPosts = query(postsRef);
   useEffect(() => {
     onSnapshot(queryPosts, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data() });
       });
-      console.log(books);
+    //  console.log(currentUser);
       setPosts(books);
     });
   }, [currentUser]);
@@ -101,7 +101,7 @@ export default function App() {
         setCurrentUser(e);
       }
     })
-    setUsers([]);
+    // setUsers([]);
   },[])
 
   // function check () {

@@ -79,7 +79,7 @@ export default function NewUser() {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input required type="text" id="form3Example4c" class="form-control" ref={address}/>
+                        <input required type="address" id="form3Example4c" class="form-control" ref={address}/>
                         <label class="form-label" for="form3Example4c">Your Address</label>
                       </div>
                     </div>

@@ -47,7 +47,7 @@ export default function User() {
           const token = credential.accessToken;
           // The signed-in user info.
           const userr = result.user;
-          //console.log(user);
+          console.log(userr);
           //setCurrentUser(user);
           // setUserID(user.id);
           const found = users.find((user) => user.userName === userr.email);
