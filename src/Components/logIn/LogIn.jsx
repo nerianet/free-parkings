@@ -2,7 +2,7 @@ import React, { useContext, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {app} from '../../Firebasee/Firebase'
+import {app} from '../../firebase/Firebase'
 import "./LogIn.css"
 
 
