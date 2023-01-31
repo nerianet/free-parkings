@@ -38,7 +38,7 @@ export default function App() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
- const localeUserName = localStorage.getItem('userName');
+ const localeUId = localStorage.getItem('userId');
 
   const usersRef = collection(firestore, "users");
   const setNewUser = (userData) => {
@@ -65,8 +65,8 @@ export default function App() {
    
   // get users data
     let queryUser;
-  if(localeUserName != null) {
-    queryUser = query(userRef, where('userName', '==', `${localeUserName}`));
+  if(localeUId != null) {
+    queryUser = query(userRef, where('userId', '==', `${localeUId}`));
   } else {
     queryUser = query(userRef);
   }
@@ -75,7 +75,7 @@ export default function App() {
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
       });
-      if(localeUserName != null) {
+      if(localeUId != null) {
         setCurrentUser(books[0]);
       }
       setUsers(books);
@@ -97,7 +97,7 @@ export default function App() {
 
   useEffect(()=>{
     users.map((e)=>{
-      if (localStorage.getItem('userName') === e.userName) {
+      if (localStorage.getItem('userId') === e.userId) {
         setCurrentUser(e);
       }
     })
@@ -116,11 +116,12 @@ export default function App() {
 
   
   const setStorage = (file) => {
-    const storageRef = ref(storage, currentUser.id + "/images/" + file.name); // Firebase creates this automaticall//
+    const storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
       // getUrl();
+      //console.log(snapshot);
     });
 
     // function getUrl (){
@@ -171,7 +172,7 @@ export default function App() {
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
-            <Route path="/Parkings/:id" element={<Parking />}></Route>
+            <Route path="/Parkings/:userId" element={<Parking />}></Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
