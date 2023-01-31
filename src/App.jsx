@@ -17,7 +17,7 @@ import Location from "./location/Location";
 
 
 // firestore Files
-import { firestore, storage } from "./firebasee/Firebase";
+import { firestore, storage } from "./Firebasee/Firebase";
 import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
 //////////////////////////////////////////////////////////////////////////////////////////////
