@@ -18,8 +18,9 @@ import Location from "./location/Location";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
-import { addDoc, collection, onSnapshot, query, where } from "@firebase/firestore";
+import { addDoc, collection, onSnapshot, query, where, doc, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
+import { async } from "@firebase/util";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -31,11 +32,8 @@ export default function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
-  
-  const userNameInput = useRef();
-
   const [myPosts, setMyPosts] = useState([]);
-
+  const [mo, setMo] = useState();
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
@@ -49,17 +47,20 @@ export default function App() {
     }
   };
 
-  const postsRef = collection(firestore, "posts"); // Firebase creates this automaticall//
+  let postsRef = collection(firestore, "posts");
+
+     // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try {
+      // doc(firestore,"posts", )
       addDoc(postsRef, postData);
+      console.log("addDoc Success")
     } catch (err) {
       console.log(err);
     }  
   };
    
 
-  
   useEffect(() => {
     let userRef = collection(firestore, "users");  // Firebase creates this automaticall//
    
@@ -87,13 +88,19 @@ export default function App() {
     onSnapshot(queryPosts, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
-        books.push({ ...doc.data() });
+        books.push({ ...doc.data(), id: doc.id });
       });
     //  console.log(currentUser);
       setPosts(books);
+      let n;
+      if(mo != undefined){
+        books.map((item)=>{
+          item.userId != currentUser.userId ? n=false : getUrl(item); 
+        })
+      }
+     
     });
-  }, [currentUser]);
-
+  }, [mo]);
 
   useEffect(()=>{
     users.map((e)=>{
@@ -101,7 +108,6 @@ export default function App() {
         setCurrentUser(e);
       }
     })
-    // setUsers([]);
   },[])
 
   // function check () {
@@ -113,30 +119,41 @@ export default function App() {
   //     })
   //   }
   // }
-
-  
-  const setStorage = (file) => {
-    const storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
+  let storageRef;
+  const setStorage =(file) => {
+    storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
-      // getUrl();
+      setMo('');
       //console.log(snapshot);
     });
 
-    // function getUrl (){
-    //   getDownloadURL(storageRef)
-    //   .then((url) => {
-    //     // `url` is the download URL for 'images/stars.jpg'
+    
 
-    //     // Or inserted into an <img> element
-    //     //setImage(url);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // }
 };
+function getUrl(e) {
+  console.log(e);
+   getDownloadURL(storageRef)
+  .then((url) => { 
+    const u = doc(firestore, 'posts', `${e.id}`);
+    const loc = updateDoc(u,{"imgUrl": `${url}`});
+    // Set the 'capital' field of the city
+    //const res = await loc.update();
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // Or inserted into an <img> element
+    //setImage(url);
+    // const img = document.getElementById('myimg');
+    // img.setAttribute('src', url);
+    setMo("o");
+    console.log("momo");
+  })
+  .catch((error) => {
+    console.log(error);
+   });
+  }
+  
 //////////////////////////////////////////////////////////////////////////////////////////////
  
   const [data, setData] = useState(Data);

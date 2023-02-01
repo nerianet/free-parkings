@@ -40,15 +40,15 @@ const PostParking = () => {
 
   const submitPost = async (e) => {
     e.preventDefault();
-    setName(imageRef.current.files[0].name);
     setStorage(imageRef.current.files[0]);
+    setName(imageRef.current.files[0].name);
     //setImage(undefined);
     img = undefined;
       const post = {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
-      code: code.target != undefined ? code.target.checked : "",
+      code: code.target == undefined ? code.target.checked : "",
       address: (address.current.value.charAt(0).toUpperCase() + address.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
@@ -82,7 +82,6 @@ const PostParking = () => {
     setImage(imageRef.current.files[0]);
     let _url = URL.createObjectURL(imageRef.current.files[0]);
     setUrl(_url);
-    console.log(image);
   }
 
   return (
