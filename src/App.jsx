@@ -33,6 +33,7 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
+  const [idImg, setIdImg] = useState("");
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
@@ -47,14 +48,18 @@ export default function App() {
   };
 
   let postsRef = collection(firestore, "posts");
-
+  let ur;
      // Firebase creates this automaticall//
   const setNewPost = (postData) => {
-    try {
+    try { 
       // doc(firestore,"posts", )
-      addDoc(postsRef, postData);
+      let n  = addDoc(postsRef, postData)
+      .then((result)=>{
+         ur = result.id;
+         postData.id = result.id;
+        });
+      console.log(postData);
       setPosts([...posts, postData]);     
-      console.log("addDoc Success")
     } catch (err) {
       console.log(err);
     }  
@@ -104,11 +109,10 @@ export default function App() {
 
 function getUrl() {
    getDownloadURL(storageRef)
-  .then((url) => { 
-    const found = posts.find((post) => post.id === post.id);
-    console.log(found)
-    const u = doc(firestore, 'posts', `${found.id}`);
+  .then((url) => {
+    const u = doc(firestore, "posts", `${ur}`);
     const loc = updateDoc(u,{"imgUrl": `${url}`});
+
     // Set the field 
     //const res = await loc.update();
     // `url` is the download URL for 'images/stars.jpg'
@@ -119,7 +123,9 @@ function getUrl() {
     console.log(error);
    });
   }
-  
+  useEffect(()=>{
+    console.log(idImg);
+  },[idImg])
 //////////////////////////////////////////////////////////////////////////////////////////////
  
   const [data, setData] = useState(Data);

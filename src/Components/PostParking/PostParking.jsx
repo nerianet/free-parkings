@@ -15,6 +15,8 @@ const PostParking = () => {
     setImage,
     image,
     setNewPost,
+    setPosts,
+    posts,
   } = useContext(MyContext);
   const navigate = useNavigate();
   const imageRef = useRef();
@@ -40,7 +42,6 @@ const PostParking = () => {
 
   const submitPost = async (e) => {
     e.preventDefault();
-    setStorage(imageRef.current.files[0]);
     setName(imageRef.current.files[0].name);
     //setImage(undefined);
     img = undefined;
@@ -56,6 +57,8 @@ const PostParking = () => {
       activityTime: activityTime.target.value,
       };
     setNewPost(post);
+    setStorage(imageRef.current.files[0]);
+
     accessibility.current.checked = false;
     code.target != undefined ? code.target.checked = false : code.target = undefined;
     suitable.current.value = "";
@@ -149,7 +152,7 @@ const PostParking = () => {
 
                           <div className="mb-1">
                               <div className="">
-                                  <input onChange={() => setLocaleImage()} ref={imageRef} type="file" />
+                                  <input onChange={setLocaleImage} ref={imageRef} type="file" />
                               </div>
                           </div>
                           <span className="">The selected image</span>
