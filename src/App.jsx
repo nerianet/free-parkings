@@ -20,7 +20,6 @@ import Location from "./location/Location";
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
-import { async } from "@firebase/util";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
