@@ -33,7 +33,6 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
-  const [id, setId] = useState();
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
@@ -48,17 +47,17 @@ export default function App() {
   };
 
   let postsRef = collection(firestore, "posts");
-  let ur;
+  let idImg;
      // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try { 
       // doc(firestore,"posts", )
       let n  = addDoc(postsRef, postData)
       .then((result)=>{
-         ur = result.id;
+         idImg = result.id;
          console.log(result.id)
          postData.id = result.id;
-        //  getUrl();
+        getUrl();
         }) .catch((error) => console.log(error));
       console.log(postData);
       setPosts([...posts, postData]);     
@@ -100,22 +99,24 @@ export default function App() {
   },[]);
 
   let storageRef;
+  let flag;
   const setStorage = (file) => {
+    flag = false;
     storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
+      flag = true;
       getUrl();
     });
   };
 
- async function getUrl() {
-  if(ur == undefined){}
+function getUrl() {
+  if(idImg == undefined || flag == false){}
   else{
     getDownloadURL(storageRef)
     .then((url) => {
-      console.log(ur);
-      const u = doc(firestore, "posts", `${ur}`);
+      const u = doc(firestore, "posts", `${idImg}`);
       const loc = updateDoc(u,{"imgUrl": `${url}`});
       // Set the field 
       //const res = await loc.update();

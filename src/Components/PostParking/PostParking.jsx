@@ -40,10 +40,9 @@ const PostParking = () => {
 
   let img = document.getElementById("myimg");
 
-  const submitPost = async (e) => {
+  const submitPost =  (e) => {
     e.preventDefault();
     setName(imageRef.current.files[0].name);
-    setStorage(imageRef.current.files[0]);
       const post = {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
@@ -55,7 +54,7 @@ const PostParking = () => {
       keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
       };
-    await setNewPost(post);
+    setNewPost(post);
     accessibility.current.checked = false;
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
@@ -64,6 +63,7 @@ const PostParking = () => {
     activityTime.target.value = "";
     setImage(undefined);
     img = undefined;
+    setStorage(imageRef.current.files[0]);
     imageRef.current.value = null;
 
   };
