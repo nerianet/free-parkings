@@ -15,8 +15,7 @@ const PostParking = () => {
     setImage,
     image,
     setNewPost,
-    setPosts,
-    posts,
+    isLoading,
   } = useContext(MyContext);
   const navigate = useNavigate();
   const imageRef = useRef();
@@ -65,14 +64,13 @@ const PostParking = () => {
     img = undefined;
     setStorage(imageRef.current.files[0]);
     imageRef.current.value = null;
-
   };
 
   // useEffect(() => {
-  //   if (img != undefined) {
-  //     img.setAttribute("src", image);
+  //   if (isLoading != true) {
+  //     navigate('/')
   //   }
-  // }, []);
+  // }, [isLoading]);
 
   const unsetImage = (e) => {
     e.preventDefault();
@@ -91,7 +89,7 @@ const PostParking = () => {
     <>
       {currentUser.yourName == undefined ? (
         changeNavigate()
-      ) : (
+      ) : ( 
       <div className="vh-100 ">
         <div className="container h-100 ">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -164,9 +162,10 @@ const PostParking = () => {
                               <img className="rounded mx-3" src={url} style={{ width: "250px", height: "150px" }} id="myimg"/>
                               <button onClick={unsetImage}><FaTrashAlt /></button>
                           </div>)}
+                          
 
                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                              <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
+                              <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
                           </div>
                         </form>
                     </div>

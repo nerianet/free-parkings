@@ -10,7 +10,7 @@ export default function MyAccount() {
   const navigate = useNavigate();
 
   
-  const {setCurrentUser ,currentUser, data, posts, myPosts, setMyPosts } = useContext(MyContext);
+  const { currentUser, posts, myPosts } = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
@@ -44,7 +44,6 @@ export default function MyAccount() {
     else{
      //   console.log(currentUser);
       const items = posts.filter(item => item.userId == currentUser.userId);
-      setMyPosts(items);
     }
      //console.log(posts);
   }, [currentUser]);

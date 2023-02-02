@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { createContext, useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Data from "./Data.json";
 import Header from "./Components/Header/Header";
@@ -20,7 +20,6 @@ import Location from "./location/Location";
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
-import { async } from "@firebase/util";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -32,11 +31,11 @@ export default function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
-  const [myPosts, setMyPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
-
+ const navigate = useNavigate();
   const usersRef = collection(firestore, "users");
   const setNewUser = (userData) => {
     try {
@@ -55,11 +54,9 @@ export default function App() {
       let n  = addDoc(postsRef, postData)
       .then((result)=>{
          idImg = result.id;
-         console.log(result.id)
-         postData.id = result.id;
+        postData.id = result.id;
         getUrl();
         }) .catch((error) => console.log(error));
-      console.log(postData);
       setPosts([...posts, postData]);     
     } catch (err) {
       console.log(err);
@@ -103,10 +100,13 @@ export default function App() {
   const setStorage = (file) => {
     flag = false;
     storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
+    setIsLoading(true);
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
       flag = true;
+      setIsLoading(false);
+      navigate('/MyAccount')
       getUrl();
     });
   };
@@ -148,8 +148,7 @@ function getUrl() {
     setImage,
     image,
     posts,
-    myPosts,
-    setMyPosts,
+    isLoading,
   };
 
   return (
