@@ -13,6 +13,7 @@ export default function PostParking() {
 
   const { currentUser, setName, setStorage, setImage, image, setNewPost, isLoading, isShowModal } = useContext(MyContext);
   const navigate = useNavigate();
+
   const imageRef = useRef();
   const accessibility = useRef();
   const address = useRef();
@@ -49,8 +50,8 @@ export default function PostParking() {
       keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
     };
-
     setNewPost(post);
+    
     accessibility.current.checked = false;
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
