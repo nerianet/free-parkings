@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
+import ModalC from '../modalComponnet/ModalC'
+
 // import {BiAccessibility} from 'react-icons/bi'
 
 const PostParking = () => {
@@ -16,6 +18,7 @@ const PostParking = () => {
     image,
     setNewPost,
     isLoading,
+    isShowModal
   } = useContext(MyContext);
   const navigate = useNavigate();
   const imageRef = useRef();
@@ -27,7 +30,8 @@ const PostParking = () => {
   const [url, setUrl] = useState([]);
   const [code, setCode] = useState();
   const [keyCode, setKeyCode] = useState();
-  const [activityTime, setActivityTime] = useState(); 
+  const [activityTime, setActivityTime] = useState();
+   
   const changeNavigate = () => {
     navigate("/LogIn");
   };
@@ -87,6 +91,7 @@ const PostParking = () => {
 
   return (
     <>
+    <ModalC/>
       {currentUser.yourName == undefined ? (
         changeNavigate()
       ) : ( 

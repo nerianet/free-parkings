@@ -15,7 +15,6 @@ import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
 import Location from "./location/Location";
 
-
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc } from "@firebase/firestore";
@@ -32,6 +31,7 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false)
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
@@ -106,7 +106,7 @@ export default function App() {
       console.log('Uploaded successed!');
       flag = true;
       setIsLoading(false);
-      navigate('/MyAccount')
+      setIsShowModal(true);
       getUrl();
     });
   };
@@ -149,6 +149,8 @@ function getUrl() {
     image,
     posts,
     isLoading,
+    isShowModal,
+    setIsShowModal,
   };
 
   return (

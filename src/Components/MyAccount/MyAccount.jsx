@@ -10,11 +10,12 @@ export default function MyAccount() {
   const navigate = useNavigate();
 
   
-  const { currentUser, posts, myPosts } = useContext(MyContext);
+  const { currentUser, posts } = useContext(MyContext);
 
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts]     = useState(false);
+  const [myPosts, setMyPosts] = useState([]);
 
   const [chageName, setChageName] = useState(false);
   const [chagePhone, setChagePhone] = useState(false);
@@ -34,16 +35,14 @@ export default function MyAccount() {
   const changePassword3 = useRef();
 
 
-  const changeNavigate = () => {
-    navigate("/LogIn");
-  };
 
   useEffect(() => {
     if (currentUser.yourName == undefined)
-      changeNavigate();
+    navigate("/LogIn");
     else{
      //   console.log(currentUser);
       const items = posts.filter(item => item.userId == currentUser.userId);
+      setMyPosts(items);
     }
      //console.log(posts);
   }, [currentUser]);
@@ -96,7 +95,7 @@ function changeSeePassword3(e) {
   
   return (
     <>
-      {currentUser.yourName == undefined ? changeNavigate() :
+      {currentUser.yourName == undefined ? navigate('/LogIn') :
         <div className='container'>
             <div className='row'>
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
