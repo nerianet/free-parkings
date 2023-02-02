@@ -49,23 +49,25 @@ const PostParking = () => {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
-      code: code.target == undefined ? code.target.checked : "",
+      code: code != undefined ? code.target.checked : "",
       address: (address.current.value.charAt(0).toUpperCase() + address.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
-      keyCode : keyCode.target != undefined ? keyCode.target.value : "",
+      keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
       };
     setNewPost(post);
     setStorage(imageRef.current.files[0]);
 
     accessibility.current.checked = false;
-    code.target != undefined ? code.target.checked = false : code.target = undefined;
+    code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
     imageRef.current.value = null;
     address.current.value = "";
     activityTime.target.value = "";
+    setImage(undefined);
+    img = undefined;
   };
 
   // useEffect(() => {
