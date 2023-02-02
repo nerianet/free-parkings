@@ -33,7 +33,6 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
-  const [idImg, setIdImg] = useState("");
 //////////////////////////////////////////////////////////////////////////////////////////////
 
  const localeUId = localStorage.getItem('userId');
@@ -122,9 +121,6 @@ function getUrl() {
     console.log(error);
    });
   }
-  useEffect(()=>{
-    console.log(idImg);
-  },[idImg])
 //////////////////////////////////////////////////////////////////////////////////////////////
  
   const [data, setData] = useState(Data);
