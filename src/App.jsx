@@ -165,7 +165,7 @@ function getUrl() {
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
-            <Route path="/Parkings/:userId" element={<Parking />}></Route>
+            <Route path="/Parkings/:id" element={<Parking />}></Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>

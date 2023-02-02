@@ -5,9 +5,9 @@ import Data from "../../Data.json";
 
 export default function Parking() {
 
-  const { userId } = useParams();
+  const { id } = useParams();
   const {posts} = useContext(MyContext);
-  const current = posts.find((post) => post.userId == userId);
+  const current = posts.find((post) => post.id == id);
 
   return (
     <> 
