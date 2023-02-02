@@ -43,8 +43,7 @@ const PostParking = () => {
   const submitPost = async (e) => {
     e.preventDefault();
     setName(imageRef.current.files[0].name);
-    //setImage(undefined);
-    img = undefined;
+    setStorage(imageRef.current.files[0]);
       const post = {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
@@ -56,18 +55,17 @@ const PostParking = () => {
       keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
       };
-    setNewPost(post);
-    setStorage(imageRef.current.files[0]);
-
+    await setNewPost(post);
     accessibility.current.checked = false;
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
-    imageRef.current.value = null;
     address.current.value = "";
     activityTime.target.value = "";
     setImage(undefined);
     img = undefined;
+    imageRef.current.value = null;
+
   };
 
   // useEffect(() => {
