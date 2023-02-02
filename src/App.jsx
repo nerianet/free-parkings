@@ -112,7 +112,6 @@ function getUrl() {
   .then((url) => {
     const u = doc(firestore, "posts", `${ur}`);
     const loc = updateDoc(u,{"imgUrl": `${url}`});
-
     // Set the field 
     //const res = await loc.update();
     // `url` is the download URL for 'images/stars.jpg'

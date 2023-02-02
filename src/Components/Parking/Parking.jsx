@@ -15,7 +15,7 @@ export default function Parking() {
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
-          <img src={current.img} alt="picture parking" class="img-fluid" width={"500px"} />
+          <img src={current.imgUrl} alt="picture parking" class="img-fluid" width={"500px"} />
         </div>
         <div class="col-md-6">
           <h3 class="text-primary">{current.price}₪</h3>
