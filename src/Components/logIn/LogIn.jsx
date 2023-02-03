@@ -12,6 +12,8 @@ export default function User() {
   const userName = useRef();
   const password = useRef();
   const navigate = useNavigate();
+// get users data
+
 
   
   const submithandler = (a) => {
