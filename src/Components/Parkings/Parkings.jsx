@@ -4,6 +4,7 @@ import { MyContext } from "../../App";
 import './parkings.css';
 
 export default function Parkings() {
+
   
   const { posts } = useContext(MyContext);
   const [inputData, setInput] = useState("");

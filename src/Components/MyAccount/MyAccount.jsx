@@ -9,12 +9,10 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  
   const { currentUser, posts } = useContext(MyContext);
 
-
   const [profile, setProfile] = useState(false);
-  const [localePosts, setLocalePosts]     = useState(false);
+  const [localePosts, setLocalePosts] = useState(false);
   const [myPosts, setMyPosts] = useState([]);
 
   const [chageName, setChageName] = useState(false);
@@ -35,11 +33,10 @@ export default function MyAccount() {
   const changePassword3 = useRef();
 
 
-
   useEffect(() => {
-    if (currentUser.yourName == undefined)
+    if (currentUser.yourName == undefined){
     navigate("/LogIn");
-    else{
+    }else{
      //   console.log(currentUser);
       const items = posts.filter(item => item.userId == currentUser.userId);
       setMyPosts(items);
@@ -57,15 +54,15 @@ export default function MyAccount() {
     setProfile(false);
   }
 
-//   function setKeyCode(e){
-//     if(chageName.target.checked == false){
-//         setChageName(false);
-//     } else {
-//     setCurrentUser({...currentUser, YourName: e.target.value});
-// }
-//   }
+    //   function setKeyCode(e){
+    //     if(chageName.target.checked == false){
+    //         setChageName(false);
+    //     } else {
+    //     setCurrentUser({...currentUser, YourName: e.target.value});
+    // }
+    //   }
 
-function changeSeePassword1(e) {
+    function changeSeePassword1(e) {
         if( changePassword1.current.type == 'password'){
             changePassword1.current.type = 'text';
             setEye1(true);
@@ -73,8 +70,9 @@ function changeSeePassword1(e) {
             changePassword1.current.type = 'password';
             setEye1(false);
         }
-  }
-function changeSeePassword2(e) {
+    }
+
+    function changeSeePassword2(e) {
         if( changePassword2.current.type == 'password'){
             changePassword2.current.type = 'text';
             setEye2(true);
@@ -82,8 +80,8 @@ function changeSeePassword2(e) {
             changePassword2.current.type = 'password';
             setEye2(false);
         }
-  }
-function changeSeePassword3(e) {
+    }
+    function changeSeePassword3(e) {
         if( changePassword3.current.type == 'password'){
             changePassword3.current.type = 'text';
             setEye3(true);
@@ -91,7 +89,7 @@ function changeSeePassword3(e) {
             changePassword3.current.type = 'password';
             setEye3(false);
         }
-  }
+    }
   
   return (
     <>

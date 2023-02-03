@@ -34,38 +34,38 @@ export default function App() {
   const [isShowModal, setIsShowModal] = useState(false)
 //////////////////////////////////////////////////////////////////////////////////////////////
 
- const localeUId = localStorage.getItem('userId');
- const navigate = useNavigate();
+  const localeUId = localStorage.getItem('userId');
+  const navigate = useNavigate();
+
   const usersRef = collection(firestore, "users");
   const setNewUser = (userData) => {
     try {
       addDoc(usersRef, userData);
-    } catch (err) {
+    } 
+    catch (err) {
       console.log(err);
     }
   };
 
   let postsRef = collection(firestore, "posts");
   let idImg;
-     // Firebase creates this automaticall//
+  // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try { 
       // doc(firestore,"posts", )
-      let n  = addDoc(postsRef, postData)
+      let n = addDoc(postsRef, postData)
       .then((result)=>{
-         idImg = result.id;
+        idImg = result.id;
         postData.id = result.id;
         getUrl();
         }) .catch((error) => console.log(error));
       setPosts([...posts, postData]);     
-    } catch (err) {
+    } 
+    catch (err) {
       console.log(err);
     }  
   };
    
-  
-  // get users data
-
   function setUser (UserName, password){ 
     let queryUser;
   if(localeUId != null) {
@@ -98,8 +98,8 @@ export default function App() {
         else window.alert("Please Sign In");
     }
     });
- 
-}
+  
+  }
 
   useEffect(() => {
     setUser();
@@ -130,23 +130,23 @@ export default function App() {
     });
   };
 
-function getUrl() {
-  if(idImg == undefined || flag == false){}
-  else{
-    getDownloadURL(storageRef)
-    .then((url) => {
-      const u = doc(firestore, "posts", `${idImg}`);
-      const loc = updateDoc(u,{"imgUrl": `${url}`});
-      // Set the field 
-      //const res = await loc.update();
-      // `url` is the download URL for 'images/stars.jpg'
-  
-      // Or inserted into an <img> element
-    })
-    .catch((error) => {
-      console.log(error);
-     });
-  }
+  function getUrl() {
+    if(idImg == undefined || flag == false){}
+    else{
+      getDownloadURL(storageRef)
+      .then((url) => {
+        const u = doc(firestore, "posts", `${idImg}`);
+        const loc = updateDoc(u,{"imgUrl": `${url}`});
+        // Set the field 
+        //const res = await loc.update();
+        // `url` is the download URL for 'images/stars.jpg'
+    
+        // Or inserted into an <img> element
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   }
 //////////////////////////////////////////////////////////////////////////////////////////////
  
