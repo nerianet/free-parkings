@@ -63,27 +63,46 @@ export default function App() {
     }  
   };
    
-  useEffect(() => {
+  
   // get users data
+
+  function setUser (UserName, password){ 
     let queryUser;
   if(localeUId != null) {
+    console.log(localeUId);
     queryUser = query(usersRef, where('userId', '==', `${localeUId}`));
   } else {
-    queryUser = query(usersRef);
+    queryUser = query(usersRef, where('userName', '==', `${UserName}`));
   }
-    onSnapshot(queryUser, (snapshot) => {
+      onSnapshot(queryUser, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
       });
-      if(localeUId != null) {
-        setCurrentUser(books[0]);
-      }
-      setUsers(books);
+      if(books[0] != undefined){
+        if(localeUId != null) {
+          setCurrentUser(books[0]);
+          localStorage.setItem("userId", `${books[0].userId}`);
+          navigate('/');
+        } else {
+          if(books[0].password == password){
+            setCurrentUser(books[0]);
+            localStorage.setItem("userId", `${books[0].userId}`);
+            navigate('/');
+          } else {
+            window.alert("Please Enter Password correct");
+          }
+        }
+      } else {
+        if(password == undefined) {}
+        else window.alert("Please Sign In");
+    }
     });
-  }, []);
+ 
+}
 
   useEffect(() => {
+    setUser();
     let queryPosts = query(postsRef);
     onSnapshot(queryPosts, (snapshot) => {
       const books = [];
@@ -151,6 +170,7 @@ function getUrl() {
     isLoading,
     isShowModal,
     setIsShowModal,
+    setUser,
   };
 
   return (

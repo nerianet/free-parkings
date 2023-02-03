@@ -8,7 +8,7 @@ import { firestore } from '../../firebase/Firebase';
 
 
 export default function User() {
-  const { users,  setCurrentUser} = useContext(MyContext);
+  const { users,  setCurrentUser, setUser, currentUser} = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
   const navigate = useNavigate();
@@ -16,61 +16,45 @@ export default function User() {
   
   const submithandler = (a) => {
     a.preventDefault();
-    const found = users.find((user) => user.userName === userName.current.value);
-     if(found){
-      if(password.current.value === found.password){
-        //console.log(found);
-        setCurrentUser(found);
+    setUser(userName.current.value, password.current.value);
         userName.current.value = "";
         password.current.value = "";
-        navigate('/');
-        localStorage.setItem("userId", `${found.userId}`);
-      } else {
-        password.current.value = "";
-      }
-     } else {
-     // prompt("Please Sign In");
-      window.alert("Please Sign In");
-     }       
-    userName.current.value = "";
-    password.current.value = "";
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  const handleSignWithGoogle = () =>{
-    const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  // const handleSignWithGoogle = () =>{
+  //   const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-    const auth = getAuth(app); 
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-          // The signed-in user info.
-          const userr = result.user;
-          console.log(userr);
-          //setCurrentUser(user);
-          // setUserID(user.id);
-          const found = users.find((user) => user.userName === userr.email);
-        //  console.log(found);
-          if(found != undefined) {
-            setCurrentUser(found);
-            navigate('/');
-            localStorage.setItem("userId", `${found.userId}`);
-          }
-          // ...
-        }).catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.customData.email;
-          // The AuthCredential type that was used.
-          const credential = GoogleAuthProvider.credentialFromError(error);
-          // ...
-        });
+  //   const auth = getAuth(app); 
+  //     signInWithPopup(auth, provider)
+  //       .then((result) => {
+  //         // This gives you a Google Access Token. You can use it to access the Google API.
+  //         const credential = GoogleAuthProvider.credentialFromResult(result);
+  //         const token = credential.accessToken;
+  //         // The signed-in user info.
+  //         const userr = result.user;
+  //         //setCurrentUser(user);
+  //         // setUserID(user.id);
+  //         const found = users.find((user) => user.userName === userr.email);
+  //       //  console.log(found);
+  //         if(found != undefined) {
+  //           setCurrentUser(found);
+  //           navigate('/');
+  //           localStorage.setItem("userId", `${found.userId}`);
+  //         }
+  //         // ...
+  //       }).catch((error) => {
+  //         // Handle Errors here.
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         // The email of the user's account used.
+  //         const email = error.customData.email;
+  //         // The AuthCredential type that was used.
+  //         const credential = GoogleAuthProvider.credentialFromError(error);
+  //         // ...
+  //       });
 
-  }
+  // }
   
   //////////////////////////////////////////////////////////////////////////////
 
@@ -99,7 +83,7 @@ export default function User() {
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>
-      <button class="btn btn-lg btn-primary btn-block mx-5" onClick={handleSignWithGoogle} >Login With Google</button>
+      <button class="btn btn-lg btn-primary btn-block mx-5" onClick >Login With Google</button>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2022-2023</p>
     </form>
     </div>
