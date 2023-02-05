@@ -26,7 +26,6 @@ export const MyContext = createContext(); // הצהרה רישונית
 export default function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [name, setName] = useState("");
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -170,8 +169,6 @@ export default function App() {
     setStorage,
     currentUser,
     setCurrentUser,
-    name,
-    setName,
     setImage,
     setImage,
     image,

@@ -11,7 +11,7 @@ import ModalC from '../modalComponnet/ModalC'
 
 export default function PostParking() {
 
-  const { currentUser, setName, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
   const navigate = useNavigate();
 
   const imageRef = useRef();
@@ -38,7 +38,6 @@ export default function PostParking() {
 
   const submitPost =  (e) => {
     e.preventDefault();
-    setName(imageRef.current.files[0].name);
       const post = {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
