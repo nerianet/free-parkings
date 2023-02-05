@@ -160,23 +160,20 @@ export default function App() {
   }
 //////////////////////////////////////////////////////////////////////////////////////////////
  
-  const [data, setData] = useState(Data);
   const AllData = {
-    data,
-    setData,
+///////////////////
     setNewUser,
     setNewPost,
     setStorage,
+    setUser,
+///////////////////
     currentUser,
     setCurrentUser,
-    setImage,
     setImage,
     image,
     posts,
     isLoading,
     isShowModal,
-    setIsShowModal,
-    setUser,
   };
 
   return (
