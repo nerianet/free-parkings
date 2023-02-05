@@ -27,7 +27,7 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded ">
    
       {posts.filter((post) => post.address.startsWith(inputData)).map((item, i) => (
-        <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
+        <Link to={item.id} key={i} className="text-decoration-none border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
           <h4 className="d-flex justify-content-center">{item.address}</h4>
           <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>

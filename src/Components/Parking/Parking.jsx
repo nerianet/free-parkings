@@ -15,7 +15,7 @@ export default function Parking() {
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
-          <img src={current.imgUrl} alt="picture parking" class="img-fluid" width={"500px"} />
+          <img src={current.imgUrl} alt="picture parking" class="img-fluid rounded-3 border" style={{ width: "500px", height: "350px" }} />
         </div>
         <div class="col-md-6">
           <h3 class="text-primary">{current.price}₪</h3>
@@ -24,7 +24,7 @@ export default function Parking() {
       </div> 
       <div class="row mt-5">
         <div class="col-md-12">
-          <h3>{current.category}</h3>
+          <div className="display-5 text-primary">contactName: {current.contactName}</div>
         </div>
       </div>
     </div>
