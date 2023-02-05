@@ -25,7 +25,6 @@ export const MyContext = createContext(); // הצהרה רישונית
 
 export default function App() {
 
-  const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [name, setName] = useState("");
   const [image, setImage] = useState();
@@ -39,14 +38,27 @@ export default function App() {
 
   const usersRef = collection(firestore, "users");
   const setNewUser = (userData) => {
-    try {
-      addDoc(usersRef, userData);
-    } 
-    catch (err) {
-      console.log(err);
-    }
-  };
-
+    const queryUser = query(usersRef, where('userName', '==', `${userData.userName}`));
+    onSnapshot(queryUser, (snapshot) => {
+      const books = [];
+      snapshot.docs.forEach((doc) => {
+        books.push({ ...doc.data(), id: doc.id });
+      });
+      if(books[0] != undefined){
+        window.alert("You Have a Account");
+        navigate('/LogIn');
+      } else {
+        try {
+          addDoc(usersRef, userData);
+        } 
+        catch (err) {
+          console.log(err);
+        }
+        localStorage.setItem("userId", `${userData.userId}`);
+        navigate('/');
+      }
+    })
+  }
   let postsRef = collection(firestore, "posts");
   let idImg;
   // Firebase creates this automaticall//
@@ -69,7 +81,6 @@ export default function App() {
   function setUser (UserName, password){ 
     let queryUser;
   if(localeUId != null) {
-    console.log(localeUId);
     queryUser = query(usersRef, where('userId', '==', `${localeUId}`));
   } else {
     queryUser = query(usersRef, where('userName', '==', `${UserName}`));
@@ -157,8 +168,6 @@ export default function App() {
     setNewUser,
     setNewPost,
     setStorage,
-    users,
-    setUsers,
     currentUser,
     setCurrentUser,
     name,

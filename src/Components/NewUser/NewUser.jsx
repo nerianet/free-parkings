@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function NewUser() {
-  const {setNewUser, users,setUsers,setCurrentUser, currentUser} = useContext(MyContext);
+  const {setNewUser, currentUser} = useContext(MyContext);
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
@@ -17,11 +17,6 @@ export default function NewUser() {
   const submitHandler = (e) => {
     e.preventDefault();
     const { v4: userId } = require('uuid');
-    const found = users.find((user) => user.userName == userName.current.value);
-    if(found){
-      window.alert("You Hava A Acount");
-      navigate('/LogIn');
-    } else {
     const user = {
       userName: userName.current.value, 
       phone: phone.current.value,
@@ -33,19 +28,14 @@ export default function NewUser() {
     if(pass1.current.value!=pass2.current.value){
       window.alert("the password not correct");
     } else {
-      setUsers([...users, user]);
       setNewUser(user);
-      setCurrentUser(user);
-      localStorage.setItem("userId", `${user.userId}`);
       userName.current.value = "";
       pass1.current.value = "";
       phone.current.value = "";
       yourName.current.value = "";
       pass2.current.value = "";
       address.current.value = "";
-      navigate('/');
-    }  
-  }
+    }
 }
 
   return (

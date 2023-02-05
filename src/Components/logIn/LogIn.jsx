@@ -7,11 +7,10 @@ import "./LogIn.css"
 import { firestore } from '../../firebase/Firebase';
 
 
-export default function User() {
-  const { users,  setCurrentUser, setUser, currentUser} = useContext(MyContext);
+export default function LogIn() {
+  const { setUser } = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
-  const navigate = useNavigate();
 // get users data
 
 
