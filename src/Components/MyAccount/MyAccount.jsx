@@ -97,6 +97,7 @@ export default function MyAccount() {
         if(changePassword1.current.value == currentUser.password){
             if(changePassword2.current.value == changePassword3.current.value){
                 data.password = changePassword2.current.value;
+                return 1;
             } else {
                 window.alert("The Password Not Matched");
             }
@@ -104,7 +105,7 @@ export default function MyAccount() {
             window.alert("The Password Not Correct");
         }
     }
-    let data;
+    let  data ;
     const submitChange = (e) =>{
         e.preventDefault();
         data = {
@@ -112,10 +113,14 @@ export default function MyAccount() {
             phone: changePhone.current  ? changePhone.current.value : currentUser.phone,
             yourName: changeName.current  ? changeName.current.value : currentUser.yourName,
             address: changeAddress.current  ? changeAddress.current.value : currentUser.address,
+        };
+        if(chagePassword == true){
+            if(checkPassword() == 1){
+                updateUser(data);
+            }
+        } else {
+            updateUser(data);
         }
-        let k;
-        chagePassword != true ? k=5 :checkPassword();
-        updateUser(data);
     }
 
    
