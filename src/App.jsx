@@ -94,7 +94,6 @@ export default function App() {
         if(localeUId != null) {
           setCurrentUser(books[0]);
           localStorage.setItem("userId", `${books[0].userId}`);
-          navigate('/');
         } else {
           if(books[0].password == password){
             setCurrentUser(books[0]);
