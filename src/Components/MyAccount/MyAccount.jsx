@@ -105,7 +105,7 @@ export default function MyAccount() {
             window.alert("The Password Not Correct");
         }
     }
-    let  data ;
+    let  data;
     const submitChange = (e) =>{
         e.preventDefault();
         data = {

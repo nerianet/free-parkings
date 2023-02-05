@@ -19,6 +19,7 @@ import Location from "./location/Location";
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
+import MyParking from "./Components/myParking/MyParking";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -147,12 +148,7 @@ export default function App() {
       .then((url) => {
         const u = doc(firestore, "posts", `${idPost}`);
         const loc = updateDoc(u,{"imgUrl": `${url}`});
-        // Set the field 
-        //const res = await loc.update();
-        // `url` is the download URL for 'images/stars.jpg'
-    
-        // Or inserted into an <img> element
-      })
+       })
       .catch((error) => {
         console.log(error);
       });
@@ -212,6 +208,7 @@ export default function App() {
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
             <Route path="/Parkings/:id" element={<Parking />}></Route>
+            <Route path="/MyAccount/:id" element={<MyParking />}></Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
