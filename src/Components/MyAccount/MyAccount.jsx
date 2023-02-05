@@ -91,12 +91,7 @@ export default function MyAccount() {
         setMyPosts(arr);
     }
 
-    let data = {
-        userName: chageMail == true ? changeEmail.current.value : currentUser.userName, 
-        phone: chagePhone == true ? changePhone.current.value : currentUser.phone,
-        yourName: chageMail == true ? changeName.current.value : currentUser.yourName,
-        address: chageAddress == true ? changeAddress.current.value : currentUser.address,
-    }
+    
 
     function checkPassword(){
         if(changePassword1.current.value == currentUser.password){
@@ -109,11 +104,17 @@ export default function MyAccount() {
             window.alert("The Password Not Correct");
         }
     }
-
+    let data;
     const submitChange = (e) =>{
         e.preventDefault();
+        data = {
+            userName: changeEmail.current  ? changeEmail.current.value : currentUser.userName, 
+            phone: changePhone.current  ? changePhone.current.value : currentUser.phone,
+            yourName: changeName.current  ? changeName.current.value : currentUser.yourName,
+            address: changeAddress.current  ? changeAddress.current.value : currentUser.address,
+        }
         let k;
-        // chagePassword == true ? checkPassword() : k=5;
+        chagePassword != true ? k=5 :checkPassword();
         updateUser(data);
     }
 
