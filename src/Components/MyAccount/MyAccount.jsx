@@ -4,12 +4,13 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
-import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai'
+import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
+
 
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts } = useContext(MyContext);
+  const { currentUser, posts, postDelete, updateUser } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
@@ -54,14 +55,6 @@ export default function MyAccount() {
     setProfile(false);
   }
 
-    //   function setKeyCode(e){
-    //     if(chageName.target.checked == false){
-    //         setChageName(false);
-    //     } else {
-    //     setCurrentUser({...currentUser, YourName: e.target.value});
-    // }
-    //   }
-
     function changeSeePassword1(e) {
         if( changePassword1.current.type == 'password'){
             changePassword1.current.type = 'text';
@@ -81,6 +74,7 @@ export default function MyAccount() {
             setEye2(false);
         }
     }
+
     function changeSeePassword3(e) {
         if( changePassword3.current.type == 'password'){
             changePassword3.current.type = 'text';
@@ -90,7 +84,41 @@ export default function MyAccount() {
             setEye3(false);
         }
     }
-  
+
+    function deletePost (id, nameFile){
+        postDelete(id, nameFile);
+        let arr = myPosts.filter((item)=> item.id != id);
+        setMyPosts(arr);
+    }
+
+    let data = {
+        userName: chageMail == true ? changeEmail.current.value : currentUser.userName, 
+        phone: chagePhone == true ? changePhone.current.value : currentUser.phone,
+        yourName: chageMail == true ? changeName.current.value : currentUser.yourName,
+        address: chageAddress == true ? changeAddress.current.value : currentUser.address,
+    }
+
+    function checkPassword(){
+        if(changePassword1.current.value == currentUser.password){
+            if(changePassword2.current.value == changePassword3.current.value){
+                data.password = changePassword2.current.value;
+            } else {
+                window.alert("The Password Not Matched");
+            }
+        } else {
+            window.alert("The Password Not Correct");
+        }
+    }
+
+    const submitChange = (e) =>{
+        e.preventDefault();
+        let k;
+        // chagePassword == true ? checkPassword() : k=5;
+        updateUser(data);
+    }
+
+   
+
   return (
     <>
       {currentUser.yourName == undefined ? navigate('/LogIn') :
@@ -104,21 +132,24 @@ export default function MyAccount() {
             <div className="row justify-content-center pt-3">
                 <div className="row justify-content-around container rounded">
                     {myPosts.map((item, i) => (
-                    <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
-                        <h4 className="d-flex justify-content-center">{item.address}</h4>
-                        <h4 className="d-flex justify-content-center">{item.price}</h4>
-                        <h4 className="d-flex justify-content-center">{item.activityTime}</h4>
-                        <h4 className="d-flex justify-content-center">accessibility: {item.accessibility == true ? "Yes" : "No"}</h4>
-                        <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
-                            <img className="img-card border rounded" src={item.imgUrl} alt={item.name} style={{ height: "85%", width: "100%" }}/>
-                        </div>
-                        <h2 className="d-flex justify-content-center">{}</h2>
-                        <div className=" d-flex justify-content-center">
-                            <button type="button" className="btn btn-success">
-                                Detail Parking
-                            </button>
-                        </div>
-                    </Link>
+                    <div className="border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
+                        <Link to={item.id} key={i} >
+                            <h4 className="d-flex justify-content-center">{item.address}</h4>
+                            <h4 className="d-flex justify-content-center">{item.price}</h4>
+                            <h4 className="d-flex justify-content-center">{item.activityTime}</h4>
+                            <h4 className="d-flex justify-content-center">accessibility: {item.accessibility == true ? "Yes" : "No"}</h4>
+                            <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
+                                <img className="img-card border rounded" src={item.imgUrl} alt={item.name} style={{ height: "85%", width: "100%" }}/>
+                            </div>
+                            <h2 className="d-flex justify-content-center">{}</h2>
+                            <div className=" d-flex justify-content-center">
+                                <button type="button" className="btn btn-success">
+                                    Detail Parking
+                                </button>
+                            </div>
+                        </Link>
+                        <button onClick={()=>deletePost(item.id, item.nameFile)}>Delete</button>
+                    </div>
                     ))}
                 </div>
             </div>
@@ -130,7 +161,7 @@ export default function MyAccount() {
                             <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(245, 240, 249, 0.3)",}}>
                                 <div className="card-body p-md-5">
                                     <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 display-3">My Profile</p>
-                                    <form className="mx-1 mx-md-4" >
+                                    <form className="mx-1 mx-md-4" onSubmit={submitChange} >
 
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <div className="form-outline flex-fill mb-0">
@@ -139,7 +170,7 @@ export default function MyAccount() {
                                                 <button className="btn btn-warning mx-2" type="button" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
                                                 { chageName == false ? "" 
                                                 :
-                                                <input ref={changeName} placeholder="enter name to change" type="text" />}
+                                                <input defaultValue={currentUser.yourName} id="mo" ref={changeName} placeholder="enter name to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -150,7 +181,7 @@ export default function MyAccount() {
                                                 <button className="btn btn-warning mx-2" type="button" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
                                                 { chagePhone == false ? "" 
                                                 :
-                                                <input ref={changePhone} placeholder="enter phone to change" type="text" />}
+                                                <input defaultValue={currentUser.phone} ref={changePhone} placeholder="enter phone to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -161,7 +192,7 @@ export default function MyAccount() {
                                                 <button className="btn btn-warning mx-2" type="button" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
                                                 { chageAddress == false ? "" 
                                                 :
-                                                <input ref={changeAddress} placeholder="enter address to change" type="text" />}
+                                                <input defaultValue={currentUser.address} ref={changeAddress} placeholder="enter address to change" type="text" />}
                                             </div>
                                         </div>
 
@@ -172,7 +203,7 @@ export default function MyAccount() {
                                                 <button className="btn btn-warning mx-2" type="button" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
                                                 { chageMail == false ? "" 
                                                 :
-                                                <input ref={changeEmail} placeholder="enter mail to change" type="text" />}
+                                                <input defaultValue={currentUser.userName} ref={changeEmail} placeholder="enter mail to change" type="text" />}
                                             </div>
                                         </div>
  

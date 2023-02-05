@@ -17,8 +17,8 @@ import Location from "./location/Location";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
-import { addDoc, collection, onSnapshot, query, where, doc, updateDoc } from "@firebase/firestore";
-import { getDownloadURL, ref, uploadBytes  } from "firebase/storage";
+import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@firebase/firestore";
+import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -59,14 +59,14 @@ export default function App() {
     })
   }
   let postsRef = collection(firestore, "posts");
-  let idImg;
+  let idPost;
   // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try { 
       // doc(firestore,"posts", )
       let n = addDoc(postsRef, postData)
       .then((result)=>{
-        idImg = result.id;
+        idPost = result.id;
         postData.id = result.id;
         getUrl();
         }) .catch((error) => console.log(error));
@@ -74,7 +74,7 @@ export default function App() {
     } 
     catch (err) {
       console.log(err);
-    }  
+    } 
   };
    
   function setUser (UserName, password){ 
@@ -141,11 +141,11 @@ export default function App() {
   };
 
   function getUrl() {
-    if(idImg == undefined || flag == false){}
+    if(idPost == undefined || flag == false){}
     else{
       getDownloadURL(storageRef)
       .then((url) => {
-        const u = doc(firestore, "posts", `${idImg}`);
+        const u = doc(firestore, "posts", `${idPost}`);
         const loc = updateDoc(u,{"imgUrl": `${url}`});
         // Set the field 
         //const res = await loc.update();
@@ -158,6 +158,26 @@ export default function App() {
       });
     }
   }
+
+  function updateUser(user){
+   // console.log(currentUser.id)
+    let a = doc(firestore, 'users', `${currentUser.id}`);
+    const loc = updateDoc(a,user);
+  }
+
+  function postDelete(id, fileName){
+
+    /// delete post from firebase
+    let a = doc(firestore, 'posts', `${id}`);
+    let n = deleteDoc(a);
+
+    /// delete image from firebase
+    storageRef = ref(storage, currentUser.userId + "/images/" + `${fileName}`);
+    deleteObject(storageRef);
+
+    let arr = posts.filter((item)=> item.id != id);
+    setPosts(arr);
+  }
 //////////////////////////////////////////////////////////////////////////////////////////////
  
   const AllData = {
@@ -166,6 +186,8 @@ export default function App() {
     setNewPost,
     setStorage,
     setUser,
+    postDelete,
+    updateUser,
 ///////////////////
     currentUser,
     setCurrentUser,
@@ -174,6 +196,7 @@ export default function App() {
     posts,
     isLoading,
     isShowModal,
+    setIsShowModal,
   };
 
   return (

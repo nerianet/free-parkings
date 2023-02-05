@@ -11,7 +11,7 @@ import ModalC from '../modalComponnet/ModalC'
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, setIsShowModal } = useContext(MyContext);
   const navigate = useNavigate();
 
   const imageRef = useRef();

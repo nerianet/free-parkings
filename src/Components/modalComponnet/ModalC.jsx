@@ -18,8 +18,8 @@ export default function ModalC() {
           Your ad has been uploaded successfully
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={()=>setIsShowModal(false)}>
-            <Link to={'/'}>Go To Home Page</Link>
+          <Button variant="danger" >
+            <Link onClick={()=>setIsShowModal(false)} to={'/'}>Go To Home Page</Link>
           </Button>
           <Button variant="dark" onClick={()=>setIsShowModal(false)}>
           <Link to={'/MyAccount'}>Go To Your Account</Link>
