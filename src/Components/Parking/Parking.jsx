@@ -11,7 +11,7 @@ export default function Parking() {
 
   return (
     <> 
-    <div class="container mt-5">
+    {current ? <div class="container mt-5">
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
@@ -27,7 +27,7 @@ export default function Parking() {
           <div className="display-5 text-primary">contactName: {current.contactName}</div>
         </div>
       </div>
-    </div>
+    </div> : ''}
     </>
   )
 }

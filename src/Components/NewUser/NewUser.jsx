@@ -2,9 +2,11 @@ import React, { useContext, useRef, useState } from 'react';
 import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import { FaTrashAlt } from "react-icons/fa";
+
 
 export default function NewUser() {
-  const {setNewUser, currentUser} = useContext(MyContext);
+  const {setNewUser, currentUser, setImage, image} = useContext(MyContext);
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
@@ -54,7 +56,7 @@ export default function NewUser() {
 
                   <form class="mx-1 mx-md-4" onSubmit={submitHandler}>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
+                  <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input required type="text" id="form3Example1c" class="form-control" ref={yourName} />
@@ -71,7 +73,7 @@ export default function NewUser() {
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <i class="fa-solid fa-house-user me-3"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input required type="address" id="form3Example4c" class="form-control" ref={address}/>
                         <label class="form-label" for="form3Example4c">Your Address</label>
