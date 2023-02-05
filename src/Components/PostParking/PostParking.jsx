@@ -48,6 +48,7 @@ export default function PostParking() {
       suitable: suitable.current.value,
       keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
+      contactName: currentUser.yourName,
     };
     setNewPost(post);
     

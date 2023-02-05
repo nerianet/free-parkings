@@ -29,7 +29,7 @@ export default function Parkings() {
       {posts.filter((post) => post.address.startsWith(inputData)).map((item, i) => (
         <Link to={item.id} key={i} className=" border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
           <h4 className="d-flex justify-content-center">{item.address}</h4>
-          <h4 className="d-flex justify-content-center">Name: {item.yourName}</h4>
+          <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
             <img className="img-card border rounded" src={item.imgUrl} alt={item.name} style={{ height: "85%", width: "100%" }}/>
           </div>
