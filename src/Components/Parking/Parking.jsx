@@ -27,8 +27,7 @@ export default function Parking() {
 
   return (
     <> 
-    {current ? 
-    <div class="container mt-5">
+    {current ? <div class="container mt-5">
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
