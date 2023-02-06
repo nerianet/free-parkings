@@ -13,21 +13,22 @@ export default function Parking() {
 
   },[]);
 
-  const [a, setA] = useState(false);
+  const [hide, setHide] = useState(false);
 
   function hideContact(){
-    if (a == true) {
-      setA(false);
+    if (hide == true) {
+      setHide(false);
     }
     else{
-      setA(true);
+      setHide(true);
     }
     
   }
 
   return (
     <> 
-    {current ? <div class="container mt-5">
+    {current ? 
+    <div class="container mt-5">
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
@@ -46,13 +47,13 @@ export default function Parking() {
       </div> 
 
       <div class="row mt-5">
-        <div class="col-2 d-flex justify-content-center">
+        <div class="col-2">
           <button class="btn btn-primary btn-lg" onClick={() => hideContact()}>contact</button>
-          {a == true ? 
-          <div className="col-2 d-flex justify-content-between">
-            <img className="border circle" style={{ width: "90px", height: "90px" }} src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png" />
-            <div className="display-6 text-primary">Name: {current.contactName}</div>
-            <div className="display-6 text-primary">Phone: {current.contactPhone}</div>
+          {hide ? 
+          <div className="col-3 ">
+            <img className="" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style={{ width: "90px", height: "90px" }} />
+            <div className="">Name: {current.contactName}</div>
+            <div className="">Phone: {current.contactPhone}</div>
           </div>
         : ''}
         </div>

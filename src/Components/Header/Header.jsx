@@ -19,15 +19,14 @@ export default function Header() {
       <li>Free Parkings</li>
       <li></li>
       <li></li>
-      <p>{currentUser.yourName}</p>
+      {/* <p>{currentUser.yourName}</p> */}
       
      
       
 
     <div class="btn-group rounded" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
-        Menu
-      </button>
+      <p className='p-2'>{currentUser.yourName}</p>
+      <img id="btnGroupDrop1" type="button" class="dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style={{ width: "60px", height: "60px" }} />
       <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <li className=''><Link className="dropdown-item link-primary" to={'/MyAccount'}>My Account</Link></li>
         <li>
