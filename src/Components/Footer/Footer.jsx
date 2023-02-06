@@ -17,6 +17,7 @@ export default function Footer() {
     .catch(error => console.log('error', error));
   },[input])
   
+  
   return (
     <>
     <div className='container align-text-bottom a w-50'>
@@ -24,7 +25,7 @@ export default function Footer() {
       <div className='container'>
       {
         data.map((e)=>(
-          <div className='rounded text-light border'> {e.properties.formatted }</div>
+          <div className='rounded text-dark border'> {e.properties.city }</div>
         ))
       }
       </div>

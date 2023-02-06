@@ -93,8 +93,6 @@ export default function App() {
       if(books[0] != undefined){
         if(localeUId != null) {
           setCurrentUser(books[0]);
-          localStorage.setItem("userId", `${books[0].userId}`);
-          //navigate('/');
         } else {
           if(books[0].password == password){
             setCurrentUser(books[0]);

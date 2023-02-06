@@ -25,33 +25,19 @@ export default function LogIn() {
 
   //////////////////////////////////////////////////////////////////////////////
   const handleSignWithGoogle = () =>{
-    const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    const provider = new GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
     const auth = getAuth(app); 
       signInWithPopup(auth, provider)
         .then((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
           // The signed-in user info.
           const userr = result.user;
-          //setCurrentUser(user);
-          // setUserID(user.id);
           setUser(userr.email);
-
-          
-          // ...
-        }).catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.customData.email;
-          // The AuthCredential type that was used.
-          const credential = GoogleAuthProvider.credentialFromError(error);
-          // ...
+        })
+        .catch((error) => {
+        
         });
-
   }
   
   //////////////////////////////////////////////////////////////////////////////
