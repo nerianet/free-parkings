@@ -97,7 +97,7 @@ export default function PostParking() {
     const t = document.getElementById('outlined-basic');
     console.log(e);
     t.value = e;
-
+    setInput('');
   }
 
   return (
