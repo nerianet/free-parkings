@@ -5,18 +5,21 @@ import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
-import ModalC from '../modalComponnet/ModalC'
+import ModalC from '../modalComponnet/ModalC';
+import { location } from '../API/APIs';
+
 
 // import {BiAccessibility} from 'react-icons/bi'
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, setIsShowModal } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, input, setInput } = useContext(MyContext);
   const navigate = useNavigate();
 
   const imageRef = useRef();
   const accessibility = useRef();
-  const address = useRef();
+  const city = useRef();
+  const street = useRef();
   const suitable = useRef();
   const price = useRef();
 
@@ -24,6 +27,7 @@ export default function PostParking() {
   const [code, setCode] = useState();
   const [keyCode, setKeyCode] = useState();
   const [activityTime, setActivityTime] = useState();
+  const [loc, setLoc] = useState([]);
    
   const changeNavigate = () => {
     navigate("/LogIn");
@@ -34,6 +38,11 @@ export default function PostParking() {
       changeNavigate();
   }, []);
 
+  useEffect(()=>{
+    location(input, setLoc);
+    console.log(loc);
+  },[input])
+
   let img = document.getElementById("myimg");
 
   const submitPost =  (e) => {
@@ -43,13 +52,15 @@ export default function PostParking() {
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code != undefined ? code.target.checked : "",
-      address: (address.current.value.charAt(0).toUpperCase() + address.current.value.slice(1)),
+      city: (city.current.value.charAt(0).toUpperCase() + city.current.value.slice(1)),
+      street: (street.current.value.charAt(0).toUpperCase() + street.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
       contactName: currentUser.yourName,
       contactPhone: currentUser.phone,
+      cordLocation: "m",
     };
     setNewPost(post);
     
@@ -57,7 +68,8 @@ export default function PostParking() {
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
-    address.current.value = "";
+    city.current.value = "";
+    street.current.value = "";
     activityTime.target.value = "";
     setImage(undefined);
     img = undefined;
@@ -98,14 +110,17 @@ export default function PostParking() {
 
                       <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
+                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" onChange={(e)=>setInput(e.target.value)} className="form-control" ref={city}/>
                                 <label className="form-label" for="form3Example1c">City</label>
+                                <div>{loc.map((e)=>(
+                                  <div>{e.properties.city}</div>
+                                ))}</div>
                             </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
+                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={street}/>
                                 <label className="form-label" for="form3Example1c">Street</label>
                             </div>
                         </div>
