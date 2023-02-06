@@ -30,7 +30,9 @@ export default function App() {
   const [image, setImage] = useState();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isShowModal, setIsShowModal] = useState(false)
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [input, setInput] = useState("");
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -194,6 +196,8 @@ export default function App() {
     isLoading,
     isShowModal,
     setIsShowModal,
+    input, 
+    setInput,
   };
 
   return (
