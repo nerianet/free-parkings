@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import ModalC from '../modalComponnet/ModalC'
 import { location } from '../API/APIs';
+import { TextField } from "@mui/material";
 
-// import {BiAccessibility} from 'react-icons/bi'
 
 export default function PostParking() {
 
@@ -27,6 +27,7 @@ export default function PostParking() {
   const [keyCode, setKeyCode] = useState();
   const [activityTime, setActivityTime] = useState();
   const [loc, setLoc] = useState([]);
+  const [inputCity, setInputCity] = useState("");
    
   const changeNavigate = () => {
     navigate("/LogIn");
@@ -40,6 +41,7 @@ export default function PostParking() {
   useEffect(()=>{
     location(input, setLoc);
     console.log(loc);
+    console.log(city.current)
   },[input])
 
   let img = document.getElementById("myimg");
@@ -51,7 +53,7 @@ export default function PostParking() {
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code != undefined ? code.target.checked : "",
-      city: (city.current.value.charAt(0).toUpperCase() + city.current.value.slice(1)),
+      city: (input.charAt(0).toUpperCase() + input.slice(1)),
       street: (street.current.value.charAt(0).toUpperCase() + street.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
@@ -89,6 +91,14 @@ export default function PostParking() {
     let _url = URL.createObjectURL(imageRef.current.files[0]);
     setUrl(_url);
   }
+  
+  
+  function setAdress(e){
+    const t = document.getElementById('outlined-basic');
+    console.log(e);
+    t.value = e;
+
+  }
 
   return (
     <>
@@ -109,10 +119,9 @@ export default function PostParking() {
 
                       <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" onChange={(e)=>setInput(e.target.value)} className="form-control" ref={city}/>
-                                <label className="form-label" for="form3Example1c">City</label>
-                                <div>{loc.map((e)=>(
-                                  <div>{e.properties.city}</div>
+                                <TextField required color="warning" id="outlined-basic" label="City" variant="outlined" onChange={(e)=>setInput(e.target.value)} className="bg-light" />
+                                <div>{loc.map((e, i)=>(
+                                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setAdress(e.target.innerHTML)}>{e.properties.city}</button> : loc[i].properties.city == loc[i-1].properties.city ? "" : <button className="col-4 border" onClick={(e)=>setAdress(e.target.innerHTML)}>{loc[i].properties.city}</button>}</div>
                                 ))}</div>
                             </div>
                         </div>

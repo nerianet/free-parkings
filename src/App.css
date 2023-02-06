@@ -4,6 +4,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     font-style:italic;
+    overflow-x:auto;
     /* background-color: rgba(247, 198, 49, 0.974); */
 }
 

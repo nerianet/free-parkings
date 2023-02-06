@@ -17,7 +17,7 @@ import Location from "./location/Location";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
-import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@firebase/firestore";
+import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc, setDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
 import MyParking from "./Components/myParking/MyParking";
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,6 +141,7 @@ export default function App() {
       setIsLoading(false);
       setIsShowModal(true);
       getUrl();
+      setInput('');
     });
   };
 
