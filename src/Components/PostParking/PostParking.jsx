@@ -65,11 +65,6 @@ export default function PostParking() {
     imageRef.current.value = null;
   };
 
-  // useEffect(() => {
-  //   if (isLoading != true) {
-  //     navigate('/')
-  //   }
-  // }, [isLoading]);
 
   const unsetImage = (e) => {
     e.preventDefault();
@@ -100,11 +95,40 @@ export default function PostParking() {
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Post A Park</p>
                       <form className="mx-1 mx-md-4" onSubmit={submitPost}>
+
+                      <div className="d-flex flex-row align-items-center mb-4">
+                            <div className="form-outline flex-fill mb-0">
+                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
+                                <label className="form-label" for="form3Example1c">City</label>
+                            </div>
+                        </div>
+
                         <div className="d-flex flex-row align-items-center mb-4">
-                          <div className="form-outline flex-fill mb-0">
-                            <label className=" form-label" for="form3Example4c">accessibility?</label>
-                            <input type="checkbox" ref={accessibility} id="form3Example4c" className="mx-2"/>
-                          </div>
+                            <div className="form-outline flex-fill mb-0">
+                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
+                                <label className="form-label" for="form3Example1c">Street</label>
+                            </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                            <div className="form-outline flex-fill mb-0">
+                                <input required placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e)}/>
+                                <label className="form-label" for="form3Example4c">Activity time?</label>
+                            </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                            <div className="form-outline flex-fill mb-0">
+                            <input required placeholder="Car / Trunk / Bike" type="text" id="form3Example4c" className="form-control" ref={suitable}/>
+                            <label className="form-label" for="form3Example4c">suitable for?</label>
+                            </div>
+                        </div>
+
+                        <div className="d-flex flex-row align-items-center mb-4">
+                            <div className="form-outline flex-fill mb-0">
+                                <input required placeholder="Price For Hour " type="text" id="form3Example4c" className="form-control" ref={price}/>
+                                <label className="form-label" for="form3Example4c">Please Enter Price: </label>
+                            </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
@@ -119,33 +143,12 @@ export default function PostParking() {
                                 (<input required autoFocus placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
                             </div>
                         </div>
-                        
-                        <div className="d-flex flex-row align-items-center mb-4">
-                            <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={address}/>
-                                <label className="form-label" for="form3Example1c">Adress</label>
-                            </div>
-                        </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
-                            <div className="form-outline flex-fill mb-0">
-                            <input required placeholder="Car / Trunk / Bike" type="text" id="form3Example4c" className="form-control" ref={suitable}/>
-                            <label className="form-label" for="form3Example4c">suitable for?</label>
-                            </div>
-                        </div>
-
-                        <div className="d-flex flex-row align-items-center mb-4">
-                            <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="sun - thurs " type="text" id="form3Example4c" className="form-control" onChange={e => setActivityTime(e)}/>
-                                <label className="form-label" for="form3Example4c">Activity time?</label>
-                            </div>
-                        </div>
-
-                        <div className="d-flex flex-row align-items-center mb-4">
-                            <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Price For Hour " type="text" id="form3Example4c" className="form-control" ref={price}/>
-                                <label className="form-label" for="form3Example4c">Please Enter Price: </label>
-                            </div>
+                          <div className="form-outline flex-fill mb-0">
+                            <label className=" form-label" for="form3Example4c">accessibility?</label>
+                            <input type="checkbox" ref={accessibility} id="form3Example4c" className="mx-2"/>
+                          </div>
                         </div>
 
                         <div className="mb-1">
@@ -166,6 +169,7 @@ export default function PostParking() {
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                             <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
                         </div>
+
                       </form>
                     </div>
                   </div>
