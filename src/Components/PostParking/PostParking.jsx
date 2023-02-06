@@ -12,7 +12,7 @@ import { TextField } from "@mui/material";
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, input, setInput } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
   const navigate = useNavigate();
 
   const imageRef = useRef();
@@ -26,9 +26,14 @@ export default function PostParking() {
   const [code, setCode] = useState();
   const [keyCode, setKeyCode] = useState();
   const [activityTime, setActivityTime] = useState();
-  const [loc, setLoc] = useState([]);
-  const [inputCity, setInputCity] = useState("");
-   
+  const [cityInput, setCityInput] = useState([]);
+  const [addressInput, setAddressInput] = useState([]);
+
+  const [totalCity, setTotalCity] = useState([]);
+  const [totalStreet, setTotalStreet] = useState([]);
+  const [total, setTotal] = useState();
+   let flag2 = true;
+   let flag1 = true;
   const changeNavigate = () => {
     navigate("/LogIn");
   };
@@ -39,10 +44,21 @@ export default function PostParking() {
   }, []);
 
   useEffect(()=>{
-    location(input, setLoc);
-    console.log(loc);
-    console.log(city.current)
-  },[input])
+    if(flag1 == true){setTotalStreet([])}
+    else{
+      location(cityInput, setTotalCity);
+    }
+    flag1 = false;
+  },[cityInput])
+
+  useEffect(()=>{
+    console.log(totalStreet);
+    if(flag2 == true){setTotalStreet([])}
+    else{
+    location(total + " " + addressInput, setTotalStreet);
+    }
+    flag2 = false;
+  },[addressInput])
 
   let img = document.getElementById("myimg");
 
@@ -53,7 +69,7 @@ export default function PostParking() {
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code != undefined ? code.target.checked : "",
-      city: (input.charAt(0).toUpperCase() + input.slice(1)),
+      city: (cityInput.charAt(0).toUpperCase() + cityInput.slice(1)),
       street: (street.current.value.charAt(0).toUpperCase() + street.current.value.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
@@ -86,18 +102,27 @@ export default function PostParking() {
     imageRef.current.value = null;
   };
 
-  function setLocaleImage(e) {
+  function setCityInputaleImage(e) {
     setImage(imageRef.current.files[0]);
     let _url = URL.createObjectURL(imageRef.current.files[0]);
     setUrl(_url);
   }
-  
-  
-  function setAdress(e){
-    const t = document.getElementById('outlined-basic');
-    console.log(e);
-    t.value = e;
 
+  function setCity(e){
+    const t = document.getElementById('outlined-basic');
+    t.value = e;
+    setTotal(e);
+    setTotalCity([]);
+    // console.log(e);
+  }
+
+    function setTotalAddress(e){
+    setTotal(total + " " + addressInput);
+    const t = document.getElementById('outlined');
+    t.value = e;
+    //console.log(total + e);
+    setTotalStreet([]);
+    location(total, setTotal);
   }
 
   return (
@@ -119,17 +144,19 @@ export default function PostParking() {
 
                       <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">
-                                <TextField required color="warning" id="outlined-basic" label="City" variant="outlined" onChange={(e)=>setInput(e.target.value)} className="bg-light" />
-                                <div>{loc.map((e, i)=>(
-                                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setAdress(e.target.innerHTML)}>{e.properties.city}</button> : loc[i].properties.city == loc[i-1].properties.city ? "" : <button className="col-4 border" onClick={(e)=>setAdress(e.target.innerHTML)}>{loc[i].properties.city}</button>}</div>
+                                <TextField required color="warning" id="outlined-basic" label="City" variant="outlined" onChange={(e)=>setCityInput(e.target.value)} className="bg-light" />
+                                <div>{totalCity.map((e, i)=>(
+                                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> : totalCity[i].properties.city == totalCity[i-1].properties.city ? "" : <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>
                                 ))}</div>
                             </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">
-                                <input required placeholder="Street, Number, City" type="text" id="form3Example1c" className="form-control" ref={street}/>
-                                <label className="form-label" for="form3Example1c">Street</label>
+                            <TextField required color="warning" id="outlined" label="Street" variant="outlined" onChange={(e)=>setAddressInput( e.target.value)} className="bg-light" />
+                            <div>{totalStreet.map((e, i)=>(
+                                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> : totalStreet[i].properties.address_line1 == totalStreet[i-1].properties.address_line1 ? "" : <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>
+                                ))}</div>
                             </div>
                         </div>
 
@@ -176,7 +203,7 @@ export default function PostParking() {
 
                         <div className="mb-1">
                             <div className="">
-                                <input onChange={setLocaleImage} ref={imageRef} type="file" />
+                                <input onChange={setCityInputaleImage} ref={imageRef} type="file" />
                             </div>
                         </div>
                         <span className="">The selected image</span>

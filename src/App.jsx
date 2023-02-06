@@ -204,7 +204,7 @@ export default function App() {
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
-        {/* <Location/> */}
+        <Location/>
         <MyContext.Provider value={AllData}>
           <Header />
           <Routes>
