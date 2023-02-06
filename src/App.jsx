@@ -100,6 +100,10 @@ export default function App() {
             setCurrentUser(books[0]);
             localStorage.setItem("userId", `${books[0].userId}`);
             navigate('/');
+          } else if(!password && UserName){
+            setCurrentUser(books[0]);
+            localStorage.setItem("userId", `${books[0].userId}`);
+            navigate('/');
           } else {
             window.alert("Please Enter Password correct");
           }

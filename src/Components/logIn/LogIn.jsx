@@ -5,6 +5,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from '../../firebase/Firebase'
 import "./LogIn.css"
 import { firestore } from '../../firebase/Firebase';
+import { onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@firebase/firestore";
 
 
 export default function LogIn() {
@@ -23,39 +24,35 @@ export default function LogIn() {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // const handleSignWithGoogle = () =>{
-  //   const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  const handleSignWithGoogle = () =>{
+    const provider = new GoogleAuthProvider();provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-  //   const auth = getAuth(app); 
-  //     signInWithPopup(auth, provider)
-  //       .then((result) => {
-  //         // This gives you a Google Access Token. You can use it to access the Google API.
-  //         const credential = GoogleAuthProvider.credentialFromResult(result);
-  //         const token = credential.accessToken;
-  //         // The signed-in user info.
-  //         const userr = result.user;
-  //         //setCurrentUser(user);
-  //         // setUserID(user.id);
-  //         const found = users.find((user) => user.userName === userr.email);
-  //       //  console.log(found);
-  //         if(found != undefined) {
-  //           setCurrentUser(found);
-  //           navigate('/');
-  //           localStorage.setItem("userId", `${found.userId}`);
-  //         }
-  //         // ...
-  //       }).catch((error) => {
-  //         // Handle Errors here.
-  //         const errorCode = error.code;
-  //         const errorMessage = error.message;
-  //         // The email of the user's account used.
-  //         const email = error.customData.email;
-  //         // The AuthCredential type that was used.
-  //         const credential = GoogleAuthProvider.credentialFromError(error);
-  //         // ...
-  //       });
+    const auth = getAuth(app); 
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const userr = result.user;
+          //setCurrentUser(user);
+          // setUserID(user.id);
+          setUser(userr.email);
 
-  // }
+          
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          // ...
+        });
+
+  }
   
   //////////////////////////////////////////////////////////////////////////////
 
@@ -84,7 +81,7 @@ export default function LogIn() {
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>
-      <button class="btn btn-lg btn-primary btn-block mx-5" onClick >Login With Google</button>
+      <button class="btn btn-lg btn-primary btn-block mx-5" onClick={handleSignWithGoogle} >Login With Google</button>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2022-2023</p>
     </form>
     </div>
