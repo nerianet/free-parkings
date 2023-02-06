@@ -44,19 +44,12 @@ export default function PostParking() {
   }, []);
 
   useEffect(()=>{
-    if(flag1 == true){setTotalStreet([])}
-    else{
-      location(cityInput, setTotalCity);
-    }
+    location(cityInput, setTotalCity);
     flag1 = false;
   },[cityInput])
 
   useEffect(()=>{
-    console.log(totalStreet);
-    if(flag2 == true){setTotalStreet([])}
-    else{
     location(total + " " + addressInput, setTotalStreet);
-    }
     flag2 = false;
   },[addressInput])
 
@@ -70,7 +63,7 @@ export default function PostParking() {
       accessibility: accessibility.current.checked,
       code: code != undefined ? code.target.checked : "",
       city: (cityInput.charAt(0).toUpperCase() + cityInput.slice(1)),
-      street: (street.current.value.charAt(0).toUpperCase() + street.current.value.slice(1)),
+      street: (addressInput.charAt(0).toUpperCase() + addressInput.slice(1)),
       price: price.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode != undefined ? keyCode.target.value : "",
@@ -85,8 +78,8 @@ export default function PostParking() {
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
-    city.current.value = "";
-    street.current.value = "";
+    // city.current.value = "";
+    // street.current.value = "";
     activityTime.target.value = "";
     setImage(undefined);
     img = undefined;
