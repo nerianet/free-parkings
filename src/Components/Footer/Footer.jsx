@@ -6,12 +6,10 @@ import { location } from '../API/APIs';
 import './Footer.css';
 
 
-
-
-
 export default function Footer() {
   const [data, setData] = useState([]);
   const {input, setInput} = useContext(MyContext);
+
   useEffect(()=>{
     location(input, setData);
   },[input])

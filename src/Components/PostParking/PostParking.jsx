@@ -6,6 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import ModalC from '../modalComponnet/ModalC'
+import { location } from '../API/APIs';
 
 // import {BiAccessibility} from 'react-icons/bi'
 
