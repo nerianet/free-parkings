@@ -111,8 +111,8 @@ export default function PostParking() {
                             <div className="form-outline flex-fill mb-0">
                                 <input required placeholder="Street, Number, City" type="text" id="form3Example1c" onChange={(e)=>setInput(e.target.value)} className="form-control" ref={city}/>
                                 <label className="form-label" for="form3Example1c">City</label>
-                                <div>{loc.map((e)=>(
-                                  <div>{e.properties.city}</div>
+                                <div>{loc.map((e, i)=>(
+                                  <div>{i < 1 ? loc[i].properties.city : loc[i].properties.city == loc[i-1].properties.city ? "" : loc[i].properties.city }</div>
                                 ))}</div>
                             </div>
                         </div>
