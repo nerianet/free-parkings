@@ -32,8 +32,7 @@ export default function PostParking() {
   const [totalCity, setTotalCity] = useState([]);
   const [totalStreet, setTotalStreet] = useState([]);
   const [total, setTotal] = useState();
-   let flag2 = true;
-   let flag1 = true;
+
   const changeNavigate = () => {
     navigate("/LogIn");
   };
@@ -44,14 +43,18 @@ export default function PostParking() {
   }, []);
 
   useEffect(()=>{
+    if(cityInput){
     location(cityInput, setTotalCity);
-    flag1 = false;
+    }
   },[cityInput])
 
   useEffect(()=>{
-    location(total + " " + addressInput, setTotalStreet);
-    flag2 = false;
+    if(total){
+      location(total + " " + addressInput, setTotalStreet);
+    }
   },[addressInput])
+
+
 
   let img = document.getElementById("myimg");
 
@@ -62,8 +65,8 @@ export default function PostParking() {
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
       code: code != undefined ? code.target.checked : "",
-      city: (cityInput.charAt(0).toUpperCase() + cityInput.slice(1)),
-      street: (addressInput.charAt(0).toUpperCase() + addressInput.slice(1)),
+      city: cityInput,
+      street: addressInput,
       price: price.current.value,
       suitable: suitable.current.value,
       keyCode : keyCode != undefined ? keyCode.target.value : "",
@@ -108,14 +111,15 @@ export default function PostParking() {
     setTotalCity([]);
     // console.log(e);
   }
-
+  
     function setTotalAddress(e){
+    setAddressInput(e);
     setTotal(total + " " + addressInput);
     const t = document.getElementById('outlined');
     t.value = e;
-    //console.log(total + e);
+    // console.log(addressInput);
     setTotalStreet([]);
-    location(total, setTotal);
+    // location(total, setTotal);
   }
 
   return (
