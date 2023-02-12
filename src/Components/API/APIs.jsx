@@ -11,3 +11,11 @@ export function location(input, setData) {
    } )
     .catch((error) => console.log("error", error));
   }
+
+  export function showCurrentLoation(){
+// fetch("https://api.geoapify.com/v1/geocode/reverse?lat=31.9472616&lon=34.8809776&format=json&apiKey=YOUR_API_KEY")
+  // .then(response => response.json())
+  // .then(result => console.log(result))
+  // .catch(error => console.log('error', error));
+  }
+  

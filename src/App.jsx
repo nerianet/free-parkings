@@ -32,7 +32,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const [input, setInput] = useState("");
-
+  const [cordUser, setCordUser] = useState();
 //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -199,13 +199,15 @@ export default function App() {
     setIsShowModal,
     input, 
     setInput,
+    cordUser,
+    setCordUser,
   };
 
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
-        {/* <Location/> */}
         <MyContext.Provider value={AllData}>
+        <Location/>
           <Header />
           <Routes>
             <Route path="/" element={<Home />}></Route>

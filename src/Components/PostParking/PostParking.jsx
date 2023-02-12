@@ -8,13 +8,14 @@ import { MyContext } from "../../App";
 import ModalC from '../modalComponnet/ModalC'
 import { location } from '../API/APIs';
 import { TextField } from "@mui/material";
+// import Location from '../../location/Location'
 
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, cordUser } = useContext(MyContext);
   const navigate = useNavigate();
-
+  
   const imageRef = useRef();
   const accessibility = useRef();
   const city = useRef();
@@ -73,7 +74,7 @@ export default function PostParking() {
       activityTime: activityTime.target.value,
       contactName: currentUser.yourName,
       contactPhone: currentUser.phone,
-      cordLocation: "m",
+      cordLocation: cordUser,
     };
     setNewPost(post);
     
