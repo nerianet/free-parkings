@@ -7,19 +7,6 @@ export default function Location() {
   const {setCordUser, cordUser} = useContext(MyContext);
 
   const v = useGeolocated();
-  let L = "https://api.geoapify.com/v1/icon/?type=material&color=red&icon=cloud&iconType=awesome&apiKey=0d1d8fa39ae14774b80d34e9c2fe719e";
-  const m = document.getElementById('momo');
-  function KokaKola(){
-    const markerIcon = L.icon({
-    iconUrl: `https://api.geoapify.com/v1/icon?size=xx-large&type=awesome&color=%233e9cfe&icon=paw&apiKey=0d1d8fa39ae14774b80d34e9c2fe719e`,
-    iconSize: [31, 46], // size of the icon
-    iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
-    popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
-  });
-  const zooMarker = L.marker([cordUser.longitude, cordUser.latitude], {
-    icon: markerIcon
-  }).addTo(m);
-}
   
   useEffect(()=>{
     if(v.coords != undefined){
