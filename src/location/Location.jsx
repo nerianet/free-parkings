@@ -11,7 +11,6 @@ export default function Location() {
   useEffect(()=>{
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
-      KokaKola();
     }
   }, [v.coords])
 
