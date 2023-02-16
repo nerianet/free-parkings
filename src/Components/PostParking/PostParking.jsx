@@ -115,23 +115,20 @@ export default function PostParking() {
     setCityInput(e);
     setTotal(e);
     setTotalCity([]);
-    // console.log(e);
   }
   
     function setTotalAddress(e){
     setAddressInput(e);
-    console.log(totalStreet);
     setTotal(total + " " + addressInput);
     const t = document.getElementById('outlined');
     t.value = e;
-    console.log(totalStreet);
     setGeo({lat: totalStreet[0].properties.lat, lon: totalStreet[0].properties.lon});
     setTotalStreet([]);
     // location(total, setTotal);
   }
 
-  const v = useGeolocated();
 
+  const v = useGeolocated();
   function setAutoLocation(e){
     e.preventDefault();
     let ge = {
@@ -147,7 +144,6 @@ export default function PostParking() {
       const v = document.getElementById('outlined-basic');
       v.value = currLoc.city;
     }
-    console.log(currLoc);
   },[currLoc]);
 
   return (

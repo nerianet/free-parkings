@@ -7,28 +7,10 @@ import './Footer.css';
 
 
 export default function Footer() {
-  const [data, setData] = useState([]);
-  const {input, setInput} = useContext(MyContext);
 
-  useEffect(()=>{
-    location(input, setData);
-  },[input])
-  
-  
   return (
     <>
-    <div className='container align-text-bottom a w-50'>
-      <input onChange={e=>setInput(e.target.value)} />
-      <div className='container'>
-      {
-        data.map((e)=>(
-          <div className='rounded text-dark border'> {e.properties.city }</div>
-        ))
-      }
-      </div>
-    </div>
-
-    <div className="container-fluid text-center text-md-left pt-5 bg_header text-white ">
+    <div className="container-fluid text-center text-md-left  bg_header text-white ">
     <div className="row">
       <div className="col-md-6 mt-md-0 mt-3">
         <h5 className="text-uppercase">Free Parkings</h5>
