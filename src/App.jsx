@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
-import Data from "./Data.json";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
 import LogIn from "./Components/logIn/LogIn";
@@ -14,12 +13,12 @@ import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
 import Location from "./location/Location";
+import MyParking from "./Components/myParking/MyParking";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc, setDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
-import MyParking from "./Components/myParking/MyParking";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית

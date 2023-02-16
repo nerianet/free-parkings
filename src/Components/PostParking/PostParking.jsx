@@ -3,17 +3,19 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import {BiCurrentLocation} from 'react-icons/bi'
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import ModalC from '../modalComponnet/ModalC'
-import { location } from '../API/APIs';
+import { location, getCurrLoc } from '../API/APIs';
 import { TextField } from "@mui/material";
+import { useGeolocated } from "react-geolocated";
 // import Location from '../../location/Location'
 
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, cordUser } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, cordUser, setCordUser } = useContext(MyContext);
   const navigate = useNavigate();
   
   const imageRef = useRef();
@@ -33,6 +35,8 @@ export default function PostParking() {
   const [totalCity, setTotalCity] = useState([]);
   const [totalStreet, setTotalStreet] = useState([]);
   const [total, setTotal] = useState();
+  const [geo, setGeo] = useState();
+  const [currLoc, setCurrLoc] = useState();
 
   const changeNavigate = () => {
     navigate("/LogIn");
@@ -74,7 +78,7 @@ export default function PostParking() {
       activityTime: activityTime.target.value,
       contactName: currentUser.yourName,
       contactPhone: currentUser.phone,
-      cordLocation: cordUser,
+      cordLocation: geo,
     };
     setNewPost(post);
     
@@ -108,6 +112,7 @@ export default function PostParking() {
   function setCity(e){
     const t = document.getElementById('outlined-basic');
     t.value = e;
+    setCityInput(e);
     setTotal(e);
     setTotalCity([]);
     // console.log(e);
@@ -115,13 +120,35 @@ export default function PostParking() {
   
     function setTotalAddress(e){
     setAddressInput(e);
+    console.log(totalStreet);
     setTotal(total + " " + addressInput);
     const t = document.getElementById('outlined');
     t.value = e;
-    // console.log(addressInput);
+    console.log(totalStreet);
+    setGeo({lat: totalStreet[0].properties.lat, lon: totalStreet[0].properties.lon});
     setTotalStreet([]);
     // location(total, setTotal);
   }
+
+  const v = useGeolocated();
+
+  function setAutoLocation(e){
+    e.preventDefault();
+    let ge = {
+       lat: v.coords.latitude,
+       lon: v.coords.longitude
+      }
+    getCurrLoc(ge, setCurrLoc);
+  }
+  useEffect(()=>{
+    if(currLoc){
+      const t = document.getElementById('outlined');
+      t.value = currLoc.address_line1;
+      const v = document.getElementById('outlined-basic');
+      v.value = currLoc.city;
+    }
+    console.log(currLoc);
+  },[currLoc]);
 
   return (
     <>
@@ -157,6 +184,8 @@ export default function PostParking() {
                                 ))}</div>
                             </div>
                         </div>
+
+                        <button className="btn btn-dark text-primary mb-3" onClick={e=>setAutoLocation(e)}>Search By Current Location <BiCurrentLocation/></button>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                             <div className="form-outline flex-fill mb-0">

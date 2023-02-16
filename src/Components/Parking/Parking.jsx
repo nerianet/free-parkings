@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MyContext } from "../../App";
-import Data from "../../Data.json";
 
 export default function Parking() {
 
@@ -36,9 +35,8 @@ export default function Parking() {
         </div>
         <ul class="col-md-6 list-unstyled fs-5">
           <li class="text-primary"><h2>Parking Detail</h2></li>
-          <li class="text-primary"><b>city: </b>{current.address}</li>
-          <li class="text-primary"><b>street: </b>{}</li>
-          <li class="text-primary"><b>location: </b>{}</li>
+          <li class="text-primary"><b>city: </b>{current.city}</li>
+          <li class="text-primary"><b>street: </b>{current.street}</li>
           <li class="text-primary"><b>Activity time: </b>{current.activityTime}</li>
           <li class="text-primary"><b>price: ₪</b>{current.price}</li>
           <li class="text-primary"><b>accessibility: </b>{current.accessibility == true ? "yes" : "no"}</li>
