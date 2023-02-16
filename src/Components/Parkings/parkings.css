@@ -8,3 +8,14 @@
   background-color: rgba(31, 30, 29, 0.4);
   transform: scale(1.1, 1.1);
 }/*# sourceMappingURL=parkings.css.map */
+
+#my-map{
+  display: none;
+  height: 500px;
+  width :  700px;
+  position : relative;
+  margin-left : 30px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}

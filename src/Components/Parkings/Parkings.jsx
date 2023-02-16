@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import './parkings.css';
 
-
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 
@@ -17,10 +16,6 @@ export default function Parkings() {
 
   const [inputData, setInput] = useState("");
   const {setCordUser, cordUser, posts} = useContext(MyContext);
-  const [flag, setFlag] = useState(false);
-
- 
-
 
   const v = useGeolocated();
 
@@ -37,41 +32,42 @@ export default function Parkings() {
   
 
 
-  let arr = [];
-
-  function searcheByLoc(e){
-    e.preventDefault();
-  }
-
 
   let m = document.getElementById('my-map');
   function maps(e){
     e.preventDefault();
-      setFlag(true);
-      m.style.height =  '500px';
-      m.style.width =  '500px';
-      m.style.position = 'relative';
-      var map = L.map('my-map').setView([cordUser.latitude, cordUser.longitude], 15);
-  
-    const isRetina = L.Browser.retina;
-  const baseUrl = `https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=${myAPIKey}`;
-  const retinaUrl = `https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}@2x.png?apiKey=${myAPIKey}`;
-  L.tileLayer(isRetina ? retinaUrl : baseUrl, {
-      attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
-      apiKey: myAPIKey, 
-      maxZoom: 20, 
-      id: 'osm-bright'
-  }).addTo(map);
+    // console.log(m.style.display)
+    var map;
+    if(!m.style.display || m.style.display == 'none') {
 
-    posts.map((e)=>{
-      L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
-      .bindPopup(`${e.street + " " + e.city}`)
-      .openPopup();
-    })
+      m.style.display = 'block';
+     
+      map = L.map('my-map').setView([cordUser.latitude, cordUser.longitude], 17);
+      
 
-    L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
-        .bindPopup('You Find Here')
+      const isRetina = L.Browser.retina;
+      const baseUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`;
+      const retinaUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}@2x.png?apiKey=${myAPIKey}`;
+      L.tileLayer(isRetina ? retinaUrl : baseUrl, {
+        attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
+        apiKey: myAPIKey, 
+        maxZoom: 20, 
+        id: 'maptiler-3d',
+      }).addTo(map);
+
+      posts.map((e)=>{
+        L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
+        .bindPopup(`${e.street + " " + e.city}`)
         .openPopup();
+      })
+
+      L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
+          .bindPopup('You Find Here')
+          .openPopup();
+    } else {
+      m.style.display = 'none';
+      map = '';
+    }
   }
 
   return (
@@ -83,16 +79,8 @@ export default function Parkings() {
       <button className="btn btn-primary mx-4" onClick={e=>maps(e)} >Live</button>
     </form>
   </div>
-  <div className="" id="my-map"></div>
-        {!flag ? "" : <div> 
-        <button className="btn btn-primary" onClick={e=>searcheByLoc(e)}>Search</button>
-        </div>}
-        {/* <iframe src="https://www.openstreetmap.org/#map=13/32.8003/35.0150"
-        width="900px" style={{height:"500px", border:'0' }}
-        loading="lazy" >
-        </iframe> */}
 
-        
+  <div className="" id="my-map"></div> {/* container map*/}
 
   <div className="row justify-content-center ">
     <div className="row justify-content-around container rounded ">
