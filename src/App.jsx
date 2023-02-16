@@ -60,6 +60,7 @@ export default function App() {
       }
     })
   }
+  
   let postsRef = collection(firestore, "posts");
   let idPost;
   // Firebase creates this automaticall//

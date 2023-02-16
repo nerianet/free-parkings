@@ -5,7 +5,7 @@ import "./Home.css"
 export default function Home() {
   return (
   <>
-  <div id="GoToUp" className="">
+  <div id="GoToUp" className="pb-5">
     <div className="container h-100 text-primary" style={{height:'920px'}}>
       <h1 className="d-flex justify-content-center display-2">search parkings</h1>
       <p className="d-flex justify-content-center pb-5 display-5">Here you can easily find parking</p>
