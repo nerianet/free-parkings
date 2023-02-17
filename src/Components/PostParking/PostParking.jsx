@@ -111,10 +111,12 @@ export default function PostParking() {
 
   function setCity(e){
     const t = document.getElementById('outlined-basic');
-    t.value = e;
-    setCityInput(e);
+    t.value = totalCity[0].properties.city;
+    setCityInput(t.value);
     setTotal(e);
-    setTotalCity([]);
+    setTimeout(() => {
+      setTotalCity([]);
+    }, 1000);
   }
   
     function setTotalAddress(e){
@@ -123,8 +125,9 @@ export default function PostParking() {
     const t = document.getElementById('outlined');
     t.value = e;
     setGeo({lat: totalStreet[0].properties.lat, lon: totalStreet[0].properties.lon});
-    setTotalStreet([]);
-    // location(total, setTotal);
+    setTimeout(() => {
+      setTotalStreet([]);
+    }, 1000);
   }
 
 

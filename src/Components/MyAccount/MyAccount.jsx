@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 
 export default function MyAccount() {
@@ -164,7 +165,7 @@ export default function MyAccount() {
                 <div className="container h-100 ">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
-                            <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(245, 240, 249, 0.3)",}}>
+                            <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(100, 140, 149, .7)",}}>
                                 <div className="card-body p-md-5">
                                     <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 display-3">My Profile</p>
                                     <form className="mx-1 mx-md-4" onSubmit={submitChange} >
@@ -251,6 +252,42 @@ export default function MyAccount() {
                 </div>
             </div>}
         </div>}
+
+        {/* <Container className="mt-4 mb-5">
+      <Row>
+        <Col md={4}>
+          <Card className="shadow">
+            <Card.Header className="bg-primary text-light">Profile</Card.Header>
+            <Card.Body>
+              <div className="d-flex flex-column align-items-center">
+                <img src="https://via.placeholder.com/150" alt="Profile" className="rounded-circle mb-3" />
+                <h5 className="mb-0">{currentUser.yourName}</h5>
+                <small className="text-muted">{currentUser.userName}</small>
+              </div>
+              <hr />
+              <Button variant="primary" block>Edit Profile</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={8}>
+          <Card className="shadow">
+            <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
+            <Card.Body>
+              <div className="d-flex flex-column align-items-start">
+                {myPosts.map((post)=>(
+                <div>
+                    <Link className=" mb-0 text-decoration-none">{post.city} </Link>
+                    <Link className=" mt-2 mb-0 text-decoration-none">{post.street}</Link>
+                    <hr/>
+                </div>
+                ))}
+                
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container> */}
     </>
   )
 }
