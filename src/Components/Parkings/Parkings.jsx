@@ -62,7 +62,7 @@ export default function Parkings() {
         .openPopup();
         v = document.querySelectorAll('.leaflet-popup-content');
       })
-      
+
       for(let i=0; i<posts.length; i++){
         v[i].innerHTML += 'mo';
       }
@@ -92,7 +92,7 @@ export default function Parkings() {
   <div className="" id="my-map"></div> {/* container map*/}
 
   <div className="row justify-content-center ">
-    <div className="row justify-content-around container rounded ">
+    <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
         <div className="text-decoration-none border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>

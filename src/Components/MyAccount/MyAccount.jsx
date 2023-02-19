@@ -89,11 +89,7 @@ export default function MyAccount() {
         }
     }
 
-    function deletePost (id, nameFile){
-        postDelete(id, nameFile);
-        let arr = myPosts.filter((item)=> item.id != id);
-        setMyPosts(arr);
-    }
+    
 
     
 
@@ -158,7 +154,6 @@ export default function MyAccount() {
                                 </button>
                             </div>
                         </Link>
-                        <button onClick={()=>deletePost(item.id, item.nameFile)}>Delete</button>
                     </div>
                     ))}
                 </div>
@@ -182,7 +177,7 @@ export default function MyAccount() {
 
         <Container className="mt-4 mb-5">
       <Row>
-        <Col md={4} className='mb-sm-0 mb-3 col-sm-5 col-12 d-flex justify-content-sm-start justify-content-center'>
+        <Col md={5} className='mb-sm-0 mb-3 col-sm-8 col-12 d-flex justify-content-sm-start justify-content-center'>
           <Card className="shadow w-sm-100 w-75">
             <Card.Header className="bg-primary text-light">Profile</Card.Header>
             <Card.Body>
@@ -207,7 +202,7 @@ export default function MyAccount() {
         <input defaultValue={currentUser.yourName} id="mo" ref={changeName} placeholder="enter name to change" type="text" />}
     </div>
 </div>
-
+<hr/>
 <div className="d-flex flex-row align-items-center mb-4">
     <div className="form-outline flex-fill mb-0">
         <label className="form-label text-info" ><b>PHONE : </b>{currentUser.phone} </label>
@@ -218,7 +213,7 @@ export default function MyAccount() {
         <input defaultValue={currentUser.phone} ref={changePhone} placeholder="enter phone to change" type="text" />}
     </div>
 </div>
-
+<hr/>
 <div className="d-flex flex-row align-items-center mb-4">
     <div className="form-outline flex-fill mb-0">
         <label className="form-label text-info" ><b>ADDRESS : </b>{currentUser.address} </label>
@@ -229,7 +224,7 @@ export default function MyAccount() {
         <input defaultValue={currentUser.address} ref={changeAddress} placeholder="enter address to change" type="text" />}
     </div>
 </div>
-
+<hr/>
 <div className="d-flex flex-row align-items-center mb-4">
     <div className="form-outline flex-fill mb-0">
         <label className="form-label text-info" ><b>MAIL : </b>{currentUser.userName} </label>
@@ -240,7 +235,7 @@ export default function MyAccount() {
         <input defaultValue={currentUser.userName} ref={changeEmail} placeholder="enter mail to change" type="text" />}
     </div>
 </div>
-
+<hr/>
 <div className=" flex-row align-items-center mb-4"> 
     <div className=" form-outline flex-fill mb-0 ">
         <label className="form-label text-info" ><b>PASSWORD : </b>*****</label>
@@ -267,7 +262,7 @@ export default function MyAccount() {
         
     </div>
 </div>
-
+<hr/>
 <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
     <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
 </div>
@@ -276,20 +271,21 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8} className='col-sm-7 col-12 '>
+        <Col md={7} className='col-sm-7 col-12 '>
           <Card className="shadow" style={{height:'354px'}}>
-            <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
+            <Card.Header className="bg-secondary shadow text-light">Last Posts</Card.Header>
             <Card.Body>
-
+            {!myPosts[0] ? <div>not yet</div> :
             <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
                     {myPosts.map((item, i) => (
                     <div className='bg-dark'>
-                        <Link to={item.id} className='text-primary' key={i} >
                         <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
+                        <Link to={item.id} className='text-primary' key={i} >
+                        {/* <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/> */}
                         <div className=''>
-                            <div className=''>{}</div>
+                            <div className='mt-sm-2'></div>
                             <div>
-                            <span className=''>{}</span>
+                            <span className='mt-sm-2 mt-4'>{item.city + ", " + item.street}</span>
                             <span className=''>{} </span>
                             </div>
                             <div className=''>{}</div>
@@ -298,6 +294,7 @@ export default function MyAccount() {
                     </div> 
                     ))}
                 </Carousel>
+            }
             </Card.Body>
           </Card>
         </Col>

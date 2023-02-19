@@ -1,12 +1,21 @@
 import React, { useContext } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../App';
 
 export default function MyParking() {
     const { id } = useParams();
-    const {posts, currentUser} = useContext(MyContext);
+    const {posts, currentUser, postDelete} = useContext(MyContext);
     const current = posts.find((post) => post.id == id);
-  
+    const navigate = useNavigate();
+
+
+    function deletePost (id, nameFile){
+      postDelete(id, nameFile);
+      navigate('/MyAccount')
+      // let arr = posts.filter((item)=> item.id != id);
+      // setMyPosts(arr);
+    }
+
     return (
       <> 
       <div class="container mt-5">
@@ -17,12 +26,12 @@ export default function MyParking() {
           </div>
           <div class="col-md-6">
             <h3 class="text-primary">{current.price}₪</h3>
-            <Link><button class="btn btn-primary btn-lg">לסל</button></Link>
+            
           </div>
         </div> 
         <div class="row mt-5">
           <div class="col-md-12">
-            <h3>{current.category}</h3>
+          <button onClick={()=>deletePost(id, current.nameFile)}>Delete</button>
           </div>
         </div>
       </div>
