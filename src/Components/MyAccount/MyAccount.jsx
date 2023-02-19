@@ -128,7 +128,7 @@ export default function MyAccount() {
 
   return (
     <>
-      {currentUser.yourName == undefined ? navigate('/LogIn') :
+      {/* {currentUser.yourName == undefined ? navigate('/LogIn') :
         <div className='container'>
             <div className='row'>
                 <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
@@ -251,9 +251,9 @@ export default function MyAccount() {
                     </div>
                 </div>
             </div>}
-        </div>}
+        </div>} */}
 
-        {/* <Container className="mt-4 mb-5">
+        <Container className="mt-4 mb-5">
       <Row>
         <Col md={4}>
           <Card className="shadow">
@@ -270,7 +270,7 @@ export default function MyAccount() {
           </Card>
         </Col>
         <Col md={8}>
-          <Card className="shadow">
+          <Card className="shadow" style={{height:'354px'}}>
             <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
             <Card.Body>
               <div className="d-flex flex-column align-items-start">
@@ -287,7 +287,7 @@ export default function MyAccount() {
           </Card>
         </Col>
       </Row>
-    </Container> */}
+    </Container>
     </>
   )
 }

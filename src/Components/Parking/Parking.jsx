@@ -8,6 +8,35 @@ export default function Parking() {
   const {posts, currentUser} = useContext(MyContext);
   const current = posts.find((post) => post.id == id);
 
+  // async function mapRouting(fromWaypoint, toWaypoint){
+  //   // const fromWaypoint = [38.937165,-77.045590]; // latutude, longitude
+  //   // const toWaypoint = [38.881152,-76.990693]; // latitude, longitude
+  //   const url = `https://api.geoapify.com/v1/routing?waypoints=${fromWaypoint.join(',')}|${toWaypoint.join(',')}&mode=drive&details=instruction_details&apiKey=${myAPIKey}`;
+
+  //   await fetch(url).then(res => res.json()).then(result => { 
+  //     ro = result;
+  //   }, error => console.log(error));
+  // }
+
+  // async function setRout(geo){
+  //   await mapRouting([cordUser.latitude , cordUser.longitude], [geo.lat , geo.lon]);    
+  //   if(ro){
+  //     console.log(geo)
+  //     setTimeout(() => {
+  //       L.geoJSON(ro, {
+  //         style: (feature) => {
+  //           return {
+  //             color: "rgba(20, 137, 255, 0.7)",
+  //             weight: 5
+  //           };
+  //         }
+  //       }).bindPopup((layer) => {
+  //         return `${layer.features.properties.distance} ${layer.features.properties.distance_units}, ${layer.features.properties.time}`
+  //       }).addTo(map); 
+  //     }, 5000);
+  //   }
+  // }
+
   useEffect(() => {
 
   },[]);
@@ -56,6 +85,7 @@ export default function Parking() {
         : ''}
         </div>
       </div>
+      <div className="" id="my-map"></div> {/* container map*/}
     </div>
     : 
     ''}

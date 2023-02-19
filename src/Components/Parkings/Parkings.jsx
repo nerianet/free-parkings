@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import './parkings.css';
 
@@ -16,8 +16,9 @@ export default function Parkings() {
 
   const [inputData, setInput] = useState("");
   const {setCordUser, cordUser, posts} = useContext(MyContext);
-
+  const [routing, setRouting] = useState(false);
   const v = useGeolocated();
+  const n = useNavigate();
 
   useEffect(()=>{
     if(v.coords != undefined){
@@ -32,12 +33,12 @@ export default function Parkings() {
   
 
 
-
+  var map;
+  var ro;
   let m = document.getElementById('my-map');
-  function maps(e){
+  async function maps(e){
     e.preventDefault();
     // console.log(m.style.display)
-    var map;
     if(!m.style.display || m.style.display == 'none') {
 
       m.style.display = 'block';
@@ -54,21 +55,30 @@ export default function Parkings() {
         maxZoom: 20, 
         id: 'maptiler-3d',
       }).addTo(map);
-
+      let v;
       posts.map((e)=>{
         L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
-        .bindPopup(`${e.street + " " + e.city}`)
+        .bindPopup(`${e.street + " " + e.city}` + "<a href=/MapRouting>Go To</a>")
         .openPopup();
+        v = document.querySelectorAll('.leaflet-popup-content');
       })
+      console.log(v)
+
+      for(let i=0; i<posts.length; i++){
+        v[i].innerHTML += 'mo';
+      }
 
       L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
           .bindPopup('You Find Here')
           .openPopup();
+          setRouting(true);
     } else {
       m.style.display = 'none';
       map = '';
-    }
+      }
   }
+  
+  
 
   return (
   <>
@@ -86,7 +96,8 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded ">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <Link to={item.id} key={i} className="text-decoration-none border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
+        <div className="text-decoration-none border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
+        <Link to={item.id} key={i} >
           <h4 className="d-flex justify-content-center">{item.city}</h4>
           <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
@@ -94,11 +105,10 @@ export default function Parkings() {
           </div>
           <h2 className="d-flex justify-content-center">{item.price}₪</h2>
           <div className=" d-flex justify-content-center">
-            <button type="button" className="btn btn-success">
-              Detail Parking
-            </button>
           </div>
         </Link>
+        {/* <div className="btn btn-primary" onClick={()=>setRout(item.cordLocation)}>Go To</div> */}
+        </div>
       ))}
     </div>
   </div>
