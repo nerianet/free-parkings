@@ -24,6 +24,7 @@ export default function PostParking() {
   const street = useRef();
   const suitable = useRef();
   const price = useRef();
+  const detail = useRef();
 
   const [url, setUrl] = useState([]);
   const [code, setCode] = useState();
@@ -69,12 +70,13 @@ export default function PostParking() {
       userId: currentUser.userId,
       nameFile: imageRef.current.files[0].name,
       accessibility: accessibility.current.checked,
+      detail: detail != undefined ? detail.current.value : "",
       code: code != undefined ? code.target.checked : "",
+      keyCode : keyCode != undefined ? keyCode.target.value : "",
       city: cityInput,
       street: addressInput,
       price: price.current.value,
       suitable: suitable.current.value,
-      keyCode : keyCode != undefined ? keyCode.target.value : "",
       activityTime: activityTime.target.value,
       contactName: currentUser.yourName,
       contactPhone: currentUser.phone,
@@ -110,24 +112,24 @@ export default function PostParking() {
   }
 
   function setCity(e){
-    const t = document.getElementById('outlined-basic');
+    const t = document.getElementById('city');
     t.value = totalCity[0].properties.city;
     setCityInput(t.value);
     setTotal(e);
     setTimeout(() => {
       setTotalCity([]);
-    }, 1000);
+    }, 2000);
   }
   
     function setTotalAddress(e){
     setAddressInput(e);
     setTotal(total + " " + addressInput);
-    const t = document.getElementById('outlined');
+    const t = document.getElementById('street');
     t.value = e;
     setGeo({lat: totalStreet[0].properties.lat, lon: totalStreet[0].properties.lon});
     setTimeout(() => {
       setTotalStreet([]);
-    }, 1000);
+    }, 2000);
   }
 
 
@@ -142,9 +144,9 @@ export default function PostParking() {
   }
   useEffect(()=>{
     if(currLoc){
-      const t = document.getElementById('outlined');
+      const t = document.getElementById('street');
       t.value = currLoc.address_line1;
-      const v = document.getElementById('outlined-basic');
+      const v = document.getElementById('city');
       v.value = currLoc.city;
     }
   },[currLoc]);
@@ -155,7 +157,7 @@ export default function PostParking() {
       {currentUser.yourName == undefined ? (
         changeNavigate()
       ) : ( 
-      <div className="vh-100 ">
+      <div className="h-auto mb-5" >
         <div className="container border rounded bg-light">
 
           <div className="row">
@@ -163,7 +165,7 @@ export default function PostParking() {
           </div>
 
           <form className="row justify-content-around " onSubmit={submitPost}>
-            <div className="col-5 d-flex flex-sm-wrap">
+            <div className="col-sm-6 col-10 d-flex flex-wrap">
 
               <div className="m-3">
                 <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light col-12" onChange={(e)=>setCityInput(e.target.value)} />
@@ -192,11 +194,11 @@ export default function PostParking() {
               </div>
 
               <div className="m-3">
-                <TextField required color="warning" label="suitable for?" placeholder="Car / Trunk / Bike" variant="outlined" className="bg-light col-12" ref={suitable}/>
+                <TextField required color="warning" label="suitable for?" placeholder="Car / Trunk / Bike" variant="outlined" className="bg-light col-12" inputRef={suitable}/>
               </div>
 
               <div className="m-3">
-                <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light col-12" ref={price}/>
+                <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light col-12" inputRef={price}/>
               </div>
 
               <div className="m-3">
@@ -218,13 +220,13 @@ export default function PostParking() {
                 <label className=" form-label" for="form3Example4c">accessibility ?</label>
                 <input type="checkbox" ref={accessibility} className="m-2"/>
               </div>
-            </div>
+            
 
 
-            <div className="col-5">
+            <div className="col-10">
               
-              <div className="m-3">
-                  <TextField required color="warning" label="Parking details" placeholder="Give details about the parking" variant="outlined" multiline rows={7} className="bg-light col-12" ref={price}/>
+              <div className="m-3 ">
+                  <TextField required color="warning" label="Parking details" placeholder="Give details about the parking" variant="outlined" multiline rows={7} className="bg-light" inputRef={detail} />
               </div>
 
 
@@ -240,12 +242,13 @@ export default function PostParking() {
                 </div>)}
               </div>
             </div>
-          </form>
+            </div>
+          
 
           <div className="d-flex justify-content-center mb-3">
             <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
           </div>
-
+          </form>
         </div>
 
 

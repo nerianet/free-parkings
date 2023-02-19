@@ -62,8 +62,7 @@ export default function Parkings() {
         .openPopup();
         v = document.querySelectorAll('.leaflet-popup-content');
       })
-      console.log(v)
-
+      
       for(let i=0; i<posts.length; i++){
         v[i].innerHTML += 'mo';
       }

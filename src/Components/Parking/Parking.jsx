@@ -63,7 +63,7 @@ export default function Parking() {
           <img src={current.imgUrl} alt="picture parking" class="img-fluid rounded-3 border" style={{ width: "500px", height: "350px" }} />
         </div>
         <ul class="col-md-6 list-unstyled fs-5">
-          <li class="text-primary"><h2>Parking Detail</h2></li>
+          <li class="text-primary"><h2>Parking Detail</h2>{current.detail ? current.detail : ""}</li>
           <li class="text-primary"><b>city: </b>{current.city}</li>
           <li class="text-primary"><b>street: </b>{current.street}</li>
           <li class="text-primary"><b>Activity time: </b>{current.activityTime}</li>

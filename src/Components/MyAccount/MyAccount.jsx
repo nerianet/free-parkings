@@ -255,8 +255,8 @@ export default function MyAccount() {
 
         <Container className="mt-4 mb-5">
       <Row>
-        <Col md={4}>
-          <Card className="shadow">
+        <Col md={4} className='mb-sm-0 mb-3 col-sm-5 col-12 d-flex justify-content-sm-start justify-content-center'>
+          <Card className="shadow w-sm-100 w-75">
             <Card.Header className="bg-primary text-light">Profile</Card.Header>
             <Card.Body>
               <div className="d-flex flex-column align-items-center">
@@ -269,7 +269,7 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8}>
+        <Col md={8} className='col-sm-7 col-12 '>
           <Card className="shadow" style={{height:'354px'}}>
             <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
             <Card.Body>
