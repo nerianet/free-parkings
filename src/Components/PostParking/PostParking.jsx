@@ -156,7 +156,105 @@ export default function PostParking() {
         changeNavigate()
       ) : ( 
       <div className="vh-100 ">
-        <div className="container h-100 ">
+        <div className="container border rounded bg-light">
+
+          <div className="row">
+            <div className="col-12 h1 text-center">Post A Park</div>
+          </div>
+
+          <form className="row justify-content-around " onSubmit={submitPost}>
+            <div className="col-5 d-flex flex-sm-wrap">
+
+              <div className="m-3">
+                <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light col-12" onChange={(e)=>setCityInput(e.target.value)} />
+                <div>{totalCity.map((e, i)=>(
+                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
+                  : 
+                  totalCity[i].properties.city == totalCity[i-1].properties.city ? "" 
+                  : 
+                  <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
+                </div>
+              </div>
+            
+              <div className="m-3">
+                <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light col-12" onChange={(e)=>setAddressInput(e.target.value)} />
+                <div>{totalStreet.map((e, i)=>(
+                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
+                  : 
+                  totalStreet[i].properties.address_line1 == totalStreet[i-1].properties.address_line1 ? "" 
+                  : 
+                  <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
+                </div>
+              </div>
+
+              <div className="m-3">
+                <TextField required color="warning" label="Activity time?" placeholder="sun - thurs" variant="outlined" className="bg-light col-12" onChange={e => setActivityTime(e)}/>
+              </div>
+
+              <div className="m-3">
+                <TextField required color="warning" label="suitable for?" placeholder="Car / Trunk / Bike" variant="outlined" className="bg-light col-12" ref={suitable}/>
+              </div>
+
+              <div className="m-3">
+                <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light col-12" ref={price}/>
+              </div>
+
+              <div className="m-3">
+                <TextField required color="warning" label="Activity time?" variant="outlined" className="bg-light col-12" onChange={e => setActivityTime(e)}/>
+              </div>
+
+              <div className="m-3">
+                <label>Have a Code ?</label>
+                <input type="checkbox" className="m-2" onChange={(e) => setCode(e)}/>
+                {code == undefined ? "" :
+                code.target.checked == false 
+                ?
+                ("") 
+                : 
+                (<input required  placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
+              </div>
+
+              <div className="m-3">
+                <label className=" form-label" for="form3Example4c">accessibility ?</label>
+                <input type="checkbox" ref={accessibility} className="m-2"/>
+              </div>
+            </div>
+
+
+            <div className="col-5">
+              
+              <div className="m-3">
+                  <TextField required color="warning" label="Parking details" placeholder="Give details about the parking" variant="outlined" multiline rows={7} className="bg-light col-12" ref={price}/>
+              </div>
+
+
+              <div className="m-3">
+                <input type="file" onChange={setCityInputaleImage} ref={imageRef} />
+                {image == undefined 
+                ?
+                ("") 
+                : 
+                (<div style={{ marginTop: "9px" }}>
+                    <img className="rounded" src={url} style={{ width: "250px", height: "150px" }} id="myimg"/>
+                    <button onClick={unsetImage}><FaTrashAlt/></button>
+                </div>)}
+              </div>
+            </div>
+          </form>
+
+          <div className="d-flex justify-content-center mb-3">
+            <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
+          </div>
+
+        </div>
+
+
+
+
+
+
+
+        {/* <div className="container h-100 ">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
               <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(31, 30, 29, 0.6)",}}>
@@ -253,7 +351,7 @@ export default function PostParking() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>)}
     </>
   );
