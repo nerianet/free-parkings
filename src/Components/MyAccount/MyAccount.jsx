@@ -281,7 +281,7 @@ export default function MyAccount() {
             <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
             <Card.Body>
             <Carousel autoPlay showIndicators={true} showThumbs transitionTime={3} infiniteLoop={true} showStatus={true}>
-                    {posts.map((item, i) => (
+                    {myPosts.map((item, i) => (
                     <div className='bg-dark'>
                         <Link to={item.id} className='text-primary' key={i} >
                         <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
