@@ -56,10 +56,13 @@ export default function Parkings() {
         id: 'maptiler-3d',
       }).addTo(map);
       let v;
+      
       posts.map((e)=>{
-        L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
+        let l = L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
         .bindPopup(`${e.street + " " + e.city}` + "<a href=/MapRouting>Go To</a>")
         .openPopup();
+        console.log(l)
+        l._icon.classList.add("icon");
         v = document.querySelectorAll('.leaflet-popup-content');
       })
 

@@ -19,3 +19,10 @@
   border: 1px solid black;
   border-radius: 10px;
 }
+.icon{
+  background-image: url('https://previews.123rf.com/images/illizium/illizium1904/illizium190400147/128983576-pin-icon-red-with-shadow-location-icon-vector-illustration.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-style:italic;
+  overflow-x:auto;
+}
