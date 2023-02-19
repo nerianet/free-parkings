@@ -287,7 +287,7 @@ export default function MyAccount() {
                         <Link to={item.id} className='text-primary' key={i} >
                         <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
                         <div className=''>
-                            <div className=''>{}Momo</div>
+                            <div className=''>{}</div>
                             <div>
                             <span className=''>{}</span>
                             <span className=''>{} </span>
