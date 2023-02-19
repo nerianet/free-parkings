@@ -9,7 +9,7 @@ import { onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@fi
 
 
 export default function LogIn() {
-  const { setUser } = useContext(MyContext);
+  const { setUser, setProfileUrl } = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
 // get users data
@@ -33,6 +33,7 @@ export default function LogIn() {
         .then((result) => {
           // The signed-in user info.
           const userr = result.user;
+          setProfileUrl(userr.photoURL);
           setUser(userr.email);
         })
         .catch((error) => {

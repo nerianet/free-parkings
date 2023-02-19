@@ -33,7 +33,8 @@ export default function App() {
   const [isShowModal, setIsShowModal] = useState(false);
   const [input, setInput] = useState("");
   const [cordUser, setCordUser] = useState();
-//////////////////////////////////////////////////////////////////////////////////////////////
+  const [profileUrl, setProfileUrl] = useState();
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
   const navigate = useNavigate();
@@ -115,6 +116,11 @@ export default function App() {
     }
     });
   }
+  useEffect(()=>{
+    if(profileUrl){
+      updateUser({...currentUser, profileUrl: profileUrl});
+    }
+  }, [currentUser])
 
   useEffect(() => {
     setUser();
@@ -161,7 +167,7 @@ export default function App() {
   }
 
   function updateUser(user){
-   // console.log(currentUser.id)
+    console.log(user)
     let a = doc(firestore, 'users', `${currentUser.id}`);
     const loc = updateDoc(a,user);
   }
@@ -202,6 +208,7 @@ export default function App() {
     setInput,
     cordUser,
     setCordUser,
+    setProfileUrl,
   };
 
   return (

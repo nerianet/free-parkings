@@ -6,7 +6,9 @@ import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {Carousel} from 'react-responsive-carousel';
+import './myAccount.css'
 
 export default function MyAccount() {
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ export default function MyAccount() {
   const [eye1, setEye1] = useState(false);
   const [eye2, setEye2] = useState(false);
   const [eye3, setEye3] = useState(false);
+  const [change, setChange] = useState(false);
 
   const changeName = useRef();
   const changePhone = useRef();
@@ -167,84 +170,8 @@ export default function MyAccount() {
                         <div className="col-lg-12 col-xl-11">
                             <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(100, 140, 149, .7)",}}>
                                 <div className="card-body p-md-5">
-                                    <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 display-3">My Profile</p>
-                                    <form className="mx-1 mx-md-4" onSubmit={submitChange} >
-
-                                        <div className="d-flex flex-row align-items-center mb-4">
-                                            <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" ><b>NAME : </b>{currentUser.yourName} </label>
-                                                <br/>
-                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
-                                                { chageName == false ? "" 
-                                                :
-                                                <input defaultValue={currentUser.yourName} id="mo" ref={changeName} placeholder="enter name to change" type="text" />}
-                                            </div>
-                                        </div>
-
-                                        <div className="d-flex flex-row align-items-center mb-4">
-                                            <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" ><b>PHONE : </b>{currentUser.phone} </label>
-                                                <br/>
-                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
-                                                { chagePhone == false ? "" 
-                                                :
-                                                <input defaultValue={currentUser.phone} ref={changePhone} placeholder="enter phone to change" type="text" />}
-                                            </div>
-                                        </div>
-
-                                        <div className="d-flex flex-row align-items-center mb-4">
-                                            <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" ><b>ADDRESS : </b>{currentUser.address} </label>
-                                                <br/>
-                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
-                                                { chageAddress == false ? "" 
-                                                :
-                                                <input defaultValue={currentUser.address} ref={changeAddress} placeholder="enter address to change" type="text" />}
-                                            </div>
-                                        </div>
-
-                                        <div className="d-flex flex-row align-items-center mb-4">
-                                            <div className="form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" ><b>MAIL : </b>{currentUser.userName} </label>
-                                                <br/>
-                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
-                                                { chageMail == false ? "" 
-                                                :
-                                                <input defaultValue={currentUser.userName} ref={changeEmail} placeholder="enter mail to change" type="text" />}
-                                            </div>
-                                        </div>
- 
-                                        <div className=" flex-row align-items-center mb-4"> 
-                                            <div className=" form-outline flex-fill mb-0">
-                                                <label className="form-label display-6 text-info" ><b>PASSWORD : </b>*****</label>
-                                                <br/>
-                                                <div className='d-flex'>
-                                                <button className="btn btn-warning mx-2" type="button" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
-                                                { chagePassword == false ? "" 
-                                                :
-                                                <div className=''>
-                                                    <div className='d-flex '>
-                                                        <input ref={changePassword1} placeholder="Enter old password" type="password" />
-                                                        <div className='mx-2'  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
-                                                    </div>
-                                                    <div className='d-flex pt-1'>
-                                                        <input ref={changePassword2} placeholder="Enter a new password" type="password" />
-                                                        <div className='mx-2'  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
-                                                    </div>
-                                                    <div className='d-flex pt-1'>
-                                                        <input ref={changePassword3} placeholder="Verify new password" type="password" />
-                                                        <div className='mx-2'  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
-                                                    </div>
-                                                    </div>}
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
- 
-                                        <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
-                                        </div>
-                                    </form>
+                                    <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">My Profile</p>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -260,12 +187,92 @@ export default function MyAccount() {
             <Card.Header className="bg-primary text-light">Profile</Card.Header>
             <Card.Body>
               <div className="d-flex flex-column align-items-center">
-                <img src="https://via.placeholder.com/150" alt="Profile" className="rounded-circle mb-3" />
+                <img src={currentUser.profileUrl ? currentUser.profileUrl : "https://via.placeholder.com/150"} alt="Profile" className="rounded-circle mb-3" />
                 <h5 className="mb-0">{currentUser.yourName}</h5>
                 <small className="text-muted">{currentUser.userName}</small>
               </div>
               <hr />
-              <Button variant="primary" block>Edit Profile</Button>
+              <Button variant="primary" block onClick={()=>setChange(!change)}>Edit Profile</Button>
+              {!change ? "" : 
+              <div>
+                <form className="mx-1 mx-md-4" onSubmit={submitChange} >
+
+<div className="d-flex flex-row align-items-center mb-4">
+    <div className="form-outline flex-fill mb-0">
+        <label className="form-label text-info" ><b>NAME : </b>{currentUser.yourName} </label>
+        <br/>
+        <button className="btn btn-warning mx-2" type="button" onClick={() => chageName == false ? setChageName(true) : setChageName(false)}>change</button>
+        { chageName == false ? "" 
+        :
+        <input defaultValue={currentUser.yourName} id="mo" ref={changeName} placeholder="enter name to change" type="text" />}
+    </div>
+</div>
+
+<div className="d-flex flex-row align-items-center mb-4">
+    <div className="form-outline flex-fill mb-0">
+        <label className="form-label text-info" ><b>PHONE : </b>{currentUser.phone} </label>
+        <br/>
+        <button className="btn btn-warning mx-2" type="button" onClick={() => chagePhone == false ? setChagePhone(true) : setChagePhone(false)}>change</button>
+        { chagePhone == false ? "" 
+        :
+        <input defaultValue={currentUser.phone} ref={changePhone} placeholder="enter phone to change" type="text" />}
+    </div>
+</div>
+
+<div className="d-flex flex-row align-items-center mb-4">
+    <div className="form-outline flex-fill mb-0">
+        <label className="form-label text-info" ><b>ADDRESS : </b>{currentUser.address} </label>
+        <br/>
+        <button className="btn btn-warning mx-2" type="button" onClick={() => chageAddress == false ? setChageAddress(true) : setChageAddress(false)} >change</button>
+        { chageAddress == false ? "" 
+        :
+        <input defaultValue={currentUser.address} ref={changeAddress} placeholder="enter address to change" type="text" />}
+    </div>
+</div>
+
+<div className="d-flex flex-row align-items-center mb-4">
+    <div className="form-outline flex-fill mb-0">
+        <label className="form-label text-info" ><b>MAIL : </b>{currentUser.userName} </label>
+        <br/>
+        <button className="btn btn-warning mx-2" type="button" onClick={() => chageMail == false ? setChageMail(true) : setChageMail(false)} >change</button>
+        { chageMail == false ? "" 
+        :
+        <input defaultValue={currentUser.userName} ref={changeEmail} placeholder="enter mail to change" type="text" />}
+    </div>
+</div>
+
+<div className=" flex-row align-items-center mb-4"> 
+    <div className=" form-outline flex-fill mb-0 ">
+        <label className="form-label text-info" ><b>PASSWORD : </b>*****</label>
+        <br/>
+        <div className='d-flex'>
+        <button className="btn btn-warning mx-2" type="button" onClick={() => chagePassword == false ? setChagePassword(true) : setChagePassword(false)} >change</button>
+        { chagePassword == false ? "" 
+        :
+        <div className=''>
+            <div className='d-flex '>
+                <input className='in' ref={changePassword1} placeholder="Old password" type="password" />
+                <div className='mx-2'  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+            </div>
+            <div className='d-flex pt-1'>
+                <input className='in' ref={changePassword2} placeholder="New password" type="password" />
+                <div className='mx-2'  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+            </div>
+            <div className='d-flex pt-1'>
+                <input className='in' ref={changePassword3} placeholder="Verify new password" type="password" />
+                <div className='mx-2'  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
+            </div>
+            </div>}
+        </div>
+        
+    </div>
+</div>
+
+<div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+    <button type="submit" className="btn btn-primary btn-lg mt-4">submit</button>
+</div>
+</form>
+              </div>}
             </Card.Body>
           </Card>
         </Col>
@@ -273,21 +280,30 @@ export default function MyAccount() {
           <Card className="shadow" style={{height:'354px'}}>
             <Card.Header className="bg-secondary text-light">Last Activity</Card.Header>
             <Card.Body>
-              <div className="d-flex flex-column align-items-start">
-                {myPosts.map((post)=>(
-                <Link to={post.id}>
-                    <div className=" mb-0 text-decoration-none">{post.city} </div>
-                    <div className=" mt-2 mb-0 text-decoration-none">{post.street}</div>
-                    <hr/>
-                </Link>
-                ))}
-                
-              </div>
+            <Carousel autoPlay showIndicators={true} showThumbs transitionTime={3} infiniteLoop={true} showStatus={true}>
+                    {posts.map((item, i) => (
+                    <div className='bg-dark'>
+                        <Link to={item.id} className='text-primary' key={i} >
+                        <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
+                        <div className=''>
+                            <div className=''>{}Momo</div>
+                            <div>
+                            <span className=''>{}</span>
+                            <span className=''>{} </span>
+                            </div>
+                            <div className=''>{}</div>
+                        </div>
+                        </Link>
+                    </div> 
+                    ))}
+                </Carousel>
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
+
+    
     </>
   )
 }
