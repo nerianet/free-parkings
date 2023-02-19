@@ -275,11 +275,11 @@ export default function MyAccount() {
             <Card.Body>
               <div className="d-flex flex-column align-items-start">
                 {myPosts.map((post)=>(
-                <div>
-                    <Link className=" mb-0 text-decoration-none">{post.city} </Link>
-                    <Link className=" mt-2 mb-0 text-decoration-none">{post.street}</Link>
+                <Link to={post.id}>
+                    <div className=" mb-0 text-decoration-none">{post.city} </div>
+                    <div className=" mt-2 mb-0 text-decoration-none">{post.street}</div>
                     <hr/>
-                </div>
+                </Link>
                 ))}
                 
               </div>
