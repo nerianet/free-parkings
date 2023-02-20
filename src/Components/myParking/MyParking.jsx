@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../App';
 
-import L from 'leaflet';
-import {} from 'mapbox-gl-leaflet';
+
 
 export default function MyParking() {
     const { id } = useParams();
     const {posts, currentUser, postDelete} = useContext(MyContext);
     const current = posts.find((post) => post.id == id);
     const navigate = useNavigate();
+  
 
 
     function deletePost (id, nameFile){
@@ -27,7 +27,7 @@ export default function MyParking() {
           </div>
           <div class="col-md-6">
             <h3 class="text-primary">{current.price}₪</h3>
-            
+             
           </div>
         </div> 
         <div class="row mt-5">

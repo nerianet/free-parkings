@@ -38,7 +38,6 @@ export default function Parkings() {
 
 
   var map;
-  var ro;
   let m = document.getElementById('my-map');
   
   async function maps(e){
@@ -60,7 +59,6 @@ export default function Parkings() {
         maxZoom: 20, 
         id: 'maptiler-3d',
       }).addTo(map);
-      let v;
       
       posts.map((e)=>{
         let i = L.icon({
@@ -72,14 +70,7 @@ export default function Parkings() {
         // console.log(l)
         // l._popup._content += 
 
-        v = document.querySelectorAll('.leaflet-popup-content');
       })
-      
-      for(let i=0; i<posts.length; i++){
-        console.log(v)
-        v[i].classList.add('cllass');
-      }
-
       L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
           .bindPopup('You Find Here')
           .openPopup();
@@ -88,8 +79,6 @@ export default function Parkings() {
       m.style.display = 'none';
       map = '';
       }
-      map._popup._content += ()=> (<Link to={'/'}>Mo</Link>)
-      console.log(map)
   }
   
   const position = [51.505, -0.09]

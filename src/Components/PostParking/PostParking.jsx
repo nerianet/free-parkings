@@ -118,7 +118,7 @@ export default function PostParking() {
     setTotal(e);
     setTimeout(() => {
       setTotalCity([]);
-    }, 2000);
+    }, 1000);
   }
   
     function setTotalAddress(e){
@@ -129,7 +129,7 @@ export default function PostParking() {
     setGeo({lat: totalStreet[0].properties.lat, lon: totalStreet[0].properties.lon});
     setTimeout(() => {
       setTotalStreet([]);
-    }, 2000);
+    }, 1000);
   }
 
 

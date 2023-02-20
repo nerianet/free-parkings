@@ -177,7 +177,7 @@ export default function MyAccount() {
 
         <Container className="mt-4 mb-5">
       <Row>
-        <Col md={5} className='mb-sm-0 mb-3 col-sm-8 col-12 d-flex justify-content-sm-start justify-content-center'>
+        <Col md={5} className='mb-sm-0 mb-3 col-sm-6 col-12 d-flex justify-content-sm-start justify-content-center'>
           <Card className="shadow w-sm-100 w-75">
             <Card.Header className="bg-primary text-light">Profile</Card.Header>
             <Card.Body>
@@ -271,7 +271,7 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={7} className='col-sm-7 col-12 '>
+        <Col md={7} className='col-sm-6 col-12 '>
           <Card className="shadow" style={{height:'354px'}}>
             <Card.Header className="bg-secondary shadow text-light">Last Posts</Card.Header>
             <Card.Body>

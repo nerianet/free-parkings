@@ -167,7 +167,6 @@ export default function App() {
   }
 
   function updateUser(user){
-    console.log(user)
     let a = doc(firestore, 'users', `${currentUser.id}`);
     const loc = updateDoc(a,user);
   }

@@ -2,44 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MyContext } from "../../App";
 
+import L from 'leaflet';
+import {} from 'mapbox-gl-leaflet';
+import { useGeolocated } from 'react-geolocated';
+const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
   const { id } = useParams();
-  const {posts, currentUser} = useContext(MyContext);
+  const {posts, currentUser, setCordUser, cordUser} = useContext(MyContext);
   const current = posts.find((post) => post.id == id);
 
-  // async function mapRouting(fromWaypoint, toWaypoint){
-  //   // const fromWaypoint = [38.937165,-77.045590]; // latutude, longitude
-  //   // const toWaypoint = [38.881152,-76.990693]; // latitude, longitude
-  //   const url = `https://api.geoapify.com/v1/routing?waypoints=${fromWaypoint.join(',')}|${toWaypoint.join(',')}&mode=drive&details=instruction_details&apiKey=${myAPIKey}`;
+  let ro;
+  async function mapRouting(fromWaypoint, toWaypoint){
+    // const fromWaypoint = [38.937165,-77.045590]; // latutude, longitude
+    // const toWaypoint = [38.881152,-76.990693]; // latitude, longitude
+    const url = `https://api.geoapify.com/v1/routing?waypoints=${fromWaypoint.join(',')}|${toWaypoint.join(',')}&mode=drive&details=instruction_details&apiKey=${myAPIKey}`;
+    await fetch(url).then(res => res.json()).then(result => { 
+      ro = result;
+    }, error => console.log(error));
+  }
 
-  //   await fetch(url).then(res => res.json()).then(result => { 
-  //     ro = result;
-  //   }, error => console.log(error));
-  // }
+  async function setRout(){
+    await mapRouting([cordUser.latitude , cordUser.longitude], [current.cordLocation.lat , current.cordLocation.lon]);    
+    if(ro){
+      L.geoJSON(ro, {
+        style: (feature) => {
+          return {
+            color: "rgba(20, 137, 255, 0.7)",
+            weight: 5
+          };
+        }
+      }).bindPopup((layer) => {
+        return `${layer.features.properties.distance} ${layer.features.properties.distance_units}, ${layer.features.properties.time}`
+      }).addTo(map);
+    }
+  }
 
-  // async function setRout(geo){
-  //   await mapRouting([cordUser.latitude , cordUser.longitude], [geo.lat , geo.lon]);    
-  //   if(ro){
-  //     console.log(geo)
-  //     setTimeout(() => {
-  //       L.geoJSON(ro, {
-  //         style: (feature) => {
-  //           return {
-  //             color: "rgba(20, 137, 255, 0.7)",
-  //             weight: 5
-  //           };
-  //         }
-  //       }).bindPopup((layer) => {
-  //         return `${layer.features.properties.distance} ${layer.features.properties.distance_units}, ${layer.features.properties.time}`
-  //       }).addTo(map); 
-  //     }, 5000);
-  //   }
-  // }
-
-  useEffect(() => {
-
-  },[]);
 
   const [hide, setHide] = useState(false);
 
@@ -52,6 +50,69 @@ export default function Parking() {
     }
     
   }
+
+  const v = useGeolocated();
+  const [routing, setRouting] = useState(false);
+
+
+  useEffect(()=>{
+    if(v.coords != undefined){
+      setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
+    }
+  }, [v.coords])
+
+  var map;
+let m = document.getElementById('my-map');
+
+async function maps(e){
+  e.preventDefault();
+  // console.log(m.style.display)
+  if(!m.style.display || m.style.display == 'none') {
+
+    m.style.display = 'block';
+   
+    map = L.map('my-map').setView([cordUser.latitude, cordUser.longitude], 17);
+    
+
+    const isRetina = L.Browser.retina;
+    const baseUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`;
+    const retinaUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}@2x.png?apiKey=${myAPIKey}`;
+    L.tileLayer(isRetina ? retinaUrl : baseUrl, {
+      attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
+      apiKey: myAPIKey, 
+      maxZoom: 20, 
+      id: 'maptiler-3d',
+    }).addTo(map);
+    let v;
+    
+    posts.map((e)=>{
+      let i = L.icon({
+        iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
+      });
+      let l = L.marker([e.cordLocation.lat , e.cordLocation.lon], {icon: i}).addTo(map)
+      .bindPopup(`${e.street + ", " + e.city}`)
+      .openPopup();
+      // console.log(l)
+      // l._popup._content += 
+
+      v = document.querySelectorAll('.leaflet-popup-content');
+    })
+    
+    for(let i=0; i<posts.length; i++){
+      console.log(v)
+      v[i].classList.add('cllass');
+    }
+
+    L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
+        .bindPopup('You Find Here')
+        .openPopup();
+        setRouting(true);
+    setRout();
+  } else {
+    m.style.display = 'none';
+    map = '';
+    }
+}
 
   return (
     <> 
@@ -72,7 +133,8 @@ export default function Parking() {
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
         </ul>
       </div> 
-
+      <button className="btn btn-primary mx-4" onClick={e=>maps(e)} >Live</button>
+            <div className="" id="my-map"></div>
       <div class="row mt-5">
         <div class="col-2">
           <button class="btn btn-primary btn-lg" onClick={() => hideContact()}>contact</button>
