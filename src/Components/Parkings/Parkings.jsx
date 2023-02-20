@@ -7,7 +7,6 @@ import './parkings.css';
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-import { render } from "@testing-library/react";
 
 
 
@@ -23,7 +22,7 @@ export default function Parkings() {
   const [routing, setRouting] = useState(false);
   const v = useGeolocated();
   const n = useNavigate();
-
+  const [map,setMap] = useState(false);
   useEffect(()=>{
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
@@ -35,77 +34,50 @@ export default function Parkings() {
     setInput(input.charAt(0).toUpperCase() + input.slice(1));
   };
   
-
-
-  var map;
-  let m = document.getElementById('my-map');
-  
-  async function maps(e){
+  function setMaps(e){
     e.preventDefault();
-    // console.log(m.style.display)
-    if(!m.style.display || m.style.display == 'none') {
-
-      m.style.display = 'block';
-     
-      map = L.map('my-map').setView([cordUser.latitude, cordUser.longitude], 17);
-      
-
-      const isRetina = L.Browser.retina;
-      const baseUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`;
-      const retinaUrl = `https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}@2x.png?apiKey=${myAPIKey}`;
-      L.tileLayer(isRetina ? retinaUrl : baseUrl, {
-        attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
-        apiKey: myAPIKey, 
-        maxZoom: 20, 
-        id: 'maptiler-3d',
-      }).addTo(map);
-      
-      posts.map((e)=>{
-        let i = L.icon({
-          iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
-        });
-        let l = L.marker([e.cordLocation.lat , e.cordLocation.lon], {icon: i}).addTo(map)
-        .bindPopup(`${e.street + ", " + e.city}`)
-        .openPopup();
-        // console.log(l)
-        // l._popup._content += 
-
-      })
-      L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
-          .bindPopup('You Find Here')
-          .openPopup();
-          setRouting(true);
-    } else {
-      m.style.display = 'none';
-      map = '';
-      }
+    setMap(!map);
   }
+
   
-  const position = [51.505, -0.09]
+
+  let i = L.icon({
+    iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
+  });
+
   return (
   <>
-  {/* <div style={{width:"500px"}}>
-<MapContainer id="my-map"  zoom={13} scrollWheelZoom={true}>
-    <TileLayer 
-      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url={`https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`}
-    />
-    <Marker position={position}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
-    </Marker>
-  </MapContainer>
-  </div> */}
+  
    <div className="d-flex justify-content-start m-3">
     <form className="col-2 d-flex form-inline my-2 my-lg-0">
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <input className="form-control mr-sm-2" style={{width:'150px'}} type="search" placeholder="Search" aria-label="Search" onChange={(e) => postInput(e.target.value)}/>
-      <button className="btn btn-primary mx-4" onClick={e=>maps(e)} >Live</button>
+      <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live</button>
     </form>
   </div>
 
-  <div className="" id="my-map"></div> 
+  {!map ? "" :
+    <div> 
+    <MapContainer className="mb-3 mx-3 rounded" id="my" center={[cordUser.latitude , cordUser.longitude]} style={{width:"500px", height:'500px'}} zoom={13} scrollWheelZoom={true}>
+      <TileLayer 
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url={`https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`}
+      />
+      <Marker position={[cordUser.latitude , cordUser.longitude]}>
+        <Popup>
+          You find here.
+        </Popup>
+      </Marker>
+     {posts.map((post)=>(
+      <Marker icon={i} position={[post.cordLocation.lat , post.cordLocation.lon]}>
+      <Popup>
+      {post.street + ", " + post.city}
+      <Link to={post.id}> Go to</Link>
+      </Popup>
+    </Marker>
+     ))}
+    </MapContainer>
+  </div>}
 
   <div className="row justify-content-center ">
     <div className="row justify-content-around container rounded mr-0">

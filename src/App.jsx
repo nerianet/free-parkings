@@ -216,7 +216,7 @@ export default function App() {
         <MyContext.Provider value={AllData}>
         <Location/>
           <Header />
-          <Routes>
+          <Routes >
             <Route path="/" element={<Home />}></Route>
             <Route path="/*" element={<PageError />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>

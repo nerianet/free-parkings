@@ -175,7 +175,7 @@ export default function MyAccount() {
             </div>}
         </div>} */}
 
-        <Container className="mt-4 mb-5">
+        <Container className="mt-4 mb-5 vh-100 ">
       <Row>
         <Col md={5} className='mb-sm-0 mb-3 col-sm-6 col-12 d-flex justify-content-sm-start justify-content-center'>
           <Card className="shadow w-sm-100 w-75">
