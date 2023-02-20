@@ -43,7 +43,7 @@ export default function NewUser() {
   return (
   <>
   {currentUser.yourName != undefined ? <div></div> :
-  <div class="vh-100" >
+  <div class="vh-auto mb-3" >
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">

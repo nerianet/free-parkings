@@ -2,6 +2,9 @@ import React, { useContext } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../App';
 
+import L from 'leaflet';
+import {} from 'mapbox-gl-leaflet';
+
 export default function MyParking() {
     const { id } = useParams();
     const {posts, currentUser, postDelete} = useContext(MyContext);
@@ -11,9 +14,7 @@ export default function MyParking() {
 
     function deletePost (id, nameFile){
       postDelete(id, nameFile);
-      navigate('/MyAccount')
-      // let arr = posts.filter((item)=> item.id != id);
-      // setMyPosts(arr);
+      navigate('/MyAccount');
     }
 
     return (

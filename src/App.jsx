@@ -223,7 +223,7 @@ export default function App() {
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
-            <Route path="MapRouting" element={<MapRouting />}></Route>
+            <Route path="/Parkings#/MapRouting" element={<MapRouting />}></Route>
             <Route path="/Parkings/:id" element={<Parking />}></Route>
             <Route path="/MyAccount/:id" element={<MyParking />}></Route>
             <Route path="/About" element={<About />}></Route>

@@ -53,12 +53,12 @@ export default function LogIn() {
       </div>
 
       <div class="form-label-group">
-        <input ref={userName} type="email" id="inputEmail" class="form-control" placeholder="Email address" required autoFocus />
+        <input ref={userName} type="email" id="inputEmail" class="form-control" placeholder="Email address" autoFocus />
         <label for="inputEmail">Email address</label>
       </div>
 
       <div class="form-label-group">
-        <input ref={password} type="password" id="inputPassword" class="form-control" placeholder="Password" required />
+        <input ref={password} type="password" id="inputPassword" class="form-control" placeholder="Password" />
         <label for="inputPassword">Password</label>
       </div>
 

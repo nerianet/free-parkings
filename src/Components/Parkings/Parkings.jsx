@@ -6,6 +6,10 @@ import './parkings.css';
 
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import { render } from "@testing-library/react";
+
+
 
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 
@@ -36,6 +40,7 @@ export default function Parkings() {
   var map;
   var ro;
   let m = document.getElementById('my-map');
+  
   async function maps(e){
     e.preventDefault();
     // console.log(m.style.display)
@@ -58,16 +63,21 @@ export default function Parkings() {
       let v;
       
       posts.map((e)=>{
-        let l = L.marker([e.cordLocation.lat , e.cordLocation.lon]).addTo(map)
-        .bindPopup(`${e.street + " " + e.city}` + "<a href=/MapRouting>Go To</a>")
+        let i = L.icon({
+          iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
+        });
+        let l = L.marker([e.cordLocation.lat , e.cordLocation.lon], {icon: i}).addTo(map)
+        .bindPopup(`${e.street + ", " + e.city}`)
         .openPopup();
-        console.log(l)
-        l._icon.classList.add("icon");
+        // console.log(l)
+        // l._popup._content += 
+
         v = document.querySelectorAll('.leaflet-popup-content');
       })
-
+      
       for(let i=0; i<posts.length; i++){
-        v[i].innerHTML += 'mo';
+        console.log(v)
+        v[i].classList.add('cllass');
       }
 
       L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
@@ -78,12 +88,26 @@ export default function Parkings() {
       m.style.display = 'none';
       map = '';
       }
+      map._popup._content += ()=> (<Link to={'/'}>Mo</Link>)
+      console.log(map)
   }
   
-  
-
+  const position = [51.505, -0.09]
   return (
   <>
+  {/* <div style={{width:"500px"}}>
+<MapContainer id="my-map"  zoom={13} scrollWheelZoom={true}>
+    <TileLayer 
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      url={`https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`}
+    />
+    <Marker position={position}>
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+  </MapContainer>
+  </div> */}
    <div className="d-flex justify-content-start m-3">
     <form className="col-2 d-flex form-inline my-2 my-lg-0">
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -92,7 +116,7 @@ export default function Parkings() {
     </form>
   </div>
 
-  <div className="" id="my-map"></div> {/* container map*/}
+  <div className="" id="my-map"></div> 
 
   <div className="row justify-content-center ">
     <div className="row justify-content-around container rounded mr-0">
