@@ -19,7 +19,6 @@ import MyParking from "./Components/myParking/MyParking";
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc, setDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
-import MapRouting from "./Components/Parkings/MapRouting";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -222,7 +221,6 @@ export default function App() {
             <Route path="/LogIn" element={<LogIn />}></Route>
             <Route path="/MyAccount" element={<MyAccount />}></Route>
             <Route path="/Parkings" element={<Parkings />}></Route>
-            <Route path="/Parkings#/MapRouting" element={<MapRouting />}></Route>
             <Route path="/Parkings/:id" element={<Parking />}></Route>
             <Route path="/MyAccount/:id" element={<MyParking />}></Route>
             <Route path="/About" element={<About />}></Route>

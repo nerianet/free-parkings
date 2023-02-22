@@ -126,11 +126,11 @@ async function maps(e){
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
         </ul>
       </div> 
-      <button className="btn btn-primary mx-4" onClick={e=>maps(e)} >Live</button>
+      <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
             <div className="" id="my-map"></div>
       <div class="row mt-5">
         <div class="col-2">
-          <button class="btn btn-primary btn-lg" onClick={() => hideContact()}>contact</button>
+          <button class="btn btn-primary btn-lg mb-2" onClick={() => hideContact()}>contact</button>
           {hide ? 
           <div className="col-3 ">
             <img className="" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style={{ width: "90px", height: "90px" }} />
@@ -140,7 +140,7 @@ async function maps(e){
         : ''}
         </div>
       </div>
-      <div className="" id="my-map"></div> {/* container map*/}
+      {/* <div className="" id="my-map"></div> container map */}
     </div>
     : 
     ''}

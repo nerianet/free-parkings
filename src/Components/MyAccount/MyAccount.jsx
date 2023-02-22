@@ -37,16 +37,20 @@ export default function MyAccount() {
   const changePassword2 = useRef();
   const changePassword3 = useRef();
 
+  const localeUId = localStorage.getItem('userId');
 
   useEffect(() => {
-    if (currentUser.yourName == undefined){
-    navigate("/LogIn");
+    setTimeout(() => {
+        
+    }, 5000);
+    if (!localeUId){
+        navigate("/LogIn");
     }else{
-     //   console.log(currentUser);
-      const items = posts.filter(item => item.userId == currentUser.userId);
-      setMyPosts(items);
+    //   console.log(currentUser);
+    const items = posts.filter(item => item.userId == currentUser.userId);
+    setMyPosts(items);
     }
-     //console.log(posts);
+    //console.log(posts);
   }, [currentUser]);
 
   const funcProfile = () => {

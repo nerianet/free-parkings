@@ -94,7 +94,6 @@ export default function Parkings() {
           <div className=" d-flex justify-content-center">
           </div>
         </Link>
-        {/* <div className="btn btn-primary" onClick={()=>setRout(item.cordLocation)}>Go To</div> */}
         </div>
       ))}
     </div>
