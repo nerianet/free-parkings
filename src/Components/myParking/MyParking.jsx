@@ -27,6 +27,7 @@ export default function MyParking() {
           </div>
           <div class="col-md-6">
             <h3 class="text-primary">{current.price}₪</h3>
+            <button>edit</button>
              
           </div>
         </div> 
