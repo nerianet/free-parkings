@@ -8,17 +8,19 @@ export default function Home() {
   const {setInput} = useContext(MyContext);
   const [inputData, setInputData] = useState([]); 
   
-  console.log(inputData);
-  function add(e){
-    console.log(e);
-    let v = document.getElementById('search');
+
+  let v = document.getElementById('search');
+  function startSearch(){
+    setInput(v.value);
+  }
+  
+  function addToIn(e){
     v.value = e;
-    setInput(e);
     setInputData([]);
   }
 
   function getData(e){
-    location(e,setInputData);
+    location(e, setInputData);
   }
 
 
@@ -32,17 +34,17 @@ export default function Home() {
       <div className="d-flex justify-content-center col-12">
         <div className="col-sm-6 col-12">
           <div class="input-group mb-3 d-flex justify-content-center w-sm-75 rounded" style={{border: "4px solid rgb(111, 184, 184)", shadow: "2px 2px 12px 2px rgb(12, 11, 11)" }}>
-            <input id="search" type="text" className="form-control" placeholder="Please Enter City" onChange={e=> getData(e.target.value) } />
+            <input id="search" type="text" className="form-control" placeholder="Please Enter City" onChange={e=>getData(e.target.value) } />
             <div class="input-group-append">
-              <Link to={'/Parkings'}><button class="btn btn-outline-secondary" type="button">Search</button></Link>
+              <Link to={'/Parkings'}><button class="btn btn-outline-secondary" type="button" onClick={startSearch}>Search</button></Link>
             </div>
           </div>
           <div className="posotion-relative" style={{width: '92%'}}>{inputData.map((e, i)=>(
-            <div className="border bg-light">{i < 1 ? <div onClick={e=>add(e.target.innerHTML)} className="btn text-dark" >{e.properties.city}</div> 
+            <div className="border bg-light">{i < 1 ? <div onClick={e=>addToIn(e.target.innerHTML)} className="btn text-dark" >{e.properties.city}</div> 
               : 
               inputData[i].properties.city == inputData[i-1].properties.city ? ""
               : 
-              <div className="btn text-dark" onClick={e=>add(e.target.innerHTML)}>{e.properties.city}</div>}
+              <div className="btn text-dark" onClick={e=>addToIn(e.target.innerHTML)}>{e.properties.city}</div>}
             </div>))}
           </div>
         </div>
