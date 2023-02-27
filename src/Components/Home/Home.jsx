@@ -1,19 +1,56 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Home.css"
+import { MyContext } from "../../App";
+import { location } from "../API/APIs";
+
 
 export default function Home() {
+  const {setInput} = useContext(MyContext);
+  const [inputData, setInputData] = useState([]); 
+  
+  function getData(e){
+    // e.preventDefault();
+    location(e,setInputData);
+    setInput(e);
+  }
   return (
   <>
-  <div id="" className="pb-5 d-sm-flex d-none">
-    <div className="container h-100 text-primary" style={{height:'920px'}}>
-      <h1 className="d-flex justify-content-center display-2">search parkings</h1>
-      <p className="d-flex justify-content-center pb-5 display-5">Here you can easily find parking</p>
-      
-      <div className="h-100 ">
-        <div className="row justify-content-between w-100 h-100 mx-1 ">
-          <Link to={"/PostParking"} style={{width:'450px', height:'450px'}} className=" link-warning  col-4 bgCircle1 d-flex justify-content-center align-items-center border rounded-circle"><strong>Post a Park</strong></Link>
-          <Link to={"/Parkings"} style={{width:'450px', height:'450px'}}    className="link-warning col-4 bgCircle2 d-flex justify-content-center align-items-center border rounded-circle"><strong>parking search</strong></Link>
+  <div className="container-fluid row">
+    <div className="col-12 ">
+    <h1 className="d-flex justify-content-center display-2">Search Parkings</h1>
+      <p className="d-flex justify-content-center pb-5 fs-1">Here you can easily find parking</p>
+      <div className="d-flex justify-content-center display-6">Choose City ...</div>
+      <div className="d-flex justify-content-center col-12">
+        <div className="col-sm-6 col-12">
+          <div class="input-group mb-3 d-flex justify-content-center w-sm-75 rounded" style={{border: "4px solid rgb(11, 84, 84, )" }}>
+            <input type="text" className="form-control" placeholder="Please Enter City" onChange={e=> getData(e.target.value) } aria-label="Recipient's username" aria-describedby="basic-addon2" />
+            <div>{inputData.map((e, i)=>(
+                  <div>{i < 1 ? <Link className="col-4 border" to={'/Parkings'}>{e.properties.city}</Link> 
+                  : 
+                  inputData[i].properties.city == inputData[i-1].properties.city ? "" 
+                  : 
+                  <Link className="col-4 border" to={'/Parkings'}>{e.properties.city}</Link>}</div>))}
+                </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div className="h-50 d-flex justify-content-center flex-wrap mb-3">
+      <div className="col-sm-5 col-10 mx-sm-3 d-flex justify-content-center mb-sm-0 mb-2 rounded">
+        <img src="https://i.imagesup.co/images2/6d4130c2afe7821e921360c5d3c789ed38a6ab64.png" width={'100%'}/>
+      </div>
+      <div className="col-sm-5 col-10 d-flex align-items-center">
+        <div className="mx-4 mb-1">
+          <div className="display-2 text-light"><b>Hellow</b> moshe</div>
+          <div className="display-3 text-light">How are you</div>
+          <div className=" d-flex mt-3 w-75 justify-content-between">
+            <Link to={"/Parkings"} className="btn btn-light w-100">Search Parkings</Link>
+            <Link to={"/PostParking"} className="btn text-light w-100">post parking</Link>
+          </div>
         </div>
       </div>
     </div>
@@ -21,3 +58,4 @@ export default function Home() {
   </>
   );
 }
+//style={{width: '80%'}}

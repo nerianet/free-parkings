@@ -14,7 +14,7 @@ import { useGeolocated } from "react-geolocated";
 
 export default function PostParking() {
 
-  const { currentUser, setStorage, setImage, image, setNewPost, isLoading, cordUser, setCordUser } = useContext(MyContext);
+  const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
   const navigate = useNavigate();
   
   const imageRef = useRef();
@@ -197,10 +197,6 @@ export default function PostParking() {
 
               <div className="m-3">
                 <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light col-12" inputRef={price}/>
-              </div>
-
-              <div className="m-3">
-                <TextField required color="warning" label="Activity time?" variant="outlined" className="bg-light col-12" onChange={e => setActivityTime(e)}/>
               </div>
 
               <div className="m-3">
