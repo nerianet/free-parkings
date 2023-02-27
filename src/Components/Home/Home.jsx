@@ -22,18 +22,19 @@ export default function Home() {
       <div className="d-flex justify-content-center display-6">Choose City ...</div>
       <div className="d-flex justify-content-center col-12">
         <div className="col-sm-6 col-12">
-          <div class="input-group mb-3 d-flex justify-content-center w-sm-75 rounded" style={{border: "4px solid rgb(11, 84, 84, )" }}>
-            <input type="text" className="form-control" placeholder="Please Enter City" onChange={e=> getData(e.target.value) } aria-label="Recipient's username" aria-describedby="basic-addon2" />
-            <div>{inputData.map((e, i)=>(
-                  <div>{i < 1 ? <Link className="col-4 border" to={'/Parkings'}>{e.properties.city}</Link> 
-                  : 
-                  inputData[i].properties.city == inputData[i-1].properties.city ? "" 
-                  : 
-                  <Link className="col-4 border" to={'/Parkings'}>{e.properties.city}</Link>}</div>))}
-                </div>
+          <div class="input-group mb-3 d-flex justify-content-center w-sm-75 rounded" style={{border: "4px solid rgb(111, 184, 184)", shadow: "2px 2px 12px 2px rgb(12, 11, 11)" }}>
+            <input type="text" className="form-control" placeholder="Please Enter City" onChange={e=> getData(e.target.value) } />
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button">Search</button>
             </div>
+          </div>
+          <div className="posotion-relative" style={{width: '92%'}}>{inputData.map((e, i)=>(
+            <div className="border bg-light">{i < 1 ? <Link className="text-dark" to={'/Parkings'}>{e.properties.city}</Link> 
+              : 
+              inputData[i].properties.city == inputData[i-1].properties.city ? "" 
+              : 
+              <Link className="text-dark" to={'/Parkings'}>{e.properties.city}</Link>}
+            </div>))}
           </div>
         </div>
       </div>
