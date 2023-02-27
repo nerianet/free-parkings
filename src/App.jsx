@@ -170,6 +170,11 @@ export default function App() {
     const loc = updateDoc(a,user);
   }
 
+  function updatePost(current){
+    let a = doc(firestore, 'posts', `${current.id}`);
+    const loc = updateDoc(a,current);
+  }
+
   function postDelete(id, fileName){
 
     /// delete post from firebase
@@ -193,6 +198,7 @@ export default function App() {
     setUser,
     postDelete,
     updateUser,
+    updatePost,
 ///////////////////
     currentUser,
     setCurrentUser,
@@ -215,7 +221,7 @@ export default function App() {
         <MyContext.Provider value={AllData}>
         <Location/>
           <Header />
-          <Routes >
+          <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/*" element={<PageError />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>

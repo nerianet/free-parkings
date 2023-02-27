@@ -5,6 +5,7 @@ import { MyContext } from "../../App";
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { useGeolocated } from 'react-geolocated';
+import MyParking from "../myParking/MyParking";
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
@@ -127,7 +128,10 @@ async function maps(e){
         </ul>
       </div> 
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
-            <div className="" id="my-map"></div>
+      {!currentUser.admin ? "" :
+        <Link className="btn btn-warning mx-2" to={`/MyAccount/${current.id}`}>Edit Park</Link>
+      }
+      <div className="" id="my-map"></div>
       <div class="row mt-5">
         <div class="col-2">
           <button class="btn btn-primary btn-lg mb-2" onClick={() => hideContact()}>contact</button>
@@ -141,9 +145,7 @@ async function maps(e){
         </div>
       </div>
       {/* <div className="" id="my-map"></div> container map */}
-    </div>
-    : 
-    ''}
+    </div> : ''}
     </>
   )
 }
