@@ -15,8 +15,6 @@ export default function Parking() {
 
   let ro;
   async function mapRouting(fromWaypoint, toWaypoint){
-    // const fromWaypoint = [38.937165,-77.045590]; // latutude, longitude
-    // const toWaypoint = [38.881152,-76.990693]; // latitude, longitude
     const url = `https://api.geoapify.com/v1/routing?waypoints=${fromWaypoint.join(',')}|${toWaypoint.join(',')}&mode=drive&details=instruction_details&apiKey=${myAPIKey}`;
     await fetch(url).then(res => res.json()).then(result => { 
       ro = result;
@@ -67,7 +65,6 @@ let m = document.getElementById('my-map');
 
 async function maps(e){
   e.preventDefault();
-  // console.log(m.style.display)
   if(!m.style.display || m.style.display == 'none') {
 
     m.style.display = 'block';
@@ -92,9 +89,6 @@ async function maps(e){
       let l = L.marker([e.cordLocation.lat , e.cordLocation.lon], {icon: i}).addTo(map)
       .bindPopup(`${e.street + ", " + e.city}`)
       .openPopup();
-      // console.log(l)
-      // l._popup._content += 
-
     })
     
     L.marker([cordUser.latitude , cordUser.longitude]).addTo(map)
@@ -144,7 +138,6 @@ async function maps(e){
         : ''}
         </div>
       </div>
-      {/* <div className="" id="my-map"></div> container map */}
     </div> : ''}
     </>
   )

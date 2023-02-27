@@ -131,55 +131,7 @@ export default function MyAccount() {
 
   return (
     <>
-      {/* {currentUser.yourName == undefined ? navigate('/LogIn') :
-        <div className='container'>
-            <div className='row'>
-                <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcProfile}>My Profile</div>
-                <div className='col-6 d-flex border justify-content-center btn btn-primary' onClick={funcPosts}>My Posts</div>
-            </div>
-            {localePosts == true 
-            ?
-            <div className="row justify-content-center pt-3">
-                <div className="row justify-content-around container rounded">
-                    {myPosts.map((item, i) => (
-                    <div className="border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
-                        <Link to={item.id} key={i} >
-                            <h4 className="d-flex justify-content-center">{item.address}</h4>
-                            <h4 className="d-flex justify-content-center">{item.price}</h4>
-                            <h4 className="d-flex justify-content-center">{item.activityTime}</h4>
-                            <h4 className="d-flex justify-content-center">accessibility: {item.accessibility == true ? "Yes" : "No"}</h4>
-                            <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
-                                <img className="img-card border rounded" src={item.imgUrl} alt={item.name} style={{ height: "85%", width: "100%" }}/>
-                            </div>
-                            <h2 className="d-flex justify-content-center">{}</h2>
-                            <div className=" d-flex justify-content-center">
-                                <button type="button" className="btn btn-success">
-                                    Detail Parking
-                                </button>
-                            </div>
-                        </Link>
-                    </div>
-                    ))}
-                </div>
-            </div>
-            :
-            <div className="vh-100 pt-3">
-                <div className="container h-100 ">
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-lg-12 col-xl-11">
-                            <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(100, 140, 149, .7)",}}>
-                                <div className="card-body p-md-5">
-                                    <p className="text-center text-primary h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">My Profile</p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>}
-        </div>} */}
-
-        <Container className="mt-4 mb-5 vh-100 ">
+     <Container className="mt-4 mb-5 vh-100 ">
       <Row>
         <Col md={5} className='mb-sm-0 mb-3 col-sm-6 col-12 d-flex justify-content-sm-start justify-content-center'>
           <Card className="shadow w-sm-100 w-75">

@@ -1,8 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { MyContext } from '../../App';
-import { location } from '../API/APIs';
 import './Footer.css';
 
 

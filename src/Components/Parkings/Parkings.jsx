@@ -3,17 +3,11 @@ import { useGeolocated } from "react-geolocated";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import './parkings.css';
-
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 
-
-
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
-
-
-
 
 export default function Parkings() {
 

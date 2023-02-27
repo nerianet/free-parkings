@@ -4,8 +4,6 @@ import { MyContext } from '../../App'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from '../../firebase/Firebase'
 import "./LogIn.css"
-import { firestore } from '../../firebase/Firebase';
-import { onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc } from "@firebase/firestore";
 
 
 export default function LogIn() {

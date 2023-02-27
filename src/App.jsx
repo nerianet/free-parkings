@@ -12,7 +12,6 @@ import NewUser from "./Components/NewUser/NewUser";
 import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
-import Location from "./location/Location";
 import MyParking from "./Components/myParking/MyParking";
 
 // firestore Files
@@ -219,7 +218,6 @@ export default function App() {
     <div className="bg_site vh-100 ">
       <div className="bg_site">
         <MyContext.Provider value={AllData}>
-        <Location/>
           <Header />
           <Routes>
             <Route path="/" element={<Home />}></Route>

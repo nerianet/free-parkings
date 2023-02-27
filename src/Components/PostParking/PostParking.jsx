@@ -10,7 +10,6 @@ import ModalC from '../modalComponnet/ModalC'
 import { location, getCurrLoc } from '../API/APIs';
 import { TextField } from "@mui/material";
 import { useGeolocated } from "react-geolocated";
-// import Location from '../../location/Location'
 
 
 export default function PostParking() {
@@ -88,8 +87,6 @@ export default function PostParking() {
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
-    // city.current.value = "";
-    // street.current.value = "";
     activityTime.target.value = "";
     setImage(undefined);
     img = undefined;
@@ -142,6 +139,7 @@ export default function PostParking() {
       }
     getCurrLoc(ge, setCurrLoc);
   }
+
   useEffect(()=>{
     if(currLoc){
       const t = document.getElementById('street');
