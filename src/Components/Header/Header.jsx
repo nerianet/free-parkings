@@ -16,8 +16,8 @@ export default function Header() {
 
   
   return (
-    <div className=''>
-    <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light position-sticky-top'>
+    <div className='sticky-top'>
+    <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100'>
       <li><Link to={"/"}><img className='rounded-circle mt-1' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
       <li>Free Parkings</li>
       <li></li>

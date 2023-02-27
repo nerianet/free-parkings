@@ -8,7 +8,6 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
-import './myAccount.css'
 
 export default function MyAccount() {
   const navigate = useNavigate();

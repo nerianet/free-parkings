@@ -12,20 +12,21 @@ const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parkings() {
 
   const [inputData, setInput] = useState("");
-  const {setCordUser, cordUser, posts} = useContext(MyContext);
+  const {setCordUser, cordUser, posts, input} = useContext(MyContext);
   const [routing, setRouting] = useState(false);
   const v = useGeolocated();
   const n = useNavigate();
   const [map,setMap] = useState(false);
   useEffect(()=>{
+    setInput(input !== "" ? input : '');
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
     }
   }, [v.coords])
 
 
-  const postInput = function (input) {
-    setInput(input.charAt(0).toUpperCase() + input.slice(1));
+  const postInput = function (inputParkings) {
+    setInput(inputParkings.charAt(0).toUpperCase() + inputParkings.slice(1));
   };
   
   function setMaps(e){
