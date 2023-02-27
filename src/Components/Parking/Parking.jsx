@@ -122,9 +122,6 @@ async function maps(e){
         </ul>
       </div> 
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
-      {!currentUser.admin ? "" :
-        <Link className="btn btn-warning mx-2" to={`/MyAccount/${current.id}`}>Edit Park</Link>
-      }
       <div className="" id="my-map"></div>
       <div class="row mt-5">
         <div class="col-2">

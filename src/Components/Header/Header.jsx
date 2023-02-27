@@ -34,6 +34,9 @@ export default function Header() {
         : 
         <li ><Link  className='dropdown-item btn btn-primary d-flex justify-content-center' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>}</li>
         <li><Link className='link-primary dropdown-item d-flex justify-content-center' to={"/About"}>About</Link></li>
+        {!currentUser.admin ? "" :
+          <Link className="btn btn-warning mx-2" to={''}>Edit Park</Link>
+        }
         </ul>
       </div>
     </ul>
