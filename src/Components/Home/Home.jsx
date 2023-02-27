@@ -11,7 +11,7 @@ export default function Home() {
   function getData(e){
     // e.preventDefault();
     location(e,setInputData);
-    setInput(e);
+    console.log(inputData)
   }
   return (
   <>
@@ -29,11 +29,11 @@ export default function Home() {
             </div>
           </div>
           <div className="posotion-relative" style={{width: '92%'}}>{inputData.map((e, i)=>(
-            <div className="border bg-light">{i < 1 ? <Link className="text-dark" to={'/Parkings'}>{e.properties.city}</Link> 
+            <div className="border bg-light">{i < 1 ? <Link onClick={e=>setInput(e.target.innerHTML)} className="text-dark" to={'/Parkings'}>{e.properties.city + ', ' + e.properties.country}</Link> 
               : 
               inputData[i].properties.city == inputData[i-1].properties.city ? "" 
               : 
-              <Link className="text-dark" to={'/Parkings'}>{e.properties.city}</Link>}
+              <Link onClick={e=>setInput(e.target.innerHTML)} className="text-dark" to={'/Parkings'}>{e.properties.city + ', ' + e.properties.country}</Link>}
             </div>))}
           </div>
         </div>

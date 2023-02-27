@@ -18,7 +18,12 @@ export default function Parkings() {
   const n = useNavigate();
   const [map,setMap] = useState(false);
   useEffect(()=>{
-    setInput(input !== "" ? input : '');
+    if(input !== ""){
+      let m = input.split(',');
+      let v = document.getElementById('search');
+      v.value = m[0];
+      setInput(m[0]);
+    };
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
     }
@@ -46,7 +51,7 @@ export default function Parkings() {
   <div className="d-flex justify-content-start m-3">
     <form className="col-2 d-flex form-inline my-2 my-lg-0">
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <input className="form-control mr-sm-2" style={{width:'150px'}} type="search" placeholder="Search" aria-label="Search" onChange={(e) => postInput(e.target.value)}/>
+      <input id="search" className="form-control mr-sm-2" style={{width:'150px'}} type="search" placeholder="Search" aria-label="Search" onChange={(e) => postInput(e.target.value)}/>
       
       <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live</button>
     </form>
