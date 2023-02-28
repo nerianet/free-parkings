@@ -154,8 +154,8 @@ export default function PostParking() {
       {currentUser.yourName == undefined ? (
         changeNavigate()
       ) : ( 
-      <div className="h-auto mb-5" >
-        <div className="container border rounded bg-light">
+      <div className="h-auto mb-5 d-flex justify-content-center" >
+        <div className="w-75 border rounded bg-light shadow d-flex flex-column justify-content-center">
 
           <div className="row">
             <div className="col-12 h1 text-center">Post A Park</div>
