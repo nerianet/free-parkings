@@ -40,11 +40,11 @@ export default function Home() {
             </div>
           </div>
           <div className="">{inputData.map((e, i)=>(
-            <div className="border bg-light">{i < 1 ? <div onClick={e=>addToIn(e.target.innerHTML)} className="btn text-dark" >{e.properties.city}</div> 
+            <div className="border bg-light">{i < 1 ? <div onClick={e=>addToIn(e.target.innerHTML)} className="btn text-dark" >{e.properties.city+ ', ' + e.properties.country}</div> 
               : 
               inputData[i].properties.city == inputData[i-1].properties.city ? ""
               : 
-              <div className="btn text-dark" onClick={e=>addToIn(e.target.innerHTML)}>{e.properties.city}</div>}
+              <div className="btn text-dark" onClick={e=>addToIn(e.target.innerHTML)}>{e.properties.city+ ', ' + e.properties.country}</div>}
             </div>))}
           </div>
         </div>
@@ -73,4 +73,3 @@ export default function Home() {
 
 
 //style={{width: '80%'}}
-//  + ', ' + e.properties.country
