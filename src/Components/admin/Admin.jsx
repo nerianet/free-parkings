@@ -70,9 +70,9 @@ export default function Admin() {
     //   </Row>
     // </Container>
           
-     <div className='container mb-4'>
+     <div className='container mb-4 h-auto '>
         <div className='row d-flex justify-content-center mb-4'>
-          <div className='col-sm-4 col-8 bg-light rounded p-0'>
+          <div className='col-sm-4 col-8 bg-light rounded p-0 shadow'>
             <div className='bg-primary d-flex justify-content-center rounded-top mb-2'>profile</div>
               <div className="d-flex flex-column align-items-center w-100" >
                 <img style={{ width: "60px", height: "60px" }} src={otherCurrUser.profileUrl ? otherCurrUser.profileUrl : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="Profile" className="rounded-circle mb-3" />
@@ -83,33 +83,24 @@ export default function Admin() {
               </div>
           </div>
         </div>
-        <div>
-          <div className='row d-flex justify-content-center'>
+        {currPosts[0] == undefined ? "" :
+          <div className='row d-flex justify-content-center shadow'>
             <div className='col-sm-12 col-8 bg-light rounded p-0'>
               <div className='bg-primary d-flex justify-content-center rounded-top mb-2'>profile</div>
-                <div className="d-flex flex-column align-items-center w-100" >
-                {currPosts[0] == undefined ? "" :
-                  currPosts.map((item, i) => (
-                    <div className='bg-dark'>
-                        <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
-                        <Link to={item.id} className='text-primary' key={i} >
-                        {/* <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/> */}
-                        <div className=''>
-                            <div className='mt-sm-2'></div>
-                            <div>
-                                <span className='mt-sm-2 mt-4'>{item.city + ", " + item.street}</span>
-                                <span className=''>{} </span>
-                            </div>
-                            <div className=''>{}</div>
+                <div className="d-flex flex-column align-items-center mb-4 mt-4" >
+                  {currPosts.map((item, i) => (
+                    <div className='border mb-3 d-flex col-8 rounded'>
+                        <img className='w-sm-75 w-25 h-50 rounded' src={item.imgUrl}/>
+                        <div className='text-primary mx-1' key={i} >
+                          <div className='mt-2'>City: {item.city + "," }</div>
+                          <div className='mt-2'>Street: {item.street + "."} </div>
                         </div>
-                        </Link>
                     </div> 
-                    ))
-                  }
+                    ))}
                 </div>
             </div>
           </div>
-        </div>
+        }
       </div>
 }
     </>
