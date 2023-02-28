@@ -145,9 +145,7 @@ export default function App() {
       });
     }
   }
-  function clear(){
-    localStorage.clear();
-  }
+ 
   useEffect(() => {
     setUser();
     let queryPosts = query(postsRef);
@@ -246,7 +244,6 @@ export default function App() {
   return (
     <div className="bg_site vh-100 ">
       <div className="bg_site">
-        <button onClick={clear}>L</button>
         <MyContext.Provider value={AllData}>
           <Header />
           <Routes>
