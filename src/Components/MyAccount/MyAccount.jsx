@@ -233,20 +233,19 @@ export default function MyAccount() {
             {myPosts[0] == undefined ? <Link to={"/PostParking"} className='btn btn-primary raunded-circle'>add post</Link> :
             <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
                 {myPosts.map((item, i) => (
-                <div className='bg-dark'>
-                    <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/>
-                    <Link to={item.id} className='text-primary' key={i} >
-                    {/* <img className='w-75' style={{ height:"250px"}}  src={item.imgUrl}/> */}
-                    <div className=''>
-                        <div className='mt-sm-2'></div>
-                        <div>
-                            <span className='mt-sm-2 mt-4'>{item.city + ", " + item.street}</span>
-                            <span className=''>{} </span>
+                <Link to={item.id} className='bg-dark'>
+                    <div className='text-primary ' key={i} >
+                        <img className='w-75 ' style={{ height:"250px"}}  src={item.imgUrl}/>
+                        <div className=''>
+                            <div className='mt-sm-2'></div>
+                            <div>
+                                <span className='mt-sm-2 mt-4'>{item.city + ", " + item.street}</span>
+                                <span className=''>{} </span>
+                            </div>
+                            <div className=''>{}</div>
                         </div>
-                        <div className=''>{}</div>
                     </div>
-                    </Link>
-                </div> 
+                </Link> 
                 ))}
             </Carousel>
             }

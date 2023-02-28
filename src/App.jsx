@@ -13,6 +13,7 @@ import PostParking from "./Components/PostParking/PostParking";
 import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
 import MyParking from "./Components/myParking/MyParking";
+import Admin from "./Components/admin/Admin";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
@@ -134,10 +135,11 @@ export default function App() {
         let v = [];
         books.map((e,i)=>{
             v[i] = {
-            userName: e.userName,
-            id: e.id,
-            profileUrl: e.profileUrl,
-          }
+              yourName: e.yourName,
+              userName: e.userName,
+              userId: e.userId,
+              profileUrl: e.profileUrl,
+            }
         })
         setUsers(v)
       });
@@ -256,6 +258,7 @@ export default function App() {
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
             <Route path="/Users" element={<Users />}></Route>
+            <Route path="/Users/Admin/:id" element={<Admin />}></Route>
           </Routes>
           <Footer />
         </MyContext.Provider>
