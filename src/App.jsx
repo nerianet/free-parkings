@@ -16,8 +16,9 @@ import MyParking from "./Components/myParking/MyParking";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
-import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, getDoc, deleteDoc, setDoc } from "@firebase/firestore";
+import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
+import Users from "./Components/Users/Users";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -32,6 +33,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [cordUser, setCordUser] = useState();
   const [profileUrl, setProfileUrl] = useState();
+  const [users, setUsers] = useState([]);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -118,7 +120,29 @@ export default function App() {
     if(profileUrl){
       updateUser({...currentUser, profileUrl: profileUrl});
     }
+    getAllUsers();
   }, [currentUser])
+
+  function getAllUsers(){
+    if(currentUser.admin === 'true'){
+      let queryUser = query(usersRef);
+      onSnapshot(queryUser, (snapshot) => {
+        const books = [];
+        snapshot.docs.forEach((doc) => {
+          books.push({ ...doc.data(), id: doc.id });
+        });
+        let v = [];
+        books.map((e,i)=>{
+            v[i] = {
+            userName: e.userName,
+            id: e.id,
+            profileUrl: e.profileUrl,
+          }
+        })
+        setUsers(v)
+      });
+    }
+  }
 
   useEffect(() => {
     setUser();
@@ -212,6 +236,7 @@ export default function App() {
     cordUser,
     setCordUser,
     setProfileUrl,
+    users,
   };
 
   return (
@@ -230,6 +255,7 @@ export default function App() {
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
+            <Route path="/Users" element={<Users />}></Route>
           </Routes>
           <Footer />
         </MyContext.Provider>

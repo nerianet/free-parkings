@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useGeolocated } from "react-geolocated";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import './parkings.css';
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 
@@ -13,9 +13,7 @@ export default function Parkings() {
 
   const [inputData, setInput] = useState("");
   const {setCordUser, cordUser, posts, input} = useContext(MyContext);
-  const [routing, setRouting] = useState(false);
   const v = useGeolocated();
-  const n = useNavigate();
   const [map,setMap] = useState(false);
   useEffect(()=>{
     if(input !== ""){

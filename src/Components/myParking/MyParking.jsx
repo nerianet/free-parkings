@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../App';
 
 
 
 export default function MyParking() {
     const { id } = useParams();
-    const {posts, currentUser, postDelete, updatePost} = useContext(MyContext);
+    const {posts, postDelete, updatePost} = useContext(MyContext);
     const navigate = useNavigate();
-    const [change, setChange] = useState(false);
     const [changePrice, setChangePrice] = useState(false);
     const [changeTime, setChangeTime] = useState(false);
 

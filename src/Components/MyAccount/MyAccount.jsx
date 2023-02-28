@@ -12,7 +12,7 @@ import {Carousel} from 'react-responsive-carousel';
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts, postDelete, updateUser } = useContext(MyContext);
+  const { currentUser, posts, updateUser } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
