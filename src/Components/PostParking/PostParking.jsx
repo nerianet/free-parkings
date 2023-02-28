@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import {BiCurrentLocation} from 'react-icons/bi'
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import ModalC from '../modalComponnet/ModalC'

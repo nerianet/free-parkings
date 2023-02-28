@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MyContext } from "../../App";
 
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { useGeolocated } from 'react-geolocated';
-import MyParking from "../myParking/MyParking";
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
   const { id } = useParams();
-  const {posts, currentUser, setCordUser, cordUser} = useContext(MyContext);
+  const {posts, setCordUser, cordUser} = useContext(MyContext);
   const current = posts.find((post) => post.id == id);
 
   let ro;

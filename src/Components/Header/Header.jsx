@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react';
 import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -28,15 +28,17 @@ export default function Header() {
         <ul className="dropdown-menu mx-sm-0 " aria-labelledby="btnGroupDrop1">
         <li className='d-flex justify-content-center bg-primary boredr rounded fs-3 mb-1'>{currentUser.yourName}</li>
           <li><Link className="dropdown-item link-primary d-flex justify-content-center" to={'/MyAccount'}>My Account</Link></li>
-          <li>
-          {currentUser.yourName != undefined ? 
+          {currentUser.yourName != undefined ? <div> 
         <li><button className='dropdown-item bg-danger d-flex justify-content-center' onClick={Disconnect}>Disconnect<FaUserCheck className='mx-1 mt-1'/></button></li>
-        : 
-        <li ><Link  className='dropdown-item btn btn-primary d-flex justify-content-center' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>}</li>
-        <li><Link className='link-primary dropdown-item d-flex justify-content-center' to={"/About"}>About</Link></li>
-        {currentUser.admin === 'false' ? "" :
-          <Link className="btn btn-warning mx-2" to={''}>Edit Park</Link>
+        { currentUser.admin === 'false' ? "" :
+          <Link className='dropdown-item d-flex justify-content-center' to={'/Users'}>Users</Link>
         }
+        </div>
+        : <div> 
+          <li ><Link  className='dropdown-item btn btn-primary d-flex justify-content-center' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>
+        </div>
+        }
+        <li><Link className='link-primary dropdown-item d-flex justify-content-center' to={"/About"}>About</Link></li>
         </ul>
       </div>
     </ul>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import { location } from "../API/APIs";
@@ -49,7 +49,7 @@ export default function Home() {
           <div className="display-2 text-light"><b>Hellow</b> moshe</div>
           <div className="display-3 text-light">How are you</div>
           <div className=" d-flex mt-3 w-75 justify-content-between">
-            <Link to={"/Parkings"} className="btn btn-light w-100">Search Parkings</Link>
+            <Link id="linkToParkings" to={"/Parkings"} className="btn btn-outline-light w-100 hover-overlay">Search Parkings</Link>
             <Link to={"/PostParking"} className="btn text-light w-100">post parking</Link>
           </div>
         </div>
