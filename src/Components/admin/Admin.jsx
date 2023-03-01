@@ -37,7 +37,11 @@ export default function Admin() {
 
   function setAsAdmin(id){
     let u = users.find((e)=> e.id == id);
-    u.admin = "true";
+    if(u.admin === 'false'){
+      u.admin = "true";
+    } else {
+      u.admin = "false";
+    }
     updateUser(u);
   }
   
@@ -97,7 +101,7 @@ export default function Admin() {
                 <small className="text-muted">{otherCurrUser.userName}</small>
                 <hr className='w-75'/>
                 <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
-                <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>Set As Admin</div>
+                <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>{otherCurrUser.admin === 'true' ? 'Unset' : 'Set'} As Admin</div>
               </div>
           </div>
         </div>

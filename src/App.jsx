@@ -143,6 +143,7 @@ export default function App() {
               userId: e.userId,
               profileUrl: e.profileUrl,
               id: e.id,
+              admin: e.admin,
             }
         })
         setUsers(v)

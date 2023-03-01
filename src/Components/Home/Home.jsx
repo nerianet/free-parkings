@@ -5,7 +5,7 @@ import { location } from "../API/APIs";
 
 
 export default function Home() {
-  const {setInput} = useContext(MyContext);
+  const {setInput, currentUser} = useContext(MyContext);
   const [inputData, setInputData] = useState([]); 
   
 
@@ -57,7 +57,7 @@ export default function Home() {
       </div>
       <div className="col-sm-5 col-10 d-flex align-items-center">
         <div className="mx-4 mb-1">
-          <div className="display-2 text-light"><b>Hellow</b> moshe</div>
+          <div className="display-2 text-light"><b>Hellow </b></div>
           <div className="display-3 text-light">How are you</div>
           <div className=" d-flex mt-3 w-75 justify-content-between">
             <Link id="linkToParkings" to={"/Parkings"} className="btn btn-outline-light w-100 hover-overlay">Search Parkings</Link>
