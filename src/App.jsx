@@ -192,7 +192,7 @@ export default function App() {
   }
 
   function updateUser(user){
-    let a = doc(firestore, 'users', `${currentUser.id}`);
+    let a = doc(firestore, 'users', `${user.id}`);
     const loc = updateDoc(a,user);
   }
 
@@ -223,7 +223,7 @@ export default function App() {
     })
     p = posts.filter((e)=> e.userId != u.userId);
     setPosts(p);
-    
+
     /// delete post from firebase
     let a = doc(firestore, 'users', `${id}`);
     let n = deleteDoc(a);

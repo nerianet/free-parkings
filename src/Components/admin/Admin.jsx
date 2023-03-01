@@ -14,7 +14,7 @@ export default function Admin() {
   const { id } = useParams();
 
 
-  const { posts, users, postDelete, userDelete } = useContext(MyContext);
+  const { posts, users, postDelete, userDelete, updateUser } = useContext(MyContext);
 
   const [currPosts, setCurrPosts] = useState([]);
   const [otherCurrUser, setOtherCurrUser] = useState();
@@ -32,6 +32,12 @@ export default function Admin() {
   function deleteUser(id){
     userDelete(id);
     navigate(`/Users`);
+  }
+
+  function setAsAdmin(id){
+    let u = users.find((e)=> e.id == id);
+    u.admin = "true";
+    updateUser(u);
   }
   
   return (
@@ -90,6 +96,7 @@ export default function Admin() {
                 <small className="text-muted">{otherCurrUser.userName}</small>
                 <hr className='w-75'/>
                 <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
+                <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>Set As Admin</div>
               </div>
           </div>
         </div>
