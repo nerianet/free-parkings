@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import { useContext } from 'react';
 import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App';
 
 
 export default function Header() {
-  const {currentUser,setCurrentUser} = useContext(MyContext);
+  const {currentUser,setCurrentUser, setProfileUrl} = useContext(MyContext);
   const [showName, setShowName] = useState(true);
-
+  const navigate = useNavigate();
+  
   function Disconnect(){
     setCurrentUser({});
     localStorage.clear();
+    setProfileUrl('');
+    navigate('/');
   } 
 
   

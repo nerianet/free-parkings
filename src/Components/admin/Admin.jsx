@@ -19,31 +19,25 @@ export default function Admin() {
   const [currPosts, setCurrPosts] = useState([]);
   const [otherCurrUser, setOtherCurrUser] = useState();
   const navigate = useNavigate();
+
   useEffect(()=>{
     setOtherCurrUser(users.find((e)=> e.userId == id));
     setCurrPosts(posts.filter((e)=> e.userId == id));
   },[])
 
   function deletePost (id, nameFile){
-    let u = users.find((e)=> e.id == id);
-    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
-      postDelete(id, nameFile);
-      navigate(`/Users`);
-    }
+    postDelete(id, nameFile);
+    navigate(`/Users`);
   }
 
   function deleteUser(id){
-    let u = users.find((e)=> e.id == id);
-    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
-      userDelete(id);
-      setUsers(users.filter((e)=> e.id != id));
-      navigate(`/Users`);
-    }
+    userDelete(id);
+    navigate(`/Users`);
   }
 
   function setAsAdmin(id){
     let u = users.find((e)=> e.id == id);
-    if(u.admin === 'false' || u.userName === 'neria.levi444@gmail.com' || u.userName === 'moshe6073163@gmail.com'){
+    if(u.admin === 'false'){
       u.admin = "true";
     } else {
       u.admin = "false";
@@ -106,9 +100,11 @@ export default function Admin() {
                 <h5 className="mb-0">{otherCurrUser.yourName}</h5>
                 <small className="text-muted">{otherCurrUser.userName}</small>
                 <hr className='w-75'/>
+                {otherCurrUser.userName === 'neria.levi444@gmail.com' || otherCurrUser.userName === 'moshe6073163@gmail.com' ? 'Owner' : <div className='d-flex flex-column align-items-center'>
                 <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
                 <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>{otherCurrUser.admin === 'true' ? 'Unset' : 'Set'} As Admin</div>
-              </div>
+                </div>} 
+                </div>
           </div>
         </div>
         {currPosts[0] == undefined ? "" :

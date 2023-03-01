@@ -129,7 +129,6 @@ export default function MyAccount() {
     function deleteUser(id){
         userDelete(id);
         localStorage.clear();
-        setUsers(users.filter((e)=> e.id != id));
         setCurrentUser({});
         navigate(`/`);
     }
