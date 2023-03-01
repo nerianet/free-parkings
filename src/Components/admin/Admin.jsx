@@ -25,19 +25,25 @@ export default function Admin() {
   },[])
 
   function deletePost (id, nameFile){
-    postDelete(id, nameFile);
-    navigate(`/Users`);
+    let u = users.find((e)=> e.id == id);
+    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
+      postDelete(id, nameFile);
+      navigate(`/Users`);
+    }
   }
 
   function deleteUser(id){
-    userDelete(id);
-    setUsers(users.filter((e)=> e.id != id));
-    navigate(`/Users`);
+    let u = users.find((e)=> e.id == id);
+    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
+      userDelete(id);
+      setUsers(users.filter((e)=> e.id != id));
+      navigate(`/Users`);
+    }
   }
 
   function setAsAdmin(id){
     let u = users.find((e)=> e.id == id);
-    if(u.admin === 'false'){
+    if(u.admin === 'false' || u.userName === 'neria.levi444@gmail.com' || u.userName === 'moshe6073163@gmail.com'){
       u.admin = "true";
     } else {
       u.admin = "false";

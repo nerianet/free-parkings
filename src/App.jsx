@@ -33,7 +33,7 @@ export default function App() {
   const [isShowModal, setIsShowModal] = useState(false);
   const [input, setInput] = useState("");
   const [cordUser, setCordUser] = useState();
-  const [profileUrl, setProfileUrl] = useState();
+  const [profileUrl, setProfileUrl] = useState('');
   const [users, setUsers] = useState([]);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -121,7 +121,7 @@ export default function App() {
     });
   }
   useEffect(()=>{
-    if(profileUrl){
+    if(profileUrl !== ''){
       updateUser({...currentUser, profileUrl: profileUrl});
     }
     getAllUsers();
@@ -141,7 +141,7 @@ export default function App() {
               yourName: e.yourName,
               userName: e.userName,
               userId: e.userId,
-              profileUrl: e.profileUrl,
+              profileUrl:  e.profileUrl,
               id: e.id,
               admin: e.admin,
             }
