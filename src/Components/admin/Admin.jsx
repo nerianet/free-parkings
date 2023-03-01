@@ -14,7 +14,7 @@ export default function Admin() {
   const { id } = useParams();
 
 
-  const { posts, users, postDelete, userDelete, updateUser } = useContext(MyContext);
+  const { posts, users, postDelete, userDelete, updateUser, setUsers } = useContext(MyContext);
 
   const [currPosts, setCurrPosts] = useState([]);
   const [otherCurrUser, setOtherCurrUser] = useState();
@@ -31,6 +31,7 @@ export default function Admin() {
 
   function deleteUser(id){
     userDelete(id);
+    setUsers(users.filter((e)=> e.id != id));
     navigate(`/Users`);
   }
 

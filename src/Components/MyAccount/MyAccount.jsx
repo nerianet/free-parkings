@@ -12,7 +12,7 @@ import {Carousel} from 'react-responsive-carousel';
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts, updateUser, userDelete } = useContext(MyContext);
+  const { currentUser, posts, updateUser, userDelete, setUsers, users, setCurrentUser } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
@@ -128,6 +128,8 @@ export default function MyAccount() {
 
     function deleteUser(id){
         userDelete(id);
+        setUsers(users.filter((e)=> e.id != id));
+        setCurrentUser({});
         navigate(`/`);
     }
 

@@ -41,6 +41,7 @@ export default function App() {
   const navigate = useNavigate();
 
   const usersRef = collection(firestore, "users");
+  let v = 0;
   const setNewUser = (userData) => {
     const queryUser = query(usersRef, where('userName', '==', `${userData.userName}`));
     onSnapshot(queryUser, (snapshot) => {
@@ -48,10 +49,10 @@ export default function App() {
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
       });
-      if(books[0] != undefined){
+      if(books[0] && v == 0){
         window.alert("You Have a Account");
         navigate('/LogIn');
-      } else {
+      } else if(v == 0) {
         try {
           addDoc(usersRef, userData);
         } 
@@ -59,8 +60,10 @@ export default function App() {
           console.log(err);
         }
         localStorage.setItem("userId", `${userData.userId}`);
+        setCurrentUser(userData);
         navigate('/');
       }
+      v=1;
     })
   }
   
@@ -224,7 +227,7 @@ export default function App() {
     p = posts.filter((e)=> e.userId != u.userId);
     setPosts(p);
 
-    /// delete post from firebase
+    /// delete user from firebase
     let a = doc(firestore, 'users', `${id}`);
     let n = deleteDoc(a);
     let arr = users.filter((item)=> item.id != id);
@@ -257,6 +260,7 @@ export default function App() {
     setCordUser,
     setProfileUrl,
     users,
+    setUsers,
   };
 
   return (
