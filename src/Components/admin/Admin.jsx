@@ -14,15 +14,25 @@ export default function Admin() {
   const { id } = useParams();
 
 
-  const { posts, users } = useContext(MyContext);
+  const { posts, users, postDelete, userDelete } = useContext(MyContext);
 
   const [currPosts, setCurrPosts] = useState([]);
   const [otherCurrUser, setOtherCurrUser] = useState();
-
+  const navigate = useNavigate();
   useEffect(()=>{
     setOtherCurrUser(users.find((e)=> e.userId == id));
     setCurrPosts(posts.filter((e)=> e.userId == id));
   },[])
+
+  function deletePost (id, nameFile){
+    postDelete(id, nameFile);
+    navigate(`/Users`);
+  }
+
+  function deleteUser(id){
+    userDelete(id);
+    navigate(`/Users`);
+  }
   
   return (
     <> { !otherCurrUser ? "" :
@@ -79,7 +89,7 @@ export default function Admin() {
                 <h5 className="mb-0">{otherCurrUser.yourName}</h5>
                 <small className="text-muted">{otherCurrUser.userName}</small>
                 <hr className='w-75'/>
-                <div className='btn btn-danger mb-2' >Delete User</div>
+                <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
               </div>
           </div>
         </div>
@@ -96,7 +106,7 @@ export default function Admin() {
                           <div className='mt-2 '>City: {item.city + "," }</div>
                           <div className='mt-2 '>Street: {item.street + "."} </div>
                           <hr className='w-75 '/>
-                          <div className='btn btn-danger mb-2 ' >Delete Post</div>
+                          <div className='btn btn-danger mb-2 ' onClick={(e)=> deletePost(item.id, item.nameFile)}>Delete Post</div>
                         </div>
                     </div> 
                     ))}</div>

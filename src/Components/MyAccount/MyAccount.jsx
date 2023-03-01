@@ -12,7 +12,7 @@ import {Carousel} from 'react-responsive-carousel';
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts, updateUser } = useContext(MyContext);
+  const { currentUser, posts, updateUser, userDelete } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
@@ -126,7 +126,10 @@ export default function MyAccount() {
         }
     }
 
-   
+    function deleteUser(id){
+        userDelete(id);
+        navigate(`/`);
+    }
 
   return (
     <>
@@ -226,7 +229,7 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={7} className='col-sm-6 col-12 '>
+        <Col md={7} className='col-sm-6 col-12 d-flex flex-column align-items-center'>
           <Card className="shadow" style={{height:'354px'}}>
             <Card.Header className="bg-secondary shadow text-light">Last Posts</Card.Header>
             <Card.Body>
@@ -251,6 +254,7 @@ export default function MyAccount() {
             }
             </Card.Body>
           </Card>
+          <div className='btn btn-danger mt-3 d-flex justify-content-center w-50' onClick={()=> deleteUser(currentUser.id)}>Delete My Account</div>
         </Col>
       </Row>
     </Container>

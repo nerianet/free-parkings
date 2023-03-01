@@ -139,6 +139,7 @@ export default function App() {
               userName: e.userName,
               userId: e.userId,
               profileUrl: e.profileUrl,
+              id: e.id,
             }
         })
         setUsers(v)
@@ -213,6 +214,14 @@ export default function App() {
     let arr = posts.filter((item)=> item.id != id);
     setPosts(arr);
   }
+
+  function userDelete(id){
+    /// delete post from firebase
+    let a = doc(firestore, 'users', `${id}`);
+    let n = deleteDoc(a);
+    let arr = users.filter((item)=> item.id != id);
+    setUsers(arr);
+  }
 //////////////////////////////////////////////////////////////////////////////////////////////
  
   const AllData = {
@@ -224,6 +233,7 @@ export default function App() {
     postDelete,
     updateUser,
     updatePost,
+    userDelete,
 ///////////////////
     currentUser,
     setCurrentUser,
