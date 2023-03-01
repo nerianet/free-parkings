@@ -216,6 +216,14 @@ export default function App() {
   }
 
   function userDelete(id){
+    let u = users.find((e)=> e.id == id);
+    let p = posts.filter((e)=> e.userId == u.userId);
+    p.map((e)=>{
+      postDelete(e.id, e.fileName);
+    })
+    p = posts.filter((e)=> e.userId != u.userId);
+    setPosts(p);
+    
     /// delete post from firebase
     let a = doc(firestore, 'users', `${id}`);
     let n = deleteDoc(a);
