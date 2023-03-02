@@ -162,6 +162,7 @@ export default function App() {
     //  console.log(currentUser);
       setPosts(books);     
     });
+    
   },[]);
 
   let storageRef;

@@ -16,17 +16,19 @@ export default function Parkings() {
   const v = useGeolocated();
   const [map,setMap] = useState(false);
   useEffect(()=>{
-    if(input !== ""){
-      let m = input.split(',');
-      let v = document.getElementById('search');
-      v.value = m[0];
-      setInput(m[0]);
-    };
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
     }
   }, [v.coords])
 
+  useEffect(()=>{
+    if(input !== ""){
+      let m = input.split(',');
+      let v = document.getElementById('search');
+      v.value = m[0];
+      setInput(m[0]);
+    }
+  },[])
 
   const postInput = function (inputParkings) {
     setInput(inputParkings.charAt(0).toUpperCase() + inputParkings.slice(1));

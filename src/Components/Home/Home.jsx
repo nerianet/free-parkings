@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import { location } from "../API/APIs";
@@ -13,6 +13,10 @@ export default function Home() {
   function startSearch(){
     setInput(v.value.charAt(0).toUpperCase() + v.value.slice(1));
   }
+
+  useEffect(()=>{
+    setInput('');
+  },[])
   
   function addToIn(e){
     v.value = e;
