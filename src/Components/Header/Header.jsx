@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
 import { useContext } from 'react';
 import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App';
 
 
 export default function Header() {
-  const {currentUser,setCurrentUser} = useContext(MyContext);
+  const {currentUser,setCurrentUser, setProfileUrl} = useContext(MyContext);
   const [showName, setShowName] = useState(true);
-
+  const navigate = useNavigate();
+  
   function Disconnect(){
     setCurrentUser({});
     localStorage.clear();
+    setProfileUrl('');
+    navigate('/');
   } 
 
   
   return (
     <div className='sticky-top'>
     <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100'>
-      <li><Link to={"/"}><img className='rounded-circle mt-1' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
-      <li>Free Parkings</li>
+      <li><Link to={"/"}><img className='rounded-circle mt-1 mb-1' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
+      <li className='mx-1 mt-2'>Free Parkings</li>
       <li></li>
       <p className='p-2 '>{showName ? currentUser.yourName : ""}</p>
       <div className="btn-group" onClick={()=>setShowName(!showName)} role="group">

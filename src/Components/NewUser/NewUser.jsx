@@ -27,7 +27,7 @@ export default function NewUser() {
       address: address.current.value,
       userId: userId(),
       admin: userName.current.value === 'moshe6073163@gmail.com' || userName.current.value === 'neria.levi444@gmail.com' ? 'true' : 'false' ,
-      profilUrl: '',
+      profileUrl: '',
     }
     if(pass1.current.value!=pass2.current.value){
       window.alert("the password not correct");

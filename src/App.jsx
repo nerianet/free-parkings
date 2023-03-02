@@ -100,7 +100,7 @@ export default function App() {
       });
       if(books[0] != undefined){
         if(localeUId != null) {
-         setCurrentUser(books[0]);
+         setCurrentUser(books.find((e)=> e.userId == localeUId));
         } else {
           if(books[0].password == password){
             setCurrentUser(books[0]);
@@ -162,6 +162,7 @@ export default function App() {
     //  console.log(currentUser);
       setPosts(books);     
     });
+    
   },[]);
 
   let storageRef;

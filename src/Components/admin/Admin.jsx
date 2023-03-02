@@ -19,31 +19,25 @@ export default function Admin() {
   const [currPosts, setCurrPosts] = useState([]);
   const [otherCurrUser, setOtherCurrUser] = useState();
   const navigate = useNavigate();
+
   useEffect(()=>{
     setOtherCurrUser(users.find((e)=> e.userId == id));
     setCurrPosts(posts.filter((e)=> e.userId == id));
   },[])
 
   function deletePost (id, nameFile){
-    let u = users.find((e)=> e.id == id);
-    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
-      postDelete(id, nameFile);
-      navigate(`/Users`);
-    }
+    postDelete(id, nameFile);
+    navigate(`/Users`);
   }
 
   function deleteUser(id){
-    let u = users.find((e)=> e.id == id);
-    if(u.userName !== 'neria.levi444@gmail.com' || u.userName !== 'moshe6073163@gmail.com'){
-      userDelete(id);
-      setUsers(users.filter((e)=> e.id != id));
-      navigate(`/Users`);
-    }
+    userDelete(id);
+    navigate(`/Users`);
   }
 
   function setAsAdmin(id){
     let u = users.find((e)=> e.id == id);
-    if(u.admin === 'false' || u.userName === 'neria.levi444@gmail.com' || u.userName === 'moshe6073163@gmail.com'){
+    if(u.admin === 'false'){
       u.admin = "true";
     } else {
       u.admin = "false";
@@ -106,20 +100,22 @@ export default function Admin() {
                 <h5 className="mb-0">{otherCurrUser.yourName}</h5>
                 <small className="text-muted">{otherCurrUser.userName}</small>
                 <hr className='w-75'/>
+                {otherCurrUser.userName === 'neria.levi444@gmail.com' || otherCurrUser.userName === 'moshe6073163@gmail.com' ? 'Owner' : <div className='d-flex flex-column align-items-center'>
                 <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
                 <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>{otherCurrUser.admin === 'true' ? 'Unset' : 'Set'} As Admin</div>
-              </div>
+                </div>} 
+                </div>
           </div>
         </div>
         {currPosts[0] == undefined ? "" :
           <div className='row d-flex justify-content-center'>
-            <div className='col-sm-10 col-8 bg-light rounded p-0 shadow '>
+            <div className='col-8 bg-light rounded p-0 shadow '>
               <div className='bg-primary d-flex justify-content-center rounded-top mb-2'>Posts</div>
                 <div className="d-flex flex-column align-items-center mb-4 mt-4" >
                   <div className='d-flex flex-column align-items-center'>
                   {currPosts.map((item, i) => (
-                    <div className=' mb-3 d-flex flex-wrap justify-content-center w-100 rounded shadow'>
-                        <img className='w-50 rounded h-auto' src={item.imgUrl}/>
+                    <div className=' mb-3 d-flex flex-wrap justify-content-center h-100 w-100 rounded shadow'>
+                        <img className='img-fluid rounded shadow' style={{height: '250px', width:'75%'}} src={item.imgUrl}/>
                         <div className='text-primary mx-1 d-flex flex-column align-items-center ' key={i} >
                           <div className='mt-2 '>City: {item.city + "," }</div>
                           <div className='mt-2 '>Street: {item.street + "."} </div>
