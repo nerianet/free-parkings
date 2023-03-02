@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MyContext } from "../../App";
-
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { useGeolocated } from 'react-geolocated';
@@ -102,7 +101,7 @@ async function maps(e){
 }
 
   return (
-    <> 
+    <div>
     {current ? 
     <div class="container mt-5">
       <div class="row">
@@ -135,7 +134,7 @@ async function maps(e){
         </div>
       </div>
     </div> : ''}
-    </>
+    </div>
   )
 }
 
