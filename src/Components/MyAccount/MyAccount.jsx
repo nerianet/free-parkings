@@ -138,9 +138,9 @@ export default function MyAccount() {
     <>
      <Container className="mt-4 mb-5 vh-auto ">
       <Row>
-        <Col md={6} className='mb-sm-0 mb-3 col-sm-7 col-12 d-flex justify-content-sm-start justify-content-center'>
-          <Card className="shadow w-sm-100 w-50 d-flex flex-column align-items-center">
-            <Card.Header className="bg-primary text-light w-100 d-flex justify-content-center">My Profile</Card.Header>
+        <Col md={6} className='mb-sm-2 mb-3 col-12 d-flex justify-content-center'>
+          <Card className="shadow w-sm-100 w-75">
+            <Card.Header className="bg-primary text-light d-flex justify-content-center">My Profile</Card.Header>
             <Card.Body className=''>
               <div className="d-flex flex-column align-items-center">
                 <img src={currentUser.profileUrl ? currentUser.profileUrl : "https://via.placeholder.com/150"} alt="Profile" className="rounded-circle mb-3" />
@@ -208,15 +208,15 @@ export default function MyAccount() {
         :
         <div className=''>
             <div className='d-flex '>
-                <input className='in' ref={changePassword1} placeholder="Old password" type="password" />
+                <input className='in w-75' ref={changePassword1} placeholder="Old password" type="password" />
                 <div className='mx-2'  onClick={()=>changeSeePassword1()}>{eye1 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
             </div>
             <div className='d-flex pt-1'>
-                <input className='in' ref={changePassword2} placeholder="New password" type="password" />
+                <input className='in w-75' ref={changePassword2} placeholder="New password" type="password" />
                 <div className='mx-2'  onClick={()=>changeSeePassword2()}>{eye2 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
             </div>
             <div className='d-flex pt-1'>
-                <input className='in' ref={changePassword3} placeholder="Verify new password" type="password" />
+                <input className='in w-75' ref={changePassword3} placeholder="Verify new password" type="password" />
                 <div className='mx-2'  onClick={()=>changeSeePassword3()}>{eye3 == false ? <AiFillEyeInvisible/> : <AiFillEye/> } </div>
             </div>
             </div>}
@@ -233,8 +233,8 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={6} className='col-sm-6 col-12 d-flex flex-column align-items-center'>
-          <Card className="shadow w-75 d-flex flex-column align-items-center" style={{height:'354px'}}>
+        <Col md={6} className='col-12 d-flex flex-column align-items-center'>
+          <Card className="shadow w-sm-75 w-100 d-flex flex-column align-items-center" style={{height:'354px'}}>
             <Card.Header className="bg-secondary shadow text-light w-100 d-flex justify-content-center">My Posts</Card.Header>
             <Card.Body className=''>
             {myPosts[0] == undefined ? <div className='w-100 h-100 d-flex'><Link to={"/PostParking"} className=' align-self-center btn btn-primary rounded'>add post</Link></div> :
