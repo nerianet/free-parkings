@@ -84,7 +84,7 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="text-decoration-none border m-1 cards rounded" style={{ width: "350px", height: "450px" }}>
+        <div className="text-decoration-none border m-1 cards rounded mb-2" style={{ width: "350px", height: "450px" }}>
         <Link to={item.id} key={i} >
           <h4 className="d-flex justify-content-center">{item.city}</h4>
           <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>

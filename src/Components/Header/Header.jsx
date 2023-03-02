@@ -21,8 +21,8 @@ export default function Header() {
   return (
     <div className='sticky-top'>
     <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100'>
-      <li><Link to={"/"}><img className='rounded-circle mt-1' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
-      <li>Free Parkings</li>
+      <li><Link to={"/"}><img className='rounded-circle mt-1 mb-1' src='https://images.template.net/85586/free-car-parking-illustration-ql7jz.jpg' width="100px" height="70px"/></Link></li>
+      <li className='mx-1 mt-2'>Free Parkings</li>
       <li></li>
       <p className='p-2 '>{showName ? currentUser.yourName : ""}</p>
       <div className="btn-group" onClick={()=>setShowName(!showName)} role="group">

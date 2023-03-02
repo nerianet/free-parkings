@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { MyContext } from '../../App';
 import { Link } from "react-router-dom";
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
+import {TiUserDelete} from 'react-icons/ti';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
@@ -135,19 +136,20 @@ export default function MyAccount() {
 
   return (
     <>
-     <Container className="mt-4 mb-5 vh-100 ">
+     <Container className="mt-4 mb-5 vh-auto ">
       <Row>
-        <Col md={5} className='mb-sm-0 mb-3 col-sm-6 col-12 d-flex justify-content-sm-start justify-content-center'>
-          <Card className="shadow w-sm-100 w-75">
-            <Card.Header className="bg-primary text-light">Profile</Card.Header>
-            <Card.Body>
+        <Col md={6} className='mb-sm-0 mb-3 col-sm-7 col-12 d-flex justify-content-sm-start justify-content-center'>
+          <Card className="shadow w-sm-100 w-50 d-flex flex-column align-items-center">
+            <Card.Header className="bg-primary text-light w-100 d-flex justify-content-center">My Profile</Card.Header>
+            <Card.Body className=''>
               <div className="d-flex flex-column align-items-center">
                 <img src={currentUser.profileUrl ? currentUser.profileUrl : "https://via.placeholder.com/150"} alt="Profile" className="rounded-circle mb-3" />
                 <h5 className="mb-0">{currentUser.yourName}</h5>
                 <small className="text-muted">{currentUser.userName}</small>
+              
+                <hr className='w-100' />
+                <div className='btn btn-primary' onClick={()=>setChange(!change)}>Edit Profile</div>
               </div>
-              <hr />
-              <Button variant="primary" block onClick={()=>setChange(!change)}>Edit Profile</Button>
               {!change ? "" : 
               <div>
                 <form className="mx-1 mx-md-4" onSubmit={submitChange} >
@@ -231,16 +233,16 @@ export default function MyAccount() {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={7} className='col-sm-6 col-12 d-flex flex-column align-items-center'>
-          <Card className="shadow" style={{height:'354px'}}>
-            <Card.Header className="bg-secondary shadow text-light">Last Posts</Card.Header>
-            <Card.Body>
-            {myPosts[0] == undefined ? <Link to={"/PostParking"} className='btn btn-primary raunded-circle'>add post</Link> :
+        <Col md={6} className='col-sm-6 col-12 d-flex flex-column align-items-center'>
+          <Card className="shadow w-75 d-flex flex-column align-items-center" style={{height:'354px'}}>
+            <Card.Header className="bg-secondary shadow text-light w-100 d-flex justify-content-center">My Posts</Card.Header>
+            <Card.Body className=''>
+            {myPosts[0] == undefined ? <div className='w-100 h-100 d-flex'><Link to={"/PostParking"} className=' align-self-center btn btn-primary rounded'>add post</Link></div> :
             <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
                 {myPosts.map((item, i) => (
                 <Link to={item.id} className='bg-dark'>
                     <div className='text-primary ' key={i} >
-                        <img className='w-75 ' style={{ height:"250px"}}  src={item.imgUrl}/>
+                        <img className='w-75 rounded' style={{ height:"250px"}}  src={item.imgUrl}/>
                         <div className=''>
                             <div className='mt-sm-2'></div>
                             <div>
@@ -256,7 +258,7 @@ export default function MyAccount() {
             }
             </Card.Body>
           </Card>
-          <div className='btn btn-danger mt-3 d-flex justify-content-center w-50' onClick={()=> deleteUser(currentUser.id)}>Delete My Account</div>
+          <div className='btn btn-danger mt-3 d-flex justify-content-center w-50' onClick={()=> deleteUser(currentUser.id)}>Delete My Account <TiUserDelete className='m-1'/></div>
         </Col>
       </Row>
     </Container>
