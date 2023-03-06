@@ -17,16 +17,6 @@ export default function Header() {
     navigate('/');
   } 
 
-  function setShow(){
-    setShowName(showName);
-    console.log("mo")
-  }
-
-  useEffect(()=>{
-    if(!showName)
-    window.addEventListener('click', setShow());
-  },[showName])
-  
   return (
     <div className='sticky-top'>
     <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100'>
