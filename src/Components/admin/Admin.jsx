@@ -38,8 +38,10 @@ export default function Admin() {
   function setAsAdmin(id){
     let u = users.find((e)=> e.id == id);
     if(u.admin === 'false'){
+      otherCurrUser.admin = "true";
       u.admin = "true";
     } else {
+      otherCurrUser.admin = "false";
       u.admin = "false";
     }
     updateUser(u);

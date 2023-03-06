@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react';
 import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,6 +17,15 @@ export default function Header() {
     navigate('/');
   } 
 
+  function setShow(){
+    setShowName(showName);
+    console.log("mo")
+  }
+
+  useEffect(()=>{
+    if(!showName)
+    window.addEventListener('click', setShow());
+  },[showName])
   
   return (
     <div className='sticky-top'>
