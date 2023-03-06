@@ -11,6 +11,10 @@
     background-color: rgba(0, 0, 0, 0.35);
 }
 
+.bg_login {
+    background-color: rgba(85, 169, 184, 0.35);
+}
+
 .bgCircle1 {
     /* background-image: url("https://thumbs.dreamstime.com/z/smartphone-application-online-searching-free-parking-place-map-gps-navigation-parking-concept-smartphone-application-111457034.jpg");
     background-repeat: no-repeat;
