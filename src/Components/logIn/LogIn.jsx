@@ -1,7 +1,7 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
-import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 import {app} from '../../firebase/Firebase'
 import "./LogIn.css"
 
@@ -31,21 +31,23 @@ export default function LogIn() {
         });
   }
 
-  const [email, setEmail] = useState('');
-  const auth = getAuth();
-
-  const triggerResetEmail = async () => {
-    console.log(email);
-    await sendPasswordResetEmail(auth, email);
-    console.log("Password reset email sent")
-  }
-
   const submithandler = (a) => {
     a.preventDefault();
     setUser(userName.current.value, password.current.value);
       userName.current.value = "";
       password.current.value = "";
   }
+
+
+  const [email, setEmail] = useState('');
+  const auth = getAuth();
+
+  const triggerResetEmail = async () => {
+    await sendPasswordResetEmail(auth, email);
+    await confirmPasswordReset(auth, )
+    // console.log();
+  }
+
 
   function hideReset(){
     let a = document.getElementById('Reset');
