@@ -188,13 +188,14 @@ export default function App() {
     else{
       getDownloadURL(storageRef)
       .then((url) => {
-        setUrls([...urls, url]);
-        console.log(urls);
-        setTimeout(() => {
+        setUrls({...urls, url:url});
+        console.log("hellow");
+        console.log(url);
+        // setTimeout(() => {
           const u = doc(firestore, "posts", `${idPost}`);
           const loc = updateDoc(u, {"imgUrl": urls});
           
-        }, 5000);
+        // }, 5000);
        })
       .catch((error) => {
         console.log(error);
@@ -202,9 +203,9 @@ export default function App() {
     }
   }
 
-  useEffect((e)=>{
-    // console.log(urls)
-  },[urls])
+  // useEffect((e)=>{
+  //   // console.log(urls)
+  // },[urls])
 
   function updateUser(user){
     let a = doc(firestore, 'users', `${user.id}`);
