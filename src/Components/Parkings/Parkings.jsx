@@ -46,9 +46,9 @@ export default function Parkings() {
   });
 
   return (
-  <>
-  
-  <div className="d-flex justify-content-start m-3">
+  <> 
+  <div className="">
+  <div className="d-flex justify-content-start m-3" >
     <form className="col-2 d-flex form-inline my-2 my-lg-0">
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <input id="search" className="form-control mr-sm-2" style={{width:'150px'}} type="search" placeholder="Search" aria-label="Search" onChange={(e) => postInput(e.target.value)}/>
@@ -98,6 +98,7 @@ export default function Parkings() {
         </div>
       ))}
     </div>
+  </div>
   </div>
   </>
   );

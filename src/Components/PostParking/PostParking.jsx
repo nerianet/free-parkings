@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useContext } from "react";
+import { BiCurrentLocation, BiImageAdd } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
@@ -60,13 +61,14 @@ export default function PostParking() {
 
 
 
-  let img = document.getElementById("myimg");
+  // let img = document.getElementById("myimg");
 
   const submitPost =  (e) => {
     e.preventDefault();
       const post = {
       userId: currentUser.userId,
-      nameFile: imageRef.current.files[0].name,
+      // nameFile: imageRef.current.files[0].name,
+      nameFile: "check",
       accessibility: accessibility.current.checked,
       detail: detail != undefined ? detail.current.value : "",
       code: code != undefined ? code.target.checked : "",
@@ -87,24 +89,31 @@ export default function PostParking() {
     suitable.current.value = "";
     price.current.value = "";
     activityTime.target.value = "";
-    setImage(undefined);
-    img = undefined;
-    setStorage(imageRef.current.files[0]);
-    imageRef.current.value = null;
+    // setImage(undefined);
+    // img = undefined;
+    // setStorage(imageRef.current.files[0]);
+    
+    let i=0;
+    while(image[i] != undefined){
+      setStorage(image[i++]);
+    }
   };
 
 
   const unsetImage = (e) => {
-    e.preventDefault();
-    setImage(undefined);
-    img = undefined;
-    imageRef.current.value = null;
+    url[e] = undefined;
+    setUrl(url.filter((url) => url != undefined));
+
+    image[e] = undefined;
+    setImage(image.filter((image) => image != undefined));
   };
 
-  function setCityInputaleImage(e) {
-    setImage(imageRef.current.files[0]);
-    let _url = URL.createObjectURL(imageRef.current.files[0]);
-    setUrl(_url);
+  function selectImage(e) {
+    setUrl([...url, URL.createObjectURL(imageRef.current.files[0])]);
+    
+    let file = imageRef.current.files[0]; 
+    setImage([...image, file])
+    imageRef.current.value = null;
   }
 
   function setCity(e){
@@ -154,18 +163,21 @@ export default function PostParking() {
       {currentUser.yourName == undefined ? (
         changeNavigate()
       ) : ( 
-      <div className="h-auto mb-5 d-flex justify-content-center" >
-        <div className="w-75 border rounded bg-light shadow d-flex flex-column justify-content-center">
+      <div className="h-auto mb-5 d-flex justify-content-center " >
+        <div className="w-75 bg_postPark border rounded shadow d-flex flex-column justify-content-center">
 
           <div className="row">
             <div className="col-12 h1 text-center">Post A Park</div>
           </div>
 
           <form className="row justify-content-around " onSubmit={submitPost}>
-            <div className="col-sm-6 col-10 d-flex flex-wrap">
 
-              <div className="m-3">
-                <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light col-12" onChange={(e)=>setCityInput(e.target.value)} />
+            <div className="col-sm-6 col-10 flex-wrap justify-content-center">
+
+              <div className="h3 text-center">Detail</div>
+
+              <div className="d-flex flex-wrap m-2 justify-content-center">
+                <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light m-2 col-5" onChange={(e)=>setCityInput(e.target.value)} />
                 <div>{totalCity.map((e, i)=>(
                   <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
                   : 
@@ -173,10 +185,8 @@ export default function PostParking() {
                   : 
                   <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
                 </div>
-              </div>
-            
-              <div className="m-3">
-                <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light col-12" onChange={(e)=>setAddressInput(e.target.value)} />
+
+                <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light m-2 col-5" onChange={(e)=>setAddressInput(e.target.value)} />
                 <div>{totalStreet.map((e, i)=>(
                   <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
                   : 
@@ -185,64 +195,80 @@ export default function PostParking() {
                   <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
                 </div>
               </div>
-
-              <div className="m-3">
-                <TextField required color="warning" label="Activity time?" placeholder="sun - thurs" variant="outlined" className="bg-light col-12" onChange={e => setActivityTime(e)}/>
-              </div>
-
-              <div className="m-3">
-                <TextField required color="warning" label="suitable for?" placeholder="Car / Trunk / Bike" variant="outlined" className="bg-light col-12" inputRef={suitable}/>
-              </div>
-
-              <div className="m-3">
-                <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light col-12" inputRef={price}/>
-              </div>
-
-              <div className="m-3">
-                <label>Have a Code ?</label>
-                <input type="checkbox" className="m-2" onChange={(e) => setCode(e)}/>
-                {code == undefined ? "" :
-                code.target.checked == false 
-                ?
-                ("") 
-                : 
-                (<input required  placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
-              </div>
-
-              <div className="m-3">
-                <label className=" form-label" for="form3Example4c">accessibility ?</label>
-                <input type="checkbox" ref={accessibility} className="m-2"/>
-              </div>
             
+              {/* <button className="btn text-primary mb-3" onClick={e=>setAutoLocation(e)}><BiCurrentLocation/> </button> */}
 
-
-            <div className="col-10">
-              
-              <div className="m-3 ">
-                  <TextField required color="warning" label="Parking details" placeholder="Give details about the parking" variant="outlined" multiline rows={7} className="bg-light" inputRef={detail} />
+              <div className="d-flex flex-wrap m-2 justify-content-center">
+                <TextField required color="warning" label="Activity time?" placeholder="sun - thurs" variant="outlined" className="bg-light m-2 col-5" onChange={e => setActivityTime(e)}/> 
+                <TextField required color="warning" label="suitable for?" placeholder="Car / Trunk / Bike" variant="outlined" className="bg-light m-2 col-5" inputRef={suitable}/>
               </div>
 
+              <div className="d-flex flex-wrap m-2 justify-content-center">
+                <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light m-2 col-5" inputRef={price}/>
+                {/* <TextField required color="warning" label="Please Enter Price:" placeholder="Price For Hour" variant="outlined" className="bg-light m-2 col-5" inputRef={price}/> */}
+              </div>
 
-              <div className="m-3">
-                <input type="file" onChange={setCityInputaleImage} ref={imageRef} />
-                {image == undefined 
-                ?
-                ("") 
-                : 
-                (<div style={{ marginTop: "9px" }}>
-                    <img className="rounded" src={url} style={{ width: "250px", height: "150px" }} id="myimg"/>
-                    <button onClick={unsetImage}><FaTrashAlt/></button>
-                </div>)}
+              <div className="d-flex flex-wrap m-2 justify-content-center">
+                <div className="col-5">
+                  <label className=" form-label" for="form3Example4c">accessibility ?</label>
+                  <input type="checkbox" ref={accessibility} className="m-2"/>
+                  
+                </div>
+                
+                <div className="col-5">
+                  <label>Have a Code ?</label>
+                  <input type="checkbox" className="m-2" onChange={(e) => setCode(e)}/>
+                  {code == undefined ? "" :
+                  code.target.checked == false 
+                  ?
+                  ("") 
+                  : 
+                  (<input required  placeholder="Please Enter A Code" onChange={(e) => setKeyCode(e)} type="number" />)}
+                </div>
+              </div>
+
+              <div className="w-100 m-3 d-flex justify-content-center">
+                <TextField className="w-75 bg-light" required color="warning" label="Parking details" placeholder="Give details about the parking" variant="outlined" multiline rows={7} inputRef={detail} />
               </div>
             </div>
+
+
+            <div className="col-sm-6 col-10 flex-wrap justify-content-center">
+
+              <div className="h3 text-center mb-5">Images</div>
+              <input type="file" id="img0" style={{display: "none"}} onChange={(e)=>selectImage()} ref={imageRef} />
+
+              <div className="col-10 d-flex flex-wrap justify-content-center">
+                <div className="border rounded m-1">{url[0] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[0]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(0)}><FaTrashAlt/></button></div>}</div>
+                <div className="border rounded m-1">{url[1] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[1]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(1)}><FaTrashAlt/></button></div>}</div>
+                <div className="border rounded m-1">{url[2] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[2]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(2)}><FaTrashAlt/></button></div>}</div>
+                <div className="border rounded m-1">{url[3] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[3]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(3)}><FaTrashAlt/></button></div>}</div>
+              </div>
+              
             </div>
           
-
-          <div className="d-flex justify-content-center mb-3">
-            <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
-          </div>
+            <div className="d-flex justify-content-center mb-3">
+              <button type="submit" className="btn btn-primary btn-lg mt-4">{isLoading == true ? <img style={{width:'48px', height:'48px'}} src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"/> : "submit"}</button>
+            </div>
           </form>
         </div>
+      </div>)}
+    </>
+  );
+};
+
+
+
+{/* <div className="d-flex justify-content-center border">
+                <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
+                {url.map((item, i) => ( */}
+                //   <div className='bg-dark '>
+                //     <div className='text-primary ' key={i} >
+                //       <img className='w-75 rounded' style={{ height:"250px"}}  src={item}/>
+                //     </div>
+                //   </div>))}
+                // </Carousel>
+                // </div>}
 
 
 
@@ -250,7 +276,7 @@ export default function PostParking() {
 
 
 
-        {/* <div className="container h-100 ">
+{/* <div className="container h-100 ">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
               <div className="card text-white" style={{ borderRadius: "25px", backgroundColor: "rgba(31, 30, 29, 0.6)",}}>
@@ -348,7 +374,3 @@ export default function PostParking() {
             </div>
           </div>
         </div> */}
-      </div>)}
-    </>
-  );
-};

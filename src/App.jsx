@@ -27,7 +27,7 @@ export const MyContext = createContext(); // הצהרה רישונית
 export default function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [image, setImage] = useState();
+  const [image, setImage] = useState([]);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -35,6 +35,7 @@ export default function App() {
   const [cordUser, setCordUser] = useState();
   const [profileUrl, setProfileUrl] = useState('');
   const [users, setUsers] = useState([]);
+  const [urls, setUrls] = useState([]);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -183,18 +184,27 @@ export default function App() {
   };
 
   function getUrl() {
-    if(idPost == undefined || flag == false){}
+    if(idPost == undefined || flag == false){ console.log('momo')}
     else{
       getDownloadURL(storageRef)
       .then((url) => {
-        const u = doc(firestore, "posts", `${idPost}`);
-        const loc = updateDoc(u,{"imgUrl": `${url}`});
+        setUrls([...urls, url]);
+        console.log(urls);
+        setTimeout(() => {
+          const u = doc(firestore, "posts", `${idPost}`);
+          const loc = updateDoc(u, {"imgUrl": urls});
+          
+        }, 5000);
        })
       .catch((error) => {
         console.log(error);
       });
     }
   }
+
+  useEffect((e)=>{
+    // console.log(urls)
+  },[urls])
 
   function updateUser(user){
     let a = doc(firestore, 'users', `${user.id}`);
@@ -266,11 +276,11 @@ export default function App() {
   };
 
   return (
-    <div className="bg_site vh-100 ">
+    <div className="bg_site vh-100" >
       <div className="bg_site">
         <MyContext.Provider value={AllData}>
           <Header />
-          <Routes>
+          <Routes >
             <Route path="/" element={<Home />}></Route>
             <Route path="/*" element={<PageError />}></Route>
             <Route path="/LogIn" element={<LogIn />}></Route>
