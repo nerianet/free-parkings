@@ -188,7 +188,7 @@ export default function App() {
     else{
       getDownloadURL(storageRef)
       .then((url) => {
-        setUrls({...urls, url:url});nerria the big kaki!!!!!!
+        setUrls({...urls, url:url});
         console.log("hellow");
         console.log(url);
         // setTimeout(() => {
