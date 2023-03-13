@@ -193,7 +193,7 @@ export default function App() {
         console.log(url);
         // setTimeout(() => {
           const u = doc(firestore, "posts", `${idPost}`);
-          const loc = updateDoc(u, {"imgUrl": urls});
+          const loc = updateDoc(u, {"imgUrl": urls})
           
         // }, 5000);
        })
