@@ -82,21 +82,14 @@ export default function PostParking() {
       contactPhone: currentUser.phone,
       cordLocation: geo,
     };
-    setNewPost(post);
+     setNewPost(post)
     
     accessibility.current.checked = false;
     code != undefined ? code.target.checked = false : setCode(undefined);
     suitable.current.value = "";
     price.current.value = "";
     activityTime.target.value = "";
-    // setImage(undefined);
-    // img = undefined;
-    // setStorage(imageRef.current.files[0]);
-    
-    let i=0;
-    while(image[i] != undefined){
-      setStorage(image[i++]);
-    }
+    setImage(undefined);
   };
 
 
@@ -110,7 +103,7 @@ export default function PostParking() {
 
   function selectImage(e) {
     setUrl([...url, URL.createObjectURL(imageRef.current.files[0])]);
-    
+
     let file = imageRef.current.files[0]; 
     setImage([...image, file])
     imageRef.current.value = null;

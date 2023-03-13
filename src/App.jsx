@@ -18,7 +18,7 @@ import Admin from "./Components/admin/Admin";
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
-import { getDownloadURL, ref, uploadBytes,deleteObject  } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes,deleteObject, listAll  } from "firebase/storage";
 import Users from "./Components/Users/Users";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -69,18 +69,20 @@ export default function App() {
   }
   
   let postsRef = collection(firestore, "posts");
-  let idPost;
   // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try { 
       // doc(firestore,"posts", )
       let n = addDoc(postsRef, postData)
       .then((result)=>{
-        idPost = result.id;
         postData.id = result.id;
-        getUrl();
+        let i=0;
+        while(image[i] != undefined){
+          setStorage(image[i++], postData);
+        }
+        
         }) .catch((error) => console.log(error));
-      setPosts([...posts, postData]);     
+      setPosts([...posts, postData]);  
     } 
     catch (err) {
       console.log(err);
@@ -167,40 +169,43 @@ export default function App() {
   },[]);
 
   let storageRef;
-  let flag;
-  const setStorage = (file) => {
-    flag = false;
-    storageRef = ref(storage, currentUser.userId + "/images/" + file.name); // Firebase creates this automaticall//
+  const setStorage = (file, post) => {
+    storageRef = ref(storage, currentUser.userId + `/${post.id}/` + file.name);
     setIsLoading(true);
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
-      flag = true;
+      getUrl(post);
       setIsLoading(false);
       setIsShowModal(true);
-      getUrl();
       setInput('');
     });
   };
 
-  function getUrl() {
-    if(idPost == undefined || flag == false){ console.log('momo')}
-    else{
-      getDownloadURL(storageRef)
-      .then((url) => {
-        setUrls({...urls, url:url});
-        console.log("hellow");
-        console.log(url);
-        // setTimeout(() => {
-          const u = doc(firestore, "posts", `${idPost}`);
-          const loc = updateDoc(u, {"imgUrl": urls})
-          
-        // }, 5000);
-       })
+  useEffect(()=>{
+    // console.log(urls)
+  }, [urls])
+
+  let arr = [];
+  function getUrl( post) {
+    setUrls([]);
+    storageRef = ref(storage, post.userId + `/${post.id}`);
+      listAll(storageRef).then((files)=>{
+        // let arr = [];
+        files.items.forEach((e)=>{
+          getDownloadURL(e).then((url)=>{
+            arr.push(url);
+          })
+        })
+        console.log(arr)
+        const u = doc(firestore, "posts", `${post.id}`);
+        post.imgUrl = arr;
+        const loc = updateDoc(u, post);
+      })
       .catch((error) => {
         console.log(error);
       });
-    }
+    
   }
 
   // useEffect((e)=>{
