@@ -77,12 +77,7 @@ export default function App() {
       let n = addDoc(postsRef, postData)
       .then((result)=>{
         postData.id = result.id;
-        let i=0;
-        while(image[i] != undefined){
-          setStorage(image[i], postData, i);
-          i++;
-        }
-        
+        setStorage(image, postData);
         }) .catch((error) => console.log(error));
       setPosts([...posts, postData]); 
     } 
@@ -171,34 +166,41 @@ export default function App() {
   },[]);
 
   let storageRef;
-  const setStorage = (file, post, i) => {
-    storageRef = ref(storage, currentUser.userId + `/${post.id}/` + file.name);
-    setIsLoading(true);
-    uploadBytes(storageRef, file)
-    .then((snapshot) => {
-      console.log('Uploaded successed!');
-      if(i + 1 == image.length){
-        getUrl(post);
-      }
-      setIsLoading(false);
-      setIsShowModal(true);
-      setInput('');
-    });
+  const setStorage = (files, post) => {
+    let i = 0;
+    while(files[i]){
+      storageRef = ref(storage, currentUser.userId + `/${post.id}/` + files[i].name);
+      setIsLoading(true);
+  
+      uploadBytes(storageRef, files[i])
+      .then((snapshot) => {
+        console.log('Uploaded successed!');
+        setIsLoading(false);
+        setIsShowModal(true);
+        setInput('');
+        getUrl(post, i);
+      });
+      i++;
+    }
   };
 
   let arr = [];
-  function getUrl( post) {
+  function getUrl(post, i) {
+    arr = [];
     storageRef = ref(storage, post.userId + `/${post.id}`);
     listAll(storageRef).then((files)=>{
-      
-      files.items.forEach((e,i)=>{
-        getDownloadURL(e).then((url)=>{
-          arr[i] = url;
-          console.log(arr)
-      updatePost({...post, imgUrl: arr})
+      if(files.items.length == image.length){
+        files.items.forEach((e,i)=>{
+          getDownloadURL(e).then((url)=>{
+            arr[i] = url;
+            updatePost({...post, imgUrl: arr})
+          })
         })
-      })
-      
+        console.log(arr);
+      } else if(i == image.length) {
+        getUrl(post);
+        console.log("m")
+      }
     })
     .catch((error) => {
       console.log(error);
