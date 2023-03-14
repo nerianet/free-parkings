@@ -166,7 +166,7 @@ export default function PostParking() {
 
           <form className="row justify-content-around " onSubmit={submitPost}>
 
-            <div className="col-sm-6 col-10 flex-wrap justify-content-center">
+            <div className="col-sm-6 col-12 flex-wrap justify-content-center">
 
               <div className="h3 text-center">Detail</div>
 
@@ -189,6 +189,7 @@ export default function PostParking() {
                   <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
                 </div>
               </div>
+
             
               {/* <button className="btn text-primary mb-3" onClick={e=>setAutoLocation(e)}><BiCurrentLocation/> </button> */}
 
@@ -227,9 +228,9 @@ export default function PostParking() {
             </div>
 
 
-            <div className="col-sm-6 col-10 flex-wrap justify-content-center">
+            <div className="col-sm-6 col-12 d-flex flex-column  align-items-center">
 
-              <div className="h3 text-center mb-5">Images</div>
+              <div className="h3  mb-5">Images</div>
               <input type="file" id="img0" style={{display: "none"}} onChange={(e)=>selectImage()} ref={imageRef} />
 
               <div className="col-10 d-flex flex-wrap justify-content-center">

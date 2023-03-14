@@ -40,8 +40,8 @@ export default function MyParking() {
       <div class="container mt-5">
         <div class="row">
           <h1>{current.city + ', ' + current.street}</h1>
-          <div class="col-md-6 bg-dark">
-          <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
+          <div class="col-md-6">
+          <Carousel className="border rounded" autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
           {current.imgUrl.map((img)=>(
           <img src={img} alt="picture parking" class="img-fluid rounded-3" style={{ width: "500px", height: "350px" }} />
           )) }
