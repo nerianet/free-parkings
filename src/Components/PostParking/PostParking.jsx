@@ -170,23 +170,29 @@ export default function PostParking() {
 
               <div className="h3 text-center">Detail</div>
 
-              <div className="d-flex flex-wrap m-2 justify-content-center">
-                <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light m-2 col-5" onChange={(e)=>setCityInput(e.target.value)} />
-                <div>{totalCity.map((e, i)=>(
-                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
-                  : 
-                  totalCity[i].properties.city == totalCity[i-1].properties.city ? "" 
-                  : 
-                  <button className="col-4 border" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
+              <div className="d-flex col-12 m-2 justify-content-center">
+                <div className="d-flex flex-column m-2 align-items-center">
+                  <div className="col-12">
+                    <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light m-2 " onChange={(e)=>setCityInput(e.target.value)} />  
+                  </div>
+                  <div className="col-12 border bg-light d-flex flex-column align-items-center">{totalCity.map((e, i)=>(
+                      <div className="w-100">{i < 1 ? <button className="col-10 btn btn-light" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
+                      : 
+                      totalCity[i].properties.city == totalCity[i-1].properties.city ? "" 
+                      : 
+                      <button className="col-10 btn btn-light" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
+                  </div>
                 </div>
 
-                <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light m-2 col-5" onChange={(e)=>setAddressInput(e.target.value)} />
-                <div>{totalStreet.map((e, i)=>(
-                  <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
-                  : 
-                  totalStreet[i].properties.address_line1 == totalStreet[i-1].properties.address_line1 ? "" 
-                  : 
-                  <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
+                <div className="position-relative col-5  d-flex flex-column align-items-center">
+                  <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light  m-2 " onChange={(e)=>setAddressInput(e.target.value)} />
+                  <div>{totalStreet.map((e, i)=>(
+                    <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
+                    : 
+                    totalStreet[i].properties.address_line1 == totalStreet[i-1].properties.address_line1 ? "" 
+                    : 
+                    <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
+                  </div>
                 </div>
               </div>
 
