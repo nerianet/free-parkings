@@ -85,8 +85,6 @@ export default function App() {
         
         }) .catch((error) => console.log(error));
       setPosts([...posts, postData]); 
-      setImage([]); 
-      setUrls([]);
     } 
     catch (err) {
       console.log(err);
@@ -179,7 +177,7 @@ export default function App() {
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
-      if(i == 1){
+      if(i + 1 == image.length){
         getUrl(post);
       }
       setIsLoading(false);
