@@ -4,6 +4,9 @@ import { MyContext } from "../../App";
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { useGeolocated } from 'react-geolocated';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
@@ -107,7 +110,11 @@ async function maps(e){
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
-          <img src={current.imgUrl} alt="picture parking" class="img-fluid rounded-3 border" style={{ width: "500px", height: "350px" }} />
+        <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
+          {current.imgUrl.map((img)=>(
+          <img src={img} alt="picture parking" class="img-fluid rounded-3 border" style={{ width: "500px", height: "350px" }} />
+          )) }
+        </Carousel>
         </div>
         <ul class="col-md-6 list-unstyled fs-5">
           <li class="text-primary"><h2>Parking Detail</h2>{current.detail ? current.detail : ""}</li>

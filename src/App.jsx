@@ -36,6 +36,7 @@ export default function App() {
   const [profileUrl, setProfileUrl] = useState('');
   const [users, setUsers] = useState([]);
   const [urls, setUrls] = useState([]);
+  // const [arr, setArr] = useState([]);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -182,35 +183,25 @@ export default function App() {
     });
   };
 
-  useEffect(()=>{
-    // console.log(urls)
-  }, [urls])
-
   let arr = [];
-  function getUrl( post) {
-    setUrls([]);
+  async function getUrl( post) {
     storageRef = ref(storage, post.userId + `/${post.id}`);
-      listAll(storageRef).then((files)=>{
-        // let arr = [];
-        files.items.forEach((e)=>{
-          getDownloadURL(e).then((url)=>{
-            arr.push(url);
-          })
+    await listAll(storageRef).then((files)=>{
+      
+      files.items.forEach((e,i)=>{
+        getDownloadURL(e).then((url)=>{
+          arr.push(url);
         })
-        console.log(arr)
-        const u = doc(firestore, "posts", `${post.id}`);
-        post.imgUrl = arr;
-        const loc = updateDoc(u, post);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-    
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    console.log(arr)
+    updatePost({...post, imgUrl: arr})
   }
 
-  // useEffect((e)=>{
-  //   // console.log(urls)
-  // },[urls])
+  
 
   function updateUser(user){
     let a = doc(firestore, 'users', `${user.id}`);
