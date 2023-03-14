@@ -1,7 +1,8 @@
 import React, { useContext, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../App';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 
 export default function MyParking() {
@@ -39,8 +40,12 @@ export default function MyParking() {
       <div class="container mt-5">
         <div class="row">
           <h1>{current.city + ', ' + current.street}</h1>
-          <div class="col-md-6">
-            <img src={current.imgUrl} alt="picture parking" className="img-fluid" style={{width:'400px', height: '200px'}} />
+          <div class="col-md-6 bg-dark">
+          <Carousel autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
+          {current.imgUrl.map((img)=>(
+          <img src={img} alt="picture parking" class="img-fluid rounded-3" style={{ width: "500px", height: "350px" }} />
+          )) }
+        </Carousel>
           </div>
           <div class="col-md-6">
             <p class="text-primary mt-2 display-6">Price: {current.price}₪

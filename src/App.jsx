@@ -79,11 +79,14 @@ export default function App() {
         postData.id = result.id;
         let i=0;
         while(image[i] != undefined){
-          setStorage(image[i++], postData);
+          setStorage(image[i], postData, i);
+          i++;
         }
         
         }) .catch((error) => console.log(error));
-      setPosts([...posts, postData]);  
+      setPosts([...posts, postData]); 
+      setImage([]); 
+      setUrls([]);
     } 
     catch (err) {
       console.log(err);
@@ -170,13 +173,15 @@ export default function App() {
   },[]);
 
   let storageRef;
-  const setStorage = (file, post) => {
+  const setStorage = (file, post, i) => {
     storageRef = ref(storage, currentUser.userId + `/${post.id}/` + file.name);
     setIsLoading(true);
     uploadBytes(storageRef, file)
     .then((snapshot) => {
       console.log('Uploaded successed!');
-      getUrl(post);
+      if(i == 0){
+        getUrl(post);
+      }
       setIsLoading(false);
       setIsShowModal(true);
       setInput('');
@@ -184,21 +189,22 @@ export default function App() {
   };
 
   let arr = [];
-  async function getUrl( post) {
+  function getUrl( post) {
     storageRef = ref(storage, post.userId + `/${post.id}`);
-    await listAll(storageRef).then((files)=>{
+    listAll(storageRef).then((files)=>{
       
       files.items.forEach((e,i)=>{
         getDownloadURL(e).then((url)=>{
-          arr.push(url);
+          arr[i] = url;
+          console.log(arr)
+      updatePost({...post, imgUrl: arr})
         })
       })
+      
     })
     .catch((error) => {
       console.log(error);
     });
-    console.log(arr)
-    updatePost({...post, imgUrl: arr})
   }
 
   
