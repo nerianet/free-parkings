@@ -86,7 +86,6 @@ export default function App() {
         }) .catch((error) => console.log(error));
       setPosts([...posts, postData]); 
       setImage([]); 
-      setUrls([]);
     } 
     catch (err) {
       console.log(err);

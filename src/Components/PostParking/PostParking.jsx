@@ -90,6 +90,7 @@ export default function PostParking() {
     price.current.value = "";
     activityTime.target.value = "";
     setImage(undefined);
+    setUrl([]);
   };
 
 
