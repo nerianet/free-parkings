@@ -17,6 +17,15 @@ export default function Header() {
     navigate('/');
   } 
 
+  useEffect(()=>{
+    window.addEventListener('click', ()=>setShowName(true));
+  },[])
+
+  function setName(e){
+    e.stopPropagation();
+    setShowName(!showName);
+  }
+
   return (
     <div className='sticky-top'>
     <ul id='GoToUp' className='d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100'>
@@ -24,7 +33,7 @@ export default function Header() {
       <li className='mx-1 mt-2'>Free Parkings</li>
       <li></li>
       <p className='p-2 '>{showName ? currentUser.yourName : ""}</p>
-      <div className="btn-group" onClick={()=>setShowName(!showName)} role="group">
+      <div className="btn-group" onClick={(e)=>setName(e)} role="group">
         
         <img id="btnGroupDrop1" type="button" className="dropdown-toggle rounded-circle mt-1" data-bs-toggle="dropdown" aria-expanded="false" src={currentUser.profileUrl ? currentUser.profileUrl : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} style={{ width: "60px", height: "60px" }} />
         <ul className="dropdown-menu mx-sm-0 " aria-labelledby="btnGroupDrop1">

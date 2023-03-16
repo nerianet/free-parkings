@@ -12,10 +12,9 @@ import { TextField } from "@mui/material";
 import { useGeolocated } from "react-geolocated";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import './PostParking.css'
 
-
-
-export default function PostParking() {
+ export default function PostParking() {
 
   const { currentUser, setStorage, setImage, image, setNewPost, isLoading } = useContext(MyContext);
   const navigate = useNavigate();
@@ -70,8 +69,6 @@ export default function PostParking() {
     e.preventDefault();
       const post = {
       userId: currentUser.userId,
-      // nameFile: imageRef.current.files[0].name,
-      nameFile: "check",
       accessibility: accessibility.current.checked,
       detail: detail != undefined ? detail.current.value : "",
       code: code != undefined ? code.target.checked : "",
@@ -115,7 +112,7 @@ export default function PostParking() {
 
   function setCity(e){
     const t = document.getElementById('city');
-    t.value = totalCity[0].properties.city;
+    t.value = e;
     setCityInput(t.value);
     setTotal(e);
     setTimeout(() => {
@@ -143,14 +140,22 @@ export default function PostParking() {
        lon: v.coords.longitude
       }
     getCurrLoc(ge, setCurrLoc);
+    setGeo({lat: ge.lat, lon: ge.lon});
   }
 
   useEffect(()=>{
     if(currLoc){
       const t = document.getElementById('street');
       t.value = currLoc.address_line1;
+      setAddressInput(t.value);
       const v = document.getElementById('city');
       v.value = currLoc.city;
+      setCityInput(v.value);
+      location(t.value + " " + v.value, setTotalStreet);
+      setTimeout(() => {
+        setTotalCity([]);
+        setTotalStreet([]);
+      }, 1000);
     }
   },[currLoc]);
 
@@ -174,35 +179,34 @@ export default function PostParking() {
             
 
               <div className="h3 text-center">Detail</div>
+              <button className="btn btn-primary mb-3 w-sm-25 w-50 mx-5" onClick={e=>setAutoLocation(e)}>use in current location <BiCurrentLocation/> </button>
 
               <div className="d-flex col-12 justify-content-center">
-                <div className="col-5 mx-2">
-                  <div className="">
-                    <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light " onChange={(e)=>setCityInput(e.target.value)} />  
-                  </div>
-                  <div className="zindex-dropdown col-12  bg-light d-flex flex-column align-items-center">{totalCity.map((e, i)=>(
-                      <div className="w-75">{i < 1 ? <button className="col-10 btn btn-light" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
+                <div className="col-5 mx-2 ">
+                <TextField required color="warning" id="city" label="City" variant="outlined" className="bg-light " onChange={(e)=>setCityInput(e.target.value)} />  
+                  
+                  <div className="inPosition  d-flex flex-column align-items-center">{totalCity.map((e, i)=>(
+                      <div  className="col-12">{i < 1 ? <button className="col-12 btn btn-light" onClick={(e)=>setCity(e.target.innerHTML)}>{e.properties.city}</button> 
                       : 
-                      totalCity[i].properties.city == totalCity[i-1].properties.city ? "" 
+                      totalCity[i].properties.city == totalCity[i-1].properties.city || !totalCity[i].properties.city ? "" 
                       : 
-                      <button className="col-10 btn btn-light w-100" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
+                      <button  className="col-12 btn btn-light w-100" onClick={(e)=>setCity(e.target.innerHTML)}>{totalCity[i].properties.city}</button>}</div>))}
                   </div>
                 </div>
 
-                <div className=" col-5 ">
+                <div className="col-5 ">
                   <TextField required color="warning" id="street" label="Street" variant="outlined" className="bg-light" onChange={(e)=>setAddressInput(e.target.value)} />
-                  <div>{totalStreet.map((e, i)=>(
-                    <div>{i < 1 ? <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
+                  <div className="inPosition  d-flex flex-column align-items-center">{totalStreet.map((e, i)=>(
+                    <div className="col-12">{i < 1 ? <button className="col-12 btn btn-light" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{e.properties.address_line1}</button> 
                     : 
                     totalStreet[i].properties.address_line1 == totalStreet[i-1].properties.address_line1 ? "" 
                     : 
-                    <button className="col-4 border" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
+                    <button className="col-12 btn btn-light w-100" onClick={(e)=>setTotalAddress(e.target.innerHTML)}>{totalStreet[i].properties.address_line1}</button>}</div>))}
                   </div>
                 </div>
               </div>
 
             
-              {/* <button className="btn text-primary mb-3" onClick={e=>setAutoLocation(e)}><BiCurrentLocation/> </button> */}
 
               <div className="d-flex flex-wrap m-2 justify-content-center">
                 <TextField required color="warning" label="Activity time?" placeholder="sun - thurs" variant="outlined" className="bg-light m-2 col-5" onChange={e => setActivityTime(e)}/> 
