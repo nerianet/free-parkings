@@ -168,6 +168,8 @@ export default function PostParking() {
 
             <div className="col-sm-6 col-12 flex-wrap justify-content-center">
 
+            
+
               <div className="h3 text-center">Detail</div>
 
               <div className="d-flex col-12 m-2 justify-content-center">

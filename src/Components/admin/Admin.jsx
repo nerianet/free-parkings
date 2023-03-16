@@ -117,7 +117,7 @@ export default function Admin() {
                   <div className='d-flex flex-column align-items-center'>
                   {currPosts.map((item, i) => (
                     <div className=' mb-3 d-flex flex-wrap justify-content-center h-100 w-100 rounded shadow'>
-                        <img className='img-fluid rounded shadow' style={{height: '250px', width:'75%'}} src={item.imgUrl}/>
+                        <img className='img-fluid rounded shadow' style={{height: '250px', width:'75%'}} src={item.imgUrl[0]}/>
                         <div className='text-primary mx-1 d-flex flex-column align-items-center ' key={i} >
                           <div className='mt-2 '>City: {item.city + "," }</div>
                           <div className='mt-2 '>Street: {item.street + "."} </div>
