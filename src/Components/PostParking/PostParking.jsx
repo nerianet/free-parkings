@@ -10,6 +10,9 @@ import ModalC from '../modalComponnet/ModalC'
 import { location, getCurrLoc } from '../API/APIs';
 import { TextField } from "@mui/material";
 import { useGeolocated } from "react-geolocated";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+
 
 
 export default function PostParking() {
@@ -239,13 +242,21 @@ export default function PostParking() {
             <div className="col-sm-6 col-12 d-flex flex-column  align-items-center">
 
               <div className="h3  mb-5">Images</div>
-              <input type="file" id="img0" style={{display: "none"}} onChange={(e)=>selectImage()} ref={imageRef} />
 
-              <div className="col-10 d-flex flex-wrap justify-content-center">
-                <div className="border rounded m-1">{url[0] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[0]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(0)}><FaTrashAlt/></button></div>}</div>
-                <div className="border rounded m-1">{url[1] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[1]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(1)}><FaTrashAlt/></button></div>}</div>
-                <div className="border rounded m-1">{url[2] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[2]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(2)}><FaTrashAlt/></button></div>}</div>
-                <div className="border rounded m-1">{url[3] == undefined ? <label for="img0"><BiImageAdd size={185}/></label> : <div class="position-relative"><img src={url[3]} style={{width:'185px', height:'185px'}}/><button className="btn-no-background position-absolute top-0 end-0" onClick={()=>unsetImage(3)}><FaTrashAlt/></button></div>}</div>
+              <div className="border rounded m-1">
+                <input type="file" id="img" style={{display: "none"}} onChange={(e)=>selectImage()} ref={imageRef} />
+                <label for="img"><BiImageAdd size={185}/></label>
+              </div>
+
+              <div className="col-10 d-flex justify-content-center pt-3">
+                <Carousel className=" d-flex justify-content-center" autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
+                  {url.map((item, i)=>(
+                    <div class="position-relative rounded border d-flex justify-content-center" key={i}>
+                      <img src={item} alt="picture parking" class="img-fluid" style={{width:'590px', height:'300px'}}/>
+                      <button className="btn-no-background position-absolute top-50 start-50 translate-middle" onClick={()=>unsetImage(i)}><FaTrashAlt size={40}/></button>
+                    </div>
+                  ))}
+                </Carousel>
               </div>
               
             </div>
