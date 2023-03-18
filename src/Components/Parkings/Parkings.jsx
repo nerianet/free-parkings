@@ -89,7 +89,7 @@ export default function Parkings() {
           <h4 className="d-flex justify-content-center">{item.city}</h4>
           <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
-            <img className="img-card border rounded" src={item.imgUrl[0]} alt={item.name} style={{ height: "85%", width: "100%" }}/>
+            <img className="img-card border rounded" src={item.imgUrl} style={{ height: "85%", width: "100%" }}/>
           </div>
           <h2 className="d-flex justify-content-center">{item.price}₪</h2>
           <div className=" d-flex justify-content-center">

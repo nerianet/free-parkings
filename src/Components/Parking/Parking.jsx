@@ -7,6 +7,31 @@ import { useGeolocated } from 'react-geolocated';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+  WorkplaceShareButton
+} from "react-share";
+
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
@@ -59,6 +84,7 @@ export default function Parking() {
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
     }
+    console.log(window.location)
   }, [v.coords])
 
   var map;
@@ -107,6 +133,10 @@ async function maps(e){
     <div>
     {current ? 
     <div class="container mt-5">
+       <WhatsappShareButton title={ "Momo" } url={ window.location.href } > 
+          <WhatsappIcon round={ false } size={ 44 } />
+        </WhatsappShareButton>
+        
       <div class="row">
         <h1>{current.address}</h1>
         <div class="col-md-6">
