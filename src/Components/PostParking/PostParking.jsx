@@ -145,7 +145,6 @@ import './PostParking.css'
 
   useEffect(()=>{
     const t = document.getElementById('street');
-      console.log(t);
     if(currLoc){
       const t = document.getElementById('street');
       console.log(t);

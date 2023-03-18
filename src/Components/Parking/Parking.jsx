@@ -84,7 +84,6 @@ export default function Parking() {
     if(v.coords != undefined){
       setCordUser({latitude : v.coords.latitude, longitude: v.coords.longitude});
     }
-    console.log(window.location)
   }, [v.coords])
 
   var map;

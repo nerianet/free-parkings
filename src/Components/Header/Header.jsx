@@ -38,18 +38,18 @@ export default function Header() {
         <img id="btnGroupDrop1" type="button" className="dropdown-toggle rounded-circle mt-1" data-bs-toggle="dropdown" aria-expanded="false" src={currentUser.profileUrl ? currentUser.profileUrl : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} style={{ width: "60px", height: "60px" }} />
         <ul className="dropdown-menu mx-sm-0 " aria-labelledby="btnGroupDrop1">
         <li className='d-flex justify-content-center bg-primary boredr rounded fs-3 mb-1'>{currentUser.yourName}</li>
-          <li><Link className="dropdown-item link-primary d-flex justify-content-center" to={'/MyAccount'}>My Account</Link></li>
+          <li><Link  className="dropdown-item link-primary d-flex justify-content-center" to={'/MyAccount'}>My Account</Link></li>
           {currentUser.yourName != undefined ? <div> 
         <li><button className='dropdown-item bg-danger d-flex justify-content-center' onClick={Disconnect}>Disconnect<FaUserCheck className='mx-1 mt-1'/></button></li>
         { currentUser.admin === 'false' ? "" :
-          <Link className='dropdown-item d-flex justify-content-center' to={'/Users'}>Users</Link>
+          <Link  className='dropdown-item d-flex justify-content-center' to={'/Users'}>Users</Link>
         }
         </div>
         : <div> 
           <li ><Link  className='dropdown-item btn btn-primary d-flex justify-content-center' to={"/LogIn"}>LogIn <FaUserAltSlash/></Link></li>
         </div>
         }
-        <li><Link className='link-primary dropdown-item d-flex justify-content-center' to={"/About"}>About</Link></li>
+        <li><Link  className='link-primary dropdown-item d-flex justify-content-center' to={"/About"}>About</Link></li>
         </ul>
       </div>
     </ul>
