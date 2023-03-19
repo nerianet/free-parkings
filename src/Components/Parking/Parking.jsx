@@ -132,7 +132,7 @@ async function maps(e){
     <div>
     {current ? 
     <div class="container mt-5">
-       <WhatsappShareButton title={ "Momo" } url={ window.location.href } > 
+       <WhatsappShareButton title={"*Free parking*\n We found a parking for you!\n City: " + current.city + ", Street: " + current.street + "\nPrice: " + current.price + ' ₪ for hour\n\n' } url={ window.location.href } > 
           <WhatsappIcon round={ false } size={ 44 } />
         </WhatsappShareButton>
         
@@ -155,8 +155,11 @@ async function maps(e){
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
         </ul>
       </div> 
+      {/* <iframe src="https://embed.waze.com/iframe?zoom=14&lat=32.497103&lon=35.497336&ct=livemap" width="600" height="450" allowfullscreen></iframe> */}
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
-      <div className="" id="my-map"></div>
+      <div className="">
+        <div className="w-75" style={{ height:'500px'}} id="my-map"></div>
+      </div>
       <div class="row mt-5">
         <div class="col-2">
           <button class="btn btn-primary btn-lg mb-2" onClick={() => hideContact()}>contact</button>

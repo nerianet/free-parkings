@@ -47,14 +47,10 @@ export default function Parkings() {
 
   return (
   <> 
-  <div className="">
-  <div className="d-flex justify-content-start m-3" >
-    <form className="col-2 d-flex form-inline my-2 my-lg-0">
-      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <input id="search" className="form-control mr-sm-2" style={{width:'150px'}} type="search" placeholder="Search" aria-label="Search" onChange={(e) => postInput(e.target.value)}/>
-      
-      <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live</button>
-    </form>
+  <div className="container">
+  <div className="d-flex justify-content-between mb-2" >
+    <input id="search" className="w-50 rounded mx-3" type="search" placeholder="Search City" onChange={(e) => postInput(e.target.value)}/>
+    <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live Map</button>
   </div>
 
   {!map ? "" :
@@ -84,10 +80,9 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="text-decoration-none border m-1 cards rounded mb-2" style={{ width: "350px", height: "450px" }}>
-        <Link to={item.id} key={i} >
+        <div className="border m-1 cards rounded mb-2" style={{ width: "350px", height: "450px" }}>
+        <Link to={item.id} key={i} className={'text-decoration-none text-light'}>
           <h4 className="d-flex justify-content-center">{item.city}</h4>
-          <h4 className="d-flex justify-content-center">Name: {item.contactName}</h4>
           <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
             <img className="img-card border rounded" src={item.imgUrl} style={{ height: "85%", width: "100%" }}/>
           </div>
