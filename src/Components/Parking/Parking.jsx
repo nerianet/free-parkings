@@ -155,10 +155,11 @@ async function maps(e){
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
         </ul>
       </div> 
-      {/* <iframe src="https://embed.waze.com/iframe?zoom=14&lat=32.497103&lon=35.497336&ct=livemap" width="600" height="450" allowfullscreen></iframe> */}
+      <iframe src={`https://embed.waze.com/he/iframe?zoom=14&lat=${current.cordLocation.lat}&lon=${current.cordLocation.lon}&ct=livemap&pin=1&desc=1`} width="600" height="450" allowfullscreen></iframe>
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
       <div className="">
         <div className="w-75" style={{ height:'500px'}} id="my-map"></div>
+        https://www.waze.com/en/live-map/directions?latlng=32.497103%2C35.497336
       </div>
       <div class="row mt-5">
         <div class="col-2">
