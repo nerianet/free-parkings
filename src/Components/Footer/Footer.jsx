@@ -17,21 +17,21 @@ export default function Footer() {
       <hr className="clearfix w-100 d-md-none pb-0"/>
 
       <div className="col-md-3 mb-md-0 mb-3">
+        contact us-
         <ul className="list-unstyled">
-          <li><Link to={"/About"}>Contact Us</Link></li>        
+          <li>1800-770-770</li>        
         </ul>
       </div>
 
       <div className="col-md-3 mb-md-0 mb-3">
           <ul className="list-unstyled">
-            <li><Link to={"/About"}>About</Link></li>
+            <li><Link className=' text-light' to={"/About"}>About</Link></li>
           </ul>
       </div>
     </div>
     
 
     <div className="footer-copyright text-center py-3">© 2023 Free parkings:
-    <a href="#GoToUp">Go To Up</a>
     </div>
     </div>
   </>

@@ -1,13 +1,21 @@
 
 .cards {
-  background-color: rgba(31, 30, 29, 0.9);
+  background-color: rgba(58, 73, 142, 0.9);
   transition: ease-out 1s;
 }
 
 .cards:hover {
-  background-color: rgba(31, 30, 29, 0.4);
+  background-color: rgba(58, 73, 100, 0.5);
+  color: rgb(206, 215, 105);
   transform: scale(1.1, 1.1);
 }/*# sourceMappingURL=parkings.css.map */
+
+.color-font{
+  color: rgb(206, 215, 105);
+}
+.color-font:hover{
+  color: rgb(206, 215, 105);
+}
 
 #my-map{
   display: none;

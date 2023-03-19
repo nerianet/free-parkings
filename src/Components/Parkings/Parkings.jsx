@@ -80,16 +80,17 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="border m-1 cards rounded mb-2" style={{ width: "350px", height: "450px" }}>
-        <Link to={item.id} key={i} className={'text-decoration-none text-light'}>
-          <h4 className="d-flex justify-content-center">{item.city}</h4>
-          <div className="div-imges d-flex justify-content-center" style={{ height: "65%" }}>
-            <img className="img-card border rounded" src={item.imgUrl} style={{ height: "85%", width: "100%" }}/>
+        <div className="border cards rounded mb-2" style={{ width: "300px", height: "400px" }}>
+          <Link to={item.id} key={i} className={'text-decoration-none color-font'}>
+          <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
+              <img className="img-card border rounded" src={item.imgUrl} style={{ height: "90%", width: "100%" }}/>
           </div>
-          <h2 className="d-flex justify-content-center">{item.price}₪</h2>
-          <div className=" d-flex justify-content-center">
+          <h4 className=""><b>City: </b>{item.city}</h4>
+          <h5 className=""><b>Street: </b>{item.street}</h5>
+          <h5 className=""><b>Price: </b>{item.price}₪</h5>
+          <div className=" ">
           </div>
-        </Link>
+          </Link>
         </div>
       ))}
     </div>

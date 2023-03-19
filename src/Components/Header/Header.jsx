@@ -26,9 +26,9 @@ export default function Header() {
   }
 
   return (
-    <div className="sticky-top"> mmommoomomo
+    <div className="sticky-top"> 
       <ul
-        id="GoToUp"
+        
         className="d-flex justify-content-around fs-2 list-unstyled bg_header text-light w-100"
       >
         <li>

@@ -145,8 +145,8 @@ async function maps(e){
           )) }
         </Carousel>
         </div>
-        <ul class="col-md-6 list-unstyled fs-5">
-          <li class="text-primary"><h2>Parking Detail</h2>{current.detail ? current.detail : ""}</li>
+        <ul class="col-md-6 list-unstyled fs-5"> <h2>Parking Detail:</h2>
+          <li class="text-primary"><b>Detail: </b>{current.detail ? current.detail : ""}</li>
           <li class="text-primary"><b>city: </b>{current.city}</li>
           <li class="text-primary"><b>street: </b>{current.street}</li>
           <li class="text-primary"><b>Activity time: </b>{current.activityTime}</li>
@@ -155,11 +155,9 @@ async function maps(e){
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
         </ul>
       </div> 
-      <iframe src={`https://embed.waze.com/he/iframe?zoom=14&lat=${current.cordLocation.lat}&lon=${current.cordLocation.lon}&ct=livemap&pin=1&desc=1`} width="600" height="450" allowfullscreen></iframe>
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
       <div className="">
-        <div className="w-75" style={{ height:'500px'}} id="my-map"></div>
-        https://www.waze.com/en/live-map/directions?latlng=32.497103%2C35.497336
+        <div className="" style={{ height:'450px', width:'80%'}} id="my-map"></div>
       </div>
       <div class="row mt-5">
         <div class="col-2">
