@@ -95,7 +95,7 @@ export default function Admin() {
           
      <div className='container mb-4 h-auto '>
         <div className='row d-flex justify-content-center mb-4'>
-          <div className='col-sm-4 col-6 bg-light rounded p-0 shadow'>
+          <div className='col-sm-3 col-6 bg-light rounded p-0 shadow'>
             <div className='bg-primary d-flex justify-content-center rounded-top mb-2'>profile</div>
               <div className="d-flex flex-column align-items-center w-100" >
                 <img style={{ width: "60px", height: "60px" }} src={otherCurrUser.profileUrl ? otherCurrUser.profileUrl : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="Profile" className="rounded-circle mb-3" />
@@ -111,18 +111,20 @@ export default function Admin() {
         </div>
         {currPosts[0] == undefined ? "" :
           <div className='row d-flex justify-content-center'>
-            <div className='col-8 bg-light rounded p-0 shadow '>
+            <div className='col-sm-6 col-8 bg-light rounded p-0 shadow '>
               <div className='bg-primary d-flex justify-content-center rounded-top mb-2'>Posts</div>
-                <div className="d-flex flex-column align-items-center mb-4 mt-4" >
+                <div className="d-flex flex-column align-items-center mb-4 mt-4 mb-2" >
                   <div className='d-flex flex-column align-items-center'>
                   {currPosts.map((item, i) => (
-                    <div className=' mb-3 d-flex flex-wrap justify-content-center h-100 w-100 rounded shadow'>
-                        <img className='img-fluid rounded shadow' style={{height: '250px', width:'75%'}} src={item.imgUrl[0]}/>
+                    <div className='d-flex flex-wrap justify-content-center h-100 w-100 rounded mt-2'>
+                        <img className='img-fluid rounded shadow' style={{height: '250px', width:'70%'}} src={item.imgUrl[0]}/>
                         <div className='text-primary mx-1 d-flex flex-column align-items-center ' key={i} >
                           <div className='mt-2 '>City: {item.city + "," }</div>
                           <div className='mt-2 '>Street: {item.street + "."} </div>
                           <hr className='w-75 '/>
-                          <div className='btn btn-danger mb-2 ' onClick={(e)=> deletePost(item.id, item.nameFile)}>Delete Post</div>
+                          {otherCurrUser.userName === 'neria.levi444@gmail.com' || otherCurrUser.userName === 'moshe6073163@gmail.com' ? '' : 
+                          <div className='btn btn-danger mb-2' onClick={(e)=> deletePost(item.id, item.nameFile)}>Delete Post</div>
+                          }
                         </div>
                     </div> 
                     ))}</div>
