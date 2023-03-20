@@ -44,7 +44,7 @@ export default function Parkings() {
   function setFavorite(post){
     let p = currentUser.favoritePosts.filter((e)=> e === post.id);
     if(p[0]){
-      currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=>e != post.id);
+      currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=>e !== post.id);
       updateUser(currentUser);
       post.favorite-=1;
       updatePost(post);
@@ -63,12 +63,6 @@ export default function Parkings() {
     }
   }
 
-  
-
-  let i = L.icon({
-    iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
-  });
-
   const setFav = (id)=>{
     let p = currentUser.favoritePosts.find((e)=> e === id);
     if(p){
@@ -77,6 +71,11 @@ export default function Parkings() {
       return (<GrFavorite size={30}/>)
     }
   }
+  
+
+  let i = L.icon({
+    iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
+  });
 
   return (
   <> 

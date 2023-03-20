@@ -20,17 +20,6 @@ export default function FavoritePosts () {
         }
     }
 
-    const setFav = (id)=>{
-        let p = currentUser.favoritePosts.find((e)=> e === id);
-        if(p){
-          return (<MdFavorite size={30}/>)
-        } else {
-          return (<GrFavorite size={30}/>)
-        }
-    }
-    
-   
-
   return (
     <div>
       <div className="row justify-content-center ">
@@ -48,15 +37,15 @@ export default function FavoritePosts () {
                     <div className="d-flex justify-content-between">
                         <div>{post.favorite + " Like this parking"}</div>
                         <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(post)}>
-                        {currentUser.favoritePosts[0] ? setFav(post.id) : <GrFavorite size={30}/>}
+                           <MdFavorite size={30}/>
                         </div>
                     </div>
                 </div>
             ))
              : 
-            <div>
-                <p>You dont have any favorite posts, </p>
-                <Link className='text-decoration-none text-dark' to={'/Parkings'}>To add</Link>
+            <div className='col-9 d-flex flex-column align-items-center container mt-5'>
+                <p className='display-5 col-12 d-flex justify-content-center'>You dont have any favorite posts, </p>
+                <Link className='text-decoration-none text-dark btn btn-primary mb-2 w-25' to={'/Parkings'}>To add</Link>
             </div>
             }
             </div>
