@@ -131,12 +131,12 @@ export default function App() {
     }
     getAllUsers();
     
-    if(currentUser.yourName != undefined && m && !favoritePosts[0]){
+    if(currentUser.yourName != undefined && m){
       let arr = [];
       for(let i = 0; i < currentUser.favoritePosts.length; i++){
           for(let j = 0; j < posts.length; j++){
               if(currentUser.favoritePosts[i] === posts[j].id){
-                  arr.push(posts[j]);
+                arr.push(posts[j]);
               }
           }
       }
