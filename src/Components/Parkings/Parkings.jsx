@@ -118,14 +118,15 @@ export default function Parkings() {
           <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
               <img className="img-card border rounded" src={item.imgUrl} style={{ height: "90%", width: "100%" }}/>
           </div>
-          <h4 className=""><b>City: </b>{item.city}</h4>
+          <h5 className=""><b>City: </b>{item.city}</h5>
           <h5 className=""><b>Street: </b>{item.street}</h5>
           <h5 className=""><b>Price: </b>{item.price}₪</h5>
-          {item.favorite + " Like this parking"}
           </Link>
-          <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
-            {currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/>}
-            
+          <div className="d-flex justify-content-between">
+            <div>{item.favorite + " Like this parking"}</div>
+            <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
+              {currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/>}
+            </div>
           </div>
         </div>
       ))}
