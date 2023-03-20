@@ -146,10 +146,6 @@ export default function App() {
 
   }, [currentUser])
 
-  useEffect(()=>{
-    console.log(favoritePosts)
-  }, [favoritePosts])
-
   function getAllUsers(){
     if(currentUser.admin === 'true'){
       let queryUser = query(usersRef);
@@ -222,7 +218,6 @@ export default function App() {
         console.log(arr);
       } else if(i == image.length) {
         getUrl(post);
-        console.log("m")
       }
     })
     .catch((error) => {
@@ -323,7 +318,7 @@ export default function App() {
             <Route path="/Users" element={<Users />}></Route>
             <Route path="/Users/Admin/:id" element={<Admin />}></Route>
           </Routes>
-          <a style={{zIndex:'9999', position:'fixed', bottom:'auto', height:'50px'}}   href="#GoToUp"><IoArrowUpOutline className="border rounded-circle text-light" size={70}/></a>
+          <a style={{zIndex:'9999', position:'fixed', bottom:'50px', height:'50px'}}   href="#GoToUp"><IoArrowUpOutline className="border rounded-circle text-light" size={50}/></a>
           <Footer />
         </MyContext.Provider>
       </div>
