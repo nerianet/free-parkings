@@ -5,7 +5,7 @@ import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
 
 export default function FavoritePosts () {
-    const { updatePost, updateUser, currentUser, favoritePosts, setFavoritePosts, posts} = useContext(MyContext);
+    const { updatePost, updateUser, currentUser, favoritePosts, setFavoritePosts} = useContext(MyContext);
 
     function setFavorite(post){
         currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=> e !== post.id);
@@ -45,8 +45,11 @@ export default function FavoritePosts () {
                     <h5 className=""><b>Street: </b>{post.street}</h5>
                     <h5 className=""><b>Price: </b>{post.price}₪</h5>
                     </Link>
-                    <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(post)}>
-                    {currentUser.favoritePosts[0] ? setFav(post.id) : <GrFavorite size={30}/>}
+                    <div className="d-flex justify-content-between">
+                        <div>{post.favorite + " Like this parking"}</div>
+                        <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(post)}>
+                        {currentUser.favoritePosts[0] ? setFav(post.id) : <GrFavorite size={30}/>}
+                        </div>
                     </div>
                 </div>
             ))
