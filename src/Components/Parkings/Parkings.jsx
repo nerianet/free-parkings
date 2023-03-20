@@ -9,6 +9,33 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
 
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+  WorkplaceShareButton
+} from "react-share";
+import SpeedAccess from "../speedAccess/SpeedAccess";
+
+
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 
 export default function Parkings() {
@@ -113,19 +140,20 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="border cards rounded mb-2" style={{ width: "300px", height: "490px" }}>
+        <div className="border cards rounded mb-2" style={{ width: "300px", height: "520px" }}>
           <Link to={item.id} key={i} className={'text-decoration-none color-font'}>
           <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
               <img className="img-card border rounded" src={item.imgUrl} style={{ height: "90%", width: "100%" }}/>
           </div>
           <h5 className=""><b>City: </b>{item.city}</h5>
-          <h5 className=""><b>Street: </b>{item.street}</h5>
+          <h5 className=""><b>Street: </b>{item.street.length > 20 ? item.street.substring(0, 20) + "..." : item.street }</h5>
           <h5 className=""><b>Price: </b>{item.price}₪</h5>
           </Link>
           <div className="d-flex justify-content-between">
-            <div>{item.favorite + " Like this parking"}</div>
+            <div>{item.favorite + " Like this parking "}</div>
             <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
               {currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/>}
+              
             </div>
           </div>
         </div>

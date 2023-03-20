@@ -6,6 +6,7 @@ import {} from 'mapbox-gl-leaflet';
 import { useGeolocated } from 'react-geolocated';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import SpeedAccess from "../speedAccess/SpeedAccess"
 
 import {
   EmailIcon,
@@ -36,8 +37,23 @@ const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parking() {
 
   const { id } = useParams();
-  const {posts, setCordUser, cordUser} = useContext(MyContext);
-  const current = posts.find((post) => post.id == id);
+  const {posts, setCordUser, cordUser, users} = useContext(MyContext);
+  // const [img, setImg] = useState();
+  const [current, setCurrent] = useState();
+  
+  useEffect(()=>{
+    setCurrent( posts.find((post) => post.id === id));
+  },[])
+
+  // useEffect(()=>{
+  //  let v = users.find((e)=> e.userId == current.userId);
+  //  console.log(v)
+  //  if(v){
+  //   v.profileUrl === "" ? setImg("https://cdn-icons-png.flaticon.com/512/149/149071.png") :
+  //   setImg(v.profileUrl);
+  //  }
+  // console.log(v)
+  // },[current])
 
   let ro;
   async function mapRouting(fromWaypoint, toWaypoint){
@@ -129,19 +145,19 @@ async function maps(e){
 }
 
   return (
-    <div>
+    <div >
     {current ? 
-    <div class="container mt-5">
-       <WhatsappShareButton title={"*Free parking*\n We found a parking for you!\n City: " + current.city + ", Street: " + current.street + "\nPrice: " + current.price + ' ₪ for hour\n\n' } url={ window.location.href } > 
+    <div class="container mt-5 ">
+       {/* <WhatsappShareButton title={"*Free parking*\n We found a parking for you!\n City: " + current.city + ", Street: " + current.street + "\nPrice: " + current.price + ' ₪ for hour\n\n' } url={ window.location.href } > 
           <WhatsappIcon round={ false } size={ 44 } />
-        </WhatsappShareButton>
+        </WhatsappShareButton> */}
         
       <div class="row">
         <h1>{current.address}</h1>
-        <div class="col-md-6">
+        <div class="col-md-5">
         <Carousel className="border rounded" autoPlay showIndicators={true} transitionTime={3} showThumbs={false} infiniteLoop={true} showStatus={true}>
           {current.imgUrl.map((img)=>(
-          <img src={img} alt="picture parking" class="img-fluid rounded-3" style={{ width: "500px", height: "350px" }} />
+          <img src={img} alt="picture parking" class="img-fluid rounded-3" style={{  height: "350px" }} />
           )) }
         </Carousel>
         </div>
@@ -153,23 +169,25 @@ async function maps(e){
           <li class="text-primary"><b>price: ₪</b>{current.price}</li>
           <li class="text-primary"><b>accessibility: </b>{current.accessibility == true ? "yes" : "no"}</li>
           <li class="text-primary"><b>Have a Code?: </b>{current.code == true ? "yes" : "no"}</li>
+          <div class="row mt-5">
+            <div class="col-7 d-flex">
+              <button class="btn btn-primary btn-lg mb-2" style={{ height:'48px'}} onClick={() => hideContact()}>contact</button>
+              <SpeedAccess />
+              {hide ? 
+              <div className="mx-4 inPositionContact">
+                <img className="" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style={{ width: "90px", height: "90px" }} />
+                <div className="">Name: {current.contactName}</div>
+                <div className="">Phone: <a href={`tel:${current.contactPhone}`}>{current.contactPhone}</a></div>
+              </div>
+            : ''}
+            </div>
+          </div>
         </ul>
+        
       </div> 
       <button className="btn btn-primary mt-2 mb-2" onClick={e=>maps(e)} >Live</button>
       <div className="">
         <div className="" style={{ height:'450px', width:'80%'}} id="my-map"></div>
-      </div>
-      <div class="row mt-5">
-        <div class="col-2">
-          <button class="btn btn-primary btn-lg mb-2" onClick={() => hideContact()}>contact</button>
-          {hide ? 
-          <div className="col-3 ">
-            <img className="" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style={{ width: "90px", height: "90px" }} />
-            <div className="">Name: {current.contactName}</div>
-            <div className="">Phone: {current.contactPhone}</div>
-          </div>
-        : ''}
-        </div>
       </div>
     </div> : ''}
     </div>
