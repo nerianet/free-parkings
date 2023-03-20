@@ -23,6 +23,7 @@ import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject, listAll  } from "firebase/storage";
 import Users from "./Components/Users/Users";
+import FavoritePosts from "./Components/favoritePosts/FavoritePosts";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -38,8 +39,8 @@ export default function App() {
   const [cordUser, setCordUser] = useState();
   const [profileUrl, setProfileUrl] = useState('');
   const [users, setUsers] = useState([]);
-  const [urls, setUrls] = useState([]);
-  // const [arr, setArr] = useState([]);
+  const [favoritePosts, setFavoritePosts] = useState([]);
+  const [m, setM] = useState(true);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   const localeUId = localStorage.getItem('userId');
@@ -123,11 +124,24 @@ export default function App() {
     }
     });
   }
+  
   useEffect(()=>{
     if(profileUrl !== ''){
       updateUser({...currentUser, profileUrl: profileUrl});
     }
     getAllUsers();
+
+    if(currentUser.yourName != undefined && m ){
+      for(let i = 0; i < currentUser.favoritePosts.length; i++){
+          for(let j = 0; j < posts.length; j++){
+              if(currentUser.favoritePosts[i] === posts[j].id){
+                  setFavoritePosts([...favoritePosts, posts[j]]);
+              }
+          }
+      }
+      console.log("L")
+      setM(false);
+    }
   }, [currentUser])
 
   function getAllUsers(){
@@ -279,6 +293,8 @@ export default function App() {
     setProfileUrl,
     users,
     setUsers,
+    favoritePosts,
+    setFavoritePosts,
   };
 
   return (
@@ -296,6 +312,7 @@ export default function App() {
             <Route path="/MyAccount/:id" element={<MyParking />}></Route>
             <Route path="/About" element={<About />}></Route>
             <Route path="/NewUser" element={<NewUser />}></Route>
+            <Route path="/FavoritePosts" element={<FavoritePosts />}></Route>
             <Route path="/PostParking" element={<PostParking />}></Route>
             <Route path="/Users" element={<Users />}></Route>
             <Route path="/Users/Admin/:id" element={<Admin />}></Route>

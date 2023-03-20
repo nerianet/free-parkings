@@ -6,13 +6,15 @@ import './parkings.css';
 import L from 'leaflet';
 import {} from 'mapbox-gl-leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { GrFavorite } from "react-icons/gr";
+import { MdFavorite } from "react-icons/md";
 
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 
 export default function Parkings() {
 
   const [inputData, setInput] = useState("");
-  const {setCordUser, cordUser, posts, input} = useContext(MyContext);
+  const {setCordUser, cordUser, posts, input, updateUser, updatePost, currentUser, favoritePosts, setFavoritePosts} = useContext(MyContext);
   const v = useGeolocated();
   const [map,setMap] = useState(false);
   useEffect(()=>{
@@ -39,11 +41,41 @@ export default function Parkings() {
     setMap(!map);
   }
 
+  function setFavorite(post){
+    let p = currentUser.favoritePosts.filter((e)=> e === post.id);
+    if(p[0]){
+      currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=>e != post.id);
+      updateUser(currentUser);
+      post.favorite-=1;
+      updatePost(post);
+      let v = favoritePosts.filter((e)=> e.id !== post.id);
+      if(v[0]){
+        setFavoritePosts(v);
+      } else {
+        setFavoritePosts([]);
+      }
+    } else {
+      currentUser.favoritePosts = [...currentUser.favoritePosts, post.id];
+      updateUser(currentUser);
+      post.favorite+=1;
+      updatePost(post);
+    }
+  }
+
   
 
   let i = L.icon({
     iconUrl:`https://api.geoapify.com/v1/icon/?color=%23ff0000&size=small&apiKey=${myAPIKey}`,
   });
+
+  const setFav = (id)=>{
+    let p = currentUser.favoritePosts.find((e)=> e === id);
+    if(p){
+      return (<MdFavorite size={30}/>)
+    } else {
+      return (<GrFavorite size={30}/>)
+    }
+  }
 
   return (
   <> 
@@ -80,7 +112,7 @@ export default function Parkings() {
     <div className="row justify-content-around container rounded mr-0">
    
       {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="border cards rounded mb-2" style={{ width: "300px", height: "400px" }}>
+        <div className="border cards rounded mb-2" style={{ width: "300px", height: "490px" }}>
           <Link to={item.id} key={i} className={'text-decoration-none color-font'}>
           <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
               <img className="img-card border rounded" src={item.imgUrl} style={{ height: "90%", width: "100%" }}/>
@@ -88,9 +120,12 @@ export default function Parkings() {
           <h4 className=""><b>City: </b>{item.city}</h4>
           <h5 className=""><b>Street: </b>{item.street}</h5>
           <h5 className=""><b>Price: </b>{item.price}₪</h5>
-          <div className=" ">
-          </div>
+          {item.favorite + " Like this parking"}
           </Link>
+          <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
+            {currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/>}
+            
+          </div>
         </div>
       ))}
     </div>

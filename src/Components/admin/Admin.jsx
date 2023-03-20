@@ -104,7 +104,7 @@ export default function Admin() {
                 <hr className='w-75'/>
                 {otherCurrUser.userName === 'neria.levi444@gmail.com' || otherCurrUser.userName === 'moshe6073163@gmail.com' ? 'Owner' : <div className='d-flex flex-column align-items-center'>
                 <div className='btn btn-danger mb-2' onClick={()=> deleteUser(otherCurrUser.id)}>Delete User</div>
-                <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>{otherCurrUser.admin === 'true' ? 'Unset' : 'Set'} As Admin</div>
+                <div className='btn btn-warning mb-2' onClick={()=> setAsAdmin(otherCurrUser.id)}>{otherCurrUser.admin === true ? 'Unset' : 'Set'} As Admin</div>
                 </div>} 
                 </div>
           </div>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
+import { MdFavorite } from "react-icons/md";
 
 export default function Header() {
   const { currentUser, setCurrentUser, setProfileUrl } = useContext(MyContext);
@@ -81,13 +82,17 @@ export default function Header() {
             </li>
             {currentUser.yourName != undefined ? (
               <div className="">
-                {currentUser.admin === "false" ? (
+                {currentUser.admin == false ? (
                   ""
                 ) : (
                   <Link className="d-flex justify-content-center nav-link text-primary" to={"/Users"}>
                     Users
                   </Link>
                 )}
+
+                <li>
+                  <Link className="d-flex justify-content-center nav-link text-primary" to={"/FavoritePosts"}>My Favorite <MdFavorite className="mx-1 text-danger mt-2" size={30}/></Link>
+                </li>
                 
                 <li className="">
                   <button

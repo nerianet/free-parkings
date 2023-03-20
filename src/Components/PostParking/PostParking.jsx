@@ -81,6 +81,7 @@ import './PostParking.css'
       contactName: currentUser.yourName,
       contactPhone: currentUser.phone,
       cordLocation: geo,
+      favorite: 0,
     };
      setNewPost(post)
     
