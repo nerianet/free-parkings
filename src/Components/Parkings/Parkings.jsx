@@ -59,6 +59,7 @@ export default function Parkings() {
       updateUser(currentUser);
       post.favorite+=1;
       updatePost(post);
+      setFavoritePosts([...favoritePosts, post]);
     }
   }
 

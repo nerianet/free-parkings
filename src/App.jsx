@@ -130,8 +130,8 @@ export default function App() {
       updateUser({...currentUser, profileUrl: profileUrl});
     }
     getAllUsers();
-
-    if(currentUser.yourName != undefined && m ){
+    
+    if(currentUser.yourName != undefined && m && !favoritePosts[0]){
       for(let i = 0; i < currentUser.favoritePosts.length; i++){
           for(let j = 0; j < posts.length; j++){
               if(currentUser.favoritePosts[i] === posts[j].id){
@@ -139,10 +139,14 @@ export default function App() {
               }
           }
       }
-      console.log("L")
       setM(false);
-    }
+  }
+
   }, [currentUser])
+
+  useEffect(()=>{
+   
+},[currentUser])
 
   function getAllUsers(){
     if(currentUser.admin === 'true'){

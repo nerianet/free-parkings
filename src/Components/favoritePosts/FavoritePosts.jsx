@@ -8,24 +8,15 @@ export default function FavoritePosts () {
     const { updatePost, updateUser, currentUser, favoritePosts, setFavoritePosts, posts} = useContext(MyContext);
 
     function setFavorite(post){
-        let p = currentUser.favoritePosts.filter((e)=> e === post.id);
-        if(p[0]){
-          currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=> e !== post.id);
-          updateUser(currentUser);
-          post.favorite-=1;
-          updatePost(post);
-          let v = favoritePosts.filter((e)=> e.id !== post.id);
-          if(v[0]){
-            setFavoritePosts(v);
-            console.log("M")
-          } else {
-            setFavoritePosts([]);
-          }
+        currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=> e !== post.id);
+        updateUser(currentUser);
+        post.favorite-=1;
+        updatePost(post);
+        let v = favoritePosts.filter((e)=> e.id !== post.id);
+        if(v[0]){
+        setFavoritePosts(v);
         } else {
-          currentUser.favoritePosts = [...currentUser.favoritePosts, post.id];
-          updateUser(currentUser);
-          post.favorite+=1;
-          updatePost(post);
+        setFavoritePosts([]);
         }
     }
 
@@ -37,18 +28,8 @@ export default function FavoritePosts () {
           return (<GrFavorite size={30}/>)
         }
     }
-    let v = 0;
-    useEffect(()=>{
-        for(let i = 0; i < currentUser.favoritePosts.length; i++){
-            for(let j = 0; j < posts.length; j++){
-                if(currentUser.favoritePosts[i] === posts[j].id && v == 0){
-                    setFavoritePosts([...favoritePosts, posts[j]]);
-                    console.log("M");
-                }
-            }
-        }
-        v = 1;
-    },[])
+    
+   
 
   return (
     <div>
@@ -68,7 +49,8 @@ export default function FavoritePosts () {
                     {currentUser.favoritePosts[0] ? setFav(post.id) : <GrFavorite size={30}/>}
                     </div>
                 </div>
-            )) : 
+            ))
+             : 
             <div>
                 <p>You dont have any favorite posts, </p>
                 <Link className='text-decoration-none text-dark' to={'/Parkings'}>To add</Link>
