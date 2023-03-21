@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MyContext } from '../../App';
-import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
 
 export default function FavoritePosts () {
     const { updatePost, updateUser, currentUser, favoritePosts, setFavoritePosts} = useContext(MyContext);
 
     function setFavorite(post){
+        // update fireBase
         currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=> e !== post.id);
         updateUser(currentUser);
         post.favorite-=1;
         updatePost(post);
+        // update local
         let v = favoritePosts.filter((e)=> e.id !== post.id);
         if(v[0]){
         setFavoritePosts(v);
@@ -27,12 +28,12 @@ export default function FavoritePosts () {
             {favoritePosts[0] ? favoritePosts.map((post, i) => (
                 <div key={i} className="border cards rounded mb-2" style={{ width: "300px", height: "450px" }}>
                     <Link to={`/Parkings/${post.id}`} className={'text-decoration-none color-font'}>
-                    <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
-                        <img className="img-card border rounded" src={post.imgUrl} style={{ height: "90%", width: "100%" }}/>
-                    </div>
-                    <h4 className=""><b>City: </b>{post.city}</h4>
-                    <h5 className=""><b>Street: </b>{post.street.length > 20 ? post.street.substring(0, 20) + "..." : post.street }</h5>
-                    <h5 className=""><b>Price: </b>{post.price}₪</h5>
+                        <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
+                            <img className="img-card border rounded" src={post.imgUrl} style={{ height: "90%", width: "100%" }}/>
+                        </div>
+                        <h4 className=""><b>City: </b>{post.city}</h4>
+                        <h5 className=""><b>Street: </b>{post.street.length > 20 ? post.street.substring(0, 20) + "..." : post.street }</h5>
+                        <h5 className=""><b>Price: </b>{post.price}₪</h5>
                     </Link>
                     <div className="d-flex justify-content-between">
                         <div>{post.favorite + " Like this parking"}</div>
