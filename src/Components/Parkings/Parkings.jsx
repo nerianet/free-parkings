@@ -159,7 +159,6 @@ export default function Parkings() {
             <div>{item.favorite + " Like this parking "}</div>
             <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
               {currentUser.id ? currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/> :  <GrFavorite size={30}/>}
-              
             </div>
           </div>
         </div>
