@@ -22,9 +22,9 @@ export default function FavoritePosts () {
     }
 
   return (
-    <div>
-      <div className="row justify-content-center ">
-        <div className="row justify-content-around container rounded mr-0">
+    <div className=''>
+      <div className="row justify-content-center m-0">
+        <div className="row justify-content-around container rounded">
             {favoritePosts[0] ? favoritePosts.map((post, i) => (
                 <div key={i} className="border cards rounded mb-2" style={{ width: "300px", height: "450px" }}>
                     <Link to={`/Parkings/${post.id}`} className={'text-decoration-none color-font'}>

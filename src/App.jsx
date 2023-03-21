@@ -317,8 +317,9 @@ export default function App() {
   };
 
   return (
-    <div className="bg_site vh-100" >
-      <div id="GoToUp" className="bg_site">
+    <div className="bg_site">
+    <div className="" style={{height:'85vh'}} >
+      <div id="GoToUp" className="">
         <MyContext.Provider value={AllData}>
           <Header  />
           <Routes >
@@ -336,11 +337,11 @@ export default function App() {
             <Route path="/Users" element={<Users />}></Route>
             <Route path="/Users/Admin/:id" element={<Admin />}></Route>
           </Routes>
-          
-          <a style={{zIndex:'9999', position:'fixed', bottom:'50px', height:'50px'}}   href="#GoToUp"><IoArrowUpOutline className="border rounded-circle text-light" size={50}/></a>
-          <Footer />
+          {/* <a style={{zIndex:'9999', position:'fixed', bottom:'50px', height:'50px'}}   href="#GoToUp"><IoArrowUpOutline className="border rounded-circle text-light" size={50}/></a> */}
         </MyContext.Provider>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

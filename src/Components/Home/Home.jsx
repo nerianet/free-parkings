@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
   <>
-  <div className="container-fluid row">
+  <div className="container-fluid row m-0">
     <div className="col-12">
       <h1 className="d-flex justify-content-center display-2">Search Parkings</h1>
       <p className="d-flex justify-content-center pb-2 fs-1">Here you can easily find parking</p>
@@ -57,7 +57,7 @@ export default function Home() {
     </div>
     <div className="d-flex justify-content-center flex-wrap">
       <div className="col-sm-5 col-10 mx-sm-3 d-flex justify-content-center mb-sm-0 mb-2 rounded">
-        <img src="https://i.imagesup.co/images2/6d4130c2afe7821e921360c5d3c789ed38a6ab64.png" width={'100%'}/>
+        <img  src="https://i.imagesup.co/images2/6d4130c2afe7821e921360c5d3c789ed38a6ab64.png" width={'100%'}/>
       </div>
       <div className="col-sm-5 col-10 d-flex align-items-center">
         <div className="mx-4 mb-1">
