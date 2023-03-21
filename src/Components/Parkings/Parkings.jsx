@@ -69,33 +69,40 @@ export default function Parkings() {
   }
 
   function setFavorite(post){
-    let p = currentUser.favoritePosts.filter((e)=> e === post.id);
-    if(p[0]){
-      currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=>e !== post.id);
-      updateUser(currentUser);
-      post.favorite-=1;
-      updatePost(post);
-      let v = favoritePosts.filter((e)=> e.id !== post.id);
-      if(v[0]){
-        setFavoritePosts(v);
+    if(currentUser.id){
+      let p = currentUser.favoritePosts.filter((e)=> e === post.id);
+      if(p[0]){
+        currentUser.favoritePosts = currentUser.favoritePosts.filter((e)=>e !== post.id);
+        updateUser(currentUser);
+        post.favorite-=1;
+        updatePost(post);
+        let v = favoritePosts.filter((e)=> e.id !== post.id);
+        if(v[0]){
+          setFavoritePosts(v);
+        } else {
+          setFavoritePosts([]);
+        }
       } else {
-        setFavoritePosts([]);
+        currentUser.favoritePosts = [...currentUser.favoritePosts, post.id];
+        updateUser(currentUser);
+        post.favorite+=1;
+        updatePost(post);
+        setFavoritePosts([...favoritePosts, post]);
       }
     } else {
-      currentUser.favoritePosts = [...currentUser.favoritePosts, post.id];
-      updateUser(currentUser);
-      post.favorite+=1;
-      updatePost(post);
-      setFavoritePosts([...favoritePosts, post]);
+      window.alert("Please log in");
     }
+    
   }
 
   const setFav = (id)=>{
-    let p = currentUser.favoritePosts.find((e)=> e === id);
-    if(p){
-      return (<MdFavorite size={30}/>)
-    } else {
-      return (<GrFavorite size={30}/>)
+    if(currentUser.id){
+      let p = currentUser.favoritePosts.find((e)=> e === id);
+      if(p){
+        return (<MdFavorite size={30}/>)
+      } else {
+        return (<GrFavorite size={30}/>)
+      }
     }
   }
   
@@ -107,14 +114,14 @@ export default function Parkings() {
   return (
   <> 
   <div className="container">
-  <div className="d-flex justify-content-between mb-2" >
+  <div className="d-flex justify-content-between mb-4" >
     <input id="search" className="w-50 rounded mx-3" type="search" placeholder="Search City" onChange={(e) => postInput(e.target.value)}/>
     <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live Map</button>
   </div>
 
   {!map ? "" :
-    <div className="row d-flex justify-content-center"> 
-    <MapContainer className="mb-3 mx-3 rounded col-sm-11 col-8" id="my" center={[cordUser.latitude , cordUser.longitude]} style={{ height:'500px'}} zoom={13} scrollWheelZoom={true}>
+    <div className="row d-flex justify-content-center "> 
+    <MapContainer className="mb-3 mx-3 rounded col-sm-11 col-8 " id="my" center={[cordUser.latitude , cordUser.longitude]} style={{ height:'500px'}} zoom={13} scrollWheelZoom={true}>
       <TileLayer 
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url={`https://maps.geoapify.com/v1/tile/maptiler-3d/{z}/{x}/{y}.png?apiKey=${myAPIKey}`}
@@ -138,8 +145,8 @@ export default function Parkings() {
   <div className="row justify-content-center ">
     <div className="row justify-content-around container rounded mr-0">
    
-      {posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
-        <div className="border cards rounded mb-2" style={{ width: "300px", height: "520px" }}>
+      {posts[0] ? posts.filter((post) => post.city.startsWith(inputData)).map((item, i) => (
+        <div className="border cards rounded mb-2" style={{ width: "300px", height: "450px" }}>
           <Link to={item.id} key={i} className={'text-decoration-none color-font'}>
           <div className="d-flex justify-content-center mt-3" style={{ height: "65%" }}>
               <img className="img-card border rounded" src={item.imgUrl} style={{ height: "90%", width: "100%" }}/>
@@ -151,12 +158,12 @@ export default function Parkings() {
           <div className="d-flex justify-content-between">
             <div>{item.favorite + " Like this parking "}</div>
             <div className="color-font" style={{width:'30px'}} onClick={()=>setFavorite(item)}>
-              {currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/>}
+              {currentUser.id ? currentUser.favoritePosts[0] ? setFav(item.id) : <GrFavorite size={30}/> :  <GrFavorite size={30}/>}
               
             </div>
           </div>
         </div>
-      ))}
+      )) :''}
     </div>
   </div>
   </div>

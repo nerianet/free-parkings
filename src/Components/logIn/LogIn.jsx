@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../App'
 import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
-import {app} from '../../firebase/Firebase'
-import "./LogIn.css"
+import {app} from '../../firebase/Firebase';
+import "./LogIn.css";
+import { v4 as uuidv4 } from 'uuid';
+import { FcGoogle } from "react-icons/fc";
+
+
 
 
 export default function LogIn() {
-  const { setUser, setProfileUrl } = useContext(MyContext);
+  const { setUser, setProfileUrl, setNewUser } = useContext(MyContext);
   const userName = useRef();
   const password = useRef();
 // get users data
@@ -30,6 +34,9 @@ export default function LogIn() {
         
         });
   }
+
+
+  
 
   const submithandler = (a) => {
     a.preventDefault();
@@ -84,8 +91,9 @@ export default function LogIn() {
           <input type="checkbox" value="remember-me" /> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>
-      <button class="btn btn-lg btn-primary btn-block mx-5" onClick={handleSignWithGoogle} >Login With Google</button>
+      <button class="btn btn-lg btn-light text-primary" type="submit" >Login</button>
+      <button class="btn btn-light mx-3" onClick={handleSignWithGoogle} ><FcGoogle size={35}/></button>
+
 
       <div className='btn text-primary d-flex justify-content-center' onClick={hideReset}>Forgot Password</div>
       <div id='Reset' style={{display: "none"}}>

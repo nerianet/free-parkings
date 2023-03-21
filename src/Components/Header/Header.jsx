@@ -4,6 +4,8 @@ import { FaUserAltSlash, FaUserCheck } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import { MdFavorite } from "react-icons/md";
+// import { getAuth, signOut } from "firebase/auth";
+// import { app } from "../../firebase/Firebase";
 
 export default function Header() {
   const { currentUser, setCurrentUser, setProfileUrl } = useContext(MyContext);
@@ -11,10 +13,12 @@ export default function Header() {
   const navigate = useNavigate();
 
   function Disconnect() {
+    // const auth = getAuth(app); 
     setCurrentUser({});
     localStorage.clear();
     setProfileUrl("");
     navigate("/");
+    // signOut(auth);
   }
 
   useEffect(() => {

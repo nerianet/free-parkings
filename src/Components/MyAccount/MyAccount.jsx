@@ -117,6 +117,7 @@ export default function MyAccount() {
             phone: changePhone.current  ? changePhone.current.value : currentUser.phone,
             yourName: changeName.current  ? changeName.current.value : currentUser.yourName,
             address: changeAddress.current  ? changeAddress.current.value : currentUser.address,
+            id: currentUser.id,
         };
         if(chagePassword == true){
             if(checkPassword() == 1){

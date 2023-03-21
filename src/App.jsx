@@ -60,7 +60,9 @@ export default function App() {
         navigate('/LogIn');
       } else if(v == 0) {
         try {
-          addDoc(usersRef, userData);
+          addDoc(usersRef, userData).then((user)=>{
+            userData.id = user.id
+          })
         } 
         catch (err) {
           console.log(err);
@@ -124,6 +126,22 @@ export default function App() {
     }
     });
   }
+
+  // function setUserWithGoogle (user){
+  //   let queryUser = query(usersRef, where('userName', '==', `${user.userName}`));
+  //     onSnapshot(queryUser, (snapshot) => {
+  //     const books = [];
+  //     snapshot.docs.forEach((doc) => {
+  //       books.push({ ...doc.data(), id: doc.id });
+  //     });
+  //     if(books[0] != undefined){
+  //       window.prompt("You have account, please log in");
+  //     } else {
+  //       if(password == undefined) {}
+  //       else window.alert("Please Sign In");
+  //   }
+  //   });
+  // }
   
   useEffect(()=>{
     if(profileUrl !== ''){
@@ -147,7 +165,7 @@ export default function App() {
   }, [currentUser])
 
   function getAllUsers(){
-    if(currentUser.admin === 'true'){
+    if(currentUser.admin){
       let queryUser = query(usersRef);
       onSnapshot(queryUser, (snapshot) => {
         const books = [];
@@ -252,13 +270,19 @@ export default function App() {
   }
 
   function userDelete(id){
-    let u = users.find((e)=> e.id == id);
+    let queryUser = query(usersRef, where('id', '==', id));
+    onSnapshot(queryUser, (snapshot) => {
+        const books = [];
+        snapshot.docs.forEach((doc) => {
+          books.push({ ...doc.data(), id: doc.id });
+        });
+      
+    let u = books[0];
     let p = posts.filter((e)=> e.userId == u.userId);
     p.map((e)=>{
       postDelete(e.id, e.fileName);
     })
-    p = posts.filter((e)=> e.userId != u.userId);
-    setPosts(p);
+  })
 
     /// delete user from firebase
     let a = doc(firestore, 'users', `${id}`);

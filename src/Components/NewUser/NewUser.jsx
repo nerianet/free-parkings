@@ -3,10 +3,13 @@ import { MyContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { FaTrashAlt } from "react-icons/fa";
+import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import {app} from '../../firebase/Firebase';
+import { FcGoogle } from "react-icons/fc";
 
 
 export default function NewUser() {
-  const {setNewUser, currentUser, setImage, image} = useContext(MyContext);
+  const {setNewUser, currentUser, setProfileUrl} = useContext(MyContext);
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
@@ -41,6 +44,38 @@ export default function NewUser() {
       pass2.current.value = "";
       address.current.value = "";
     }
+}
+
+const signUpWithGoogle = () =>{
+  const provider = new GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+  const auth = getAuth(app); 
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // The signed-in user info.
+        
+        const user = result.user;
+
+        const { v4: userId } = require('uuid');
+        const user1 = {
+          userName: user.email, 
+          phone: 0,
+          yourName: user.displayName,
+          password: "1234",
+          address: "",
+          userId: userId(),
+          admin: user.email === 'moshe6073163@gmail.com' || userName.current.value === 'neria.levi444@gmail.com' ? true : false ,
+          profileUrl: user.photoURL,
+          favoritePosts: [],
+        }
+        setProfileUrl(user.photoURL);
+        window.alert("Your first password is: 1234,\nplease change and add all details in the private zone");
+        setNewUser(user1);
+      })
+      .catch((error) => {
+      
+      });
 }
 
   return (
@@ -117,7 +152,9 @@ export default function NewUser() {
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg">Register</button>
                     </div>
-
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button class="btn btn-light mx-3 rounded-circle" onClick={signUpWithGoogle} ><FcGoogle size={35}/></button>
+                    </div>
                   </form>
 
                 </div>
