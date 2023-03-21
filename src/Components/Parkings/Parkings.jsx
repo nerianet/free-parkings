@@ -133,6 +133,7 @@ export default function Parkings() {
       </Marker>
      {posts.map((post)=>(
       <Marker icon={i} position={[post.cordLocation.lat , post.cordLocation.lon]}>
+        {console.log(post.cordLocation)}
       <Popup>
       {post.street + ", " + post.city}
       <Link to={post.id}> Go to</Link>

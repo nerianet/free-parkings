@@ -88,39 +88,38 @@ export default function App() {
     }
   }
 
-  useEffect(()=>{
-    if(posts[0]){
-      let arr = [];
-      let temp = posts.slice();
-      for(let i = 0; i < 6 && i < posts.length; i++){
-        let max = temp.slice(0,1);
-        max.favorite = -1;
-        temp.map((p)=>{
-          if(p.favorite > max.favorite ){
-            max = p;
-          }
-        })
-        temp = temp.filter((t)=> max.id !== t.id);
-        if(max.favorite != -1){
-          popularPostsRef = query(popularPostsRef,where(`id`, '==', `${max.id}`));
-          onSnapshot(popularPostsRef, (snapshot) => {
-            const books = [];
-            snapshot.docs.forEach((doc) => {
-              books.push({ ...doc.data(), id: doc.id });
-            });
-            if(!books[0]){
-              setPopular({id: max.id});
-              arr.push(max);
-              console.log(max);
-            }
-       
-          })
-        }
-      }
+  // useEffect(()=>{
+  //   if(posts[0]){
+  //     let arr = [];
+  //     let temp = posts.slice();
+  //     for(let i = 0; i < 6 && i < posts.length; i++){
+  //       let max = temp.slice(0,1);
+  //       max.favorite = -1;
+  //       temp.map((p)=>{
+  //         if(p.favorite > max.favorite ){
+  //           max = p;
+  //         }
+  //       })
+  //       temp = temp.filter((t)=> max.id !== t.id);
+  //       if(max.favorite != -1){
+  //         popularPostsRef = query(popularPostsRef,where(`id`, '==', `${max.id}`));
+  //         onSnapshot(popularPostsRef, (snapshot) => {
+  //           const books = [];
+  //           snapshot.docs.forEach((doc) => {
+  //             books.push({ ...doc.data(), id: doc.id });
+  //           });
+  //           if(!books[0]){
+  //             setPopular({id: max.id});
+  //             arr.push(max);
+  //             console.log(max);
+  //           }
+  //         })
+  //       }
+  //     }
       
-      setPopularPosts(arr);
-    }
-  },[posts])
+  //     setPopularPosts(arr);
+  //   }
+  // },[posts])
   
 
   // function to create new post
