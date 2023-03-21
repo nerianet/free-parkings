@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <>
-    <div className="container-fluid text-center text-md-left text-white card-footer bg-dark">
+    <div className="container-fluid text-center text-md-left text-white bg_header">
     <div className="row m-0">
       <div className="col-md-6 mt-md-0 mt-3">
         <h5 className="text-uppercase">Free Parkings</h5>

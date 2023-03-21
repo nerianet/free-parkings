@@ -41,7 +41,8 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [favoritePosts, setFavoritePosts] = useState([]);
   const [flag, setflag] = useState(true);
- 
+  const [popularPosts, setPopularPosts] = useState([]);
+
   const navigate = useNavigate();
 
   // function to create new user
@@ -75,6 +76,51 @@ export default function App() {
       v=1;
     })
   }
+
+  let popularPostsRef = collection(firestore,'popularPosts');
+  function setPopular(popularPost){
+    popularPostsRef = collection(firestore,'popularPosts');
+    try {
+      addDoc(popularPostsRef, popularPost)
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(()=>{
+    if(posts[0]){
+      let arr = [];
+      let temp = posts.slice();
+      for(let i = 0; i < 6 && i < posts.length; i++){
+        let max = temp.slice(0,1);
+        max.favorite = -1;
+        temp.map((p)=>{
+          if(p.favorite > max.favorite ){
+            max = p;
+          }
+        })
+        temp = temp.filter((t)=> max.id !== t.id);
+        if(max.favorite != -1){
+          popularPostsRef = query(popularPostsRef,where(`id`, '==', `${max.id}`));
+          onSnapshot(popularPostsRef, (snapshot) => {
+            const books = [];
+            snapshot.docs.forEach((doc) => {
+              books.push({ ...doc.data(), id: doc.id });
+            });
+            if(!books[0]){
+              setPopular({id: max.id});
+              arr.push(max);
+              console.log(max);
+            }
+       
+          })
+        }
+      }
+      
+      setPopularPosts(arr);
+    }
+  },[posts])
   
 
   // function to create new post
@@ -276,6 +322,7 @@ export default function App() {
     p.map((e)=>{
       postDelete(e.id, e.fileName);
     })
+    setFavoritePosts([])
   })
 
     /// delete user from firebase
@@ -314,12 +361,13 @@ export default function App() {
     setUsers,
     favoritePosts,
     setFavoritePosts,
+    popularPosts,
   };
 
   return (
-    <div className="bg_site">
-    <div className="" style={{height:'85vh'}} >
-      <div id="GoToUp" className="">
+    <div className="bg_site" style={{height:'auto'}}>
+    <div className=""   >
+      <div id="GoToUp" className="bg_site">
         <MyContext.Provider value={AllData}>
           <Header  />
           <Routes >

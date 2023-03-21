@@ -13,7 +13,7 @@ import {Carousel} from 'react-responsive-carousel';
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts, updateUser, userDelete, setUsers, users, setCurrentUser } = useContext(MyContext);
+  const { currentUser, posts, updateUser, userDelete,updatePost, setCurrentUser } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
@@ -129,6 +129,14 @@ export default function MyAccount() {
     }
 
     function deleteUser(id){
+        currentUser.favoritePosts.map((f)=>{
+            posts.map((p)=>{
+                if(p.id === f){
+                    p.favorite--;
+                    updatePost(p);
+                }
+            })
+        })
         userDelete(id);
         localStorage.clear();
         setCurrentUser({});
