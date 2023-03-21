@@ -1,27 +1,36 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { MyContext } from '../../App'
-import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
-import {app} from '../../firebase/Firebase';
+import React, { useContext, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { MyContext } from '../../App';
 import "./LogIn.css";
-import { v4 as uuidv4 } from 'uuid';
 import { FcGoogle } from "react-icons/fc";
 
-
+import {app} from '../../firebase/Firebase';
+import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 
 
 export default function LogIn() {
+
   const { setUser, setProfileUrl, setNewUser } = useContext(MyContext);
+  const [email, setEmail] = useState('');
   const userName = useRef();
   const password = useRef();
-// get users data
+
+  const auth = getAuth();
 
 
-  //////////////////////////////////////////////////////////////////////////////
+  // conncting with user and password
+  const submithandler = (a) => {
+    a.preventDefault();
+    setUser(userName.current.value, password.current.value);
+      userName.current.value = "";
+      password.current.value = "";
+  }
+
+ 
+  // conncting auto with google 
   const handleSignWithGoogle = () =>{
     const provider = new GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
     const auth = getAuth(app); 
       signInWithPopup(auth, provider)
         .then((result) => {
@@ -31,31 +40,18 @@ export default function LogIn() {
           setUser(userr.email);
         })
         .catch((error) => {
-        
+          console.log(error);
         });
   }
 
 
-  
-
-  const submithandler = (a) => {
-    a.preventDefault();
-    setUser(userName.current.value, password.current.value);
-      userName.current.value = "";
-      password.current.value = "";
-  }
-
-
-  const [email, setEmail] = useState('');
-  const auth = getAuth();
-
+  // function forgot password
   const triggerResetEmail = async () => {
     await sendPasswordResetEmail(auth, email);
     await confirmPasswordReset(auth, )
-    // console.log();
   }
 
-
+  // function to hide forgot password
   function hideReset(){
     let a = document.getElementById('Reset');
     if(a.style.display == "none"){
@@ -65,11 +61,11 @@ export default function LogIn() {
       a.style.display = "none";
     }
   }
-  ////////////////////////////////////////////////////////////////////////////// 
+  
 
   return ( 
-    <div className='body '>
-    <form className='form-signin bg_login rounded' onSubmit={submithandler}>
+    <div className=''>
+    <form className='form-signin bg_login rounded mb-4' onSubmit={submithandler}>
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
         <h1 class="h3 mb-3 font-weight-normal text-light">Enter User</h1>
@@ -91,10 +87,15 @@ export default function LogIn() {
           <input type="checkbox" value="remember-me" /> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-light text-primary" type="submit" >Login</button>
-      <button class="btn btn-light mx-3" onClick={handleSignWithGoogle} ><FcGoogle size={35}/></button>
-
-
+      <div className='d-flex flex-column align-items-center'>
+        <button class="btn btn-lg btn-primary w-25" type="submit" >Login</button>
+        <div className='w-100 d-flex justify-content-center'>
+          <hr className='w-50 mx-1'/>
+          or
+          <hr className='w-50 mx-1'/>
+        </div>
+        <button class="btn btn-light mx-3 rounded-circle" onClick={handleSignWithGoogle} ><FcGoogle size={35}/></button>
+      </div>
       <div className='btn text-primary d-flex justify-content-center' onClick={hideReset}>Forgot Password</div>
       <div id='Reset' style={{display: "none"}}>
         <div class="input-group d-flex justify-content-center w-sm-75 rounded">

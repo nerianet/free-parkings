@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+
 import "./App.css";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
@@ -14,16 +15,15 @@ import MyAccount from "./Components/MyAccount/MyAccount";
 import PageError from "./Components/PageError/PageError";
 import MyParking from "./Components/myParking/MyParking";
 import Admin from "./Components/admin/Admin";
-import { IoArrowUpOutline } from "react-icons/io5";
-import TabScrollButton from '@mui/material/TabScrollButton';
+import Users from "./Components/Users/Users";
+import FavoritePosts from "./Components/favoritePosts/FavoritePosts";
 
+import { IoArrowUpOutline } from "react-icons/io5";
 
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject, listAll  } from "firebase/storage";
-import Users from "./Components/Users/Users";
-import FavoritePosts from "./Components/favoritePosts/FavoritePosts";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -40,12 +40,11 @@ export default function App() {
   const [profileUrl, setProfileUrl] = useState('');
   const [users, setUsers] = useState([]);
   const [favoritePosts, setFavoritePosts] = useState([]);
-  const [m, setM] = useState(true);
-  //////////////////////////////////////////////////////////////////////////////////////////////
-
-  const localeUId = localStorage.getItem('userId');
+  const [flag, setflag] = useState(true);
+ 
   const navigate = useNavigate();
 
+  // function to create new user
   const usersRef = collection(firestore, "users");
   let v = 0;
   const setNewUser = (userData) => {
@@ -58,12 +57,14 @@ export default function App() {
       if(books[0] && v == 0){
         window.alert("You Have a Account");
         navigate('/LogIn');
-      } else if(v == 0) {
+      } 
+      else if(v == 0) {
         try {
-          addDoc(usersRef, userData).then((user)=>{
+          addDoc(usersRef, userData)
+          .then((user)=>{
             userData.id = user.id
           })
-        } 
+        }
         catch (err) {
           console.log(err);
         }
@@ -75,30 +76,80 @@ export default function App() {
     })
   }
   
+
+  // function to create new post
   let postsRef = collection(firestore, "posts");
-  // Firebase creates this automaticall//
   const setNewPost = (postData) => {
     try { 
-      // doc(firestore,"posts", )
       let n = addDoc(postsRef, postData)
       .then((result)=>{
         postData.id = result.id;
         setStorage(image, postData);
-        }) .catch((error) => console.log(error));
+      }) 
+      .catch((error) => console.log(error));
       setPosts([...posts, postData]); 
     } 
     catch (err) {
       console.log(err);
     } 
   };
+
+
+  // function to upload images to fireBase
+  let storageRef;
+  const setStorage = (files, post) => {
+    let i = 0;
+    while(files[i]){
+      storageRef = ref(storage, currentUser.userId + `/${post.id}/` + files[i].name);
+      setIsLoading(true);
+  
+      uploadBytes(storageRef, files[i])
+      .then((snapshot) => {
+        console.log('Uploaded successed!');
+        setIsLoading(false);
+        setIsShowModal(true);
+        setInput('');
+        getUrl(post, i);
+      });
+      i++;
+    }
+  };
+
+
+  // function to add url for image in post in fireBase
+  let arr = [];
+  function getUrl(post, i) {
+    arr = [];
+    storageRef = ref(storage, post.userId + `/${post.id}`);
+    listAll(storageRef)
+    .then((files)=>{
+      if(files.items.length == image.length){
+        files.items.forEach((e,i)=>{
+          getDownloadURL(e)
+          .then((url)=>{
+            arr[i] = url;
+            updatePost({...post, imgUrl: arr})
+          })
+        })
+      } 
+      else if(i == image.length) {
+        getUrl(post);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
    
+
+  const localeUId = localStorage.getItem('userId');
   function setUser (UserName, password){ 
     let queryUser;
-  if(localeUId != null) {
-    queryUser = query(usersRef, where('userId', '==', `${localeUId}`));
-  } else {
-    queryUser = query(usersRef, where('userName', '==', `${UserName}`));
-  }
+    if(localeUId != null) {
+      queryUser = query(usersRef, where('userId', '==', `${localeUId}`));
+    } else {
+      queryUser = query(usersRef, where('userName', '==', `${UserName}`));
+    }
       onSnapshot(queryUser, (snapshot) => {
       const books = [];
       snapshot.docs.forEach((doc) => {
@@ -126,22 +177,6 @@ export default function App() {
     }
     });
   }
-
-  // function setUserWithGoogle (user){
-  //   let queryUser = query(usersRef, where('userName', '==', `${user.userName}`));
-  //     onSnapshot(queryUser, (snapshot) => {
-  //     const books = [];
-  //     snapshot.docs.forEach((doc) => {
-  //       books.push({ ...doc.data(), id: doc.id });
-  //     });
-  //     if(books[0] != undefined){
-  //       window.prompt("You have account, please log in");
-  //     } else {
-  //       if(password == undefined) {}
-  //       else window.alert("Please Sign In");
-  //   }
-  //   });
-  // }
   
   useEffect(()=>{
     if(profileUrl !== ''){
@@ -149,19 +184,18 @@ export default function App() {
     }
     getAllUsers();
     
-    if(currentUser.yourName != undefined && m){
+    if(currentUser.yourName != undefined && flag){
       let arr = [];
       for(let i = 0; i < currentUser.favoritePosts.length; i++){
-          for(let j = 0; j < posts.length; j++){
-              if(currentUser.favoritePosts[i] === posts[j].id){
-                arr.push(posts[j]);
-              }
+        for(let j = 0; j < posts.length; j++){
+          if(currentUser.favoritePosts[i] === posts[j].id){
+            arr.push(posts[j]);
           }
+        }
       }
       setFavoritePosts(arr);
-      setM(false);
-  }
-
+      setflag(false);
+    }
   }, [currentUser])
 
   function getAllUsers(){
@@ -196,52 +230,12 @@ export default function App() {
       snapshot.docs.forEach((doc) => {
         books.push({ ...doc.data(), id: doc.id });
       });
-    //  console.log(currentUser);
       setPosts(books);     
     });
     
   },[]);
 
-  let storageRef;
-  const setStorage = (files, post) => {
-    let i = 0;
-    while(files[i]){
-      storageRef = ref(storage, currentUser.userId + `/${post.id}/` + files[i].name);
-      setIsLoading(true);
   
-      uploadBytes(storageRef, files[i])
-      .then((snapshot) => {
-        console.log('Uploaded successed!');
-        setIsLoading(false);
-        setIsShowModal(true);
-        setInput('');
-        getUrl(post, i);
-      });
-      i++;
-    }
-  };
-
-  let arr = [];
-  function getUrl(post, i) {
-    arr = [];
-    storageRef = ref(storage, post.userId + `/${post.id}`);
-    listAll(storageRef).then((files)=>{
-      if(files.items.length == image.length){
-        files.items.forEach((e,i)=>{
-          getDownloadURL(e).then((url)=>{
-            arr[i] = url;
-            updatePost({...post, imgUrl: arr})
-          })
-        })
-        console.log(arr);
-      } else if(i == image.length) {
-        getUrl(post);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
 
   
 
