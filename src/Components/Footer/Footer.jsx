@@ -6,7 +6,8 @@ export default function Footer() {
 
   return (
     <>
-    <div className="container-fluid text-center text-md-left text-white bg_header">
+    <footer>
+    <div className="container-fluid text-center text-md-left text-white bg_header d-block">
     <div className="row m-0">
       <div className="col-md-6 mt-md-0 mt-3">
         <h5 className="text-uppercase">Free Parkings</h5>
@@ -33,6 +34,7 @@ export default function Footer() {
     <div className="footer-copyright text-center py-3">© 2023 Free parkings:
     </div>
     </div>
+    </footer>
   </>
   )
 }

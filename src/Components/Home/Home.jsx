@@ -4,6 +4,7 @@ import { MyContext } from "../../App";
 import { location } from "../API/APIs";
 import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
+import { height } from "@mui/system";
 
 export default function Home() {
   const {setInput, popularPosts, currentUser, setFavoritePosts, favoritePosts, updatePost, updateUser} = useContext(MyContext);
@@ -72,8 +73,11 @@ export default function Home() {
   <>
   <div className="container-fluid row m-0">
     <div className="col-12">
-      <h1 className="d-flex justify-content-center display-2">Search Parkings</h1>
-      <p className="d-flex justify-content-center pb-2 fs-1">Here you can easily find parking</p>
+    <h1 className="d-flex justify-content-center display-2">Search Parkings</h1>
+      <div className="d-flex flex-wrap justify-content-center"> 
+        <p className="d-flex justify-content-center pb-sm-2 fs-1 ">Here you can easily </p>
+        <p className="d-flex justify-content-center pb-2 fs-1 mx-2">find parking</p>
+      </div>
       <div className="d-flex justify-content-center display-6">Choose City ...</div>
       <div className="d-flex justify-content-center col-12">
         <div className="col-sm-6 col-12">
@@ -96,10 +100,10 @@ export default function Home() {
 
     </div>
     <div className="d-flex justify-content-center flex-wrap">
-      <div className="col-sm-5 col-10 mx-sm-3 d-flex justify-content-center mb-sm-0 mb-2 rounded">
+      <div className="col-sm-5 col-10 mx-sm-3 d-flex justify-content-center mb-sm-0 mb-2 rounded  h-sm-75" >
         <img  src="https://i.imagesup.co/images2/6d4130c2afe7821e921360c5d3c789ed38a6ab64.png" width={'100%'}/>
       </div>
-      <div className="col-sm-5 col-10 d-flex align-items-center">
+      <div className="col-sm-5 col-12 d-flex flex-sm-wrap flex-column align-items-center">
         <div className="mx-4 mb-1">
           <div className="display-2 text-light"><b>Hellow </b></div>
           <div className="display-3 text-light">How are you</div>

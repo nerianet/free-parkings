@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/joy": "^5.0.0-alpha.72",
     "@mui/material": "^5.11.6",
     "@mui/styled-engine-sc": "^5.11.0",
     "@react-icons/all-files": "^4.1.0",

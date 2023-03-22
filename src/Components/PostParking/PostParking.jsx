@@ -13,6 +13,7 @@ import { useGeolocated } from "react-geolocated";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import './PostParking.css'
+import Allert from "../allert/Allert";
 
  export default function PostParking() {
 
@@ -92,6 +93,7 @@ import './PostParking.css'
     activityTime.target.value = "";
     setImage([]);
     setUrl([]);
+    
   };
 
 

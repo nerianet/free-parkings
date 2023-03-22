@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 
 import {app} from '../../firebase/Firebase';
 import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
+import Allert from '../allert/Allert';
 
 
 export default function LogIn() {
@@ -14,7 +15,7 @@ export default function LogIn() {
   const [email, setEmail] = useState('');
   const userName = useRef();
   const password = useRef();
-
+  const [modal,setModal] = useState(false);
   const auth = getAuth();
 
 
@@ -24,7 +25,8 @@ export default function LogIn() {
     setUser(userName.current.value, password.current.value);
       userName.current.value = "";
       password.current.value = "";
-  }
+      setModal(setUser(userName.current.value, password.current.value));
+    }
 
  
   // conncting auto with google 
@@ -71,7 +73,6 @@ export default function LogIn() {
         <h1 class="h3 mb-3 font-weight-normal text-light">Enter User</h1>
         <Link className='link-light' to={'/NewUser'}>New User? Click here</Link>
       </div>
-
       <div class="form-label-group">
         <input ref={userName} type="email" id="inputEmail" class="form-control" placeholder="Email address" required autoFocus />
         <label for="inputEmail">Email address</label>
@@ -81,6 +82,8 @@ export default function LogIn() {
         <input ref={password} type="password" id="inputPassword" class="form-control" placeholder="Password" required />
         <label for="inputPassword">Password</label>
       </div>
+      {modal ? <Allert set={true}/> : ""}
+
 
       <div class="checkbox mb-3">
         <label className='text-light'>

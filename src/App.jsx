@@ -24,6 +24,7 @@ import { IoArrowUpOutline } from "react-icons/io5";
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject, listAll  } from "firebase/storage";
+import Allert from "./Components/allert/Allert";
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 export const MyContext = createContext(); // הצהרה רישונית
@@ -213,7 +214,8 @@ export default function App() {
             localStorage.setItem("userId", `${books[0].userId}`);
             navigate('/');
           } else {
-            window.alert("Please Enter Password correct");
+            // window.alert("Please Enter Password correct");
+            return true;
           }
         }
       } else {
@@ -221,6 +223,12 @@ export default function App() {
         else window.alert("Please Sign In");
     }
     });
+  }
+  const m = ()=>{
+    console.log("m")
+    return (
+<Allert />
+    )
   }
   
   useEffect(()=>{
@@ -321,7 +329,7 @@ export default function App() {
     p.map((e)=>{
       postDelete(e.id, e.fileName);
     })
-    setFavoritePosts([])
+    setFavoritePosts([]);
   })
 
     /// delete user from firebase
@@ -364,9 +372,9 @@ export default function App() {
   };
 
   return (
-    <div className="bg_site" style={{height:'auto'}}>
-    <div className=""   >
-      <div id="GoToUp" className="bg_site">
+    <div className="bg_site">
+    <div className="" >
+      <div id="GoToUp" className="" style={{minHeight: '86vh'}}>
         <MyContext.Provider value={AllData}>
           <Header  />
           <Routes >
@@ -388,7 +396,7 @@ export default function App() {
         </MyContext.Provider>
       </div>
     </div>
-    <Footer />
+    <Footer/>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function FavoritePosts () {
     }
 
   return (
-    <div className=''>
+    <div className='container'>
       <div className="row justify-content-center m-0">
         <div className="row justify-content-around container rounded">
             {favoritePosts[0] ? favoritePosts.map((post, i) => (
