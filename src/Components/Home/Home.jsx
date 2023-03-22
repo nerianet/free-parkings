@@ -5,9 +5,10 @@ import { location } from "../API/APIs";
 import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
 import { height } from "@mui/system";
+import Allert from "../allert/Allert";
 
 export default function Home() {
-  const {setInput, popularPosts, currentUser, setFavoritePosts, favoritePosts, updatePost, updateUser} = useContext(MyContext);
+  const {setIsShowAlert , setInput, popularPosts, currentUser, setFavoritePosts, favoritePosts, updatePost, updateUser} = useContext(MyContext);
   const [inputData, setInputData] = useState([]); 
   
   
@@ -52,7 +53,8 @@ export default function Home() {
         setFavoritePosts([...favoritePosts, post]);
       }
     } else {
-      window.alert("Please log in");
+      setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please log in"}/> })            
+
     }
     
   }

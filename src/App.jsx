@@ -44,7 +44,7 @@ export default function App() {
   const [flag, setflag] = useState(true);
   const [popularPosts, setPopularPosts] = useState([]);
   
-  const [isShowAlert, setIsShowAlert] = useState(false);
+  const [isShowAlert, setIsShowAlert] = useState({set: false});
   const navigate = useNavigate();
 
   // function to create new user
@@ -58,7 +58,7 @@ export default function App() {
         books.push({ ...doc.data(), id: doc.id });
       });
       if(books[0] && v == 0){
-        window.alert("You Have a Account");
+        setIsShowAlert({set: true, component: <Allert set={true} detail = {"You Have a Account"}/> })            
         navigate('/LogIn');
       } 
       else if(v == 0) {
@@ -215,14 +215,12 @@ export default function App() {
             localStorage.setItem("userId", `${books[0].userId}`);
             navigate('/');
           } else {
-            // window.alert("Please Enter Password correct");
             setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please Enter Password correct"}/> })            
           }
         }
       } else {
         if(password == undefined) {}
         else{
-          // window.alert("Please Sign In");
           setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please Sign In"}/> })
         } 
     }
@@ -373,9 +371,9 @@ export default function App() {
   return (
     <div className="bg_site">
     <div className="" >
-      {isShowAlert.set ? isShowAlert.component : ""}
       <div id="GoToUp" className="" style={{minHeight: '86vh'}}>
         <MyContext.Provider value={AllData}>
+        {isShowAlert.set ? isShowAlert.component : ""}
           <Header  />
           <Routes >
             <Route path="/" element={<Home />}></Route>

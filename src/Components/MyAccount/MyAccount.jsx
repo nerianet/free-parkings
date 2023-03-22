@@ -9,11 +9,12 @@ import {TiUserDelete} from 'react-icons/ti';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from 'react-responsive-carousel';
+import Allert from '../allert/Allert';
 
 export default function MyAccount() {
   const navigate = useNavigate();
 
-  const { currentUser, posts, updateUser, userDelete,updatePost, setCurrentUser } = useContext(MyContext);
+  const {setIsShowAlert ,currentUser, posts, updateUser, userDelete,updatePost, setCurrentUser } = useContext(MyContext);
 
   const [profile, setProfile] = useState(false);
   const [localePosts, setLocalePosts] = useState(false);
@@ -103,10 +104,10 @@ export default function MyAccount() {
                 data.password = changePassword2.current.value;
                 return 1;
             } else {
-                window.alert("The Password Not Matched");
+                setIsShowAlert({set: true, component: <Allert set={true} detail = {"The Password Not Matched"}/> })            
             }
         } else {
-            window.alert("The Password Not Correct");
+            setIsShowAlert({set: true, component: <Allert set={true} detail = {"The Password Not Correct"}/> })            
         }
     }
     let  data;

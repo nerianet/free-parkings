@@ -6,10 +6,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import {app} from '../../firebase/Firebase';
 import { FcGoogle } from "react-icons/fc";
+import Allert from '../allert/Allert';
 
 
 export default function NewUser() {
-  const {setNewUser, currentUser, setProfileUrl} = useContext(MyContext);
+  const {setNewUser, currentUser, setProfileUrl, setIsShowAlert} = useContext(MyContext);
   const userName = useRef();
   const pass1 = useRef();
   const pass2 = useRef();
@@ -34,7 +35,7 @@ export default function NewUser() {
       favoritePosts: [],
     }
     if(pass1.current.value!=pass2.current.value){
-      window.alert("the password not correct");
+      setIsShowAlert({set: true, component: <Allert set={true} detail = {"the password not correct"}/> })
     } else {
       setNewUser(user);
       userName.current.value = "";
@@ -70,7 +71,7 @@ const signUpWithGoogle = () =>{
           favoritePosts: [],
         }
         setProfileUrl(user.photoURL);
-        window.alert("Your first password is: 1234,\nplease change and add all details in the private zone");
+        setIsShowAlert({set: true, component: <Allert set={true} detail = {"Your first password is: 1234,\nplease change and add all details in the private zone"}/> })            
         setNewUser(user1);
       })
       .catch((error) => {

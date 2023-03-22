@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@mui/joy/Button';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
+import { MyContext } from '../../App';
 
 export default function Allert(props) {
   const [open, setOpen] = useState(props.set);
+  const {setIsShowAlert} = useContext(MyContext);
+
+  useEffect(()=>{
+    if(!open){
+      setIsShowAlert({set: false});
+    }
+  },[open])
+  
   return (
     <React.Fragment>
       <Modal

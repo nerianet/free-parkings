@@ -34,6 +34,7 @@ import {
   WorkplaceShareButton
 } from "react-share";
 import SpeedAccess from "../speedAccess/SpeedAccess";
+import Allert from "../allert/Allert";
 
 
 const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
@@ -41,7 +42,7 @@ const myAPIKey = "7aeea4fe26fa4c258c13fb720430df95";
 export default function Parkings() {
 
   const [inputData, setInput] = useState("");
-  const {setCordUser, cordUser, posts, input, updateUser, updatePost, currentUser, favoritePosts, setFavoritePosts} = useContext(MyContext);
+  const {setIsShowAlert , setCordUser, cordUser, posts, input, updateUser, updatePost, currentUser, favoritePosts, setFavoritePosts} = useContext(MyContext);
   const v = useGeolocated();
   const [map,setMap] = useState(false);
   useEffect(()=>{
@@ -90,7 +91,7 @@ export default function Parkings() {
         setFavoritePosts([...favoritePosts, post]);
       }
     } else {
-      window.alert("Please log in");
+      setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please log in"}/> })            
     }
     
   }
