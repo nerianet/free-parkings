@@ -66,7 +66,7 @@ const signUpWithGoogle = () =>{
           password: "1234",
           address: "",
           userId: userId(),
-          admin: user.email === 'moshe6073163@gmail.com' || userName.current.value === 'neria.levi444@gmail.com' ? true : false ,
+          admin: user.email === 'moshe6073163@gmail.com' || user.email === 'neria.levi444@gmail.com' ? true : false ,
           profileUrl: user.photoURL,
           favoritePosts: [],
         }
