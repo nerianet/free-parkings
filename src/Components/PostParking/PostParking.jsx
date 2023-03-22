@@ -93,7 +93,6 @@ import Allert from "../allert/Allert";
     activityTime.target.value = "";
     setImage([]);
     setUrl([]);
-    
   };
 
 
