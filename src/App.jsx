@@ -43,7 +43,8 @@ export default function App() {
   const [favoritePosts, setFavoritePosts] = useState([]);
   const [flag, setflag] = useState(true);
   const [popularPosts, setPopularPosts] = useState([]);
-
+  
+  const [isShowAlert, setIsShowAlert] = useState(false);
   const navigate = useNavigate();
 
   // function to create new user
@@ -215,20 +216,17 @@ export default function App() {
             navigate('/');
           } else {
             // window.alert("Please Enter Password correct");
-            return true;
+            setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please Enter Password correct"}/> })            
           }
         }
       } else {
         if(password == undefined) {}
-        else window.alert("Please Sign In");
+        else{
+          // window.alert("Please Sign In");
+          setIsShowAlert({set: true, component: <Allert set={true} detail = {"Please Sign In"}/> })
+        } 
     }
     });
-  }
-  const m = ()=>{
-    console.log("m")
-    return (
-<Allert />
-    )
   }
   
   useEffect(()=>{
@@ -369,11 +367,13 @@ export default function App() {
     favoritePosts,
     setFavoritePosts,
     popularPosts,
+    setIsShowAlert,
   };
 
   return (
     <div className="bg_site">
     <div className="" >
+      {isShowAlert.set ? isShowAlert.component : ""}
       <div id="GoToUp" className="" style={{minHeight: '86vh'}}>
         <MyContext.Provider value={AllData}>
           <Header  />

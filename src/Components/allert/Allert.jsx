@@ -9,9 +9,6 @@ export default function Allert(props) {
   const [open, setOpen] = useState(props.set);
   return (
     <React.Fragment>
-      <Button variant="outlined" color="neutral" onClick={() => setOpen(true)}>
-        Open modal
-      </Button>
       <Modal
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
@@ -46,11 +43,10 @@ export default function Allert(props) {
             fontWeight="lg"
             mb={1}
           >
-            This is the modal title
+            Massege: 
           </Typography>
           <Typography id="modal-desc" textColor="text.tertiary">
-            Make sure to use <code>aria-labelledby</code> on the modal dialog with an
-            optional <code>aria-describedby</code> attribute.
+            {props.detail}
           </Typography>
         </Sheet>
       </Modal>

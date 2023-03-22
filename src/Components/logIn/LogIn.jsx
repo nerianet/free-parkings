@@ -15,7 +15,6 @@ export default function LogIn() {
   const [email, setEmail] = useState('');
   const userName = useRef();
   const password = useRef();
-  const [modal,setModal] = useState(false);
   const auth = getAuth();
 
 
@@ -25,7 +24,6 @@ export default function LogIn() {
     setUser(userName.current.value, password.current.value);
       userName.current.value = "";
       password.current.value = "";
-      setModal(setUser(userName.current.value, password.current.value));
     }
 
  
@@ -67,6 +65,7 @@ export default function LogIn() {
 
   return ( 
     <div className=''>
+    <Allert/>
     <form className='form-signin bg_login rounded mb-4' onSubmit={submithandler}>
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
@@ -82,7 +81,6 @@ export default function LogIn() {
         <input ref={password} type="password" id="inputPassword" class="form-control" placeholder="Password" required />
         <label for="inputPassword">Password</label>
       </div>
-      {modal ? <Allert set={true}/> : ""}
 
 
       <div class="checkbox mb-3">
