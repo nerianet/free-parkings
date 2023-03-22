@@ -182,7 +182,6 @@ import Allert from "../allert/Allert";
             <div className="col-sm-6 col-12 flex-wrap justify-content-center">
 
             
-
               <div className="h3 text-center">Detail</div>
               <button className="btn btn-primary mb-3 w-sm-25 w-50 mx-5" onClick={e=>setAutoLocation(e)}>use in current location <BiCurrentLocation/> </button>
 
