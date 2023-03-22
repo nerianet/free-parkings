@@ -65,7 +65,6 @@ export default function LogIn() {
 
   return ( 
     <div className=''>
-    <Allert/>
     <form className='form-signin bg_login rounded mb-4' onSubmit={submithandler}>
       <div className='text-center mb-4'>
         <img className='mb-4' src={"https://i.ibb.co/mcCN2jp/logo-free-parking.png"} alt="icon" width="72" height="72" />
