@@ -19,6 +19,8 @@
     "firebase-admin": "^11.5.0",
     "firebase-tools": "^11.20.0",
     "leaflet": "^1.9.3",
+    "lord-icon-element": "^4.0.3",
+    "lottie-web": "^5.10.2",
     "mapbox-gl": "^2.12.1",
     "mapbox-gl-leaflet": "^0.0.15",
     "react": "^18.2.0",

@@ -18,14 +18,19 @@ import Admin from "./Components/admin/Admin";
 import Users from "./Components/Users/Users";
 import FavoritePosts from "./Components/favoritePosts/FavoritePosts";
 
-import { IoArrowUpOutline } from "react-icons/io5";
-
 // firestore Files
 import { firestore, storage } from "./firebase/Firebase";
 import { addDoc, collection, onSnapshot, query, where, doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes,deleteObject, listAll  } from "firebase/storage";
 import Allert from "./Components/allert/Allert";
 //////////////////////////////////////////////////////////////////////////////////////////////
+
+// lord icon
+import lottie from 'lottie-web';
+import { defineElement } from 'lord-icon-element';
+// define "lord-icon" custom element with default properties
+defineElement(lottie.loadAnimation);
+
 
 export const MyContext = createContext(); // הצהרה רישונית
 

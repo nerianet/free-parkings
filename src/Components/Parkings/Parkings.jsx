@@ -9,6 +9,8 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { GrFavorite } from "react-icons/gr";
 import { MdFavorite } from "react-icons/md";
 
+
+
 import {
   EmailIcon,
   EmailShareButton,
@@ -117,7 +119,14 @@ export default function Parkings() {
   <div className="container h-auto">
   <div className="d-flex justify-content-between mb-4" >
     <input id="search" className="w-50 rounded mx-3" type="search" placeholder="Search City" onChange={(e) => postInput(e.target.value)}/>
-    <button className="btn btn-primary mx-4" onClick={(e)=>setMaps(e)} >Live Map</button>
+    <button className="btn btn-primary mx-4 d-flex " onClick={(e)=>setMaps(e)}><div>Live Map</div> 
+      <lord-icon
+        src="https://cdn.lordicon.com/oaflahpk.json"
+        trigger="hover"
+        colors="primary:#e83a30"
+        style={{width:'30px',height:"28px"}}>
+     </lord-icon>
+    </button>
   </div>
 
   {!map ? "" :
@@ -134,7 +143,6 @@ export default function Parkings() {
       </Marker>
      {posts.map((post)=>(
       <Marker icon={i} position={[post.cordLocation.lat , post.cordLocation.lon]}>
-        {console.log(post.cordLocation)}
       <Popup>
       {post.street + ", " + post.city}
       <Link to={post.id}> Go to</Link>
